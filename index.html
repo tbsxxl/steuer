@@ -6,84 +6,126 @@
 <title>Steuerrecht Intensivkurs · Lernapp 2026</title>
 <style>
 :root{
-  --bg:#f4f1ea; --surface:#fffdf8; --surface2:#faf7ef; --ink:#23201a; --ink2:#5c564a;
-  --muted:#8a8273; --line:#e2dccf;
-  --petrol:#1b4d4b; --petrol-l:#2c6e6a; --petrol-bg:#e6efed;
-  --gold:#a9762f; --gold-bg:#f6edda;
-  --green:#3b6d2e; --green-bg:#e8f0e0;
-  --red:#8a3324; --red-bg:#f5e6e0;
-  --radius:10px;
+  /* Corporate identity — Steuerberaterverband blues */
+  --navy:#2D4059; --blue:#3283B9; --blue-mid:#70ADD6; --blue-light:#BBE1F8;
+  --bg:#eef2f6; --surface:#ffffff; --surface2:#f5f8fb; --ink:#1f2b3a; --ink2:#4a5a6e;
+  --muted:#8497a8; --line:#e2e9f0; --line-soft:#eef2f6;
+  /* mapped roles (names kept stable for existing references) */
+  --petrol:#2D4059; --petrol-l:#3283B9; --petrol-bg:#e8f0f7;
+  --gold:#3283B9; --gold-bg:#eef5fb;
+  --green:#1e7a55; --green-bg:#e6f4ee;
+  --red:#b23a48; --red-bg:#f9ebed;
+  --shadow:0 1px 2px rgba(45,64,89,.04),0 2px 8px rgba(45,64,89,.05);
+  --shadow-lift:0 4px 16px rgba(45,64,89,.10);
+  --heading:#2D4059;
+  --fixed-navy:#2D4059; --fixed-blue:#3283B9;
+  --radius:12px;
   --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --serif:"Iowan Old Style",Charter,"Palatino Linotype",Palatino,Georgia,serif;
+}
+[data-theme="dark"]{
+  --navy:#0f1826; --blue:#5aa8dc; --blue-mid:#4a7ba0; --blue-light:#2a3f57;
+  --bg:#0d141d; --surface:#161f2b; --surface2:#1b2633; --ink:#e8eef5; --ink2:#a9b8c8;
+  --muted:#708598; --line:#26333f; --line-soft:#1f2a36;
+  --petrol:#dbe6f0; --petrol-l:#5aa8dc; --petrol-bg:#1a2836;
+  --gold:#5aa8dc; --gold-bg:#182735;
+  --green:#4cc38a; --green-bg:#132a22;
+  --red:#e06c78; --red-bg:#2c1a1e;
+  --shadow:0 1px 2px rgba(0,0,0,.2),0 2px 8px rgba(0,0,0,.25);
+  --shadow-lift:0 4px 18px rgba(0,0,0,.4);
+  --heading:#e8eef5;
+  --fixed-navy:#22304a; --fixed-blue:#2f6f9e;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:920px;margin:0 auto;padding:0 16px 80px}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+.wrap{max-width:940px;margin:0 auto;padding:0 16px 80px}
 
-/* Header */
-header{padding:28px 0 18px;border-bottom:2px solid var(--petrol)}
-.kicker{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--petrol-l);font-weight:600;margin-bottom:6px}
-h1{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.15;color:var(--ink);margin-bottom:8px}
-.sub{font-size:14px;color:var(--ink2);max-width:640px}
-.meta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:12px;color:var(--muted)}
-.meta-row b{color:var(--petrol-l)}
+/* Header — corporate, compact */
+header{padding:0;border-bottom:none;margin:0 -16px}
+.brandbar{background:var(--navy);padding:12px 20px;display:flex;align-items:center;gap:14px;position:relative}
+.brandtext .bt-org{color:#fff;font-size:13.5px;font-weight:600;letter-spacing:.2px;line-height:1.25}
+.brandtext .bt-sub{color:var(--blue-mid);font-size:11px;letter-spacing:.3px;margin-top:1px}
+.theme-toggle{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#fff;width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.theme-toggle:hover{background:rgba(255,255,255,.2)}
+.hero{padding:22px 0 18px;transition:padding .3s,opacity .25s;overflow:hidden}
+.hero.collapsed{max-height:0;padding:0;opacity:0;pointer-events:none}
+.kicker{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:7px}
+h1{font-family:var(--serif);font-size:27px;font-weight:600;line-height:1.18;color:var(--heading);margin-bottom:8px;letter-spacing:-.01em}
+.sub{font-size:13.5px;color:var(--ink2);max-width:640px;line-height:1.6}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.meta-chip{font-size:11px;color:var(--ink2);background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:4px 11px}
+.meta-chip b{color:var(--blue)}
+.progress-track{margin-top:14px;max-width:520px}
+.pt-label{font-size:10.5px;color:var(--muted);margin-bottom:5px;display:flex;justify-content:space-between;letter-spacing:.2px}
+.pt-bar{height:5px;background:var(--surface2);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.pt-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--blue-mid));border-radius:20px;transition:width .4s}
 
-/* Module nav */
-.modnav{display:flex;flex-wrap:wrap;gap:6px;position:sticky;top:0;background:var(--bg);padding:14px 0;z-index:30;border-bottom:1px solid var(--line)}
-.mtab{padding:8px 13px;border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);font-size:13px;color:var(--ink2);cursor:pointer;font-weight:500;transition:all .15s;white-space:nowrap}
-.mtab:hover{border-color:var(--petrol-l);color:var(--petrol)}
-.mtab.act{background:var(--petrol);color:#fff;border-color:var(--petrol)}
+/* Module nav — horizontally scrollable */
+.modnav{display:flex;gap:6px;position:sticky;top:0;background:var(--bg);padding:12px 16px;margin:0 -16px;z-index:40;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.modnav::-webkit-scrollbar{display:none}
+.mtab{padding:8px 14px;border:1px solid var(--line);background:var(--surface);border-radius:9px;font-size:13px;color:var(--ink2);cursor:pointer;font-weight:500;transition:all .15s;white-space:nowrap;flex-shrink:0}
+.mtab:hover{border-color:var(--blue);color:var(--blue)}
+.mtab.act{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 2px 8px rgba(50,131,185,.28)}
 .mtab .n{opacity:.55;margin-right:5px;font-variant-numeric:tabular-nums}
-.mtab.act .n{opacity:.8}
+.mtab.act .n{opacity:.85}
+.mtab .done{color:var(--green);margin-left:5px;font-weight:700}
+.mtab.act .done{color:#fff}
 
 /* Module head */
-.modhead{padding:22px 0 10px}
-.modhead .day{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);background:var(--gold-bg);padding:4px 10px;border-radius:20px;margin-bottom:10px}
-.modhead h2{font-family:var(--serif);font-size:24px;font-weight:600;margin-bottom:6px}
-.modhead .lead{font-size:14px;color:var(--ink2);max-width:680px}
+.modhead{padding:22px 0 8px}
+.modhead .day{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--blue);background:var(--gold-bg);padding:4px 11px;border-radius:20px;margin-bottom:11px}
+.modhead h2{font-family:var(--serif);font-size:23px;font-weight:600;color:var(--heading);margin-bottom:6px;letter-spacing:-.01em}
+.modhead .lead{font-size:13.5px;color:var(--ink2);max-width:680px;line-height:1.6}
 
-/* Tabs learn/quiz */
-.viewtabs{display:flex;gap:0;border-bottom:1px solid var(--line);margin:18px 0 0}
-.vtab{padding:10px 18px;font-size:14px;color:var(--ink2);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;font-weight:500}
-.vtab:hover{color:var(--petrol)}
-.vtab.act{color:var(--petrol);border-bottom-color:var(--petrol);font-weight:600}
+/* Tabs learn/quiz/üben — sticky under modnav */
+.viewtabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin:16px 0 0;position:sticky;top:53px;background:var(--bg);z-index:35;padding-top:2px}
+.vtab{padding:10px 18px;font-size:13.5px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;font-weight:500;transition:color .15s}
+.vtab:hover{color:var(--blue)}
+.vtab.act{color:var(--blue);border-bottom-color:var(--blue);font-weight:600}
 
 /* Lesson list */
 .lessons{padding:16px 0}
-.lesson{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
-.lesson.open{border-color:var(--petrol-l);box-shadow:0 1px 0 var(--petrol-l) inset, 0 0 0 1px var(--petrol-l)}
-.lhead{padding:16px 18px;cursor:pointer;display:flex;align-items:flex-start;gap:14px}
-.lnum{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--petrol-l);line-height:1;min-width:30px;font-variant-numeric:tabular-nums}
+.lesson{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;box-shadow:var(--shadow);transition:box-shadow .2s,border-color .2s}
+.lesson:hover{box-shadow:var(--shadow-lift)}
+.lesson.open{border-color:var(--blue);box-shadow:var(--shadow-lift)}
+.lhead{padding:15px 18px;cursor:pointer;display:flex;align-items:center;gap:14px}
+.lnum{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--blue);line-height:1;min-width:26px;text-align:center;font-variant-numeric:tabular-nums}
+.lesson.read .lnum{color:var(--green)}
+.lesson.read .ltitle h3{color:var(--ink2)}
+.readbtn{margin-top:16px;padding:9px 16px;border-radius:8px;border:1px solid var(--blue);background:transparent;color:var(--blue);font-size:13px;cursor:pointer;font-weight:600;font-family:var(--font);transition:all .15s}
+.readbtn:hover{background:var(--gold-bg)}
+.readbtn.done{background:var(--green-bg);border-color:var(--green);color:var(--green);cursor:default}
 .ltitle{flex:1}
-.ltitle h3{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:3px}
-.ltitle .lsub{font-size:12.5px;color:var(--muted)}
-.lchev{color:var(--muted);font-size:13px;transition:transform .2s;margin-top:4px}
+.ltitle h3{font-size:15.5px;font-weight:600;color:var(--ink);margin-bottom:2px;line-height:1.3}
+.ltitle .lsub{font-size:12px;color:var(--muted)}
+.lchev{color:var(--muted);font-size:12px;transition:transform .2s}
 .open .lchev{transform:rotate(180deg)}
-.lbody{display:none;padding:0 18px 22px;border-top:1px solid var(--line)}
+.lbody{display:none;padding:2px 18px 22px;border-top:1px solid var(--line-soft)}
 .open .lbody{display:block}
 
-.intro{font-size:14.5px;color:var(--ink2);line-height:1.75;margin:16px 0;padding:14px 16px;background:var(--surface2);border-radius:8px;border-left:3px solid var(--petrol-l)}
+.intro{font-size:14px;color:var(--ink2);line-height:1.75;margin:16px 0;padding:14px 16px;background:var(--surface2);border-radius:10px;border-left:3px solid var(--blue)}
 .seclabel{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:20px 0 10px}
 
-.block{margin-bottom:12px;padding-bottom:12px;border-bottom:1px dashed var(--line)}
+.block{margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--line-soft)}
 .block:last-child{border-bottom:none}
-.block h4{font-size:14.5px;font-weight:600;color:var(--petrol);margin-bottom:5px}
-.block p{font-size:14px;color:var(--ink2);line-height:1.7}
-.block .num{font-family:var(--serif);color:var(--gold);font-weight:600;font-variant-numeric:tabular-nums}
+.block h4{font-size:14px;font-weight:600;color:var(--heading);margin-bottom:5px}
+.block p{font-size:13.75px;color:var(--ink2);line-height:1.72}
+.block .num{font-family:var(--serif);color:var(--blue);font-weight:600;font-variant-numeric:tabular-nums}
 
-.callout{border-radius:8px;padding:13px 16px;margin:14px 0;font-size:13.5px;line-height:1.7}
-.c-ex{background:var(--green-bg);border:1px solid #cddebf}
+.callout{border-radius:10px;padding:13px 16px;margin:14px 0;font-size:13.5px;line-height:1.7;border:none;border-left:3px solid}
+.c-ex{background:var(--green-bg);border-left-color:var(--green)}
 .c-ex .ctag{color:var(--green)}
-.c-warn{background:var(--gold-bg);border:1px solid #ebd9b4}
-.c-warn .ctag{color:var(--gold)}
-.c-current{background:var(--petrol-bg);border:1px solid #c4dad7}
+.c-warn{background:var(--gold-bg);border-left-color:var(--blue)}
+.c-warn .ctag{color:var(--blue)}
+.c-current{background:var(--petrol-bg);border-left-color:var(--navy)}
 .c-current .ctag{color:var(--petrol)}
 .ctag{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px;display:flex;align-items:center;gap:6px}
 .callout p{color:var(--ink2)}
 .callout b{color:var(--ink)}
 
 .laws{display:flex;flex-wrap:wrap;gap:5px;margin-top:16px}
-.law{font-size:11px;font-family:ui-monospace,Menlo,monospace;background:var(--petrol-bg);color:var(--petrol);padding:3px 8px;border-radius:5px;border:1px solid #cadbd8}
+.law{font-size:11px;font-family:ui-monospace,Menlo,monospace;background:var(--petrol-bg);color:var(--petrol-l);padding:3px 9px;border-radius:6px;border:1px solid var(--line)}
 
 .figtable{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
 .figtable th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);padding:6px 10px;border-bottom:1.5px solid var(--line);font-weight:600}
@@ -118,7 +160,7 @@ h1{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.15;colo
 .guv .gr .pre{font-family:ui-monospace,Menlo,monospace;color:var(--muted);margin-right:6px}
 
 .tkonto{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--ink);border-radius:6px;overflow:hidden;margin:8px 0;font-size:12px;max-width:420px}
-.tkonto .tk-name{grid-column:1/3;text-align:center;background:var(--ink);color:#fff;font-weight:600;padding:5px;font-size:11.5px}
+.tkonto .tk-name{grid-column:1/3;text-align:center;background:var(--fixed-navy);color:#fff;font-weight:600;padding:5px;font-size:11.5px}
 .tkonto .tk-h{text-align:center;font-weight:600;padding:4px;background:var(--surface2);font-size:11px;color:var(--muted)}
 .tkonto .tk-h:first-of-type{border-right:1px solid var(--line)}
 .tkonto .tk-c{padding:5px 10px;min-height:30px}
@@ -134,63 +176,250 @@ h1{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.15;colo
 .schema .sr.tot .t,.schema .sr.tot .v{color:var(--petrol)}
 @media(max-width:560px){.bilanz,.tkonto{grid-template-columns:1fr 1fr;font-size:11px}}
 
+/* Drill / practice */
+.drill-intro{font-size:13.5px;color:var(--ink2);background:var(--petrol-bg);border:none;border-left:3px solid var(--blue);border-radius:10px;padding:13px 16px;margin:18px 0 14px;line-height:1.6}
+.drill-empty{font-size:14px;color:var(--ink2);padding:24px 4px;line-height:1.6}
+.drills{padding:0 0 10px}
+.drill{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:12px;overflow:hidden}
+.drill.open{border-color:var(--petrol-l)}
+.dhead{padding:15px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:13px}
+.dnum{font-family:var(--serif);font-size:16px;font-weight:700;color:#fff;background:var(--gold);border-radius:6px;min-width:34px;height:28px;display:flex;align-items:center;justify-content:center;line-height:1}
+.dtitle{flex:1}
+.dtitle h3{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.dlevel{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.dbody{padding:0 16px 18px}
+.dtask{font-size:14px;color:var(--ink2);line-height:1.7;background:var(--surface2);border-radius:8px;padding:13px 15px;margin-bottom:12px;border-left:3px solid var(--gold)}
+.dtask b{color:var(--ink)}
+.dshow{padding:9px 16px;border-radius:8px;border:1px solid var(--petrol);background:transparent;color:var(--petrol);font-size:13px;cursor:pointer;font-weight:500;font-family:var(--font)}
+.dshow:hover{background:var(--petrol-bg)}
+.dsol{font-size:13.5px;color:var(--ink2);line-height:1.75;border:1px solid var(--green);background:var(--green-bg);border-radius:8px;padding:14px 16px}
+.drill:not(.open) .dsol{display:none}
+.drill.open .dshow{display:none}
+.dsol-label{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+.dsol b{color:var(--ink)}
+.dsol .step{margin:6px 0;padding-left:4px}
+.dsol .res{font-weight:700;color:var(--petrol);background:var(--petrol-bg);padding:8px 12px;border-radius:6px;margin-top:10px;display:inline-block;font-variant-numeric:tabular-nums}
+
+/* Rechentrainer (generators) */
+.gencard{background:var(--surface);border:1px solid var(--blue);border-radius:12px;padding:16px 18px;margin-bottom:12px;box-shadow:0 1px 4px rgba(50,131,185,.08)}
+.gen-title{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.gen-title span:first-child{font-size:15px;font-weight:600;color:var(--heading)}
+.gen-level{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.gen-q{font-size:14px;color:var(--ink);line-height:1.7;background:var(--surface2);padding:12px 14px;border-radius:8px;border-left:3px solid var(--blue)}
+.gen-a{font-size:13.5px;color:var(--ink2);line-height:1.75;background:var(--green-bg);border:1px solid var(--green);border-radius:8px;padding:12px 14px;margin-top:10px}
+.genres{font-weight:700;color:var(--petrol);background:var(--petrol-bg);padding:2px 8px;border-radius:5px;font-variant-numeric:tabular-nums}
+.gen-btns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.gen-btn{padding:8px 15px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink2);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font)}
+.gen-btn:hover{border-color:var(--blue);color:var(--blue)}
+.gen-btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+.gen-btn.primary:hover{background:var(--navy);color:#fff}
+
+/* Interactive builder */
+.builder-card{background:var(--surface);border:2px solid var(--blue);border-radius:12px;padding:18px;margin-bottom:14px}
+.builder-head{font-size:14px;color:var(--ink2);line-height:1.6;margin-bottom:14px}
+.builder-given{background:var(--surface2);border-radius:8px;padding:12px 14px;margin-bottom:14px}
+.bg-title{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.bg-grid{display:grid;grid-template-columns:1fr auto;gap:5px 16px;font-size:13px}
+.bg-grid span{color:var(--ink2)}
+.bg-grid b{color:var(--heading);font-variant-numeric:tabular-nums;text-align:right}
+.builder-inputs{display:flex;flex-direction:column;gap:12px;margin-bottom:14px}
+.builder-inputs label{font-size:13px;color:var(--ink);font-weight:500;line-height:1.7}
+.builder-inputs input{margin-top:4px;width:100%;max-width:220px;padding:9px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font);font-variant-numeric:tabular-nums}
+.builder-inputs input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--gold-bg)}
+.builder-btns{display:flex;gap:8px;flex-wrap:wrap}
+#builderResult{margin-top:14px}
+.br-line{font-size:13px;padding:8px 12px;border-radius:6px;margin-bottom:6px;font-variant-numeric:tabular-nums}
+.br-line.ok{background:var(--green-bg);color:var(--green)}
+.br-line.no{background:var(--red-bg);color:var(--red)}
+.br-msg{font-size:13px;padding:11px 14px;border-radius:8px;margin-top:6px;line-height:1.6}
+.br-ok{background:var(--green-bg);color:var(--green);border:1px solid var(--green)}
+.br-warn{background:var(--gold-bg);color:var(--blue)}
+
+/* Toolbar: search + buttons */
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:16px 0 4px}
+.searchwrap{position:relative;flex:1;min-width:220px}
+.searchbox{width:100%;padding:10px 34px 10px 14px;border:1px solid var(--line);border-radius:10px;font-size:13.5px;font-family:var(--font);background:var(--surface);color:var(--ink)}
+.searchbox:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--gold-bg)}
+.searchclear{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:none;background:var(--line);color:var(--ink2);width:22px;height:22px;border-radius:50%;cursor:pointer;font-size:15px;line-height:1}
+.toolbtn{padding:10px 14px;border:1px solid var(--line);background:var(--surface);color:var(--blue);font-size:13px;font-weight:600;border-radius:10px;cursor:pointer;font-family:var(--font);white-space:nowrap}
+.toolbtn:hover{border-color:var(--blue);background:var(--gold-bg)}
+
+/* Search results */
+#searchResults{padding:6px 0 10px}
+.search-head{font-size:13.5px;color:var(--ink2);margin:10px 0}
+.search-cat{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--blue);margin:16px 0 8px}
+.search-item{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:12px 14px;margin-bottom:8px;cursor:pointer;transition:border-color .15s}
+.search-item:hover{border-color:var(--blue)}
+.si-mod{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.si-title{font-size:14px;font-weight:600;color:var(--heading);margin-top:2px}
+.si-snip{font-size:12.5px;color:var(--ink2);margin-top:4px;line-height:1.5}
+.search-empty{font-size:14px;color:var(--muted);padding:20px 4px}
+
+/* Reference view: glossary + paragraphs */
+.ref-head{padding:8px 0 14px}
+.ref-head h2{font-family:var(--serif);font-size:24px;color:var(--heading);margin-bottom:4px}
+.ref-sub{font-size:13.5px;color:var(--ink2);max-width:640px;margin-bottom:12px}
+.ref-section-title{font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--blue);margin:22px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--blue)}
+.glosslist{display:grid;grid-template-columns:1fr;gap:2px}
+.glossitem{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:9px 12px;border-bottom:1px solid var(--line);align-items:baseline}
+.glossitem:nth-child(odd){background:var(--surface2)}
+.gk{font-weight:700;color:var(--blue);font-size:13.5px}
+.gv{font-size:13px;color:var(--ink2);line-height:1.55}
+.para-group{margin-bottom:18px}
+.para-gname{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--heading);margin:14px 0 8px;padding-left:2px}
+.paraitem{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:8px 12px;border-bottom:1px solid var(--line);align-items:baseline}
+.paraitem:nth-child(even){background:var(--surface2)}
+.pk{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;font-weight:700;color:var(--blue)}
+.pv{font-size:13px;color:var(--ink2);line-height:1.55}
+@media(max-width:560px){.glossitem{grid-template-columns:80px 1fr}.paraitem{grid-template-columns:110px 1fr}}
+.paraitem2{padding:12px 14px;border-bottom:1px solid var(--line)}
+.paraitem2:nth-child(even){background:var(--surface2)}
+.pk2{font-family:ui-monospace,Menlo,monospace;font-size:13px;font-weight:700;color:var(--blue);display:inline}
+.pd{font-size:13px;color:var(--ink2);font-weight:600;display:inline;margin-left:8px}
+.ptext{font-size:12.5px;color:var(--ink2);line-height:1.65;margin-top:7px;padding:9px 12px;background:var(--surface);border-left:3px solid var(--blue-mid);border-radius:0 6px 6px 0;font-style:italic}
+
+/* Print / PDF mode */
+@media print{
+  :root,[data-theme="dark"]{
+    --bg:#fff;--surface:#fff;--surface2:#f5f5f5;--ink:#000;--ink2:#222;--muted:#555;
+    --line:#ccc;--line-soft:#ddd;--heading:#000;--petrol:#2D4059;--petrol-l:#2D4059;--petrol-bg:#f0f0f0;
+    --gold:#2D4059;--gold-bg:#f0f0f0;--blue:#2D4059;--blue-mid:#555;--green:#1e5c40;--green-bg:#efefef;--red:#7a2830;--red-bg:#f2f2f2;
+  }
+  .hero{max-height:none !important;opacity:1 !important;padding:16px 0 !important;pointer-events:auto}
+  .theme-toggle{display:none !important}
+  .modnav,.viewtabs,.toolbar,#searchResults,.progress-track,.brandbar,.resetbtn,.readbtn,.lchev,.dshow,.mtab{display:none !important}
+  body{background:#fff;color:#000}
+  .wrap{max-width:100%;padding:0}
+  .lesson,.drill,.callout,.bilanz,.guv,.schema,.tkonto,.figtable,.search-item{break-inside:avoid;page-break-inside:avoid}
+  .lbody,.dbody{display:block !important}
+  .dsol{display:block !important}
+  .lesson{border:1px solid #ccc;margin-bottom:10px}
+  header{border:none}
+  .hero{border-bottom:2px solid #000}
+  h1,h2,h3,.modhead h2{color:#000}
+  a{color:#000;text-decoration:none}
+  #learnView,#quizView,#drillView,#refView{display:block !important}
+  .qopt{border:1px solid #999}
+}
+
 /* Quiz */
 .quiz{padding:18px 0;max-width:680px}
 .qbar{height:6px;background:var(--surface2);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:8px}
-.qfill{height:100%;background:var(--petrol);transition:width .3s}
+.qfill{height:100%;background:linear-gradient(90deg,var(--blue),var(--blue-mid));transition:width .3s}
 .qmeta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:18px}
 .qq{font-size:17px;font-weight:600;color:var(--ink);line-height:1.5;margin-bottom:18px;font-family:var(--serif)}
 .qopts{display:flex;flex-direction:column;gap:9px;margin-bottom:16px}
-.qopt{padding:13px 16px;border:1px solid var(--line);background:var(--surface);border-radius:8px;font-size:14px;color:var(--ink);cursor:pointer;text-align:left;line-height:1.5;transition:all .12s;font-family:var(--font)}
-.qopt:hover:not(:disabled){border-color:var(--petrol-l);background:var(--petrol-bg)}
+.qopt{padding:13px 16px;border:1px solid var(--line);background:var(--surface);border-radius:10px;font-size:14px;color:var(--ink);cursor:pointer;text-align:left;line-height:1.5;transition:all .12s;font-family:var(--font);box-shadow:var(--shadow)}
+.qopt:hover:not(:disabled){border-color:var(--blue);background:var(--petrol-bg);transform:translateX(2px)}
 .qopt:disabled{cursor:default}
-.qopt.correct{background:var(--green-bg);border-color:var(--green);color:var(--green);font-weight:500}
+.qopt.correct{background:var(--green-bg);border-color:var(--green);color:var(--green);font-weight:600}
 .qopt.wrong{background:var(--red-bg);border-color:var(--red);color:var(--red)}
 .qopt.reveal{background:var(--green-bg);border-color:var(--green);color:var(--green);opacity:.65}
-.qfb{font-size:13.5px;line-height:1.7;background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-bottom:16px;display:none;color:var(--ink2)}
-.qfb.show{display:block}
+.qfb{font-size:13.5px;line-height:1.7;background:var(--surface2);border:none;border-left:3px solid var(--blue);border-radius:10px;padding:14px 16px;margin-bottom:16px;display:none;color:var(--ink2)}
+.qfb.show{display:block;animation:fadein .25s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 .qfb b{color:var(--ink)}
-.qfb .law{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--petrol);margin-top:8px;display:block}
+.qfb .law{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--blue);margin-top:8px;display:block}
 .qbtns{display:flex;gap:9px;flex-wrap:wrap}
-.btn{padding:10px 20px;border-radius:8px;border:1px solid var(--petrol);background:var(--petrol);color:#fff;font-size:14px;cursor:pointer;font-weight:500;font-family:var(--font)}
-.btn:hover{background:var(--petrol-l)}
-.btn.sec{background:transparent;color:var(--petrol)}
-.btn.sec:hover{background:var(--petrol-bg)}
+.btn{padding:10px 20px;border-radius:9px;border:1px solid var(--fixed-blue);background:var(--fixed-blue);color:#fff;font-size:14px;cursor:pointer;font-weight:500;font-family:var(--font);transition:all .15s}
+.btn:hover{background:var(--fixed-navy);border-color:var(--fixed-navy)}
+.btn.sec{background:transparent;color:var(--blue);border-color:var(--line)}
+.btn.sec:hover{background:var(--petrol-bg);border-color:var(--blue)}
 .score{text-align:center;padding:36px 16px}
-.score .pct{font-family:var(--serif);font-size:60px;font-weight:600;color:var(--petrol);line-height:1}
+.score .pct{font-family:var(--serif);font-size:62px;font-weight:600;color:var(--blue);line-height:1;letter-spacing:-.02em}
 .score .frac{font-size:15px;color:var(--muted);margin-top:8px}
-.score .msg{font-size:16px;color:var(--ink);margin:18px 0;line-height:1.6}
+.score .msg{font-size:15.5px;color:var(--ink);margin:18px auto;line-height:1.6;max-width:420px}
 .score .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 
+/* Global polish */
+::selection{background:var(--blue-light);color:var(--fixed-navy)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
 footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.7}
-@media(max-width:600px){h1{font-size:24px}.modhead h2{font-size:21px}.lhead{padding:14px}.lbody{padding:0 14px 18px}}
+.foot-brand{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--heading);font-size:12.5px;margin-bottom:8px}
+.foot-logo{width:18px;height:18px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1.5px;flex-shrink:0}
+.foot-logo span{border-radius:1px}
+.foot-logo span:nth-child(1){background:var(--blue)} .foot-logo span:nth-child(2){background:var(--blue-light)}
+.foot-logo span:nth-child(3){background:var(--blue)} .foot-logo span:nth-child(4){background:var(--blue-mid)}
+.resetbtn{margin-top:12px;padding:6px 13px;border-radius:7px;border:1px solid var(--line);background:var(--surface);color:var(--muted);font-size:12px;cursor:pointer;font-family:var(--font)}
+.resetbtn:hover{border-color:var(--red);color:var(--red)}
+@media(max-width:600px){
+  h1{font-size:22px}.modhead h2{font-size:20px}.lhead{padding:14px}.lbody{padding:2px 14px 18px}
+  .bilanz{grid-template-columns:1fr}
+  .bilanz .side:first-child{border-right:none;border-bottom:2px solid var(--blue)}
+  .brandbar{padding:11px 16px}.theme-toggle{width:30px;height:30px;font-size:14px}
+  .brandtext .bt-org{font-size:12px}.brandtext .bt-sub{font-size:10px}
+  .viewtabs{top:52px}
+  .vtab{padding:10px 14px;font-size:13px}
+  .toolbar{gap:6px}.toolbtn{padding:9px 11px;font-size:12px}
+  .schema,.tkonto{font-size:11.5px}
+  .glossitem{grid-template-columns:1fr;gap:2px}
+  .glossitem .gk{font-size:13px}
+  .paraitem2{padding:11px 12px}
+  .fs-note{font-size:11px}
+  .meta-row{gap:6px}.meta-chip{font-size:10.5px;padding:3px 9px}
+}
+@media(max-width:400px){
+  .modhead h2{font-size:18px}
+  .bg-grid{font-size:12px}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
-  <div class="kicker">Einstiegskurs Steuerrecht · Steuerberaterverband Niedersachsen Sachsen-Anhalt</div>
-  <h1>Steuerrecht von Grund auf — Vorbereitung auf den 13-Tage-Intensivkurs</h1>
-  <p class="sub">Sechs Module, die dem Kursaufbau folgen: Rechnungswesen, Abgabenordnung, Einkommensteuer, Lohnsteuer, Gewerbe- &amp; Körperschaftsteuer, Umsatzsteuer. Jede Lektion erklärt das Thema von null an, mit Praxisbeispielen, Stolperfallen und den aktuellen Werten für 2026.</p>
-  <div class="meta-row">
-    <span><b>Kurstermine:</b> 07.–23.10.2026</span>
-    <span><b>Umfang:</b> 13 Tage · je 09:00–16:00 Uhr</span>
-    <span><b>Stand der Zahlen:</b> Veranlagungsjahr 2026</span>
+  <div class="brandbar">
+    <div class="brandtext">
+      <div class="bt-org">Steuerberaterverband Niedersachsen Sachsen-Anhalt e.V.</div>
+      <div class="bt-sub">Einstiegskurs Steuerrecht für Hochschulabsolventen</div>
+    </div>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Hell/Dunkel umschalten" aria-label="Design umschalten">🌙</button>
+  </div>
+  <div class="hero" id="hero">
+    <div class="kicker">Lern- &amp; Übungsplattform · Veranlagungsjahr 2026</div>
+    <h1>Steuerrecht von Grund auf — Vorbereitung auf den 13-Tage-Intensivkurs</h1>
+    <p class="sub">Sechs Module entlang des Kursaufbaus: Rechnungswesen, Abgabenordnung, Einkommensteuer, Lohnsteuer, Gewerbe- &amp; Körperschaftsteuer, Umsatzsteuer. Jede Lektion erklärt das Thema von null an — mit Praxisbeispielen, Stolperfallen, Rechenschemata und Übungsaufgaben zum Selbstlösen.</p>
+    <div class="meta-row">
+      <span class="meta-chip"><b>Kurstermine</b> · 07.–23.10.2026</span>
+      <span class="meta-chip"><b>Umfang</b> · 13 Tage, je 09–16 Uhr</span>
+      <span class="meta-chip"><b>31</b> Lektionen</span>
+      <span class="meta-chip"><b>70</b> Quizfragen</span>
+      <span class="meta-chip"><b>40+</b> Übungen</span>
+    </div>
+    <div class="progress-track">
+      <div class="pt-label"><span id="ptText">Dein Lernfortschritt</span><span id="ptPct">0 %</span></div>
+      <div class="pt-bar"><div class="pt-fill" id="ptFill" style="width:0%"></div></div>
+    </div>
   </div>
 </header>
 
+<div class="toolbar">
+  <div class="searchwrap">
+    <input type="text" id="searchInput" class="searchbox" placeholder="Suche in allen Lektionen (z. B. GWG, Kleinunternehmer, Zinsschranke) …" oninput="doSearch(this.value)" autocomplete="off">
+    <button class="searchclear" id="searchClear" onclick="clearSearch()" style="display:none">×</button>
+  </div>
+  <button class="toolbtn" onclick="setView('ref')">Glossar &amp; Paragrafen</button>
+  <button class="toolbtn" onclick="window.print()">Drucken / PDF</button>
+</div>
+<div id="searchResults" style="display:none"></div>
 <nav class="modnav" id="modnav"></nav>
 <div class="modhead" id="modhead"></div>
 <div class="viewtabs">
   <div class="vtab act" id="vt-learn" onclick="setView('learn')">Lernen</div>
   <div class="vtab" id="vt-quiz" onclick="setView('quiz')">Quiz</div>
+  <div class="vtab" id="vt-drill" onclick="setView('drill')">Üben</div>
 </div>
 <div id="learnView"></div>
 <div id="quizView" style="display:none"></div>
+<div id="drillView" style="display:none"></div>
+<div id="refView" style="display:none"></div>
 
 <footer>
-  Diese App dient der Vorbereitung und Wissensvermittlung. Alle Werte beziehen sich auf das Veranlagungsjahr 2026 (Grundfreibetrag 12.348 €, GWG-Grenze 800 € netto, Kleinunternehmer 25.000 €/100.000 €, Restaurant-USt 7 %, Pendlerpauschale 38 ct ab dem 1. km). Steuerrecht ändert sich laufend — im Zweifel die jeweils gültige Gesetzesfassung und BMF-Schreiben prüfen. Keine Steuerberatung im Einzelfall.
+  <div class="foot-brand">Steuerberaterverband Niedersachsen Sachsen-Anhalt e.V. · Lern- &amp; Übungsplattform</div>
+  <p>Diese App dient der Vorbereitung und Wissensvermittlung. Alle Werte beziehen sich auf das Veranlagungsjahr 2026 (Grundfreibetrag 12.348 €, GWG-Grenze 800 € netto, Kleinunternehmer 25.000 €/100.000 €, Restaurant-USt 7 %, Pendlerpauschale 38 ct ab dem 21. km). Steuerrecht ändert sich laufend — im Zweifel die jeweils gültige Gesetzesfassung und BMF-Schreiben prüfen. Keine Steuerberatung im Einzelfall. Dein Lernfortschritt wird nur lokal in diesem Browser gespeichert.</p>
+  <button class="resetbtn" onclick="if(confirm('Lernfortschritt wirklich zurücksetzen?')){progress={read:{},quiz:{}};saveProgress();updateProgressBar();buildNav();buildLearn();}">Lernfortschritt zurücksetzen</button>
 </footer>
+
 </div>
 
 <script>
@@ -282,39 +511,49 @@ const DATA = [
       intro:"Theorie ist das eine — eine echte Bilanz lesen zu können das andere. Hier eine vollständige, kleine GmbH-Bilanz und die zugehörige GuV nach HGB-Gliederung, Zeile für Zeile. Nimm dir Zeit und folge der Logik: Die Aktivseite zeigt, worin das Geld steckt (Mittelverwendung), die Passivseite, woher es kommt (Mittelherkunft). Beide Seiten sind immer exakt gleich hoch.",
       blocks:[
         {h:"So liest man die Bilanz",p:"<b>Aktiva</b> (links) nach steigender Liquidität geordnet: oben das langfristig gebundene Anlagevermögen, darunter das Umlaufvermögen (Vorräte, Forderungen, Bank/Kasse). <b>Passiva</b> (rechts) nach Fristigkeit: oben das Eigenkapital, dann Rückstellungen, dann Verbindlichkeiten. Die Bilanzsumme auf beiden Seiten ist identisch — das ist die Bilanzgleichung Aktiva = Passiva."},
-        {h:"Das Eigenkapital als Restgröße",p:"Eigenkapital = Vermögen − Schulden. In unserem Beispiel: Bilanzsumme 500.000 € − Rückstellungen − Verbindlichkeiten = 250.000 € Eigenkapital. Steigt der Gewinn, steigt (über den Jahresüberschuss) das Eigenkapital. Genau hier verbindet sich die GuV mit der Bilanz: Der Jahresüberschuss aus der GuV erhöht das Eigenkapital in der Bilanz."},
+        {h:"Das Eigenkapital als Restgröße",p:"Eigenkapital = Vermögen − Schulden. In unserem Beispiel: gezeichnetes Kapital 25.000 + Kapitalrücklage 30.000 + Gewinnrücklagen 140.000 + Gewinnvortrag 10.000 + Jahresüberschuss 45.000 = 250.000 €. Steigt der Gewinn, steigt (über den Jahresüberschuss) das Eigenkapital. Genau hier verbindet sich die GuV mit der Bilanz: Der Jahresüberschuss aus der GuV erhöht das Eigenkapital in der Bilanz."},
+        {h:"Die Eigenkapital-Posten im Detail (§ 266 Abs. 3 A HGB)",p:"<b>Gezeichnetes Kapital</b> = das im Handelsregister eingetragene Stammkapital (GmbH mind. 25.000 €). <b>Kapitalrücklage</b> = von außen zugeführtes Kapital (z. B. Aufgeld bei Anteilsausgabe). <b>Gewinnrücklagen</b> = in der Vergangenheit einbehaltene (thesaurierte) Gewinne. <b>Gewinnvortrag</b> = Rest des Vorjahresgewinns, der weder ausgeschüttet noch in Rücklagen gestellt wurde. <b>Jahresüberschuss</b> = das aktuelle Jahresergebnis aus der GuV."},
+        {h:"Rechnungsabgrenzungsposten (C auf beiden Seiten)",p:"<b>Aktive RAP</b>: Ausgaben vor dem Stichtag, die Aufwand des Folgejahres sind (z. B. im Dezember gezahlte Versicherung fürs nächste Jahr). <b>Passive RAP</b>: Einnahmen vor dem Stichtag, die Ertrag des Folgejahres sind (z. B. im Voraus erhaltene Miete). Sie sorgen für die periodengerechte Zuordnung (§ 250 HGB)."},
+        {h:"Latente Steuern (D Aktiva / E Passiva)",p:"Latente Steuern entstehen aus <b>Differenzen zwischen Handels- und Steuerbilanz</b>, die sich später wieder ausgleichen. <b>Aktive latente Steuern</b>: Die Steuerlast wird künftig niedriger sein (z. B. wegen einer handelsrechtlichen Drohverlustrückstellung, die steuerlich verboten ist) — ein künftiger Steuervorteil. <b>Passive latente Steuern</b>: Die Steuerlast wird künftig höher sein. Kleine Kapitalgesellschaften sind vom Ansatz aktiver latenter Steuern befreit (§ 274a HGB)."},
+        {h:"Aktiver Unterschiedsbetrag aus Vermögensverrechnung (E Aktiva)",p:"Ein Spezialposten (§ 246 Abs. 2 HGB): Wenn Vermögen ausschließlich der Erfüllung von Altersversorgungs-Verpflichtungen dient (Planvermögen) und mit diesen Schulden verrechnet wird, kann ein aktiver Überhang entstehen. Er steht ganz unten auf der Aktivseite. In der Praxis kleiner GmbHs selten, aber Teil der vollständigen Gliederung — im Beispiel mit 500 € dargestellt."},
       ],
       vis:`
-<div class="fs-title">Bilanz der Muster GmbH zum 31.12.2026</div>
+<div class="fs-title">Bilanz der Muster GmbH zum 31.12.2026 (vollständige Gliederung nach § 266 HGB)</div>
 <div class="bilanz">
   <div class="side">
     <div class="sh">Aktiva</div>
     <div class="row grp"><span class="a">A. Anlagevermögen</span><span class="b"></span></div>
-    <div class="row ind"><span class="a">I. Immaterielle VG (Software)</span><span class="b">15.000</span></div>
-    <div class="row ind"><span class="a">II. Sachanlagen (Maschinen, BGA)</span><span class="b">210.000</span></div>
+    <div class="row ind"><span class="a">I. Immaterielle Vermögensgegenst.</span><span class="b">15.000</span></div>
+    <div class="row ind"><span class="a">II. Sachanlagen</span><span class="b">210.000</span></div>
     <div class="row ind"><span class="a">III. Finanzanlagen</span><span class="b">25.000</span></div>
     <div class="row grp"><span class="a">B. Umlaufvermögen</span><span class="b"></span></div>
     <div class="row ind"><span class="a">I. Vorräte</span><span class="b">80.000</span></div>
-    <div class="row ind"><span class="a">II. Forderungen aus L+L</span><span class="b">110.000</span></div>
-    <div class="row ind"><span class="a">III. Bank / Kasse</span><span class="b">55.000</span></div>
-    <div class="row grp"><span class="a">C. Rechnungsabgrenzung</span><span class="b">5.000</span></div>
+    <div class="row ind"><span class="a">II. Forderungen u. sonst. VG</span><span class="b">110.000</span></div>
+    <div class="row ind"><span class="a">III. Wertpapiere</span><span class="b">12.000</span></div>
+    <div class="row ind"><span class="a">IV. Kassenbestand / Bankguthaben</span><span class="b">43.000</span></div>
+    <div class="row grp"><span class="a">C. Rechnungsabgrenzungsposten</span><span class="b">3.000</span></div>
+    <div class="row grp"><span class="a">D. Aktive latente Steuern</span><span class="b">1.500</span></div>
+    <div class="row grp"><span class="a">E. Aktiver Unterschiedsbetrag aus<br>Vermögensverrechnung</span><span class="b">500</span></div>
     <div class="row sum"><span class="a">Bilanzsumme</span><span class="b">500.000</span></div>
   </div>
   <div class="side">
     <div class="sh">Passiva</div>
     <div class="row grp"><span class="a">A. Eigenkapital</span><span class="b"></span></div>
-    <div class="row ind"><span class="a">Gezeichnetes Kapital</span><span class="b">25.000</span></div>
-    <div class="row ind"><span class="a">Gewinnrücklagen</span><span class="b">180.000</span></div>
-    <div class="row ind"><span class="a">Jahresüberschuss</span><span class="b">45.000</span></div>
+    <div class="row ind"><span class="a">I. Gezeichnetes Kapital</span><span class="b">25.000</span></div>
+    <div class="row ind"><span class="a">II. Kapitalrücklage</span><span class="b">30.000</span></div>
+    <div class="row ind"><span class="a">III. Gewinnrücklagen</span><span class="b">140.000</span></div>
+    <div class="row ind"><span class="a">IV. Gewinnvortrag</span><span class="b">10.000</span></div>
+    <div class="row ind"><span class="a">V. Jahresüberschuss</span><span class="b">45.000</span></div>
     <div class="row grp"><span class="a">B. Rückstellungen</span><span class="b">60.000</span></div>
     <div class="row grp"><span class="a">C. Verbindlichkeiten</span><span class="b"></span></div>
     <div class="row ind"><span class="a">ggü. Kreditinstituten</span><span class="b">120.000</span></div>
-    <div class="row ind"><span class="a">aus L+L</span><span class="b">68.000</span></div>
-    <div class="row grp"><span class="a">D. Rechnungsabgrenzung</span><span class="b">2.000</span></div>
+    <div class="row ind"><span class="a">aus Lieferungen u. Leistungen</span><span class="b">65.000</span></div>
+    <div class="row grp"><span class="a">D. Rechnungsabgrenzungsposten</span><span class="b">2.000</span></div>
+    <div class="row grp"><span class="a">E. Passive latente Steuern</span><span class="b">3.000</span></div>
     <div class="row sum"><span class="a">Bilanzsumme</span><span class="b">500.000</span></div>
   </div>
 </div>
-<div class="fs-note">Beide Seiten ergeben 500.000 € — Aktiva = Passiva. Der Jahresüberschuss von 45.000 € stammt aus der GuV unten.</div>
+<div class="fs-note">Beide Seiten ergeben 500.000 € — Aktiva = Passiva. Die Gliederung folgt § 266 HGB vollständig: Aktiva A–E, Passiva A–E. Der Jahresüberschuss von 45.000 € stammt aus der GuV unten.</div>
 
 <div class="fs-title">Gewinn- und Verlustrechnung 2026 (Gesamtkostenverfahren)</div>
 <div class="guv">
@@ -336,7 +575,7 @@ const DATA = [
       figs:{title:"Kennzahlen aus diesem Abschluss",rows:[["Eigenkapitalquote (250.000 / 500.000)","50 %"],["Umsatzrendite (45.000 / 820.000)","≈ 5,5 %"],["EBIT-Marge (70.000 / 820.000)","≈ 8,5 %"],["Bilanzsumme","500.000 €"]]},
       ex:"Lies die Bilanz aktiv: Das Unternehmen hat 250.000 € Vermögen langfristig gebunden (Anlagevermögen), finanziert sich zur Hälfte aus Eigenkapital (50 % Quote — solide) und hat mit 55.000 € Bank plus 110.000 € Forderungen ausreichend Liquidität, um die 68.000 € Lieferantenverbindlichkeiten zu bedienen. Die GuV zeigt: aus 820.000 € Umsatz bleiben nach allen Kosten und Steuern 45.000 € übrig — eine Umsatzrendite von rund 5,5 %.",
       warn:"Verwechsle nicht Gewinn mit Liquidität. Der Jahresüberschuss von 45.000 € liegt nicht als Bargeld auf dem Konto — er steckt in Forderungen, Vorräten und Anlagevermögen. Ein Unternehmen kann hohe Gewinne ausweisen und trotzdem zahlungsunfähig sein, wenn die Forderungen nicht hereinkommen. Deshalb ist die BWA monatlich so wichtig.",
-      laws:["§ 266 HGB","§ 275 HGB","§ 246 HGB","§ 247 HGB","§ 268 HGB"]
+      laws:["§ 266 HGB","§ 275 HGB","§ 246 HGB","§ 247 HGB","§ 268 HGB","§ 250 HGB","§ 274 HGB","§ 274a HGB"]
     },
     {
       t:"Jahresabschluss und E-Bilanz in der Praxis",
@@ -393,12 +632,66 @@ const DATA = [
         {h:"Fall 1 — Anschaffung und AfA",p:"Ein Mandant kauft am 1. Juli 2026 eine Maschine für 24.000 € netto, Nutzungsdauer laut AfA-Tabelle 8 Jahre. <b>Lösung:</b> Lineare AfA 24.000 ÷ 8 = 3.000 €/Jahr. 2026 nur 6 Monate (Juli–Dezember): 3.000 × 6/12 = <b>1.500 €</b>. Buchung: Abschreibungen 1.500 € an Maschinen 1.500 €. Restbuchwert Ende 2026: 22.500 €."},
         {h:"Fall 2 — GWG oder nicht?",p:"Drei Anschaffungen netto: Bürostuhl 780 €, Notebook 1.150 €, Aktenschrank 950 €. <b>Lösung:</b> Bürostuhl 780 € ≤ 800 € → GWG, Sofortabschreibung. Notebook 1.150 € → über 1.000 €, aber digitales Wirtschaftsgut → Sofortabschreibung trotzdem möglich. Aktenschrank 950 € → kein GWG (über 800 €), kein digitales WG → Sammelposten (250,01–1.000 €) über 5 Jahre oder reguläre AfA über die Nutzungsdauer."},
         {h:"Fall 3 — Rechnungsabgrenzung",p:"Der Mandant zahlt am 1. Dezember 2026 die Kfz-Versicherung für 12 Monate (1.200 €) im Voraus. <b>Lösung:</b> Nur 1 Monat (Dezember) gehört ins Jahr 2026 = 100 €. Die übrigen 1.100 € sind <b>aktive Rechnungsabgrenzung</b> (ARAP): Aufwand 100 € bleibt 2026, 1.100 € werden als ARAP aktiviert und 2027 aufgelöst. Periodengerechte Zuordnung nach § 252 HGB."},
-        {h:"Fall 4 — Privatanteil Pkw",p:"Ein Einzelunternehmer nutzt einen Betriebs-Pkw (Bruttolistenpreis 40.000 €) auch privat, kein Fahrtenbuch. <b>Lösung:</b> 1-%-Regelung: 1 % von 40.000 = 400 €/Monat = 4.800 €/Jahr als <b>Entnahme</b> (umsatzsteuerpflichtig). Bei einem reinen E-Auto bis 70.000 € Listenpreis nur 0,25 % = 100 €/Monat = 1.200 €/Jahr — ein erheblicher Unterschied."},
+        {h:"Fall 4 — Privatanteil Pkw",p:"Ein Einzelunternehmer nutzt einen Betriebs-Pkw (Bruttolistenpreis 40.000 €) auch privat, kein Fahrtenbuch. <b>Lösung:</b> 1-%-Regelung: 1 % von 40.000 = 400 €/Monat = 4.800 €/Jahr als <b>Entnahme</b> (umsatzsteuerpflichtig). Bei einem reinen E-Auto bis 100.000 € Listenpreis nur 0,25 % = 100 €/Monat = 1.200 €/Jahr — ein erheblicher Unterschied."},
         {h:"Fall 5 — Rückstellung bilden",p:"Am Bilanzstichtag ist die Steuerberatungsrechnung für die Abschlusserstellung noch nicht gestellt, wird aber auf ca. 3.500 € geschätzt. <b>Lösung:</b> Es liegt eine wirtschaftlich im alten Jahr verursachte, der Höhe nach ungewisse Verbindlichkeit vor → <b>Rückstellung</b> (§ 249 HGB): Rechtsberatungskosten 3.500 € an Sonstige Rückstellungen 3.500 €. Im Folgejahr wird sie gegen die tatsächliche Rechnung aufgelöst."},
       ],
       ex:"Diese fünf Fälle zusammen sind ein Mini-Jahresabschluss: AfA-Lauf, GWG-Entscheidungen, Rechnungsabgrenzung, Privatanteil und Rückstellung — exakt die Abschlussbuchungen aus der vorigen Lektion. Wer sie sicher beherrscht, hat den Kern der praktischen Abschlussarbeit verstanden.",
       warn:"Beim Selbstlösen immer zuerst fragen: Welches Jahr, welcher Monat, netto oder brutto? Die meisten Fehler in Übungsfällen entstehen nicht beim Rechnen, sondern bei der zeitlichen oder der Netto/Brutto-Zuordnung. Genau darauf zielen die Prüfungs- und Praxisfälle ab.",
       laws:["§ 7 EStG","§ 6 Abs. 2 EStG","§ 249 HGB","§ 250 HGB","§ 252 HGB","§ 6 Abs. 1 Nr. 4 EStG"]
+    },
+    {
+      t:"Kompletter Beispielabschluss (Schritt für Schritt)",
+      s:"Von den Salden zur fertigen Bilanz und GuV",
+      intro:"Jetzt setzen wir alles zusammen. Wir gehen einen vollständigen Jahresabschluss durch — von den vorläufigen Kontensalden über die Abschlussbuchungen bis zur fertigen Bilanz und GuV. Verfolge jeden Schritt mit; das ist genau der Ablauf, den du in der Praxis und in der Prüfung brauchst.",
+      blocks:[
+        {h:"Ausgangslage: die vorläufigen Salden",p:"Die Muster GmbH legt zum 31.12.2026 folgende vorläufige Salden vor (vor Abschlussbuchungen): Maschinen 120.000 €, Bank 60.000 €, Forderungen 95.000 €, Kasse 5.000 €, Vorräte 70.000 € · Gezeichnetes Kapital 25.000 €, Gewinnrücklagen 150.000 €, Verbindlichkeiten aus L+L 55.000 €, Bankdarlehen 90.000 € · Umsatzerlöse 640.000 €, Materialaufwand 310.000 €, Personalaufwand 205.000 €, sonstiger Aufwand 60.000 €."},
+        {h:"Schritt 1 — Abschlussbuchungen erfassen",p:"Vier Sachverhalte sind noch zu buchen: <b>(a)</b> Abschreibung auf die Maschinen: 12.000 €. <b>(b)</b> Eine Garantierückstellung ist zu bilden: 8.000 €. <b>(c)</b> Eine im Dezember gezahlte Versicherung für 2027 (aktive Rechnungsabgrenzung): 3.000 €. <b>(d)</b> Die Steuerrückstellung (KSt + GewSt) beträgt 15.000 €."},
+        {h:"Schritt 2 — die Buchungssätze",p:"(a) Abschreibungen 12.000 € an Maschinen 12.000 € → Maschinen sinken auf 108.000 €, neuer Aufwand 12.000 €. (b) Aufwand Garantie 8.000 € an Rückstellungen 8.000 €. (c) Aktive RAP 3.000 € an sonstiger Aufwand 3.000 € → sonstiger Aufwand sinkt auf 57.000 €, neuer Aktivposten 3.000 €. (d) Steueraufwand 15.000 € an Steuerrückstellungen 15.000 €."},
+        {h:"Schritt 3 — die GuV aufstellen",p:"Umsatzerlöse 640.000 − Materialaufwand 310.000 − Personalaufwand 205.000 − Abschreibungen 12.000 − sonstiger Aufwand 57.000 − Garantieaufwand 8.000 = Ergebnis vor Steuern 48.000 €. Abzüglich Steueraufwand 15.000 € = <b>Jahresüberschuss 33.000 €</b>."},
+        {h:"Schritt 4 — Jahresüberschuss ins Eigenkapital",p:"Der Jahresüberschuss von 33.000 € erhöht das Eigenkapital. Es steht jetzt: Gezeichnetes Kapital 25.000 + Gewinnrücklagen 150.000 + Jahresüberschuss 33.000 = 208.000 €. Damit ist die Brücke von der GuV in die Bilanz geschlagen."},
+        {h:"Schritt 5 — die fertige Bilanz",p:"Jetzt werden alle Bestandskonten (nach den Abschlussbuchungen) zur Bilanz zusammengestellt. Prüfe unten: Beide Seiten müssen exakt gleich sein. Wenn Aktiva = Passiva, ist der Abschluss rechnerisch korrekt."},
+      ],
+      vis:`
+<div class="fs-title">Ergebnis: GuV der Muster GmbH 2026</div>
+<div class="guv">
+  <div class="gr"><span class="lbl">Umsatzerlöse</span><span class="val">640.000</span></div>
+  <div class="gr minus"><span class="lbl">− Materialaufwand</span><span class="val">−310.000</span></div>
+  <div class="gr minus"><span class="lbl">− Personalaufwand</span><span class="val">−205.000</span></div>
+  <div class="gr minus"><span class="lbl">− Abschreibungen</span><span class="val">−12.000</span></div>
+  <div class="gr minus"><span class="lbl">− sonstiger Aufwand (57.000 nach RAP)</span><span class="val">−57.000</span></div>
+  <div class="gr minus"><span class="lbl">− Garantieaufwand (Rückstellung)</span><span class="val">−8.000</span></div>
+  <div class="gr sub"><span class="lbl">Ergebnis vor Steuern</span><span class="val">48.000</span></div>
+  <div class="gr minus"><span class="lbl">− Steueraufwand (KSt + GewSt)</span><span class="val">−15.000</span></div>
+  <div class="gr result"><span class="lbl">Jahresüberschuss</span><span class="val">33.000</span></div>
+</div>
+<div class="fs-title">Ergebnis: Bilanz zum 31.12.2026</div>
+<div class="bilanz">
+  <div class="side">
+    <div class="sh">Aktiva</div>
+    <div class="row grp"><span class="a">Maschinen (120.000 − 12.000 AfA)</span><span class="b">108.000</span></div>
+    <div class="row grp"><span class="a">Vorräte</span><span class="b">70.000</span></div>
+    <div class="row grp"><span class="a">Forderungen aus L+L</span><span class="b">95.000</span></div>
+    <div class="row grp"><span class="a">Bank</span><span class="b">60.000</span></div>
+    <div class="row grp"><span class="a">Kasse</span><span class="b">5.000</span></div>
+    <div class="row grp"><span class="a">Aktive RAP</span><span class="b">3.000</span></div>
+    <div class="row sum"><span class="a">Bilanzsumme</span><span class="b">341.000</span></div>
+  </div>
+  <div class="side">
+    <div class="sh">Passiva</div>
+    <div class="row grp"><span class="a">Gezeichnetes Kapital</span><span class="b">25.000</span></div>
+    <div class="row grp"><span class="a">Gewinnrücklagen</span><span class="b">150.000</span></div>
+    <div class="row grp"><span class="a">Jahresüberschuss</span><span class="b">33.000</span></div>
+    <div class="row grp"><span class="a">Garantierückstellung</span><span class="b">8.000</span></div>
+    <div class="row grp"><span class="a">Steuerrückstellung</span><span class="b">15.000</span></div>
+    <div class="row grp"><span class="a">Verbindlichkeiten aus L+L</span><span class="b">55.000</span></div>
+    <div class="row grp"><span class="a">Bankdarlehen</span><span class="b">90.000</span></div>
+    <div class="row sum"><span class="a">Bilanzsumme</span><span class="b">341.000</span></div>
+  </div>
+</div>
+<div class="fs-note">Beide Seiten ergeben 341.000 € — der Abschluss geht auf. Aktiva = Passiva. Der Jahresüberschuss (33.000 €) verbindet GuV und Bilanz.</div>`,
+      ex:"Beachte die Systematik: Jede Abschlussbuchung wirkt an zwei Stellen. Die Abschreibung z. B. mindert die Maschinen in der Bilanz (108.000 statt 120.000) UND erscheint als Aufwand in der GuV (−12.000). Die Garantierückstellung erscheint als Aufwand in der GuV (−8.000) UND als Passivposten in der Bilanz (8.000). Genau dieses doppelte Wirken ist der Kern der doppelten Buchführung.",
+      warn:"Wenn am Ende Aktiva ≠ Passiva, hast du irgendwo nur die halbe Buchung erfasst — der häufigste Fehler. Systematisch prüfen: Ist jede Abschlussbuchung in GuV UND Bilanz angekommen? Der Jahresüberschuss aus der GuV muss exakt dem Jahresüberschuss-Posten im Eigenkapital entsprechen.",
+      laws:["§ 242 HGB","§ 243 HGB","§ 266 HGB","§ 275 HGB","§ 249 HGB","§ 250 HGB"]
     }
   ],
   quiz:[
@@ -419,7 +712,56 @@ const DATA = [
     {q:"Die Steuerberatungsrechnung fürs alte Jahr liegt am Bilanzstichtag noch nicht vor (geschätzt 3.500 €). Was ist zu buchen?",o:["Nichts, erst bei Rechnungseingang","Eine Rückstellung von 3.500 €","Eine aktive Rechnungsabgrenzung","Eine Forderung von 3.500 €"],a:1,e:"Wirtschaftlich im alten Jahr verursacht, der Höhe nach ungewiss → Rückstellung (§ 249 HGB): Rechtsberatungskosten an Sonstige Rückstellungen 3.500 €. Im Folgejahr gegen die echte Rechnung aufgelöst.",l:"§ 249 HGB"},
     {q:"Was muss in jeder Bilanz immer gelten?",o:["Gewinn = Umsatz","Aktiva = Passiva (Bilanzsumme beider Seiten gleich)","Eigenkapital = Bilanzsumme","Anlagevermögen = Umlaufvermögen"],a:1,e:"Die Bilanzgleichung Aktiva = Passiva gilt immer. Die Aktivseite zeigt die Mittelverwendung (worin steckt das Geld), die Passivseite die Mittelherkunft (woher kommt es). Beide Summen sind identisch.",l:"§ 247 HGB"},
     {q:"Wie verbindet sich die GuV mit der Bilanz?",o:["Gar nicht, das sind getrennte Rechnungen","Der Jahresüberschuss aus der GuV erhöht das Eigenkapital in der Bilanz","Die Bilanzsumme steht auch in der GuV","Die GuV ersetzt die Bilanz"],a:1,e:"Der Jahresüberschuss aus der GuV fließt als Eigenkapitalposten in die Bilanz. Gewinn erhöht das Eigenkapital, Verlust mindert es — so hängen beide Rechnungen zusammen.",l:"§ 266, § 275 HGB"},
-    {q:"Ein Unternehmen weist 45.000 € Jahresüberschuss aus, hat aber nur 5.000 € auf dem Konto. Wie ist das möglich?",o:["Das ist ein Buchungsfehler","Gewinn ist nicht gleich Liquidität — der Gewinn steckt in Forderungen, Vorräten, Anlagevermögen","Der Gewinn ist falsch berechnet","Das Unternehmen ist insolvent"],a:1,e:"Gewinn ≠ Liquidität. Ein hoher Jahresüberschuss kann in noch nicht bezahlten Forderungen oder in Vorräten und Anlagevermögen gebunden sein. Deshalb braucht es neben der GuV immer auch den Liquiditätsblick (BWA, OPOS).",l:"Bilanzanalyse"}
+    {q:"Ein Unternehmen weist 45.000 € Jahresüberschuss aus, hat aber nur 5.000 € auf dem Konto. Wie ist das möglich?",o:["Das ist ein Buchungsfehler","Gewinn ist nicht gleich Liquidität — der Gewinn steckt in Forderungen, Vorräten, Anlagevermögen","Der Gewinn ist falsch berechnet","Das Unternehmen ist insolvent"],a:1,e:"Gewinn ≠ Liquidität. Ein hoher Jahresüberschuss kann in noch nicht bezahlten Forderungen oder in Vorräten und Anlagevermögen gebunden sein. Deshalb braucht es neben der GuV immer auch den Liquiditätsblick (BWA, OPOS).",l:"Bilanzanalyse"},
+    {q:"Wie ist die Aktivseite einer Bilanz nach § 266 HGB grob gegliedert?",o:["Eigenkapital, Rückstellungen, Verbindlichkeiten","Anlagevermögen, Umlaufvermögen, RAP, latente Steuern, Unterschiedsbetrag","Umsatz, Kosten, Gewinn","Nur Bank und Kasse"],a:1,e:"Aktiva: A. Anlagevermögen, B. Umlaufvermögen, C. Rechnungsabgrenzungsposten, D. Aktive latente Steuern, E. Aktiver Unterschiedsbetrag aus der Vermögensverrechnung. Eigenkapital/Rückstellungen/Verbindlichkeiten stehen dagegen auf der Passivseite.",l:"§ 266 HGB"},
+    {q:"Wodurch entstehen latente Steuern in der Bilanz?",o:["Durch verspätete Steuerzahlung","Durch Differenzen zwischen Handels- und Steuerbilanz, die sich später ausgleichen","Durch ausländische Einkünfte","Durch nicht gezahlte Gewerbesteuer"],a:1,e:"Latente Steuern bilden zeitliche Differenzen zwischen HGB- und Steuerbilanz ab. Aktive latente Steuern = künftiger Steuervorteil, passive = künftige Mehrbelastung. Kleine KapGes sind beim Ansatz aktiver latenter Steuern befreit (§ 274a HGB).",l:"§ 274 HGB"},
+    {q:"Welche Posten gehören zum Eigenkapital einer GmbH (§ 266 Abs. 3 A)?",o:["Nur das Stammkapital","Gezeichnetes Kapital, Kapitalrücklage, Gewinnrücklagen, Gewinnvortrag, Jahresüberschuss","Rückstellungen und Verbindlichkeiten","Forderungen und Bankguthaben"],a:1,e:"Das Eigenkapital gliedert sich in: I. Gezeichnetes Kapital, II. Kapitalrücklage, III. Gewinnrücklagen, IV. Gewinnvortrag/Verlustvortrag, V. Jahresüberschuss/Jahresfehlbetrag.",l:"§ 266 Abs. 3 HGB"}
+  ],
+  drills:[
+    {t:"Buchungssätze bilden",lvl:"Grundlagen",
+     task:"Bilde die Buchungssätze (Soll an Haben) für diese fünf Geschäftsvorfälle:<br><b>1.</b> Wareneinkauf 5.000 € netto + 950 € USt auf Ziel (Rechnung).<br><b>2.</b> Ein Kunde zahlt eine Ausgangsrechnung über 2.380 € per Bank.<br><b>3.</b> Barkauf von Büromaterial 119 € brutto (19 % USt).<br><b>4.</b> Banküberweisung der Miete 1.500 € (umsatzsteuerfrei).<br><b>5.</b> Privatentnahme des Unternehmers 800 € bar aus der Kasse.",
+     sol:`<div class="step"><b>1.</b> Wareneingang 5.000 € + Vorsteuer 950 € <b>an</b> Verbindlichkeiten aL+L 5.950 €</div>
+<div class="step"><b>2.</b> Bank 2.380 € <b>an</b> Forderungen aL+L 2.380 € (offener Posten wird ausgeglichen)</div>
+<div class="step"><b>3.</b> Büromaterial 100 € + Vorsteuer 19 € <b>an</b> Kasse 119 €</div>
+<div class="step"><b>4.</b> Mietaufwand 1.500 € <b>an</b> Bank 1.500 € (keine Vorsteuer, da steuerfrei)</div>
+<div class="step"><b>5.</b> Privatentnahme 800 € <b>an</b> Kasse 800 €</div>
+<div class="step">Merke: Aufwand und Aktivzugänge stehen im Soll, Bank-/Kassenabgänge und Verbindlichkeitszugänge im Haben.</div>`},
+    {t:"Abschreibung berechnen und buchen",lvl:"AfA",
+     task:"Ein Mandant kauft am <b>1. April 2026</b> eine Produktionsmaschine für <b>60.000 € netto</b>. Nutzungsdauer laut AfA-Tabelle: 10 Jahre. Lineare AfA.<br><b>a)</b> Wie hoch ist die AfA 2026?<br><b>b)</b> Wie lautet die Buchung?<br><b>c)</b> Wie hoch ist der Restbuchwert am 31.12.2027?",
+     sol:`<div class="step"><b>a)</b> Jahres-AfA = 60.000 ÷ 10 = 6.000 €. 2026 nur 9 Monate (April–Dez): 6.000 × 9/12 = <b>4.500 €</b>.</div>
+<div class="step"><b>b)</b> Abschreibungen 4.500 € <b>an</b> Maschinen 4.500 €.</div>
+<div class="step"><b>c)</b> Buchwert nach 2026: 60.000 − 4.500 = 55.500 €. 2027 volle Jahres-AfA 6.000 €. Restbuchwert 31.12.2027: <span class="res">49.500 €</span></div>`},
+    {t:"GWG, Sammelposten oder reguläre AfA?",lvl:"Einordnung",
+     task:"Ordne jede Anschaffung (netto) korrekt zu — GWG-Sofort, Sammelposten, digitales WG oder reguläre AfA:<br><b>1.</b> Bürodrucker 220 €<br><b>2.</b> Schreibtisch 920 €<br><b>3.</b> Smartphone (betrieblich) 780 €<br><b>4.</b> Monitor 340 €<br><b>5.</b> Konferenztisch 2.400 €",
+     sol:`<div class="step"><b>1.</b> Drucker 220 € → digitale Hardware → <b>Sofortabschreibung</b> (auch als GWG ≤ 800 € möglich).</div>
+<div class="step"><b>2.</b> Schreibtisch 920 € → kein GWG (über 800 €), kein digitales WG → <b>Sammelposten</b> (250,01–1.000 €) über 5 Jahre oder reguläre AfA.</div>
+<div class="step"><b>3.</b> Smartphone 780 € ≤ 800 € → <b>GWG</b>, Sofortabschreibung.</div>
+<div class="step"><b>4.</b> Monitor 340 € → digitale Hardware → <b>Sofortabschreibung</b>.</div>
+<div class="step"><b>5.</b> Konferenztisch 2.400 € → über 1.000 €, kein digitales WG → <b>reguläre AfA</b> über die Nutzungsdauer (13 Jahre).</div>`},
+    {t:"Abschlussbuchungen: Rechnungsabgrenzung & Rückstellung",lvl:"Jahresabschluss",
+     task:"Buche zum 31.12.2026:<br><b>a)</b> Am 1.10.2026 wurde die Kfz-Versicherung für 12 Monate im Voraus gezahlt: 2.400 €.<br><b>b)</b> Die Steuerberatungskosten für den Abschluss 2026 (geschätzt 4.000 €) sind noch nicht berechnet.<br><b>c)</b> Ein Kunde hat im Dezember 3.000 € Miete für Januar 2027 im Voraus überwiesen (Mietertrag).",
+     sol:`<div class="step"><b>a)</b> Von Okt 2026 bis Sep 2027. 2026 gehören nur 3 Monate (Okt–Dez) = 600 €. Die übrigen 9 Monate = 1.800 € sind <b>aktive RAP</b>: Aktive RAP 1.800 € <b>an</b> Versicherungsaufwand 1.800 €.</div>
+<div class="step"><b>b)</b> Wirtschaftlich 2026 verursacht, Höhe ungewiss → <b>Rückstellung</b>: Rechts-/Beratungskosten 4.000 € <b>an</b> Sonstige Rückstellungen 4.000 €.</div>
+<div class="step"><b>c)</b> Ertrag gehört ins Jahr 2027 → <b>passive RAP</b>: Mietertrag 3.000 € <b>an</b> Passive RAP 3.000 € (bzw. direkt bei Vereinnahmung als PRAP gebucht).</div>`},
+    {t:"Übungs-GuV aufstellen (Gesamtkostenverfahren)",lvl:"GuV",
+     task:"Stelle aus diesen Werten die GuV auf und ermittle den Jahresüberschuss:<br>Umsatzerlöse 600.000 €, sonstige betr. Erträge 20.000 €, Materialaufwand 250.000 €, Personalaufwand 200.000 €, Abschreibungen 30.000 €, sonstige betr. Aufwendungen 70.000 €, Zinsaufwand 6.000 €, Steuern vom Einkommen 13.000 €.",
+     sol:`<div class="step">Umsatzerlöse 600.000 + sonst. Erträge 20.000 = <b>Gesamtleistung 620.000</b></div>
+<div class="step">− Material 250.000 − Personal 200.000 − Abschreibungen 30.000 − sonst. Aufwand 70.000 = <b>Betriebsergebnis 70.000</b></div>
+<div class="step">− Zinsaufwand 6.000 = <b>Ergebnis vor Steuern 64.000</b></div>
+<div class="step">− Steuern 13.000 = Jahresüberschuss</div>
+<div class="step"><span class="res">Jahresüberschuss = 51.000 €</span></div>`},
+    {t:"Übungs-Bilanz: fehlende Größe finden",lvl:"Bilanz",
+     task:"Eine Bilanz hat folgende Posten:<br><b>Aktiva:</b> Anlagevermögen 300.000 €, Vorräte 90.000 €, Forderungen 120.000 €, Bank 40.000 €.<br><b>Passiva:</b> Eigenkapital ?, Rückstellungen 50.000 €, Verbindlichkeiten 280.000 €.<br><b>a)</b> Wie hoch ist die Bilanzsumme?<br><b>b)</b> Wie hoch ist das Eigenkapital?<br><b>c)</b> Wie hoch ist die Eigenkapitalquote?",
+     sol:`<div class="step"><b>a)</b> Aktiva = 300.000 + 90.000 + 120.000 + 40.000 = <b>550.000 €</b>. Da Aktiva = Passiva, ist die Bilanzsumme 550.000 €.</div>
+<div class="step"><b>b)</b> Eigenkapital = Bilanzsumme − Rückstellungen − Verbindlichkeiten = 550.000 − 50.000 − 280.000 = <b>220.000 €</b>.</div>
+<div class="step"><b>c)</b> Eigenkapitalquote = 220.000 / 550.000 = <span class="res">40 %</span></div>`},
+    {t:"Kompletter Mini-Jahresabschluss",lvl:"Vertiefung · anspruchsvoll",
+     task:"Ein Einzelunternehmer legt vor: vorläufiger Gewinn 80.000 €. Noch zu berücksichtigen:<br><b>1.</b> AfA auf einen im Juli gekauften Transporter (36.000 €, ND 6 Jahre, linear).<br><b>2.</b> Rückstellung für eine drohende Garantieleistung 5.000 €.<br><b>3.</b> Pkw-Privatnutzung (Bruttolistenpreis 30.000 €, 1-%-Regel, ganzjährig).<br>Wie hoch ist der korrigierte Gewinn?",
+     sol:`<div class="step"><b>1.</b> AfA Transporter: 36.000 ÷ 6 = 6.000/Jahr, Juli–Dez = 6 Monate → 3.000 €. Gewinnmindernd: −3.000 €.</div>
+<div class="step"><b>2.</b> Garantierückstellung 5.000 € → Aufwand, gewinnmindernd: −5.000 €.</div>
+<div class="step"><b>3.</b> Pkw-Privatanteil: 1 % × 30.000 = 300/Monat × 12 = 3.600 € → Entnahme, gewinn<b>erhöhend</b>: +3.600 €.</div>
+<div class="step">Korrigierter Gewinn = 80.000 − 3.000 − 5.000 + 3.600 = <span class="res">75.600 €</span></div>
+<div class="step">Hinweis: Die Privatnutzung erhöht den Gewinn, weil sie betrieblichen Aufwand neutralisiert (privater Anteil darf den Gewinn nicht mindern).</div>`}
   ]
 },
 {
@@ -443,16 +785,16 @@ const DATA = [
     },
     {
       t:"Steuerbescheid, Bekanntgabe und Fristen",
-      s:"Verwaltungsakt, 3-Tages-Fiktion, Vorbehalt",
+      s:"Verwaltungsakt, 4-Tages-Fiktion, Vorbehalt",
       intro:"Das Ergebnis des Verfahrens ist der Steuerbescheid — rechtlich ein Verwaltungsakt. Ein Fehler darin hat nur Folgen, wenn man ihn rechtzeitig angreift. Deshalb ist das Fristenmanagement die vielleicht wichtigste Daueraufgabe der Kanzlei.",
       blocks:[
         {h:"Verwaltungsakt (§ 118 AO)",p:"Jede hoheitliche Maßnahme einer Behörde zur Regelung eines Einzelfalls mit Außenwirkung. Der Steuerbescheid ist der klassische Verwaltungsakt im Steuerrecht."},
-        {h:"Bekanntgabe und 3-Tages-Fiktion (§ 122 AO)",p:"Der Bescheid wird erst mit Bekanntgabe wirksam. Bei Postzustellung gilt er am <b>dritten Tag</b> nach Aufgabe zur Post als bekannt gegeben. Fällt der dritte Tag auf Samstag, Sonntag oder Feiertag, verschiebt sich die Fiktion auf den nächsten Werktag. <b>Hinweis:</b> Seit 2025 wird vielfach über eine 4-Tages-Frist diskutiert/eingeführt im Zuge der Umstellung der Postlaufzeiten — im Kurs den aktuellen Stand der Fassung prüfen."},
+        {h:"Bekanntgabe und 4-Tages-Fiktion (§ 122 AO)",p:"Der Bescheid wird erst mit Bekanntgabe wirksam. Bei Postzustellung gilt er am <b>vierten Tag</b> nach Aufgabe zur Post als bekannt gegeben. <b>Wichtig:</b> Seit dem 1.1.2025 gilt die <b>4-Tages-Fiktion</b> (vorher 3 Tage) — angepasst an die längeren Postlaufzeiten durch das Postrechtsmodernisierungsgesetz. Fällt der vierte Tag auf Samstag, Sonntag oder Feiertag, verschiebt sich die Fiktion auf den nächsten Werktag (§ 108 Abs. 3 AO). Die Frist gilt auch für elektronisch bereitgestellte Bescheide. Für die Steuerberaterprüfung 2026 ist die 4-Tages-Frist maßgeblich."},
         {h:"Pflichtinhalt und Rechtsbehelfsbelehrung",p:"Name, Steuerart, Zeitraum, Betrag, Fälligkeit, Begründung bei Abweichung und <b>Rechtsbehelfsbelehrung</b>. Fehlt die Belehrung, verlängert sich die Einspruchsfrist von einem Monat auf ein Jahr (§ 356 AO)."},
         {h:"Vorbehalt der Nachprüfung (§ 164 AO)",p:"Steht der Bescheid unter Vorbehalt der Nachprüfung, ist er jederzeit — auch zu Ungunsten — änderbar, bis der Vorbehalt aufgehoben wird oder die Festsetzungsfrist abläuft. Üblich bei noch nicht abschließend geprüften Erklärungen."},
         {h:"Vorläufige Festsetzung (§ 165 AO)",p:"Bei ungewissem Sachverhalt oder anhängigen Musterverfahren (z. B. vor dem BVerfG) ergeht der Bescheid in dem betreffenden Punkt vorläufig. Nach Klärung wird er angepasst — ohne dass der Steuerpflichtige eigens Einspruch einlegen muss."},
       ],
-      ex:"ESt-Bescheid wird am Donnerstag, 8.10.2026, zur Post gegeben. 3-Tages-Fiktion: 8.10. + 3 = 11.10. (Sonntag) → Bekanntgabe gilt am Montag, 12.10. Einspruchsfrist: ein Monat ab 12.10. → läuft bis 12.11.2026. Der Einspruch muss spätestens an diesem Tag beim FA eingegangen sein.",
+      ex:"ESt-Bescheid wird am Mittwoch, 7.10.2026, zur Post gegeben. 4-Tages-Fiktion: 7.10. + 4 = 11.10. (Sonntag) → Bekanntgabe verschiebt sich auf Montag, 12.10. Einspruchsfrist: ein Monat ab Bekanntgabe → läuft bis 12.11.2026. Der Einspruch muss spätestens an diesem Tag beim FA eingegangen sein.",
       warn:"Posteingang sofort mit Datum erfassen und Frist im DATEV-/Fristenkalender notieren. Eine versäumte Einspruchsfrist macht selbst einen falschen Bescheid bestandskräftig. Wiedereinsetzung (§ 110 AO) wird nur bei unverschuldeter Verhinderung gewährt — und ist schwer durchzusetzen.",
       laws:["§ 118 AO","§ 122 AO","§ 124 AO","§ 157 AO","§ 164 AO","§ 165 AO","§ 356 AO"]
     },
@@ -485,17 +827,59 @@ const DATA = [
       ex:"Bescheid geht am 5.11. zu. Frist: bis 5.12. Mandant bemerkt am 20.11., dass eine Abschreibung fehlt. Kanzlei legt fristgerecht Einspruch ein, beantragt AdV und reicht bis Mitte Dezember die Begründung mit Nachweisen nach. Das FA hilft ab (Abhilfebescheid) → Verfahren erledigt, kein Zinsrisiko.",
       warn:"Vor jedem Einspruch prüfen, ob im Bescheid auch Fehler zu Gunsten des Mandanten stecken. Denn das FA darf verbösern. In Grenzfällen den Einspruch gezielt auf den Streitpunkt beschränken, um das Risiko zu begrenzen.",
       laws:["§ 347 AO","§ 355 AO","§ 356 AO","§ 361 AO","§ 367 AO","§ 47 FGO"]
+    },
+    {
+      t:"Haftung, Steuerstraf- & Bußgeldrecht",
+      s:"§§ 69 ff. AO, Hinterziehung, Selbstanzeige",
+      intro:"Wer haftet, wenn Steuern nicht gezahlt werden — und wann wird aus einem Fehler eine Straftat? Diese Themen sind für die Kanzlei doppelt wichtig: zur Beratung der Mandanten und zum Schutz der eigenen Berufsträger. Gerade als Geschäftsführer-Haftung und Selbstanzeige kommen sie regelmäßig vor.",
+      blocks:[
+        {h:"Haftung des Geschäftsführers (§ 69 AO)",p:"Gesetzliche Vertreter (GmbH-Geschäftsführer, Vorstände) haften <b>persönlich</b> mit ihrem Privatvermögen, wenn Steuern infolge vorsätzlicher oder grob fahrlässiger Pflichtverletzung nicht oder nicht rechtzeitig festgesetzt oder gezahlt werden. Klassiker: Der GF zahlt Löhne aus, führt aber die Lohnsteuer nicht ab → persönliche Haftung."},
+        {h:"Weitere Haftungstatbestände",p:"<b>§ 71 AO:</b> Wer Steuern hinterzieht oder daran teilnimmt, haftet für die verkürzten Steuern. <b>§ 74 AO:</b> Haftung des Eigentümers von Gegenständen, die einem Unternehmen dienen. <b>§ 75 AO:</b> Betriebsübernehmer-Haftung — wer einen Betrieb im Ganzen übernimmt, haftet für bestimmte Betriebssteuern des Vorgängers. Wichtig bei Unternehmenskäufen (Asset Deal)."},
+        {h:"Haftung durch Haftungsbescheid (§ 191 AO)",p:"Das Finanzamt macht die Haftung durch einen <b>Haftungsbescheid</b> geltend — ein eigener Verwaltungsakt, gegen den Einspruch möglich ist. Das FA hat dabei Ermessen (Auswahl zwischen mehreren Haftungsschuldnern). Der Haftungsschuldner haftet neben dem eigentlichen Steuerschuldner (Gesamtschuld)."},
+        {h:"Steuerhinterziehung (§ 370 AO)",p:"Eine <b>Straftat</b>: Wer den Finanzbehörden vorsätzlich unrichtige oder unvollständige Angaben macht oder sie pflichtwidrig in Unkenntnis lässt und dadurch Steuern verkürzt, wird mit Geldstrafe oder Freiheitsstrafe bis zu <b>5 Jahren</b> bestraft — in besonders schweren Fällen (z. B. großes Ausmaß ab ca. 50.000 €) bis zu <b>10 Jahren</b>. Der Versuch ist strafbar."},
+        {h:"Leichtfertige Steuerverkürzung (§ 378 AO)",p:"Die „kleine Schwester\" der Hinterziehung — kein Vorsatz, sondern <b>Leichtfertigkeit</b> (grobe Fahrlässigkeit). Es ist eine <b>Ordnungswidrigkeit</b>, keine Straftat, und wird mit Geldbuße bis 50.000 € geahndet. Beispiel: ein Steuerberater, der Belege grob nachlässig auswertet."},
+        {h:"Selbstanzeige (§ 371 AO)",p:"Wer eine Steuerhinterziehung vollständig und rechtzeitig offenbart und die Steuern nachzahlt, kann <b>Straffreiheit</b> erlangen. Strenge Voraussetzungen: Die Anzeige muss <b>vollständig</b> sein (alle unverjährten Jahre einer Steuerart), darf nicht <b>gesperrt</b> sein (z. B. Prüfung bereits angekündigt, Tat schon entdeckt), und ab 25.000 € verkürzter Steuer ist ein Zuschlag zu zahlen. Eine misslungene Teil-Selbstanzeige hilft nicht."},
+      ],
+      figs:{title:"Straf- & Bußgeldrahmen",rows:[["Steuerhinterziehung (§ 370)","bis 5 Jahre Haft"],["Besonders schwerer Fall","bis 10 Jahre Haft"],["Leichtfertige Verkürzung (§ 378)","Bußgeld bis 50.000 €"],["Verjährung Hinterziehung (steuerl.)","10 Jahre"],["Selbstanzeige-Zuschlag ab","25.000 €"]]},
+      ex:"Ein GmbH-Geschäftsführer behält in einer Liquiditätskrise die einbehaltene Lohnsteuer ein, statt sie ans FA abzuführen, und zahlt stattdessen Lieferanten. Folge: persönliche Haftung nach § 69 AO über einen Haftungsbescheid (§ 191 AO) — er muss die nicht abgeführte Lohnsteuer aus seinem Privatvermögen zahlen. Bei Vorsatz kommt eine Strafbarkeit hinzu.",
+      warn:"Die Lohnsteuer ist „fremdes Geld\" — sie gehört dem Fiskus, nicht dem Unternehmen. Ihre Nichtabführung ist der häufigste Haftungsfall überhaupt und wird besonders streng behandelt. Mandanten in der Krise immer darauf hinweisen: Lohnsteuer und Sozialabgaben haben Vorrang.",
+      laws:["§ 69 AO","§ 71 AO","§ 74 AO","§ 75 AO","§ 191 AO","§ 370 AO","§ 371 AO","§ 378 AO"]
     }
   ],
   quiz:[
     {q:"Was sind Steuern nach § 3 AO?",o:["Gebühren für staatliche Leistungen","Geldleistungen ohne Gegenleistung zur Erzielung von Einnahmen","Strafen für Rechtsverstöße","Freiwillige Beiträge"],a:1,e:"§ 3 AO: Steuern sind Geldleistungen ohne Gegenleistung. Das unterscheidet sie von Gebühren (konkrete Gegenleistung) und Beiträgen (potenzielle Gegenleistung).",l:"§ 3 AO"},
-    {q:"Was bedeutet die 3-Tages-Fiktion?",o:["Das FA hat 3 Tage zur Antwort","Ein per Post versandter Bescheid gilt am 3. Tag nach Aufgabe als bekannt gegeben","Die Einspruchsfrist beträgt 3 Tage","Nach 3 Tagen ist der Bescheid bezahlt"],a:1,e:"§ 122 Abs. 2 AO: Bekanntgabe am 3. Tag nach Aufgabe zur Post. Fällt dieser auf Wochenende/Feiertag, verschiebt er sich auf den nächsten Werktag.",l:"§ 122 AO"},
+    {q:"Was bedeutet die 4-Tages-Fiktion (seit 2025)?",o:["Das FA hat 4 Tage zur Antwort","Ein per Post versandter Bescheid gilt am 4. Tag nach Aufgabe als bekannt gegeben","Die Einspruchsfrist beträgt 4 Tage","Nach 4 Tagen ist der Bescheid bezahlt"],a:1,e:"Seit 1.1.2025: Bekanntgabe am 4. Tag nach Aufgabe zur Post (vorher 3 Tage, angepasst an längere Postlaufzeiten). Fällt dieser auf Wochenende/Feiertag, verschiebt er sich auf den nächsten Werktag. Für die Steuerberaterprüfung 2026 maßgeblich.",l:"§ 122 Abs. 2 AO"},
     {q:"Wie lang ist die reguläre Festsetzungsfrist?",o:["1 Jahr","2 Jahre","4 Jahre","10 Jahre"],a:2,e:"Regulär 4 Jahre. Bei leichtfertiger Verkürzung 5, bei Hinterziehung 10 Jahre (§ 169 AO).",l:"§ 169 AO"},
     {q:"Innerhalb welcher Frist ist Einspruch einzulegen?",o:["2 Wochen","1 Monat","3 Monate","1 Jahr"],a:1,e:"Ein Monat nach Bekanntgabe (§ 355 AO). Fehlt die Rechtsbehelfsbelehrung, verlängert sich die Frist auf ein Jahr.",l:"§ 355 AO"},
     {q:"Was passiert während einer gewährten Aussetzung der Vollziehung bei erfolglosem Einspruch?",o:["Es fallen keine Kosten an","Es werden Aussetzungszinsen (6 % p. a.) fällig","Der Bescheid wird automatisch aufgehoben","Säumniszuschläge werden verdoppelt"],a:1,e:"AdV verhindert Säumniszuschläge, aber bei erfolglosem Einspruch werden Aussetzungszinsen von 0,5 % pro Monat (6 % p. a.) nachgefordert.",l:"§ 361 AO, § 237 AO"},
     {q:"Was regelt § 173 AO?",o:["Berichtigung von Rechenfehlern","Änderung bei nachträglich bekannt gewordenen Tatsachen oder Beweismitteln","Verlängerung der Festsetzungsfrist","Aussetzung der Vollziehung"],a:1,e:"§ 173 AO: Änderung bei neuen Tatsachen/Beweismitteln. Zu Ungunsten nur bei grobem Verschulden des Steuerpflichtigen.",l:"§ 173 AO"},
     {q:"Wann ist § 129 AO (offenbare Unrichtigkeit) anwendbar?",o:["Bei falscher Gesetzesauslegung durch das FA","Bei mechanischen Fehlern wie Schreib- oder Rechenfehlern","Nur innerhalb der Einspruchsfrist","Bei jeder Art von Fehler"],a:1,e:"§ 129 AO greift nur bei mechanischen Versehen (Tipp-, Rechenfehler), die ohne weiteres erkennbar sind — nicht bei Rechtsfehlern. Korrektur ist jederzeit möglich.",l:"§ 129 AO"},
-    {q:"Was bedeutet Verböserung im Einspruchsverfahren?",o:["Der Mandant bekommt mehr Zeit","Das FA kann den Bescheid auch zu Ungunsten ändern (nach vorherigem Hinweis)","Der Einspruch wird automatisch abgewiesen","Die Strafe wird erhöht"],a:1,e:"§ 367 Abs. 2 AO: Das FA darf im Einspruchsverfahren auch verschlechtern, muss aber vorher hinweisen. Der Steuerpflichtige kann dann den Einspruch zurücknehmen.",l:"§ 367 AO"}
+    {q:"Was bedeutet Verböserung im Einspruchsverfahren?",o:["Der Mandant bekommt mehr Zeit","Das FA kann den Bescheid auch zu Ungunsten ändern (nach vorherigem Hinweis)","Der Einspruch wird automatisch abgewiesen","Die Strafe wird erhöht"],a:1,e:"§ 367 Abs. 2 AO: Das FA darf im Einspruchsverfahren auch verschlechtern, muss aber vorher hinweisen. Der Steuerpflichtige kann dann den Einspruch zurücknehmen.",l:"§ 367 AO"},
+    {q:"Wofür haftet ein GmbH-Geschäftsführer nach § 69 AO?",o:["Nur für seine eigenen Steuern","Persönlich für Steuern, die durch vorsätzliche oder grob fahrlässige Pflichtverletzung nicht abgeführt wurden","Gar nicht, die GmbH haftet allein","Nur für die Körperschaftsteuer"],a:1,e:"§ 69 AO: Gesetzliche Vertreter haften mit ihrem Privatvermögen, wenn Steuern wegen vorsätzlicher oder grob fahrlässiger Pflichtverletzung nicht abgeführt werden — klassischer Fall: nicht abgeführte Lohnsteuer.",l:"§ 69 AO"},
+    {q:"Was ist der Unterschied zwischen § 370 und § 378 AO?",o:["Kein Unterschied","§ 370 (Hinterziehung) ist eine Straftat mit Vorsatz; § 378 (leichtfertige Verkürzung) ist eine Ordnungswidrigkeit","§ 378 ist schwerer als § 370","Beide sind nur Bußgelder"],a:1,e:"§ 370 AO (Steuerhinterziehung, vorsätzlich) ist eine Straftat (bis 5, in schweren Fällen bis 10 Jahre Haft). § 378 AO (leichtfertige Verkürzung, grobe Fahrlässigkeit) ist eine Ordnungswidrigkeit mit Bußgeld bis 50.000 €.",l:"§ 370, § 378 AO"},
+    {q:"Was ist eine Voraussetzung der strafbefreienden Selbstanzeige (§ 371 AO)?",o:["Eine Teil-Offenlegung genügt","Sie muss vollständig sein und darf nicht gesperrt sein (z. B. Tat noch nicht entdeckt)","Sie ist immer möglich","Es muss keine Steuer nachgezahlt werden"],a:1,e:"§ 371 AO verlangt eine vollständige Offenbarung aller unverjährten Zeiträume einer Steuerart, Nachzahlung der Steuer und dass kein Sperrgrund vorliegt (z. B. angekündigte Prüfung, entdeckte Tat). Ab 25.000 € ist ein Zuschlag fällig.",l:"§ 371 AO"}
+  ],
+  drills:[
+    {t:"Bekanntgabe und Einspruchsfrist berechnen",lvl:"Fristen",
+     task:"Ein ESt-Bescheid wird vom Finanzamt am <b>Mittwoch, 7. Oktober 2026</b> zur Post gegeben.<br><b>a)</b> Wann gilt er als bekannt gegeben (4-Tages-Fiktion)?<br><b>b)</b> Wann läuft die Einspruchsfrist ab?<br><b>c)</b> Was ändert sich, wenn die Rechtsbehelfsbelehrung fehlt?",
+     sol:`<div class="step"><b>a)</b> 7.10. + 4 Tage = 11.10.2026 (Sonntag). Da Wochenende → Bekanntgabe verschiebt sich auf <b>Montag, 12.10.2026</b>.</div>
+<div class="step"><b>b)</b> Einspruchsfrist 1 Monat ab Bekanntgabe → Ablauf am <b>12.11.2026</b>. Der Einspruch muss spätestens an diesem Tag beim FA eingegangen sein.</div>
+<div class="step"><b>c)</b> Ohne Rechtsbehelfsbelehrung verlängert sich die Frist auf <span class="res">1 Jahr</span> (§ 356 AO) → Ablauf 12.10.2027.</div>`},
+    {t:"Festsetzungsverjährung mit Anlaufhemmung",lvl:"Verjährung",
+     task:"Ein Mandant ist verpflichtet, die ESt-Erklärung 2022 abzugeben. Er reicht sie aber erst <b>2024</b> ein.<br><b>a)</b> Wann beginnt die Festsetzungsfrist?<br><b>b)</b> Wann endet sie regulär?<br><b>c)</b> Wie lange wäre die Frist bei Steuerhinterziehung?",
+     sol:`<div class="step"><b>a)</b> Anlaufhemmung (§ 170 Abs. 2 AO): Die Frist beginnt erst mit Ablauf des Jahres, in dem die Erklärung eingereicht wird → Beginn mit Ablauf <b>31.12.2024</b>.</div>
+<div class="step"><b>b)</b> Reguläre Frist 4 Jahre → Ende <b>31.12.2028</b>. (Ohne die späte Abgabe hätte sie schon Ende 2026 geendet — die späte Abgabe verlängert faktisch die Änderbarkeit.)</div>
+<div class="step"><b>c)</b> Bei Steuerhinterziehung 10 Jahre → Ende <span class="res">31.12.2034</span>.</div>`},
+    {t:"Welche Änderungsvorschrift greift?",lvl:"Korrektur",
+     task:"Ordne jeweils die richtige AO-Vorschrift zu:<br><b>1.</b> Das FA hat sich beim Übertragen einer Zahl vertippt (5.000 statt 500).<br><b>2.</b> Nach Bestandskraft taucht eine bisher unbekannte Mieteinnahme auf.<br><b>3.</b> Der Steuerpflichtige stimmt einer Änderung zu seinen Gunsten zu.",
+     sol:`<div class="step"><b>1.</b> Mechanischer Schreibfehler, offensichtlich → <b>§ 129 AO</b> (offenbare Unrichtigkeit), jederzeit berichtigbar.</div>
+<div class="step"><b>2.</b> Nachträglich bekannt gewordene Tatsache → <b>§ 173 AO</b>. Zu Ungunsten nur bei grobem Verschulden.</div>
+<div class="step"><b>3.</b> Änderung mit Zustimmung/auf Antrag → <b>§ 172 AO</b> (allgemeine Korrekturvorschrift).</div>`},
+    {t:"Einspruch mit AdV — Ablauf und Zinsrisiko",lvl:"Rechtsschutz",
+     task:"Ein Mandant erhält einen Nachzahlungsbescheid über 12.000 €, hält ihn aber für falsch.<br><b>a)</b> Muss er die 12.000 € trotz Einspruch zahlen?<br><b>b)</b> Wie verhindert er die Zahlung?<br><b>c)</b> Welches Risiko besteht, wenn der Einspruch am Ende erfolglos ist?",
+     sol:`<div class="step"><b>a)</b> Ja — der Einspruch hat keine aufschiebende Wirkung (§ 361 Abs. 1 AO). Die 12.000 € werden zunächst fällig.</div>
+<div class="step"><b>b)</b> Er beantragt zusätzlich <b>Aussetzung der Vollziehung (AdV)</b>. Bei ernstlichen Zweifeln an der Rechtmäßigkeit setzt das FA die Zahlung aus.</div>
+<div class="step"><b>c)</b> Bei erfolglosem Einspruch werden <b>Aussetzungszinsen</b> von 0,5 %/Monat = 6 % p. a. auf den ausgesetzten Betrag fällig (§ 237/238 AO; die Höhe liegt derzeit dem BVerfG zur Prüfung vor — Stand 2026 gilt sie weiter). <span class="res">Auf 12.000 € z. B. 720 € pro Jahr.</span></div>`}
   ]
 },
 {
@@ -531,7 +915,7 @@ const DATA = [
   <div class="sr"><span class="op"></span><span class="t">Durchschnittssteuersatz (11.100 / 55.000)</span><span class="v">≈ 20 %</span></div>
   <div class="sr tot"><span class="op"></span><span class="t">Grenzsteuersatz (auf den letzten Euro)</span><span class="v">≈ 36 %</span></div>
 </div>`,
-      ex:"Single, Bruttolohn 55.000 €. Werbungskosten-Pauschbetrag 1.230 € → Einkünfte 53.770 €. Sonderausgaben (KV/PV + Kirchensteuer) ca. 3.900 €. zvE ≈ 49.870 €. Die ESt liegt bei rund 11.000–11.500 €, der Grenzsteuersatz (auf den letzten Euro) bei etwa 36 %, der Durchschnittssatz aber nur bei ~22 %.",
+      ex:"Single, Bruttolohn 55.000 €. Werbungskosten-Pauschbetrag 1.230 € → Einkünfte 53.770 €. Sonderausgaben (KV/PV + Kirchensteuer) ca. 3.900 €. zvE ≈ 49.870 €. Die ESt liegt bei rund 11.000–11.500 €, der Grenzsteuersatz (auf den letzten Euro) bei etwa 36 % — der Durchschnittssatz dagegen nur bei ~22 % des zvE bzw. ~20 % des Bruttolohns. Diese Differenz ist die Progression.",
       warn:"Grenzsteuersatz ≠ Durchschnittssteuersatz. Der oft zitierte „42 %\"-Satz gilt nur für den Einkommensteil oberhalb von 69.879 €, nicht für das ganze Einkommen. Diese Verwechslung ist der häufigste Laienirrtum — und ein gutes Beispiel, um Mandanten die Progression zu erklären.",
       laws:["§ 1 EStG","§ 2 EStG","§ 10 EStG","§ 32a EStG","§ 33 EStG","§ 32a Abs. 5 EStG"]
     },
@@ -560,12 +944,46 @@ const DATA = [
         {h:"Betriebsvermögensvergleich (§ 4 Abs. 1, § 5 EStG)",p:"Für Buchführungspflichtige: Betriebsvermögen am Jahresende − Betriebsvermögen am Jahresanfang + Entnahmen − Einlagen = Gewinn. Genauer als die EÜR, aber aufwändiger."},
         {h:"Investitionsabzugsbetrag — IAB (§ 7g EStG)",p:"Bis zu <span class='num'>50 %</span> der voraussichtlichen Anschaffungskosten eines geplanten Wirtschaftsguts können <b>vorab</b> abgezogen werden (max. <span class='num'>200.000 €</span> IAB-Bestand). Bedingung: Anschaffung binnen 3 Jahren, mind. 90 % betriebliche Nutzung. Im Anschaffungsjahr Hinzurechnung + 20 % Sonderabschreibung möglich."},
         {h:"Übertragung stiller Reserven (§ 6b EStG)",p:"Stille Reserven (Verkaufspreis über Buchwert) aus dem Verkauf bestimmter Wirtschaftsgüter (Grund und Boden, Gebäude) können steuerneutral auf ein Reinvestitionsobjekt übertragen werden, statt sie sofort zu versteuern."},
-        {h:"Pkw-Privatnutzung",p:"<b>1-%-Regelung:</b> 1 % des Bruttolistenpreises (bei Erstzulassung, inkl. aller Extras) pro Monat als Entnahme — auch bei Gebrauchtkauf. <b>Fahrtenbuch:</b> tatsächliche Privatkilometer, erfordert lückenlose, zeitnahe Aufzeichnung. <b>E-Autos:</b> nur 0,25 % (Bruttolistenpreis bis 70.000 €, seit 2024 angehoben) bzw. 0,5 %."},
+        {h:"Pkw-Privatnutzung",p:"<b>1-%-Regelung:</b> 1 % des Bruttolistenpreises (bei Erstzulassung, inkl. aller Extras) pro Monat als Entnahme — auch bei Gebrauchtkauf. <b>Fahrtenbuch:</b> tatsächliche Privatkilometer, erfordert lückenlose, zeitnahe Aufzeichnung. <b>E-Autos:</b> nur 0,25 % des Bruttolistenpreises (Grenze ab Juli 2025 von 70.000 € auf <b>100.000 €</b> angehoben) bzw. 0,5 % bei Hybriden/teureren E-Autos."},
         {h:"Gewerbesteueranrechnung (§ 35 EStG)",p:"Für Personenunternehmer: Das <span class='num'>4,0-fache</span> des Gewerbesteuer-Messbetrags wird auf die ESt angerechnet (erhöht von 3,8 auf 4,0). Bei einem Hebesatz bis ca. 420 % wird die Gewerbesteuer so weitgehend neutralisiert."},
       ],
       ex:"Ein Handwerker plant 2027 einen Lieferwagen für 40.000 € netto. Schon in der ESt 2026 zieht er 50 % × 40.000 = 20.000 € IAB ab. 2027 kauft er: 20.000 € werden hinzugerechnet, gleichzeitig 20 % × 40.000 = 8.000 € Sonderabschreibung. Effekt: deutlich mehr Liquidität durch den vorgezogenen Steuervorteil 2026.",
       warn:"Wird das geplante Wirtschaftsgut nicht binnen 3 Jahren angeschafft, wird der IAB rückwirkend aufgelöst — der alte Bescheid wird geändert, es entstehen Nachzahlungszinsen (§ 233a AO, aktuell 0,15 % pro Monat). IAB nur ansetzen, wenn die Investition realistisch ist.",
       laws:["§ 15 EStG","§ 4 Abs. 3 EStG","§ 4 Abs. 1 EStG","§ 5 EStG","§ 7g EStG","§ 6b EStG","§ 35 EStG"]
+    },
+    {
+      t:"Vermietung, Kapitalvermögen und sonstige Einkünfte",
+      s:"§ 20, § 21, § 22 im Detail",
+      intro:"Die drei „privaten\" Überschusseinkunftsarten betreffen fast jeden Mandanten — Sparer, Vermieter, Rentner. Hier die Besonderheiten, die in der Praxis am häufigsten Fragen aufwerfen.",
+      blocks:[
+        {h:"Kapitalvermögen (§ 20) und Abgeltungsteuer",p:"Zinsen, Dividenden und Veräußerungsgewinne aus Wertpapieren werden grundsätzlich mit <span class='num'>25 %</span> Abgeltungsteuer + SolZ (+ ggf. KiSt) besteuert — meist direkt von der Bank einbehalten. Der <b>Sparer-Pauschbetrag</b> beträgt 1.000 € (Einzel) / 2.000 € (Zusammenveranlagte). Ein darüber hinausgehender Werbungskostenabzug ist ausgeschlossen."},
+        {h:"Verlustverrechnung bei Kapital (§ 20 Abs. 6)",p:"Kapitalverluste dürfen <b>nur</b> mit Kapitalgewinnen verrechnet werden, nicht mit anderen Einkunftsarten. <b>Aktienveräußerungsverluste</b> sogar nur mit Aktienveräußerungsgewinnen (eigener Verlusttopf). Nicht genutzte Verluste werden vorgetragen. Die Bank führt dazu „Verlusttöpfe\"."},
+        {h:"Günstigerprüfung (§ 32d Abs. 6)",p:"Wer einen persönlichen Steuersatz unter 25 % hat, kann beantragen, die Kapitaleinkünfte stattdessen mit dem persönlichen Tarif zu versteuern. Das FA prüft automatisch, was günstiger ist. Lohnt sich vor allem bei niedrigem Gesamteinkommen (z. B. Studenten, Rentner)."},
+        {h:"Vermietung und Verpachtung (§ 21)",p:"Einnahmen aus Vermietung minus Werbungskosten = Einkünfte. Abziehbar: <b>Gebäude-AfA</b> (i. d. R. 2 %, Neubau ab 2023 sogar 3 %), Schuldzinsen, Erhaltungsaufwand, Grundsteuer, Verwaltungskosten. Wichtig: Nur das Gebäude wird abgeschrieben, nicht der Grund und Boden (Kaufpreis aufteilen!)."},
+        {h:"Erhaltungs- vs. Herstellungsaufwand",p:"<b>Erhaltungsaufwand</b> (Reparatur, Renovierung) ist sofort voll abziehbar. <b>Herstellungsaufwand</b> (Erweiterung, wesentliche Verbesserung) muss über die AfA verteilt werden. Sonderfall <b>anschaffungsnaher Aufwand</b> (§ 6 Abs. 1 Nr. 1a EStG): Übersteigen Instandsetzungskosten in den ersten 3 Jahren nach Kauf 15 % der Gebäude-Anschaffungskosten, gelten sie als Herstellungskosten → keine Sofortabsetzung."},
+        {h:"Sonstige Einkünfte (§ 22)",p:"Dazu zählen vor allem <b>Renten</b> (mit steigendem Besteuerungsanteil je nach Renteneintrittsjahr), <b>private Veräußerungsgeschäfte</b> (§ 23: Immobilien innerhalb 10 Jahren, andere Wirtschaftsgüter innerhalb 1 Jahr — Freigrenze 1.000 €) und wiederkehrende Bezüge. Gewinne aus dem Verkauf der selbstgenutzten Wohnung sind steuerfrei."},
+      ],
+      figs:{title:"Wichtige Werte 2026",rows:[["Sparer-Pauschbetrag (Einzel)","1.000 €"],["Sparer-Pauschbetrag (Zusammen)","2.000 €"],["Abgeltungsteuer","25 % + SolZ"],["Spekulationsfrist Immobilien","10 Jahre"],["Freigrenze private Veräußerung","1.000 €"]]},
+      ex:"Ein Mandant kauft 2026 eine Mietwohnung für 300.000 € (davon Grundanteil 60.000 €, Gebäude 240.000 €). AfA nur auf das Gebäude: 2 % × 240.000 = 4.800 €/Jahr. Mieteinnahmen 14.400 €/Jahr, Schuldzinsen 6.000 €, sonstige Kosten 1.600 €. Einkünfte aus V+V = 14.400 − 4.800 − 6.000 − 1.600 = 2.000 €.",
+      warn:"Anschaffungsnaher Aufwand ist eine klassische Falle: Wer kurz nach dem Kauf umfangreich renoviert und dabei in 3 Jahren über 15 % der Gebäude-Anschaffungskosten (netto) ausgibt, kann diese Kosten NICHT sofort absetzen — sie werden über die AfA (oft 50 Jahre) verteilt. Renovierungen ggf. zeitlich strecken.",
+      laws:["§ 20 EStG","§ 21 EStG","§ 22 EStG","§ 23 EStG","§ 32d EStG","§ 6 Abs. 1 Nr. 1a EStG"]
+    },
+    {
+      t:"Sonderausgaben & außergewöhnliche Belastungen",
+      s:"Was die Steuer mindert — und wie viel",
+      intro:"Zwischen den Einkünften und der fertigen Steuer liegen die privaten Abzüge. Sie zu kennen, ist der Unterschied zwischen einer mittelmäßigen und einer guten Steuererklärung — und genau das, wonach Mandanten am häufigsten fragen.",
+      blocks:[
+        {h:"Vorsorgeaufwendungen (§ 10 EStG)",p:"Der größte Posten: <b>Altersvorsorge</b> (gesetzliche Rente, berufsständische Versorgung, Rürup) — 2026 bis rund <span class='num'>30.865 €</span> (Ledige) abziehbar. Dazu <b>Basis-Kranken- und Pflegeversicherung</b> in voller Höhe. Weitere Versicherungen (Haftpflicht, Unfall) nur im Rahmen eines kleinen Höchstbetrags, der meist schon durch die Krankenversicherung ausgeschöpft ist."},
+        {h:"Weitere Sonderausgaben",p:"<b>Kirchensteuer</b> (voll abziehbar, außer auf Abgeltungsteuer), <b>Spenden</b> bis 20 % des Gesamtbetrags der Einkünfte (§ 10b), <b>Kinderbetreuungskosten</b> (zwei Drittel, max. 4.000 € je Kind), <b>Schulgeld</b> (30 %, max. 5.000 €), <b>Unterhalt an Ex-Ehegatten</b> (Realsplitting, bis 13.805 €), <b>Ausbildungskosten</b> für die erste Berufsausbildung (bis 6.000 €). Ohne Nachweis: Sonderausgaben-Pauschbetrag 36 € / 72 €."},
+        {h:"Außergewöhnliche Belastungen allgemein (§ 33)",p:"Zwangsläufige, außergewöhnlich hohe Aufwendungen — typisch: Krankheitskosten (Zahnersatz, Brille, Reha), Pflegekosten, Beerdigungskosten (soweit nicht durch Nachlass gedeckt). Abziehbar ist aber nur der Teil über der <b>zumutbaren Belastung</b>."},
+        {h:"Zumutbare Belastung berechnen",p:"Die zumutbare Belastung ist ein Prozentsatz des Gesamtbetrags der Einkünfte, gestaffelt nach Einkommen und Familienstand (<span class='num'>1 % bis 7 %</span>). Sie wird seit einem BFH-Urteil stufenweise berechnet. Erst was darüber liegt, wirkt steuermindernd."},
+        {h:"Außergewöhnliche Belastungen besonderer Art (§ 33a, § 33b)",p:"Ohne zumutbare Belastung, dafür mit festen Beträgen: <b>Unterhalt</b> an bedürftige Angehörige (bis zum Grundfreibetrag, 2026 rund 12.348 €), <b>Ausbildungsfreibetrag</b> für auswärts untergebrachte volljährige Kinder in Ausbildung, <b>Pauschbeträge für Menschen mit Behinderung</b> (gestaffelt nach Grad der Behinderung), <b>Pflege-Pauschbetrag</b>."},
+        {h:"Haushaltsnahe Leistungen (§ 35a EStG)",p:"Ein Direktabzug von der Steuer (nicht vom Einkommen!): <b>20 %</b> der Lohnkosten für haushaltsnahe Dienstleistungen (max. 4.000 €/Jahr) und für Handwerkerleistungen (max. 1.200 €/Jahr). Nur Lohn-, Fahrt- und Maschinenkosten, kein Material — und nur bei unbarer Zahlung (Überweisung, kein Bargeld)."},
+      ],
+      figs:{title:"Abzugshöchstbeträge 2026",rows:[["Altersvorsorge (Ledige, ca.)","30.865 €"],["Spenden","bis 20 % d. GdE"],["Kinderbetreuung","2/3, max. 4.000 € / Kind"],["Handwerkerleistungen (§ 35a)","20 %, max. 1.200 €"],["Haushaltsnahe Dienste (§ 35a)","20 %, max. 4.000 €"]]},
+      ex:"Ein Mandant (GdE 50.000 €) hat Krankheitskosten von 4.000 € (Zahnersatz). Zumutbare Belastung ca. 5 % von 50.000 = 2.500 €. Abziehbar als außergewöhnliche Belastung: 4.000 − 2.500 = 1.500 €. Zusätzlich zahlt er 600 € an einen Handwerker (Lohnanteil 400 €) → § 35a: 20 % × 400 = 80 € werden direkt von der Steuer abgezogen.",
+      warn:"§ 35a (Handwerker/haushaltsnahe Dienste) ist ein Abzug von der Steuerschuld, nicht vom Einkommen — also viel wirksamer als ein gleich hoher Sonderausgabenabzug. Voraussetzung: Rechnung und unbare Zahlung. Bei Barzahlung verfällt der Abzug komplett. Darauf Mandanten immer hinweisen.",
+      laws:["§ 10 EStG","§ 10b EStG","§ 33 EStG","§ 33a EStG","§ 33b EStG","§ 35a EStG"]
     }
   ],
   quiz:[
@@ -574,9 +992,44 @@ const DATA = [
     {q:"Wie viele Einkunftsarten kennt das EStG?",o:["5","6","7","9"],a:2,e:"Sieben: §§ 13, 15, 18 (Gewinneinkünfte) und §§ 19, 20, 21, 22 (Überschusseinkünfte).",l:"§ 2 Abs. 1 EStG"},
     {q:"Welche Tätigkeit unterliegt NICHT der Gewerbesteuer?",o:["Einzelhandel","Freiberufliche Tätigkeit nach § 18 EStG","Handwerksbetrieb","Gewerblicher Großhandel"],a:1,e:"Freiberufler (§ 18 EStG) zahlen keine Gewerbesteuer. Nur Gewerbebetriebe nach § 15 EStG sind gewerbesteuerpflichtig.",l:"§ 2 GewStG, § 18 EStG"},
     {q:"Wie hoch ist der Sparer-Pauschbetrag 2026 (Einzelperson)?",o:["801 €","1.000 €","1.602 €","2.000 €"],a:1,e:"1.000 € (Einzel) bzw. 2.000 € (Zusammenveranlagte), seit 2023. Kapitalerträge darüber unterliegen 25 % Abgeltungsteuer.",l:"§ 20 Abs. 9 EStG"},
-    {q:"Was gilt 2026 bei der Pkw-Privatnutzung von reinen E-Autos (Bruttolistenpreis bis 70.000 €)?",o:["1 % wie beim Verbrenner","0,5 %","0,25 %","steuerfrei"],a:2,e:"Reine E-Autos bis 70.000 € Bruttolistenpreis: 0,25-%-Regelung (die Preisgrenze wurde von 60.000 auf 70.000 € angehoben). Darüber oder bei Hybriden: 0,5 %.",l:"§ 6 Abs. 1 Nr. 4 EStG"},
+    {q:"Was gilt 2026 bei der Pkw-Privatnutzung von reinen E-Autos (Bruttolistenpreis bis 100.000 €)?",o:["1 % wie beim Verbrenner","0,5 %","0,25 %","steuerfrei"],a:2,e:"Reine E-Autos bis 100.000 € Bruttolistenpreis: 0,25-%-Regelung. Die Preisgrenze wurde mit dem Investitionssofortprogramm (Juli 2025) von 70.000 € auf 100.000 € angehoben. Darüber oder bei Hybriden: 0,5 %.",l:"§ 6 Abs. 1 Nr. 4 EStG"},
     {q:"Bis zu welchem Betrag kann der Investitionsabzugsbetrag (§ 7g) gebildet werden?",o:["50 % der AK, max. 100.000 €","50 % der AK, max. 200.000 €","100 % der AK","40 % der AK, unbegrenzt"],a:1,e:"Bis zu 50 % der voraussichtlichen Anschaffungskosten, maximal 200.000 € IAB-Bestand. Anschaffung muss binnen 3 Jahren erfolgen.",l:"§ 7g EStG"},
-    {q:"Grenzsteuersatz und Durchschnittssteuersatz — was stimmt?",o:["Sie sind immer gleich","Der Grenzsteuersatz gilt nur für den obersten Einkommensteil, der Durchschnittssatz ist niedriger","Der Durchschnittssatz ist immer höher","Beide gelten nur für Selbständige"],a:1,e:"Wegen der Progression gilt der hohe Grenzsteuersatz nur für den letzten Einkommensteil. Der Durchschnittssatz über das gesamte zvE ist deutlich niedriger.",l:"§ 32a EStG"}
+    {q:"Grenzsteuersatz und Durchschnittssteuersatz — was stimmt?",o:["Sie sind immer gleich","Der Grenzsteuersatz gilt nur für den obersten Einkommensteil, der Durchschnittssatz ist niedriger","Der Durchschnittssatz ist immer höher","Beide gelten nur für Selbständige"],a:1,e:"Wegen der Progression gilt der hohe Grenzsteuersatz nur für den letzten Einkommensteil. Der Durchschnittssatz über das gesamte zvE ist deutlich niedriger.",l:"§ 32a EStG"},
+    {q:"Womit dürfen Verluste aus Aktienverkäufen verrechnet werden?",o:["Mit allen Einkünften","Nur mit anderen Kapitalerträgen","Nur mit Gewinnen aus Aktienverkäufen","Gar nicht"],a:2,e:"Aktienveräußerungsverluste dürfen nur mit Aktienveräußerungsgewinnen verrechnet werden (eigener Verlusttopf, § 20 Abs. 6 EStG). Nicht genutzte Verluste werden vorgetragen.",l:"§ 20 Abs. 6 EStG"},
+    {q:"Was wird bei einer vermieteten Immobilie abgeschrieben?",o:["Grundstück und Gebäude zusammen","Nur das Gebäude, nicht der Grund und Boden","Nur das Grundstück","Gar nichts"],a:1,e:"Nur das Gebäude ist abnutzbar und wird abgeschrieben (i. d. R. 2 %, Neubau ab 2023 sogar 3 %). Der Grund und Boden wird nie abgeschrieben — daher muss der Kaufpreis aufgeteilt werden.",l:"§ 7 Abs. 4 EStG"},
+    {q:"Was ist der anschaffungsnahe Aufwand?",o:["Kosten direkt beim Kauf","Instandsetzungskosten über 15 % der Gebäude-AK in den ersten 3 Jahren → gelten als Herstellungskosten","Sofort abziehbare Reparaturen","Die Maklergebühr"],a:1,e:"Übersteigen Instandsetzungs-/Modernisierungskosten in den ersten 3 Jahren nach Kauf 15 % der Gebäude-Anschaffungskosten (netto), gelten sie als Herstellungskosten und sind nur über die AfA abziehbar — nicht sofort.",l:"§ 6 Abs. 1 Nr. 1a EStG"},
+    {q:"Wie wirkt der Steuerabzug nach § 35a (Handwerkerleistungen)?",o:["Mindert das zu versteuernde Einkommen","Wird direkt von der Steuerschuld abgezogen (20 % des Lohnanteils, max. 1.200 €)","Ist ein Freibetrag","Gilt nur für Vermieter"],a:1,e:"§ 35a ist ein Abzug direkt von der Steuerschuld (20 % der Lohn-/Fahrt-/Maschinenkosten, max. 1.200 € bei Handwerkern). Voraussetzung: Rechnung und unbare Zahlung — bei Barzahlung verfällt der Abzug.",l:"§ 35a EStG"}
+  ],
+  drills:[
+    {t:"Zu versteuerndes Einkommen ermitteln",lvl:"Veranlagung",
+     task:"Eine ledige Angestellte hat 2026:<br>Bruttoarbeitslohn 62.000 €, keine weiteren Werbungskosten über dem Pauschbetrag, Kranken-/Pflegeversicherung (Basis) 4.200 €, Kirchensteuer 350 €, Spenden 500 €.<br>Ermittle das zu versteuernde Einkommen.",
+     sol:`<div class="step">Bruttolohn 62.000 − Arbeitnehmer-Pauschbetrag 1.230 = Einkünfte 60.770 €</div>
+<div class="step">Sonderausgaben: KV/PV 4.200 + Kirchensteuer 350 + Spenden 500 = 5.050 €</div>
+<div class="step">zvE = 60.770 − 5.050 = <span class="res">55.720 €</span></div>
+<div class="step">Der Spitzensteuersatz (42 % ab 69.879 €) ist noch nicht erreicht — sie liegt in der oberen Progressionszone.</div>`},
+    {t:"EÜR aufstellen",lvl:"Gewinnermittlung",
+     task:"Ein freiberuflicher Texter (EÜR) hat 2026:<br>Honorareinnahmen (zugeflossen) 85.000 €, noch offene Rechnung 5.000 € (noch nicht bezahlt), Bürokosten 8.000 €, Laptop 1.200 € (im Januar gekauft), Fahrtkosten 3.000 €, im Dezember bezahlte aber erst 2027 fällige Fortbildung 2.000 €.<br>Wie hoch ist der Gewinn?",
+     sol:`<div class="step">Einnahmen: nur tatsächlich zugeflossen → 85.000 € (die offenen 5.000 € zählen erst bei Zahlung, Zuflussprinzip).</div>
+<div class="step">Ausgaben (Abflussprinzip): Bürokosten 8.000 + Fahrtkosten 3.000 + Fortbildung 2.000 (im Dez. bezahlt → 2026) = 13.000 €.</div>
+<div class="step">Laptop 1.200 € → digitales WG → Sofortabschreibung 1.200 € (sonst über 3 Jahre). Hier voll: −1.200 €.</div>
+<div class="step">Gewinn = 85.000 − 13.000 − 1.200 = <span class="res">70.800 €</span></div>`},
+    {t:"Investitionsabzugsbetrag durchrechnen",lvl:"§ 7g EStG",
+     task:"Ein Handwerker (Gewinn 90.000 €) plant für 2028 eine Maschine für 50.000 € netto. Er bildet 2026 den maximalen IAB.<br><b>a)</b> Wie hoch ist der IAB 2026 und wie wirkt er auf den Gewinn?<br><b>b)</b> Was passiert 2028 bei der Anschaffung?<br><b>c)</b> Was, wenn er bis 2029 nicht investiert?",
+     sol:`<div class="step"><b>a)</b> Max. IAB = 50 % × 50.000 = 25.000 €. Gewinn 2026 sinkt von 90.000 auf <b>65.000 €</b> → sofortige Steuerersparnis.</div>
+<div class="step"><b>b)</b> 2028: Hinzurechnung +25.000 € zum Gewinn, gleichzeitig Sonderabschreibung 20 % × 50.000 = 10.000 € + reguläre AfA. Netto wird der Vorteil teils zurückgeführt, teils verstetigt.</div>
+<div class="step"><b>c)</b> Ohne Investition bis Ende der 3-Jahres-Frist → <b>rückwirkende Auflösung</b> des IAB: Bescheid 2026 wird geändert, <span class="res">Nachzahlung + Zinsen (0,15 %/Monat)</span>.</div>`},
+    {t:"Pkw: 1-%-Regel vs. E-Auto",lvl:"Dienstwagen",
+     task:"Vergleiche den jährlichen geldwerten Vorteil für drei Fahrzeuge (ganzjährige Privatnutzung, 1-%-Methode):<br><b>1.</b> Verbrenner, Bruttolistenpreis 50.000 €<br><b>2.</b> Reines E-Auto, Bruttolistenpreis 50.000 €<br><b>3.</b> Reines E-Auto, Bruttolistenpreis 110.000 €",
+     sol:`<div class="step"><b>1.</b> Verbrenner: 1 % × 50.000 = 500/Monat × 12 = <b>6.000 €/Jahr</b>.</div>
+<div class="step"><b>2.</b> E-Auto bis 100.000 €: nur 0,25 % → 0,25 % × 50.000 = 125/Monat × 12 = <b>1.500 €/Jahr</b>.</div>
+<div class="step"><b>3.</b> E-Auto über 100.000 €: 0,5 % → 0,5 % × 110.000 = 550/Monat × 12 = <b>6.600 €/Jahr</b>.</div>
+<div class="step"><span class="res">Das günstige E-Auto spart 4.500 € geldwerten Vorteil pro Jahr gegenüber dem Verbrenner.</span></div>`},
+    {t:"Gewerbe oder Freiberuf?",lvl:"Abgrenzung",
+     task:"Beurteile, ob gewerblich (§ 15, mit Gewerbesteuer) oder freiberuflich (§ 18, ohne):<br><b>1.</b> Eine Ärztin mit eigener Praxis.<br><b>2.</b> Ein Online-Händler, der Waren ein- und weiterverkauft.<br><b>3.</b> Ein selbständiger Programmierer, der individuelle Software entwickelt.<br><b>4.</b> Ein Steuerberater.",
+     sol:`<div class="step"><b>1.</b> Ärztin → Katalogberuf → <b>freiberuflich</b> (§ 18), keine GewSt.</div>
+<div class="step"><b>2.</b> Warenhandel ohne eigene Schöpfung → <b>gewerblich</b> (§ 15), GewSt.</div>
+<div class="step"><b>3.</b> Eigenständige Software-Entwicklung → ingenieurähnlich → in der Regel <b>freiberuflich</b> (strittig; reine Anpassung/Installation kann gewerblich sein).</div>
+<div class="step"><b>4.</b> Steuerberater → Katalogberuf → <b>freiberuflich</b>.</div>`}
   ]
 },
 {
@@ -589,7 +1042,7 @@ const DATA = [
       intro:"Lohnsteuer ist keine eigene Steuer, sondern die Form, in der die Einkommensteuer bei Arbeitnehmern erhoben wird. Der Arbeitgeber berechnet, behält ein und führt ab. Am Jahresende gleicht die Einkommensteuerveranlagung Zuviel oder Zuwenig aus.",
       blocks:[
         {h:"Was ist Arbeitslohn? (§ 19 EStG)",p:"Alle Einnahmen aus dem Dienstverhältnis: Gehalt, Urlaubs-/Weihnachtsgeld, Sachbezüge, Firmenwagen, Boni. Egal ob Geld oder Sache, freiwillig oder vereinbart. <b>Kein</b> Arbeitslohn: durchlaufende Aufwandserstattungen (z. B. Reisekosten nach Pauschalen)."},
-        {h:"Steuerklassen I–VI",p:"I Ledige, II Alleinerziehende (mit Entlastungsbetrag), III/V Ehegatten mit ungleichem Einkommen (III für Hauptverdiener), IV beide ähnlich, IV-Faktor für gerechtere Verteilung, VI für das zweite Dienstverhältnis. <b>Hinweis:</b> Die Steuerklassen III/V sollen perspektivisch durch das Faktorverfahren ersetzt werden — im Kurs aktuellen Stand prüfen."},
+        {h:"Steuerklassen I–VI",p:"I Ledige, II Alleinerziehende (mit Entlastungsbetrag), III/V Ehegatten mit ungleichem Einkommen (III für Hauptverdiener), IV beide ähnlich, IV-Faktor für gerechtere Verteilung, VI für das zweite Dienstverhältnis. <b>Ausblick:</b> Die Kombination III/V soll <b>ab 2030</b> abgeschafft und ins Faktorverfahren (IV mit Faktor) überführt werden. Bis dahin gilt III/V weiter; für 2026 ändert sich nichts. Das Ehegattensplitting bleibt davon unberührt."},
         {h:"Arbeitnehmer-Pauschbetrag",p:"Werbungskosten werden ohne Nachweis mit dem Arbeitnehmer-Pauschbetrag von <span class='num'>1.230 €</span> berücksichtigt. Höhere tatsächliche Werbungskosten muss man einzeln nachweisen."},
         {h:"Pauschale Lohnsteuer (§§ 40, 40a, 40b EStG)",p:"Der Arbeitgeber kann die Steuer in bestimmten Fällen pauschal übernehmen: <b>Minijob</b> 2 % (einheitliche Pauschsteuer inkl. SolZ und KiSt), kurzfristige Beschäftigung 25 %, Aushilfen in der Land-/Forstwirtschaft 5 %. Der Arbeitnehmer bleibt dann mit diesen Bezügen aus der Veranlagung heraus."},
       ],
@@ -611,6 +1064,22 @@ const DATA = [
       ex:"Ein Arbeitgeber gibt monatlich 50 € Tankgutschein (Freigrenze ausgeschöpft) + 600 €/Jahr Fitnessstudio-Zuschuss (§ 3 Nr. 34) + Jobticket. Alles steuer- und sozialversicherungsfrei. Der Mitarbeiter hat netto mehr in der Tasche als bei einer entsprechenden Bruttolohnerhöhung, der Arbeitgeber spart Lohnnebenkosten.",
       warn:"Seit 2020 sind die Anforderungen an Sachbezugs-Gutscheine streng: Eine offene VISA-Prepaidkarte oder PayPal-Guthaben ohne Einschränkung gilt als Geldleistung → voll steuerpflichtig. Nur zweckgebundene, einlösbare Gutscheine (ZAG-konform) sind echte Sachbezüge.",
       laws:["§ 3 EStG","§ 8 Abs. 2 EStG","§ 19 Abs. 1 EStG","§ 40 Abs. 2 EStG"]
+    },
+    {
+      t:"Werbungskosten, Reisekosten & Entfernungspauschale",
+      s:"Was Arbeitnehmer absetzen können",
+      intro:"Werbungskosten mindern den steuerpflichtigen Arbeitslohn. Über den Pauschbetrag von 1.230 € hinaus lohnt sich der Einzelnachweis oft — gerade bei Pendlern, Dienstreisen und doppelter Haushaltsführung. Das ist Standardwissen für jede Lohnsteuerhilfe und ESt-Erklärung.",
+      blocks:[
+        {h:"Entfernungspauschale (Pendlerpauschale)",p:"Für den Weg zwischen Wohnung und erster Tätigkeitsstätte: <span class='num'>0,30 €</span> je Entfernungskilometer für die ersten 20 km, ab dem 21. km <span class='num'>0,38 €</span> (einfache Strecke, nicht Hin- und Rückweg!). Sie gilt unabhängig vom Verkehrsmittel — auch für Radfahrer und Mitfahrer. Höchstbetrag 4.500 € (außer eigener Pkw)."},
+        {h:"Erste Tätigkeitsstätte vs. Auswärtstätigkeit",p:"Zur <b>ersten Tätigkeitsstätte</b> gibt es nur die Entfernungspauschale. Bei einer <b>Auswärtstätigkeit</b> (Dienstreise, wechselnde Einsatzorte) gelten die günstigeren Reisekostengrundsätze: tatsächliche Fahrtkosten oder 0,30 €/km für <b>jeden</b> gefahrenen Kilometer (Hin- und Rückweg)."},
+        {h:"Verpflegungsmehraufwand (Pauschalen)",p:"Bei Auswärtstätigkeit gibt es steuerfreie Verpflegungspauschalen: <span class='num'>14 €</span> bei mehr als 8 Stunden Abwesenheit, <span class='num'>28 €</span> bei ganztägiger (24 h) Abwesenheit, je <span class='num'>14 €</span> für An- und Abreisetag bei mehrtägigen Reisen. Diese kann der Arbeitgeber steuerfrei erstatten oder der Arbeitnehmer als Werbungskosten ansetzen."},
+        {h:"Doppelte Haushaltsführung",p:"Wer aus beruflichen Gründen einen Zweitwohnsitz am Arbeitsort unterhält, kann absetzen: Unterkunftskosten am Arbeitsort (max. <span class='num'>1.000 €</span>/Monat), eine Familienheimfahrt pro Woche (Entfernungspauschale), Verpflegungspauschalen für die ersten 3 Monate. Voraussetzung: eigener Hausstand am Lebensmittelpunkt."},
+        {h:"Weitere typische Werbungskosten",p:"Arbeitsmittel (Computer, Fachliteratur, Werkzeug — über 800 € netto über AfA), Arbeitszimmer bzw. <b>Homeoffice-Pauschale</b> (6 €/Tag, max. 1.260 €/Jahr = 210 Tage), Fortbildungskosten, Bewerbungskosten, Beiträge zu Berufsverbänden/Gewerkschaften, Kontoführungsgebühren (Pauschale 16 €)."},
+      ],
+      figs:{title:"Werte 2026",rows:[["Entfernungspauschale 1.–20. km","0,30 €/km"],["Entfernungspauschale ab 21. km","0,38 €/km"],["Verpflegung > 8 h","14 €"],["Verpflegung 24 h","28 €"],["Homeoffice-Pauschale","6 €/Tag, max. 1.260 €"],["Unterkunft doppelter Haushalt","max. 1.000 €/Monat"]]},
+      ex:"Ein Arbeitnehmer pendelt an 220 Tagen 30 km (einfach) zur Arbeit. Entfernungspauschale: 20 km × 0,30 € + 10 km × 0,38 € = 6,00 + 3,80 = 9,80 € pro Tag × 220 = 2.156 €. Das übersteigt den Pauschbetrag von 1.230 € deutlich → der Einzelnachweis lohnt sich, es zählen die vollen 2.156 € als Werbungskosten.",
+      warn:"Die Entfernungspauschale gilt nur für die EINFACHE Strecke, nicht für Hin- und Rückfahrt. Ein häufiger Fehler in Erklärungen ist die Verdopplung. Bei echten Dienstreisen (Auswärtstätigkeit) dagegen zählt jeder gefahrene Kilometer — dort 0,30 €/km für die gesamte Fahrtstrecke.",
+      laws:["§ 9 EStG","§ 9 Abs. 1 Nr. 4 EStG","§ 9 Abs. 4a EStG","§ 9 Abs. 1 Nr. 5 EStG","§ 4 Abs. 5 EStG"]
     }
   ],
   quiz:[
@@ -619,7 +1088,27 @@ const DATA = [
     {q:"Wie hoch ist die monatliche Sachbezugsfreigrenze?",o:["44 €","50 €","60 €","100 €"],a:1,e:"50 €/Monat (seit 2022). Freigrenze, kein Freibetrag — bei Überschreitung ist der gesamte Betrag steuerpflichtig.",l:"§ 8 Abs. 2 EStG"},
     {q:"Welche Pauschsteuer fällt beim Minijob an?",o:["2 %","15 %","20 %","25 %"],a:0,e:"2 % einheitliche Pauschsteuer (inkl. SolZ und Kirchensteuer), die der Arbeitgeber übernimmt. Alternativ individuelle Besteuerung über die Lohnsteuerklasse.",l:"§ 40a Abs. 2 EStG"},
     {q:"Was gilt für einen Sachbezugs-Gutschein, der in Bargeld umtauschbar ist?",o:["Bis 50 € steuerfrei","Er gilt als Geldleistung und ist voll steuerpflichtig","Bis 60 € steuerfrei","Immer steuerfrei"],a:1,e:"Nur zweckgebundene, nicht in Bargeld umwandelbare Gutscheine sind echte Sachbezüge. Offene Geldkarten gelten seit 2020 als Geldleistung → voll steuerpflichtig.",l:"§ 8 Abs. 1 EStG"},
-    {q:"Bis zu welchem Betrag ist die Aktivrente 2026 steuerfrei?",o:["1.000 €/Monat","1.500 €/Monat","2.000 €/Monat","unbegrenzt"],a:2,e:"Die 2026 eingeführte Aktivrente erlaubt Beschäftigten über dem Regelrentenalter, bis zu 2.000 €/Monat steuerfrei hinzuzuverdienen — zusätzlich zum Grundfreibetrag.",l:"§ 3 EStG (Aktivrente)"}
+    {q:"Bis zu welchem Betrag ist die Aktivrente 2026 steuerfrei?",o:["1.000 €/Monat","1.500 €/Monat","2.000 €/Monat","unbegrenzt"],a:2,e:"Die 2026 eingeführte Aktivrente erlaubt Beschäftigten über dem Regelrentenalter, bis zu 2.000 €/Monat steuerfrei hinzuzuverdienen — zusätzlich zum Grundfreibetrag.",l:"§ 3 EStG (Aktivrente)"},
+    {q:"Wie hoch ist die Entfernungspauschale 2026?",o:["0,30 €/km für alle Kilometer","0,30 € bis 20 km, ab dem 21. km 0,38 € (einfache Strecke)","0,38 €/km für alle Kilometer","0,30 € für Hin- und Rückweg"],a:1,e:"0,30 €/km für die ersten 20 km, ab dem 21. km 0,38 €/km — und nur für die einfache Strecke, nicht für Hin- und Rückweg.",l:"§ 9 Abs. 1 Nr. 4 EStG"},
+    {q:"Wie hoch ist die Homeoffice-Pauschale 2026?",o:["5 €/Tag, max. 600 €","6 €/Tag, max. 1.260 € (210 Tage)","10 €/Tag, unbegrenzt","Es gibt keine Homeoffice-Pauschale"],a:1,e:"6 € pro Homeoffice-Tag, maximal 1.260 € im Jahr (entspricht 210 Tagen). Sie kann auch ohne separates Arbeitszimmer angesetzt werden.",l:"§ 4 Abs. 5 EStG"}
+  ],
+  drills:[
+    {t:"Steuerfreie Gehaltsoptimierung",lvl:"Gestaltung",
+     task:"Ein Arbeitgeber will einem Mitarbeiter 100 €/Monat mehr zukommen lassen. Vergleiche zwei Wege:<br><b>A)</b> Bruttolohnerhöhung um 100 €.<br><b>B)</b> 50 € Sachbezug (Tankgutschein) + 50 €/Monat steuerfreier Zuschuss aus dem Gesundheitsbudget (600 €/Jahr).<br>Welcher Weg bringt dem Mitarbeiter netto mehr — und warum?",
+     sol:`<div class="step"><b>A)</b> 100 € brutto: davon gehen Lohnsteuer + Sozialabgaben ab (zusammen oft 35–45 %). Netto bleiben ca. <b>55–65 €</b>.</div>
+<div class="step"><b>B)</b> 50 € Sachbezug (Freigrenze § 8 Abs. 2) + 50 € Gesundheitsförderung (§ 3 Nr. 34) → beide steuer- und sozialabgabenfrei. Netto bleiben volle <b>100 €</b>.</div>
+<div class="step"><span class="res">Weg B bringt rund 40 € mehr netto pro Monat</span> — und der Arbeitgeber spart zusätzlich die Lohnnebenkosten.</div>`},
+    {t:"Sachbezugs-Freigrenze prüfen",lvl:"Freigrenze",
+     task:"Beurteile, ob steuerfrei:<br><b>1.</b> Tankgutschein 50 €/Monat.<br><b>2.</b> Warengutschein 51 €/Monat.<br><b>3.</b> Eine offene Prepaid-Kreditkarte mit 45 €, bar abhebbar.<br><b>4.</b> Geburtstagsgeschenk (Buch) im Wert von 55 €.",
+     sol:`<div class="step"><b>1.</b> 50 € → genau die Freigrenze ausgeschöpft → <b>steuerfrei</b>.</div>
+<div class="step"><b>2.</b> 51 € → Freigrenze um 1 € überschritten → <b>der gesamte Betrag (51 €) ist steuerpflichtig</b> (Freigrenze, kein Freibetrag).</div>
+<div class="step"><b>3.</b> Bar abhebbar → gilt als Geldleistung → <b>voll steuerpflichtig</b>, unabhängig vom Betrag.</div>
+<div class="step"><b>4.</b> Aufmerksamkeit zum persönlichen Anlass bis 60 € → <b>steuerfrei</b> (eigene Grenze, getrennt von den 50 €).</div>`},
+    {t:"Minijob beurteilen",lvl:"Geringfügigkeit",
+     task:"Eine Aushilfe verdient 2026 monatlich 600 €. In zwei Monaten fällt zusätzlich eine Einmalzahlung von je 200 € an.<br><b>a)</b> Liegt der reguläre Verdienst unter der Minijob-Grenze?<br><b>b)</b> Was bewirken die Einmalzahlungen?<br><b>c)</b> Wie wird der Minijob pauschal versteuert?",
+     sol:`<div class="step"><b>a)</b> Minijob-Grenze 2026 = 603 €/Monat. 600 € liegen knapp darunter → grundsätzlich Minijob.</div>
+<div class="step"><b>b)</b> Maßgeblich ist der Jahresdurchschnitt: 600 × 12 + 400 = 7.600 € ÷ 12 = 633 €/Monat → <b>über</b> der Jahresgrenze (7.236 €) → die Beschäftigung wird sozialversicherungspflichtig.</div>
+<div class="step"><b>c)</b> Bei echtem Minijob: <span class="res">2 % Pauschsteuer</span> (inkl. SolZ + KiSt), die der Arbeitgeber trägt.</div>`}
   ]
 },
 {
@@ -661,7 +1150,7 @@ const DATA = [
       intro:"Die Körperschaftsteuer ist die Einkommensteuer der juristischen Personen. GmbH und AG zahlen sie statt der ESt. Wichtig ist das Zusammenspiel mit der Besteuerung der Gesellschafter bei Ausschüttungen.",
       blocks:[
         {h:"Steuerpflicht und Tarif (§§ 1, 23 KStG)",p:"Unbeschränkt steuerpflichtig: GmbH, AG, eG, Vereine, Stiftungen mit Sitz/Geschäftsleitung in Deutschland. Tarif einheitlich <span class='num'>15 %</span> + 5,5 % SolZ = <b>15,825 %</b>. Plus Gewerbesteuer (ca. 14 %) → Gesamtbelastung auf Gesellschaftsebene rund 30 %."},
-        {h:"Geplante Tarifsenkung beachten",p:"Die Bundesregierung hat eine schrittweise Absenkung des KSt-Satzes ab 2028 (von 15 % in mehreren Stufen Richtung 10 %) angekündigt. Für 2026 gilt noch 15 % — im Kurs den aktuellen Gesetzesstand prüfen."},
+        {h:"Beschlossene Tarifsenkung ab 2028 (§ 23 KStG)",p:"Bereits <b>gesetzlich beschlossen</b> (Investitionssofortprogramm, BGBl. Juli 2025): Der KSt-Satz sinkt ab 2028 in fünf Jahresschritten um je 1 Prozentpunkt — <b>2028: 14 %, 2029: 13 %, 2030: 12 %, 2031: 11 %, 2032: 10 %</b>. Für <b>2026 und 2027 gilt unverändert 15 %</b>. Die kombinierte Belastung (KSt + SolZ + GewSt) sinkt damit langfristig von rund 30 % auf etwa 25 %."},
         {h:"Verdeckte Gewinnausschüttung (vGA)",p:"Gewährt die GmbH einem Gesellschafter einen Vorteil, den ein fremder Dritter nicht bekommen hätte (überhöhtes GF-Gehalt, zinsloses Darlehen, private Nutzung von GmbH-Eigentum), liegt eine vGA vor. Folge: Das KSt-Einkommen der GmbH wird erhöht; beim Gesellschafter wird der Vorteil wie eine Dividende behandelt."},
         {h:"Steuerfreie Dividenden (§ 8b KStG)",p:"Dividenden zwischen Kapitalgesellschaften sind zu <span class='num'>95 %</span> steuerfrei (5 % gelten als nicht abziehbare Betriebsausgabe). Voraussetzung u. a. Mindestbeteiligung von 10 % zu Beginn des Jahres. Ziel: keine Mehrfachbesteuerung im Konzern."},
         {h:"Organschaft (§§ 14 ff. KStG)",p:"Bei finanzieller Eingliederung und einem wirksamen Gewinnabführungsvertrag (Mindestlaufzeit 5 Jahre) werden Gewinne und Verluste zwischen Organträger und Organgesellschaft verrechnet — wichtiges Instrument zur konzernweiten Verlustnutzung."},
@@ -684,6 +1173,38 @@ const DATA = [
       ex:"GmbH zahlt dem Alleingesellschafter-GF 300.000 € Gehalt. Fremdvergleich: angemessen wären max. 180.000 €. Die übersteigenden 120.000 € sind eine vGA. Folge: Das KSt-Einkommen der GmbH steigt um 120.000 € (nicht abziehbar), und beim GF werden 120.000 € wie eine Dividende (Kapitalertrag) besteuert.",
       warn:"Der Gewinnabführungsvertrag der Organschaft muss notariell beurkundet, im Handelsregister eingetragen und tatsächlich durchgeführt werden. Schon eine fehlerhafte Durchführung (z. B. nicht ausgeglichene Verluste) kann die Organschaft rückwirkend kippen — mit erheblichen Steuerfolgen.",
       laws:["§ 1 KStG","§ 8 Abs. 3 KStG","§ 8b KStG","§ 14 KStG","§ 23 KStG","§ 3 Nr. 40 EStG"]
+    },
+    {
+      t:"Verlustabzug & Mindestbesteuerung",
+      s:"Verlustvortrag, -rücktrag, § 8c/8d KStG",
+      intro:"Verluste sind steuerlich wertvoll — sie mindern künftige (oder vergangene) Gewinne und damit die Steuer. Der Gesetzgeber begrenzt das aber, damit profitable Unternehmen nicht dauerhaft steuerfrei bleiben. Diese Regeln gelten für ESt und KSt gleichermaßen und sind in der Beratung sehr praxisrelevant.",
+      blocks:[
+        {h:"Verlustvortrag und Verlustrücktrag (§ 10d EStG)",p:"Ein nicht ausgeglichener Verlust kann <b>zurückgetragen</b> werden (in das Vorjahr, aktuell bis 2 Jahre zurück, max. 1 Mio. € / 2 Mio. € bei Zusammenveranlagung) oder <b>vorgetragen</b> werden (zeitlich unbegrenzt in künftige Jahre). Der Rücktrag bringt sofort eine Steuererstattung, der Vortrag wirkt erst künftig."},
+        {h:"Mindestbesteuerung",p:"Beim Verlustvortrag gilt eine Grenze: Bis <b>1 Mio. €</b> Gewinn kann voll mit Verlustvorträgen verrechnet werden. Vom darüber hinausgehenden Gewinn nur noch <b>60 %</b> (§ 10d Abs. 2 EStG, § 10a GewStG analog). Folge: Selbst bei hohen Verlustvorträgen bleiben mindestens 40 % des Millionengewinns steuerpflichtig — der Staat sichert sich eine Mindesteinnahme. <b>Hinweis:</b> Für 2024–2027 wurde die 60-%-Grenze vorübergehend auf 70 % angehoben."},
+        {h:"Verlustuntergang bei Anteilsübertragung (§ 8c KStG)",p:"Werden mehr als <b>50 %</b> der Anteile an einer Kapitalgesellschaft auf einen Erwerber übertragen, gehen die nicht genutzten Verlustvorträge <b>vollständig unter</b>. Hintergrund: Verhindern, dass „Verlustmäntel\" (leere GmbHs mit hohen Verlusten) verkauft werden, um Steuern zu sparen. Die früher auch geltende anteilige Kürzung bei 25–50 % wurde vom BVerfG gekippt."},
+        {h:"Fortführungsgebundener Verlustvortrag (§ 8d KStG)",p:"Eine Rettung für § 8c: Wird der Geschäftsbetrieb nach dem Anteilseignerwechsel <b>unverändert fortgeführt</b>, kann der Verlustvortrag auf Antrag erhalten bleiben (fortführungsgebundener Verlustvortrag). Wichtig bei Sanierungen und Nachfolgen, wo neue Gesellschafter einsteigen, der Betrieb aber weiterläuft."},
+        {h:"Gewerbesteuerlicher Verlustabzug (§ 10a GewStG)",p:"Bei der GewSt gibt es <b>nur Verlustvortrag, keinen Rücktrag</b>. Die Mindestbesteuerung (1 Mio. € + 60 % darüber) gilt analog. Gewerbeverluste gehen zudem unter, wenn die Unternehmens<b>identität</b> oder die Unternehmer<b>identität</b> verloren geht (z. B. Betriebsaufgabe, Gesellschafterwechsel bei Personengesellschaften)."},
+      ],
+      figs:{title:"Verlustabzug — Kennzahlen",rows:[["Verlustrücktrag max.","1 Mio. € (2 Mio. € Zusammenv.)"],["Rücktragszeitraum","2 Jahre"],["Mindestbesteuerung Sockelbetrag","1 Mio. €"],["Verrechnung darüber (2024–2027)","70 %"],["Verrechnung darüber (ab 2028)","60 %"],["Verlustuntergang § 8c","ab > 50 % Anteilsübertragung"]]},
+      ex:"Eine GmbH hat 5 Mio. € Verlustvortrag und macht im Folgejahr 3 Mio. € Gewinn. Mindestbesteuerung: 1 Mio. € voll verrechenbar + 70 % der restlichen 2 Mio. € = 1,4 Mio. €. Insgesamt verrechenbar: 2,4 Mio. €. Steuerpflichtig bleiben 3 − 2,4 = 0,6 Mio. € → darauf fällt trotz hoher Verlustvorträge KSt + GewSt an.",
+      warn:"Bei jedem Gesellschafterwechsel über 50 % prüfen, ob Verlustvorträge nach § 8c untergehen — das ist ein häufig übersehener, teurer Effekt bei GmbH-Anteilskäufen. Ggf. rechtzeitig den Antrag nach § 8d (Fortführung) stellen, um die Verluste zu retten.",
+      laws:["§ 10d EStG","§ 8c KStG","§ 8d KStG","§ 10a GewStG"]
+    },
+    {
+      t:"Zinsschranke & weitere Abzugsbeschränkungen",
+      s:"§ 4h EStG / § 8a KStG, verdeckte Einlage",
+      intro:"Damit Konzerne Gewinne nicht durch konzerninterne Darlehen ins Ausland verlagern, begrenzt das Gesetz den Abzug von Zinsaufwand. Das ist eher Spezialwissen, aber für das Verständnis der Unternehmensbesteuerung wichtig — und ein typisches Thema, bei dem die Kanzlei bei größeren Mandaten gefragt ist.",
+      blocks:[
+        {h:"Grundidee der Zinsschranke (§ 4h EStG)",p:"Der Netto-Zinsaufwand (Zinsaufwand minus Zinserträge) ist nur bis zu <b>30 % des steuerlichen EBITDA</b> abziehbar. Was darüber liegt, wird nicht sofort abgezogen, sondern als <b>Zinsvortrag</b> in künftige Jahre verschoben. Ziel: Gewinnverlagerung durch übermäßige Fremdfinanzierung verhindern."},
+        {h:"Freigrenze und Ausnahmen",p:"Die Zinsschranke greift erst ab einem Netto-Zinsaufwand von <b>3 Mio. €</b> (Freigrenze — darunter voll abziehbar). Weitere Ausnahmen: Betriebe, die nicht zu einem Konzern gehören (Stand-alone-Klausel), und der Eigenkapital-Escape (wenn die Eigenkapitalquote des Betriebs nicht wesentlich unter der des Konzerns liegt)."},
+        {h:"§ 8a KStG — Zinsschranke bei Kapitalgesellschaften",p:"Für Körperschaften verschärft § 8a KStG die Regeln, insbesondere bei der schädlichen Gesellschafter-Fremdfinanzierung (Darlehen von wesentlich beteiligten Gesellschaftern). Das verhindert, dass eine GmbH ihren Gewinn über Gesellschafterdarlehen „wegfinanziert\"."},
+        {h:"Verdeckte Einlage (Gegenstück zur vGA)",p:"Während die vGA einen verdeckten Vermögensabfluss zum Gesellschafter beschreibt, ist die <b>verdeckte Einlage</b> der umgekehrte Fall: Der Gesellschafter wendet der GmbH einen einlagefähigen Vermögensvorteil zu, ohne dafür Gesellschaftsrechte zu erhalten (z. B. verzichtet auf eine Forderung). Folge: Das Einkommen der GmbH wird gemindert, beim Gesellschafter erhöhen sich die Anschaffungskosten der Beteiligung."},
+        {h:"Nicht abziehbare Aufwendungen (§ 10 KStG)",p:"Bestimmte Ausgaben mindern das KSt-Einkommen nicht: die Körperschaftsteuer und sonstige Personensteuern selbst, Geldstrafen und -bußen, die Hälfte der Aufsichtsratsvergütungen, und nach § 4 Abs. 5 EStG nicht abziehbare Betriebsausgaben (z. B. unangemessene Bewirtung, Geschenke über 50 €)."},
+      ],
+      figs:{title:"Zinsschranke — Eckwerte",rows:[["Abzugsgrenze","30 % des EBITDA"],["Freigrenze","3 Mio. € Netto-Zinsaufwand"],["Überhang","Zinsvortrag in Folgejahre"],["Ausnahmen","Stand-alone, EK-Escape"]]},
+      ex:"Eine GmbH hat ein steuerliches EBITDA von 8 Mio. € und einen Netto-Zinsaufwand von 3,2 Mio. €. Über der Freigrenze (3 Mio. €), also greift die Schranke: Abziehbar sind nur 30 % × 8 Mio. = 2,4 Mio. €. Die restlichen 0,8 Mio. € sind nicht sofort abziehbar, sondern werden als Zinsvortrag in die Folgejahre verschoben.",
+      warn:"Die Zinsschranke betrifft fast nur größere, fremdfinanzierte Unternehmen — wegen der 3-Mio-€-Freigrenze sind kleine und mittlere Mandate praktisch nie betroffen. Für den Einstiegskurs reicht es, das Prinzip (30 % EBITDA, Freigrenze, Zinsvortrag) zu kennen. Verbeiß dich nicht in die Detailausnahmen.",
+      laws:["§ 4h EStG","§ 8a KStG","§ 10 KStG","§ 4 Abs. 5 EStG"]
     }
   ],
   quiz:[
@@ -693,7 +1214,35 @@ const DATA = [
     {q:"Wie hoch ist der Körperschaftsteuersatz 2026?",o:["10 %","15 %","25 %","30 %"],a:1,e:"15 % (§ 23 KStG), plus 5,5 % SolZ = 15,825 %. Eine schrittweise Absenkung ab 2028 ist angekündigt.",l:"§ 23 KStG"},
     {q:"Was ist eine verdeckte Gewinnausschüttung?",o:["Eine offene Dividende","Ein Vorteil der GmbH an den Gesellschafter, der dem Fremdvergleich nicht standhält","Ein versteckter Verlust","Eine steuerfreie Ausschüttung"],a:1,e:"Eine vGA liegt vor, wenn ein Gesellschafter einen Vorteil erhält, den ein fremder Dritter nicht bekäme. Folge: Erhöhung des KSt-Einkommens + Dividendenbesteuerung beim Gesellschafter.",l:"§ 8 Abs. 3 KStG"},
     {q:"Wie werden Dividenden zwischen Kapitalgesellschaften nach § 8b KStG behandelt?",o:["Voll steuerpflichtig","Zu 95 % steuerfrei (5 % nicht abziehbare BA)","Vollständig steuerfrei","Pauschal mit 15 %"],a:1,e:"§ 8b Abs. 1 KStG: Dividenden sind zu 95 % steuerfrei, 5 % gelten als nicht abziehbare Betriebsausgabe. Vermeidet Mehrfachbesteuerung im Konzern.",l:"§ 8b KStG"},
-    {q:"Warum gibt es Hinzurechnungen nach § 8 GewStG?",o:["Um kleine Betriebe zu benachteiligen","Um den objektiven Ertrag unabhängig von der Finanzierungsstruktur zu erfassen","Weil Zinsen steuerfrei sind","Um ausländische Firmen zu begünstigen"],a:1,e:"§ 8 GewStG rechnet Finanzierungsanteile (Zinsen, Mieten, Lizenzen) anteilig hinzu, damit die GewSt den objektivierten Ertrag besteuert — unabhängig von Eigen- oder Fremdfinanzierung.",l:"§ 8 GewStG"}
+    {q:"Warum gibt es Hinzurechnungen nach § 8 GewStG?",o:["Um kleine Betriebe zu benachteiligen","Um den objektiven Ertrag unabhängig von der Finanzierungsstruktur zu erfassen","Weil Zinsen steuerfrei sind","Um ausländische Firmen zu begünstigen"],a:1,e:"§ 8 GewStG rechnet Finanzierungsanteile (Zinsen, Mieten, Lizenzen) anteilig hinzu, damit die GewSt den objektivierten Ertrag besteuert — unabhängig von Eigen- oder Fremdfinanzierung.",l:"§ 8 GewStG"},
+    {q:"Was besagt die Mindestbesteuerung beim Verlustvortrag?",o:["Verluste dürfen gar nicht vorgetragen werden","Bis 1 Mio. € Gewinn voll, darüber nur zu 60 % (2024–2027: 70 %) mit Verlustvorträgen verrechenbar","Nur 50 % aller Verluste sind abziehbar","Verluste verfallen nach einem Jahr"],a:1,e:"§ 10d Abs. 2 EStG: Bis 1 Mio. € Gewinn ist die Verrechnung mit Verlustvorträgen unbegrenzt, vom darüberliegenden Gewinn nur zu 60 % (vorübergehend 70 % für 2024–2027). So bleibt bei Millionengewinnen stets ein Teil steuerpflichtig.",l:"§ 10d EStG"},
+    {q:"Was passiert mit Verlustvorträgen einer GmbH bei Übertragung von mehr als 50 % der Anteile?",o:["Nichts","Sie gehen vollständig unter (§ 8c KStG), außer der Betrieb wird nach § 8d fortgeführt","Sie verdoppeln sich","Sie werden auf den Erwerber übertragen"],a:1,e:"§ 8c KStG: Bei Übertragung von über 50 % der Anteile gehen nicht genutzte Verlustvorträge unter — Ausnahme: fortführungsgebundener Verlustvortrag nach § 8d KStG bei unverändertem Geschäftsbetrieb.",l:"§ 8c KStG"},
+    {q:"Wie funktioniert die Zinsschranke (§ 4h EStG)?",o:["Zinsen sind nie abziehbar","Netto-Zinsaufwand nur bis 30 % des EBITDA abziehbar (Freigrenze 3 Mio. €)","Zinsen sind immer voll abziehbar","Nur Zinserträge werden besteuert"],a:1,e:"Die Zinsschranke begrenzt den Abzug des Netto-Zinsaufwands auf 30 % des steuerlichen EBITDA. Es gilt eine Freigrenze von 3 Mio. € — darunter voll abziehbar. Überhänge werden als Zinsvortrag verschoben.",l:"§ 4h EStG"}
+  ],
+  drills:[
+    {t:"Gewerbesteuer komplett berechnen (Einzelunternehmen)",lvl:"GewSt",
+     task:"Ein Einzelunternehmer (Gemeinde mit Hebesatz 380 %) hat einen Gewerbeertrag (vor Freibetrag) von 100.000 €. Keine Hinzurechnungen/Kürzungen.<br><b>a)</b> Wie hoch ist die Gewerbesteuer?<br><b>b)</b> Wie wirkt die Anrechnung nach § 35 EStG?",
+     sol:`<div class="step"><b>a)</b> Gewerbeertrag 100.000 − Freibetrag 24.500 = 75.500 €. × 3,5 % = Messbetrag 2.642 €. × 380 % Hebesatz = <b>GewSt 10.040 €</b>.</div>
+<div class="step"><b>b)</b> § 35 EStG: 4,0 × Messbetrag = 4,0 × 2.642 = 10.568 € werden auf die ESt angerechnet. Da 10.568 > 10.040, wird die GewSt <b>vollständig</b> neutralisiert.</div>
+<div class="step"><span class="res">Effektive GewSt-Belastung beim Einzelunternehmer: praktisch 0 € (bei Hebesatz 380 %).</span></div>`},
+    {t:"GewSt bei der GmbH (keine Anrechnung)",lvl:"GewSt",
+     task:"Eine GmbH (Hebesatz 450 %) hat einen Gewinn von 250.000 €. Hinzurechnungen nach § 8: Schuldzinsen, die nach dem 200.000-€-Freibetrag mit 12.000 € einzubeziehen sind.<br>Berechne die Gewerbesteuer.",
+     sol:`<div class="step">Hinzurechnung: 25 % × 12.000 = 3.000 €. Gewerbeertrag = 250.000 + 3.000 = 253.000 €.</div>
+<div class="step">Kein Freibetrag (GmbH). × 3,5 % = Messbetrag 8.855 €.</div>
+<div class="step">× 450 % Hebesatz = 39.847,50 € → <span class="res">GewSt ≈ 39.848 €</span></div>
+<div class="step">Anders als beim Einzelunternehmer gibt es <b>keine § 35-Anrechnung</b> — die GewSt ist definitive Belastung.</div>`},
+    {t:"Gesamtsteuerbelastung GmbH + Ausschüttung",lvl:"KSt · anspruchsvoll",
+     task:"Eine GmbH (Hebesatz 400 %) erwirtschaftet 100.000 € Gewinn vor Steuern. Der Alleingesellschafter schüttet den gesamten Gewinn nach Steuern aus (Abgeltungsteuer 25 % + SolZ).<br>Wie hoch ist die Gesamtsteuerbelastung?",
+     sol:`<div class="step">GewSt: 100.000 × 3,5 % × 400 % = 14.000 €.</div>
+<div class="step">KSt 15 % + SolZ 5,5 % = 15,825 % × 100.000 = 15.825 €.</div>
+<div class="step">Gewinn nach Steuern = 100.000 − 14.000 − 15.825 = 70.175 €.</div>
+<div class="step">Ausschüttung: Abgeltungsteuer 25 % + SolZ (26,375 %) × 70.175 = 18.509 €.</div>
+<div class="step">Gesamte Steuer = 14.000 + 15.825 + 18.509 = 48.334 € → <span class="res">Gesamtbelastung ≈ 48,3 %</span></div>`},
+    {t:"Verdeckte Gewinnausschüttung erkennen",lvl:"vGA",
+     task:"Beurteile, ob eine vGA vorliegt:<br><b>1.</b> Die GmbH zahlt dem Gesellschafter-GF ein marktübliches Gehalt von 120.000 €.<br><b>2.</b> Die GmbH gewährt dem Gesellschafter ein zinsloses Darlehen von 200.000 €.<br><b>3.</b> Die GmbH verkauft dem Gesellschafter einen Firmenwagen weit unter Marktwert.",
+     sol:`<div class="step"><b>1.</b> Marktüblich → kein Verstoß gegen den Fremdvergleich → <b>keine vGA</b>.</div>
+<div class="step"><b>2.</b> Ein fremder Dritter bekäme kein zinsloses Darlehen → der entgangene Zins ist eine <b>vGA</b>.</div>
+<div class="step"><b>3.</b> Verkauf unter Wert → der Preisvorteil ist eine <b>vGA</b>. Folge jeweils: KSt-Einkommen der GmbH steigt, beim Gesellschafter Besteuerung als Kapitalertrag.</div>`}
   ]
 },
 {
@@ -779,15 +1328,348 @@ const DATA = [
     {q:"Was ist die Voraussetzung für die Steuerbefreiung einer ig Lieferung?",o:["Kunde ist Privatperson","Gültige USt-IdNr. des Erwerbers und Belegnachweis der Warenbewegung","Lieferung innerhalb Deutschlands","Rechnung mit 19 % USt"],a:1,e:"§ 6a UStG: gültige USt-IdNr. des unternehmerischen Erwerbers (vorab prüfen!) plus Gelangensnachweis. Ohne diese entfällt die Befreiung.",l:"§ 6a UStG"},
     {q:"Was bedeutet Reverse Charge (§ 13b UStG)?",o:["Der Leistende schuldet immer die USt","Die Steuerschuld geht auf den Leistungsempfänger über","Der Empfänger bekommt Geld zurück","Gilt nur außerhalb der EU"],a:1,e:"Bei Reverse Charge schuldet der Empfänger die USt (und zieht sie ggf. gleichzeitig als Vorsteuer ab). Rechnung mit Hinweis „Steuerschuldnerschaft des Leistungsempfängers\".",l:"§ 13b UStG"},
     {q:"Was ist die Zusammenfassende Meldung (ZM)?",o:["Jahressteuererklärung","Monatliche/quartalsweise Meldung der ig Lieferungen ans BZSt","Sammelrechnung","Eine Form des Jahresabschlusses"],a:1,e:"§ 18a UStG: Meldung aller ig Lieferungen und ig sonstigen Leistungen (mit IdNr. der Empfänger) ans Bundeszentralamt für Steuern, bis zum 25. des Folgemonats.",l:"§ 18a UStG"}
+  ],
+  drills:[
+    {t:"USt-Voranmeldung: Zahllast berechnen",lvl:"Zahllast",
+     task:"Ein Unternehmer hat im Monat folgende Umsätze:<br>Ausgangsrechnungen 40.000 € netto (19 %), zusätzlich 5.000 € netto ermäßigt (7 %).<br>Eingangsrechnungen mit Vorsteuer: 18.000 € netto (19 %) Material, 2.000 € (19 %) Bürokosten.<br>Berechne die Zahllast ans Finanzamt.",
+     sol:`<div class="step">USt auf Ausgangsumsätze: 40.000 × 19 % = 7.600 € + 5.000 × 7 % = 350 € → <b>7.950 € USt</b>.</div>
+<div class="step">Vorsteuer: (18.000 + 2.000) × 19 % = 20.000 × 19 % = <b>3.800 € Vorsteuer</b>.</div>
+<div class="step">Zahllast = USt − Vorsteuer = 7.950 − 3.800 = <span class="res">4.150 €</span></div>`},
+    {t:"Kleinunternehmer-Grenzen prüfen (2026)",lvl:"§ 19 UStG",
+     task:"Beurteile für 2026:<br><b>1.</b> Vorjahresumsatz 23.000 €, laufendes Jahr voraussichtlich 60.000 €.<br><b>2.</b> Vorjahresumsatz 26.000 €.<br><b>3.</b> Vorjahr 20.000 €, aber im laufenden Jahr wird im September die 100.000-€-Grenze gerissen.",
+     sol:`<div class="step"><b>1.</b> Vorjahr ≤ 25.000 € und laufend ≤ 100.000 € → <b>Kleinunternehmer möglich</b>.</div>
+<div class="step"><b>2.</b> Vorjahr 26.000 € > 25.000 € → <b>keine</b> Kleinunternehmerregelung, Regelbesteuerung.</div>
+<div class="step"><b>3.</b> Beim Überschreiten der 100.000 € tritt die Regelbesteuerung <b>sofort, unterjährig</b> ein — ab genau dem Umsatz, der die Grenze reißt. <span class="res">Ab September USt-Pflicht.</span></div>`},
+    {t:"Leistungsort bestimmen",lvl:"§ 3a UStG",
+     task:"Wo ist der Leistungsort, und fällt deutsche USt an?<br><b>1.</b> Deutscher Berater → französischer Unternehmer (Beratung).<br><b>2.</b> Deutscher Berater → französische Privatperson (Beratung).<br><b>3.</b> Deutscher Handwerker renoviert ein Haus in Österreich.",
+     sol:`<div class="step"><b>1.</b> B2B → Empfängerortsprinzip (§ 3a Abs. 2) → Leistungsort Frankreich → <b>keine deutsche USt</b>, Reverse Charge beim Empfänger.</div>
+<div class="step"><b>2.</b> B2C → Sitz des Leistenden (§ 3a Abs. 1) → Leistungsort Deutschland → <b>19 % deutsche USt</b>.</div>
+<div class="step"><b>3.</b> Grundstücksleistung (§ 3a Abs. 3 Nr. 1) → Ort des Grundstücks = Österreich → <b>keine deutsche USt</b>, österreichische Regeln.</div>`},
+    {t:"Echte vs. unechte Steuerbefreiung & Vorsteuer",lvl:"§ 4, § 15 UStG",
+     task:"Beurteile jeweils, ob USt anfällt und ob der Vorsteuerabzug erhalten bleibt:<br><b>1.</b> Innergemeinschaftliche Lieferung an einen EU-Unternehmer.<br><b>2.</b> Eine Ärztin behandelt Patienten.<br><b>3.</b> Ein Vermieter vermietet eine Wohnung an eine Privatperson.",
+     sol:`<div class="step"><b>1.</b> Echte Befreiung (§ 4 Nr. 1b): keine USt, aber <b>Vorsteuerabzug bleibt</b> erhalten.</div>
+<div class="step"><b>2.</b> Unechte Befreiung (§ 4 Nr. 14): keine USt, <b>kein Vorsteuerabzug</b> — die gezahlte Vorsteuer wird Kostenfaktor.</div>
+<div class="step"><b>3.</b> Unechte Befreiung (§ 4 Nr. 12): keine USt, <b>kein Vorsteuerabzug</b>. Bei Vermietung an Unternehmer könnte zur Steuerpflicht optiert werden (§ 9).</div>`},
+    {t:"Reverse Charge und ig Lieferung im Geschäftsfall",lvl:"EU · anspruchsvoll",
+     task:"Ein deutscher Maschinenbauer liefert eine Maschine (80.000 €) an einen italienischen Unternehmer mit gültiger USt-IdNr. und transportiert sie nach Mailand.<br><b>a)</b> Wie wird die Lieferung umsatzsteuerlich behandelt?<br><b>b)</b> Was muss auf der Rechnung stehen?<br><b>c)</b> Welche Meldepflicht besteht zusätzlich?",
+     sol:`<div class="step"><b>a)</b> Innergemeinschaftliche Lieferung (§ 6a) → <b>steuerfrei</b> (echte Befreiung). Der Italiener versteuert den ig Erwerb in Italien.</div>
+<div class="step"><b>b)</b> Rechnung ohne USt, mit beiden USt-IdNr. und dem Hinweis „steuerfreie innergemeinschaftliche Lieferung\". Gelangensnachweis aufbewahren.</div>
+<div class="step"><b>c)</b> <span class="res">Zusammenfassende Meldung (ZM)</span> ans BZSt mit der IdNr. des Italieners und der Bemessungsgrundlage — bis zum 25. des Folgemonats. Wichtig: USt-IdNr. vorab über das BZSt-Bestätigungsverfahren prüfen!</div>`}
   ]
 }
 ];
 
-let cm=0, cv='learn', open=null, qi=0, qsc=0, qans=false, qdone=false;
+/* ---- Glossar (Abkürzungen & Begriffe) ---- */
+const GLOSSARY = [
+  ["AfA","Absetzung für Abnutzung — die steuerliche Abschreibung, die Anschaffungskosten über die Nutzungsdauer verteilt (§ 7 EStG)."],
+  ["AdV","Aussetzung der Vollziehung — vorläufiges Aussetzen der Zahlungspflicht während eines Einspruchs bei ernstlichen Zweifeln (§ 361 AO)."],
+  ["AO","Abgabenordnung — das allgemeine Steuerverfahrensrecht, die Klammer um alle Einzelsteuern."],
+  ["ARAP","Aktive Rechnungsabgrenzungsposten — vor dem Stichtag gezahlte Ausgaben, die Aufwand des Folgejahres sind (§ 250 HGB)."],
+  ["BWA","Betriebswirtschaftliche Auswertung — der wichtigste monatliche DATEV-Report über Umsatz, Kosten und vorläufiges Ergebnis."],
+  ["BZSt","Bundeszentralamt für Steuern — u. a. Empfänger der Zusammenfassenden Meldung und Stelle für die USt-IdNr.-Prüfung."],
+  ["EBIT","Earnings before interest and taxes — das Betriebsergebnis vor Zinsen und Steuern."],
+  ["EBITDA","EBIT vor Abschreibungen — Bezugsgröße u. a. der Zinsschranke (30 % des EBITDA)."],
+  ["E-Bilanz","Elektronisch nach amtlicher Taxonomie ans Finanzamt übermittelte Bilanz und GuV (§ 5b EStG)."],
+  ["EÜR","Einnahmen-Überschuss-Rechnung — einfache Gewinnermittlung (Einnahmen − Ausgaben) nach dem Zufluss-Abfluss-Prinzip (§ 4 Abs. 3 EStG)."],
+  ["ELSTER","Elektronische Steuererklärung — das Portal der Finanzverwaltung für Übermittlungen."],
+  ["ESt","Einkommensteuer — die Steuer auf das Einkommen natürlicher Personen."],
+  ["GewSt","Gewerbesteuer — Gemeindesteuer auf den Ertrag des Gewerbebetriebs."],
+  ["GdE","Gesamtbetrag der Einkünfte — Zwischengröße auf dem Weg zum zu versteuernden Einkommen."],
+  ["GoB","Grundsätze ordnungsmäßiger Buchführung — Vollständigkeit, Richtigkeit, Zeitgerechtheit, Klarheit, Vorsicht."],
+  ["GoBD","Grundsätze ordnungsmäßiger DV-gestützter Buchführung — Regeln für die digitale Buchführung (Unveränderlichkeit, Nachvollziehbarkeit)."],
+  ["GuV","Gewinn- und Verlustrechnung — stellt Erträge und Aufwendungen einer Periode gegenüber (§ 275 HGB)."],
+  ["GWG","Geringwertige Wirtschaftsgüter — bis 800 € netto sofort abschreibbar (§ 6 Abs. 2 EStG)."],
+  ["Hebesatz","Von der Gemeinde festgelegter Prozentsatz, mit dem der Gewerbesteuer-Messbetrag multipliziert wird (mind. 200 %)."],
+  ["IAB","Investitionsabzugsbetrag — bis 50 % der geplanten Anschaffungskosten vorab abziehbar (§ 7g EStG)."],
+  ["ig","innergemeinschaftlich — Umsätze zwischen EU-Mitgliedstaaten (ig Lieferung, ig Erwerb)."],
+  ["KSt","Körperschaftsteuer — die „Einkommensteuer\" der Kapitalgesellschaften, 2026 15 %."],
+  ["Maßgeblichkeit","Grundsatz, dass die Handelsbilanz für die Steuerbilanz maßgeblich ist (§ 5 Abs. 1 EStG)."],
+  ["OPOS","Offene-Posten-Buchhaltung — Verwaltung unbezahlter Forderungen und Verbindlichkeiten in DATEV."],
+  ["OSS","One-Stop-Shop — zentrale EU-weite USt-Meldung für B2C-Umsätze (§ 18j UStG)."],
+  ["PRAP","Passive Rechnungsabgrenzungsposten — vor dem Stichtag erhaltene Einnahmen, die Ertrag des Folgejahres sind."],
+  ["RAP","Rechnungsabgrenzungsposten — Oberbegriff für ARAP und PRAP, sorgt für periodengerechte Zuordnung."],
+  ["Reverse Charge","Umkehr der Steuerschuldnerschaft — der Leistungsempfänger schuldet die USt (§ 13b UStG)."],
+  ["SKR","Standardkontenrahmen — DATEV-Kontensystematik; SKR 03 (prozessorientiert), SKR 04 (abschlussorientiert)."],
+  ["SolZ","Solidaritätszuschlag — 5,5 % Zuschlag auf KSt bzw. (nur noch für hohe Einkommen) auf ESt."],
+  ["USt","Umsatzsteuer — Verbrauchsteuer mit Vorsteuerabzug; Regelsatz 19 %, ermäßigt 7 %."],
+  ["UStVA","Umsatzsteuer-Voranmeldung — monatliche oder quartalsweise USt-Meldung ans FA."],
+  ["vGA","Verdeckte Gewinnausschüttung — Vorteil an einen Gesellschafter, der dem Fremdvergleich nicht standhält (§ 8 Abs. 3 KStG)."],
+  ["Vorsteuer","Die von einem Unternehmer selbst gezahlte USt, die er vom Finanzamt zurückholt (§ 15 UStG)."],
+  ["zvE","Zu versteuerndes Einkommen — die Bemessungsgrundlage der Einkommensteuer, auf die der Tarif angewendet wird."],
+  ["ZM","Zusammenfassende Meldung — Meldung der ig Lieferungen ans BZSt (§ 18a UStG)."],
+];
+
+/* ---- Paragrafensammlung (die wichtigsten Normen) ---- */
+const PARAGRAPHS = [
+  {g:"AO", items:[
+    ["§ 3 AO","Definition der Steuer.","(1) Steuern sind Geldleistungen, die nicht eine Gegenleistung für eine besondere Leistung darstellen und von einem öffentlich-rechtlichen Gemeinwesen zur Erzielung von Einnahmen allen auferlegt werden, bei denen der Tatbestand zutrifft, an den das Gesetz die Leistungspflicht knüpft; die Erzielung von Einnahmen kann Nebenzweck sein. (2) Realsteuern sind die Grundsteuer und die Gewerbesteuer."],
+    ["§ 33 AO","Steuerpflichtiger.","(1) Steuerpflichtiger ist, wer eine Steuer schuldet, für eine Steuer haftet, eine Steuer für Rechnung eines Dritten einzubehalten und abzuführen hat, wer eine Steuererklärung abzugeben, Sicherheit zu leisten, Bücher und Aufzeichnungen zu führen oder andere ihm durch die Steuergesetze auferlegte Verpflichtungen zu erfüllen hat."],
+    ["§ 88 AO","Untersuchungsgrundsatz.","(1) Die Finanzbehörde ermittelt den Sachverhalt von Amts wegen. Sie bestimmt Art und Umfang der Ermittlungen; an das Vorbringen und an die Beweisanträge der Beteiligten ist sie nicht gebunden. Sie hat alle für den Einzelfall bedeutsamen, auch die für die Beteiligten günstigen Umstände zu berücksichtigen."],
+    ["§ 90 AO","Mitwirkungspflichten.","(1) Die Beteiligten sind zur Mitwirkung bei der Ermittlung des Sachverhalts verpflichtet. Sie kommen der Mitwirkungspflicht insbesondere dadurch nach, dass sie die für die Besteuerung erheblichen Tatsachen vollständig und wahrheitsgemäß offenlegen und die ihnen bekannten Beweismittel angeben. (Erhöhte Mitwirkungspflicht bei Auslandssachverhalten, Abs. 2.)"],
+    ["§ 122 AO","Bekanntgabe.","(2) Ein schriftlicher Verwaltungsakt, der durch die Post übermittelt wird, gilt als bekannt gegeben … am vierten Tag nach der Aufgabe zur Post … außer wenn er nicht oder zu einem späteren Zeitpunkt zugegangen ist. [4-Tages-Fiktion seit 1.1.2025; fällt der Tag auf Sa/So/Feiertag, verschiebt er sich, § 108 Abs. 3.]"],
+    ["§ 162 AO","Schätzung.","(1) Soweit die Finanzbehörde die Besteuerungsgrundlagen nicht ermitteln oder berechnen kann, hat sie sie zu schätzen. Dabei sind alle Umstände zu berücksichtigen, die für die Schätzung von Bedeutung sind."],
+    ["§ 164 AO","Vorbehalt der Nachprüfung.","(1) Steuern können, solange der Steuerfall nicht abschließend geprüft ist, allgemein oder im Einzelfall unter dem Vorbehalt der Nachprüfung festgesetzt werden … (2) Solange der Vorbehalt wirksam ist, kann die Steuerfestsetzung aufgehoben oder geändert werden."],
+    ["§ 169 AO","Festsetzungsfrist.","(2) Die Festsetzungsfrist beträgt: 1. ein Jahr für Verbrauchsteuern, 2. vier Jahre für Steuern und Steuervergütungen … Die Frist beträgt zehn Jahre, soweit eine Steuer hinterzogen, und fünf Jahre, soweit sie leichtfertig verkürzt worden ist."],
+    ["§ 173 AO","Änderung wegen neuer Tatsachen.","(1) Steuerbescheide sind aufzuheben oder zu ändern, 1. soweit Tatsachen oder Beweismittel nachträglich bekannt werden, die zu einer höheren Steuer führen, 2. soweit sie zu einer niedrigeren Steuer führen und den Steuerpflichtigen kein grobes Verschulden trifft."],
+    ["§ 129 AO","Offenbare Unrichtigkeiten.","Die Finanzbehörde kann Schreibfehler, Rechenfehler und ähnliche offenbare Unrichtigkeiten, die beim Erlass eines Verwaltungsakts unterlaufen sind, jederzeit berichtigen."],
+    ["§ 355 AO","Einspruchsfrist.","(1) Der Einspruch … ist innerhalb eines Monats nach Bekanntgabe des Verwaltungsakts einzulegen."],
+    ["§ 361 AO","Aussetzung der Vollziehung.","(1) Durch Einlegung des Einspruchs wird die Vollziehung des angefochtenen Verwaltungsakts … nicht gehemmt … (2) Die Finanzbehörde … soll die Vollziehung aussetzen, wenn ernstliche Zweifel an der Rechtmäßigkeit des angefochtenen Verwaltungsakts bestehen."],
+    ["§ 69 AO","Haftung der Vertreter.","Die in den §§ 34 und 35 bezeichneten Personen [z. B. Geschäftsführer] haften, soweit Ansprüche aus dem Steuerschuldverhältnis infolge vorsätzlicher oder grob fahrlässiger Verletzung der ihnen auferlegten Pflichten nicht oder nicht rechtzeitig festgesetzt oder erfüllt werden."],
+    ["§ 370 AO","Steuerhinterziehung.","(1) Mit Freiheitsstrafe bis zu fünf Jahren oder mit Geldstrafe wird bestraft, wer den Finanzbehörden … unrichtige oder unvollständige Angaben macht … und dadurch Steuern verkürzt … (3) In besonders schweren Fällen … Freiheitsstrafe von sechs Monaten bis zu zehn Jahren."],
+    ["§ 371 AO","Selbstanzeige.","(1) Wer gegenüber der Finanzbehörde zu allen Steuerstraftaten einer Steuerart in vollem Umfang die unrichtigen Angaben berichtigt, die unvollständigen ergänzt oder die unterlassenen Angaben nachholt, wird … nicht … bestraft."],
+  ]},
+  {g:"EStG", items:[
+    ["§ 1 EStG","Steuerpflicht.","(1) Natürliche Personen, die im Inland einen Wohnsitz oder ihren gewöhnlichen Aufenthalt haben, sind unbeschränkt einkommensteuerpflichtig."],
+    ["§ 2 EStG","Umfang der Besteuerung.","(1) Der Einkommensteuer unterliegen … Einkünfte aus: 1. Land- und Forstwirtschaft, 2. Gewerbebetrieb, 3. selbständiger Arbeit, 4. nichtselbständiger Arbeit, 5. Kapitalvermögen, 6. Vermietung und Verpachtung, 7. sonstige Einkünfte im Sinne des § 22."],
+    ["§ 4 Abs. 3 EStG","Einnahmen-Überschuss-Rechnung.","Steuerpflichtige, die nicht … Bücher führen und … Abschlüsse machen, können als Gewinn den Überschuss der Betriebseinnahmen über die Betriebsausgaben ansetzen."],
+    ["§ 5 EStG","Betriebsvermögensvergleich.","(1) Bei Gewerbetreibenden, die … verpflichtet sind, Bücher zu führen … ist für den Schluss des Wirtschaftsjahres das Betriebsvermögen anzusetzen, das nach den handelsrechtlichen Grundsätzen ordnungsmäßiger Buchführung auszuweisen ist [Maßgeblichkeit]."],
+    ["§ 6 Abs. 2 EStG","Geringwertige Wirtschaftsgüter.","Die Anschaffungs- oder Herstellungskosten von abnutzbaren beweglichen Wirtschaftsgütern des Anlagevermögens … können … in voller Höhe als Betriebsausgaben abgezogen werden, wenn sie … 800 Euro nicht übersteigen."],
+    ["§ 7 EStG","Absetzung für Abnutzung.","(1) Bei Wirtschaftsgütern, deren Verwendung … sich … über einen Zeitraum von mehr als einem Jahr erstreckt, ist jeweils … der Teil der Anschaffungs- oder Herstellungskosten abzusetzen, der bei gleichmäßiger Verteilung auf … die Nutzungsdauer … entfällt (lineare AfA)."],
+    ["§ 9 EStG","Werbungskosten.","(1) Werbungskosten sind Aufwendungen zur Erwerbung, Sicherung und Erhaltung der Einnahmen. … Nr. 4: für die Wege zwischen Wohnung und erster Tätigkeitsstätte eine Entfernungspauschale (0,30 € bis 20 km, 0,38 € ab dem 21. km)."],
+    ["§ 15 EStG","Einkünfte aus Gewerbebetrieb.","(2) Eine selbständige nachhaltige Betätigung, die mit der Absicht, Gewinn zu erzielen, unternommen wird und sich als Beteiligung am allgemeinen wirtschaftlichen Verkehr darstellt, ist Gewerbebetrieb, wenn sie weder Land- und Forstwirtschaft noch … selbständige Arbeit … ist."],
+    ["§ 19 EStG","Nichtselbständige Arbeit.","(1) Zu den Einkünften aus nichtselbständiger Arbeit gehören Gehälter, Löhne, Gratifikationen, Tantiemen und andere Bezüge und Vorteile für eine Beschäftigung im öffentlichen oder privaten Dienst."],
+    ["§ 32a EStG","Einkommensteuertarif.","(1) Die tarifliche Einkommensteuer bemisst sich nach dem zu versteuernden Einkommen … [2026: Grundfreibetrag 12.348 €, Spitzensteuersatz 42 % ab 69.879 €, Reichensteuer 45 % ab 277.826 €]."],
+    ["§ 35a EStG","Haushaltsnahe Leistungen.","(3) Für die Inanspruchnahme von Handwerkerleistungen … ermäßigt sich die tarifliche Einkommensteuer … um 20 Prozent der Aufwendungen des Steuerpflichtigen, höchstens jedoch um 1 200 Euro. [Nur Lohnkosten, unbare Zahlung.]"],
+    ["§ 10d EStG","Verlustabzug.","(1) Negative Einkünfte … sind … vom Gesamtbetrag der Einkünfte des unmittelbar vorangegangenen Veranlagungszeitraums abzuziehen (Verlustrücktrag). (2) Nicht ausgeglichene negative Einkünfte sind in den folgenden Veranlagungszeiträumen abzuziehen (Verlustvortrag; Mindestbesteuerung)."],
+  ]},
+  {g:"KStG / GewStG", items:[
+    ["§ 8 Abs. 3 KStG","Verdeckte Gewinnausschüttung.","(3) Für die Ermittlung des Einkommens ist es ohne Bedeutung, ob das Einkommen verteilt wird. Auch verdeckte Gewinnausschüttungen … mindern das Einkommen nicht."],
+    ["§ 8b KStG","Beteiligungen an Körperschaften.","(1) Bezüge im Sinne des § 20 Abs. 1 Nr. 1 EStG bleiben bei der Ermittlung des Einkommens außer Ansatz. (5) Von den Bezügen gelten 5 Prozent als Ausgaben, die nicht als Betriebsausgaben abgezogen werden dürfen [→ 95 % steuerfrei]."],
+    ["§ 8c KStG","Verlustabzug bei Anteilswechsel.","(1) Werden … mehr als 50 Prozent … der Anteile an einer Körperschaft an einen Erwerber … übertragen …, sind die … nicht genutzten Verluste vollständig nicht mehr abziehbar."],
+    ["§ 14 KStG","Organschaft.","(1) Verpflichtet sich eine … Organgesellschaft durch einen Gewinnabführungsvertrag …, ihren ganzen Gewinn an ein einziges anderes gewerbliches Unternehmen abzuführen, so ist das Einkommen der Organgesellschaft … dem Organträger zuzurechnen."],
+    ["§ 23 KStG","Steuersatz.","(1) Die Körperschaftsteuer beträgt 15 Prozent des zu versteuernden Einkommens. [Beschlossene Senkung ab 2028: 14 %, dann jährlich −1 %-Punkt bis 10 % ab 2032.]"],
+    ["§ 2 GewStG","Steuergegenstand.","(1) Der Gewerbesteuer unterliegt jeder stehende Gewerbebetrieb, soweit er im Inland betrieben wird. … (2) Als Gewerbebetrieb gilt stets und in vollem Umfang die Tätigkeit der Kapitalgesellschaften."],
+    ["§ 8 GewStG","Hinzurechnungen.","Dem Gewinn aus Gewerbebetrieb werden … wieder hinzugerechnet: … ein Viertel der Summe aus Entgelten für Schulden [und Finanzierungsanteilen von Mieten, Pachten, Lizenzen], soweit die Summe 200 000 Euro übersteigt."],
+    ["§ 9 GewStG","Kürzungen.","Die Summe des Gewinns und der Hinzurechnungen wird gekürzt um … 1,2 Prozent des Einheitswerts des zum Betriebsvermögen gehörenden Grundbesitzes … [sowie Schachteldividenden u. a.]."],
+    ["§ 11 GewStG","Steuermesszahl.","(2) Die Steuermesszahl für den Gewerbeertrag beträgt 3,5 Prozent. [Freibetrag 24.500 € für Einzelunternehmen und Personengesellschaften, § 11 Abs. 1.]"],
+  ]},
+  {g:"UStG / HGB", items:[
+    ["§ 1 UStG","Steuerbare Umsätze.","(1) Der Umsatzsteuer unterliegen … 1. die Lieferungen und sonstigen Leistungen, die ein Unternehmer im Inland gegen Entgelt im Rahmen seines Unternehmens ausführt … 4. die Einfuhr … 5. der innergemeinschaftliche Erwerb."],
+    ["§ 2 UStG","Unternehmer.","(1) Unternehmer ist, wer eine gewerbliche oder berufliche Tätigkeit selbständig ausübt. … Gewerblich oder beruflich ist jede nachhaltige Tätigkeit zur Erzielung von Einnahmen, auch wenn die Absicht, Gewinn zu erzielen, fehlt."],
+    ["§ 3a UStG","Ort der sonstigen Leistung.","(1) Eine sonstige Leistung wird … an dem Ort ausgeführt, von dem aus der Unternehmer sein Unternehmen betreibt [B2C]. (2) Eine sonstige Leistung an einen Unternehmer … wird an dem Ort ausgeführt, von dem aus der Empfänger sein Unternehmen betreibt [B2B, Empfängerort]."],
+    ["§ 4 UStG","Steuerbefreiungen.","Von den … Umsätzen sind steuerfrei: 1. a) die Ausfuhrlieferungen … b) die innergemeinschaftlichen Lieferungen … [echte Befreiung, Vorsteuerabzug bleibt] … 14. Heilbehandlungen … [unechte Befreiung, kein Vorsteuerabzug]."],
+    ["§ 12 UStG","Steuersätze.","(1) Die Steuer beträgt für jeden steuerpflichtigen Umsatz 19 Prozent der Bemessungsgrundlage. (2) Die Steuer ermäßigt sich auf 7 Prozent für die … [u. a. Lebensmittel, Bücher, Personennahverkehr, Restaurantspeisen ab 2026]."],
+    ["§ 13b UStG","Reverse Charge.","(2)/(5) In bestimmten Fällen … schuldet der Leistungsempfänger die Steuer [Umkehr der Steuerschuldnerschaft], wenn er ein Unternehmer … ist — z. B. bei Bauleistungen, ausländischen Dienstleistern, Gebäudereinigung."],
+    ["§ 14 UStG","Rechnungen.","(4) Eine Rechnung muss … enthalten: den vollständigen Namen und die Anschrift des leistenden Unternehmers und des Leistungsempfängers, die Steuernummer oder USt-IdNr., das Ausstellungsdatum, eine fortlaufende Nummer, Menge und Art der Leistung, das Entgelt, den Steuersatz und Steuerbetrag."],
+    ["§ 15 UStG","Vorsteuerabzug.","(1) Der Unternehmer kann … die gesetzlich geschuldete Steuer für Lieferungen und sonstige Leistungen, die von einem anderen Unternehmer für sein Unternehmen ausgeführt worden sind, als Vorsteuer abziehen. Voraussetzung ist eine ordnungsgemäße Rechnung."],
+    ["§ 19 UStG","Kleinunternehmer.","(1) Die … Umsatzsteuer wird … nicht erhoben, wenn der … Umsatz im vorangegangenen Kalenderjahr 25 000 Euro nicht überschritten hat und im laufenden Kalenderjahr 100 000 Euro nicht überschreitet. [Reform 2025.]"],
+    ["§ 238 HGB","Buchführungspflicht.","(1) Jeder Kaufmann ist verpflichtet, Bücher zu führen und in diesen seine Handelsgeschäfte und die Lage seines Vermögens nach den Grundsätzen ordnungsmäßiger Buchführung ersichtlich zu machen."],
+    ["§ 249 HGB","Rückstellungen.","(1) Rückstellungen sind für ungewisse Verbindlichkeiten und für drohende Verluste aus schwebenden Geschäften zu bilden."],
+    ["§ 266 HGB","Gliederung der Bilanz.","(1) Die Bilanz ist in Kontoform aufzustellen. … (2) Aktivseite: A. Anlagevermögen, B. Umlaufvermögen, C. Rechnungsabgrenzungsposten, D. Aktive latente Steuern, E. Aktiver Unterschiedsbetrag aus der Vermögensverrechnung. (3) Passivseite: A. Eigenkapital, B. Rückstellungen, C. Verbindlichkeiten, D. Rechnungsabgrenzungsposten, E. Passive latente Steuern."],
+    ["§ 275 HGB","Gliederung der GuV.","(1) Die Gewinn- und Verlustrechnung ist … in Staffelform … aufzustellen. (2) Beim Gesamtkostenverfahren: 1. Umsatzerlöse, 2. Bestandsveränderungen, … 5. Materialaufwand, 6. Personalaufwand, 7. Abschreibungen … bis zum Jahresüberschuss/Jahresfehlbetrag."],
+  ]},
+];
+
+
+let cm=0, cv='learn', open=null, dopen=null, qi=0, qsc=0, qans=false, qdone=false;
+
+/* ---- Rechentrainer (variable Aufgaben) ---- */
+function ri(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+function fmt(n){return n.toLocaleString('de-DE');}
+const GENERATORS = {
+  0:[ // Rechnungswesen
+    {title:"AfA berechnen",level:"linear, Monatsregel",
+     make:()=>{const ak=ri(12,60)*1000;const nd=[3,5,8,10,13][ri(0,4)];const mon=ri(1,12);const jahr=Math.round(ak/nd);const anteil=Math.round(jahr*(13-mon)/12);return{
+       q:`Anschaffung einer Maschine am 1. <b>${['Jan','Feb','März','Apr','Mai','Juni','Juli','Aug','Sep','Okt','Nov','Dez'][mon-1]}</b> für <b>${fmt(ak)} €</b> netto, Nutzungsdauer <b>${nd} Jahre</b> (linear). Wie hoch ist die AfA im Anschaffungsjahr?`,
+       a:`Jahres-AfA = ${fmt(ak)} ÷ ${nd} = <b>${fmt(jahr)} €</b>. Im Anschaffungsjahr zeitanteilig ab ${['Jan','Feb','März','Apr','Mai','Juni','Juli','Aug','Sep','Okt','Nov','Dez'][mon-1]} = ${13-mon} Monate → ${fmt(jahr)} × ${13-mon}/12 = <span class="genres">${fmt(anteil)} €</span>`
+     };}},
+    {title:"USt-Zahllast",level:"Voranmeldung",
+     make:()=>{const aus=ri(20,80)*1000;const ein=ri(8,40)*1000;const ust=Math.round(aus*0.19);const vst=Math.round(ein*0.19);const zl=ust-vst;return{
+       q:`Ausgangsumsätze <b>${fmt(aus)} €</b> netto (19 %), Eingangsrechnungen mit Vorsteuer <b>${fmt(ein)} €</b> netto (19 %). Wie hoch ist die USt-Zahllast?`,
+       a:`USt = ${fmt(aus)} × 19 % = ${fmt(ust)} €. Vorsteuer = ${fmt(ein)} × 19 % = ${fmt(vst)} €. Zahllast = ${fmt(ust)} − ${fmt(vst)} = <span class="genres">${fmt(zl)} €</span>`
+     };}},
+    {title:"GWG oder nicht?",level:"Einordnung 2026",
+     make:()=>{const preis=ri(150,1400);let kat,erkl;if(preis<=800){kat='GWG — Sofortabschreibung';erkl='≤ 800 € netto → GWG (§ 6 Abs. 2 EStG), sofort voll abziehbar.';}else if(preis<=1000){kat='Sammelposten';erkl='über 800 €, aber ≤ 1.000 € → Sammelposten (§ 6 Abs. 2a), Auflösung über 5 Jahre.';}else{kat='reguläre AfA';erkl='über 1.000 € → kein GWG, normale Abschreibung über die Nutzungsdauer.';}return{
+       q:`Ein Wirtschaftsgut (kein digitales Gerät) kostet <b>${fmt(preis)} €</b> netto. Wie wird es steuerlich behandelt?`,
+       a:`<b>${kat}.</b> ${erkl} <span class="genres">${kat}</span>`
+     };}},
+    {title:"Skonto berechnen",level:"Zahlungsverkehr",
+     make:()=>{const netto=ri(2,20)*1000;const sk=[2,3][ri(0,1)];const brutto=Math.round(netto*1.19);const skzahl=Math.round(brutto*(100-sk)/100);return{
+       q:`Eine Eingangsrechnung lautet über <b>${fmt(netto)} €</b> netto (19 % USt). Bei Zahlung binnen 10 Tagen gewährt der Lieferant <b>${sk} % Skonto</b>. Wie viel ist bei Skontoabzug zu überweisen?`,
+       a:`Bruttobetrag = ${fmt(netto)} × 1,19 = ${fmt(brutto)} €. Abzüglich ${sk} % Skonto → ${fmt(brutto)} × ${(100-sk)}/100 = <span class="genres">${fmt(skzahl)} €</span> (Skonto mindert auch die Vorsteuer entsprechend)`
+     };}},
+    {title:"Rohgewinn & Handelsspanne",level:"Kalkulation",
+     make:()=>{const ek=ri(20,60)*1000;const auf=ri(30,80);const vk=Math.round(ek*(100+auf)/100);const rg=vk-ek;return{
+       q:`Wareneinsatz <b>${fmt(ek)} €</b>, Aufschlag <b>${auf} %</b>. Wie hoch sind Verkaufspreis (netto) und Rohgewinn?`,
+       a:`Verkaufspreis = ${fmt(ek)} × ${(100+auf)}/100 = ${fmt(vk)} €. Rohgewinn = ${fmt(vk)} − ${fmt(ek)} = <span class="genres">${fmt(rg)} €</span>`
+     };}}
+  ],
+  4:[ // GewSt/KSt
+    {title:"Gewerbesteuer berechnen",level:"GmbH",
+     make:()=>{const g=ri(80,300)*1000;const hs=[350,400,450,470][ri(0,3)];const mb=Math.round(g*0.035);const gs=Math.round(mb*hs/100);return{
+       q:`GmbH, Gewerbeertrag <b>${fmt(g)} €</b>, Hebesatz <b>${hs} %</b>, keine Hinzurechnungen/Kürzungen. Wie hoch ist die Gewerbesteuer? (kein Freibetrag bei der GmbH)`,
+       a:`Messbetrag = ${fmt(g)} × 3,5 % = ${fmt(mb)} €. GewSt = ${fmt(mb)} × ${hs} % = <span class="genres">${fmt(gs)} €</span>`
+     };}},
+    {title:"Körperschaftsteuer + SolZ",level:"KSt 2026",
+     make:()=>{const zve=ri(50,400)*1000;const kst=Math.round(zve*0.15);const sol=Math.round(kst*0.055);return{
+       q:`Eine GmbH hat ein zu versteuerndes Einkommen von <b>${fmt(zve)} €</b> (2026). Wie hoch sind Körperschaftsteuer und Solidaritätszuschlag?`,
+       a:`KSt = ${fmt(zve)} × 15 % = ${fmt(kst)} €. SolZ = ${fmt(kst)} × 5,5 % = ${fmt(sol)} €. Gesamt = <span class="genres">${fmt(kst+sol)} €</span> (effektiv 15,825 %)`
+     };}},
+    {title:"GewSt Einzelunternehmen mit Freibetrag",level:"§ 35 Anrechnung",
+     make:()=>{const g=ri(40,120)*1000;const hs=[380,400,420][ri(0,2)];const nachFB=Math.max(0,g-24500);const mb=Math.round(nachFB*0.035);const gs=Math.round(mb*hs/100);const anr=Math.round(mb*4.0);return{
+       q:`Einzelunternehmen, Gewerbeertrag <b>${fmt(g)} €</b>, Hebesatz <b>${hs} %</b>. Wie hoch ist die Gewerbesteuer (nach Freibetrag 24.500 €)?`,
+       a:`Nach Freibetrag: ${fmt(g)} − 24.500 = ${fmt(nachFB)} €. Messbetrag × 3,5 % = ${fmt(mb)} €. GewSt = ${fmt(mb)} × ${hs} % = <span class="genres">${fmt(gs)} €</span>. § 35 EStG rechnet 4,0 × ${fmt(mb)} = ${fmt(anr)} € auf die ESt an → GewSt weitgehend neutralisiert.`
+     };}},
+    {title:"Gesamtbelastung Ausschüttung",level:"anspruchsvoll",
+     make:()=>{const g=ri(60,200)*1000;const hs=400;const gewst=Math.round(g*0.14);const kst=Math.round(g*0.15825);const nach=g-gewst-kst;const ausst=Math.round(nach*0.26375);const netto=nach-ausst;const last=Math.round((gewst+kst+ausst)/g*1000)/10;return{
+       q:`GmbH-Gewinn <b>${fmt(g)} €</b> (Hebesatz 400 %). Alles wird an den Alleingesellschafter ausgeschüttet (Abgeltungsteuer 25 % + SolZ). Wie hoch ist die Gesamtbelastung in %?`,
+       a:`GewSt ≈ ${fmt(gewst)} €, KSt+SolZ ≈ ${fmt(kst)} €, Rest ${fmt(nach)} €. Abgeltungsteuer 26,375 % = ${fmt(ausst)} €. Netto ${fmt(netto)} €. Gesamtsteuer/Gewinn = <span class="genres">≈ ${last} %</span>`
+     };}}
+  ],
+  2:[ // Einkommensteuer
+    {title:"Entfernungspauschale",level:"Pendler",
+     make:()=>{const km=ri(15,60);const tage=ri(190,225);const p=(Math.min(km,20)*0.30+Math.max(0,km-20)*0.38);const jahr=Math.round(p*tage);return{
+       q:`Ein Arbeitnehmer fährt an <b>${tage} Tagen</b> je <b>${km} km</b> (einfache Strecke) zur Arbeit. Wie hoch ist die Entfernungspauschale im Jahr?`,
+       a:`Pro Tag: ${Math.min(km,20)} km × 0,30 € ${km>20?`+ ${km-20} km × 0,38 €`:''} = ${p.toFixed(2).replace('.',',')} €. × ${tage} Tage = <span class="genres">${fmt(jahr)} €</span>${jahr>1230?' — übersteigt den Pauschbetrag von 1.230 €, Einzelnachweis lohnt sich.':' — liegt unter dem Pauschbetrag von 1.230 €.'}`
+     };}},
+    {title:"zu versteuerndes Einkommen",level:"Veranlagung",
+     make:()=>{const lohn=ri(35,90)*1000;const kv=ri(35,60)*100;const sonst=ri(3,20)*100;const eink=lohn-1230;const zve=eink-kv-sonst;return{
+       q:`Bruttolohn <b>${fmt(lohn)} €</b>, Basis-Kranken-/Pflegeversicherung <b>${fmt(kv)} €</b>, weitere Sonderausgaben <b>${fmt(sonst)} €</b>. Wie hoch ist das zu versteuernde Einkommen?`,
+       a:`Einkünfte = ${fmt(lohn)} − 1.230 (AN-Pauschbetrag) = ${fmt(eink)} €. zvE = ${fmt(eink)} − ${fmt(kv)} − ${fmt(sonst)} = <span class="genres">${fmt(zve)} €</span>`
+     };}},
+    {title:"Ehegattensplitting-Vorteil",level:"Splitting",
+     make:()=>{const a=ri(50,90)*1000;const b=ri(0,25)*1000;const halb=Math.round((a+b)/2);return{
+       q:`Ehepaar: Partner A verdient <b>${fmt(a)} €</b> zvE, Partner B <b>${fmt(b)} €</b>. Auf welches Einkommen wird beim Splitting der Tarif angewendet (Splitting-Grundlage)?`,
+       a:`Gemeinsames zvE = ${fmt(a)} + ${fmt(b)} = ${fmt(a+b)} €. Halbiert: <span class="genres">${fmt(halb)} €</span> — auf diese Hälfte wird der Tarif angewendet, das Ergebnis dann verdoppelt. Vorteil ist umso größer, je ungleicher die Einkommen.`
+     };}},
+    {title:"Abschreibung Immobilie (V+V)",level:"§ 7 Abs. 4",
+     make:()=>{const kauf=ri(200,500)*1000;const grund=Math.round(kauf*ri(20,35)/100);const geb=kauf-grund;const afa=Math.round(geb*0.02);return{
+       q:`Vermietete Immobilie: Kaufpreis <b>${fmt(kauf)} €</b>, davon Grundanteil <b>${fmt(grund)} €</b>. Wie hoch ist die jährliche Gebäude-AfA (2 %)?`,
+       a:`Nur das Gebäude wird abgeschrieben: ${fmt(kauf)} − ${fmt(grund)} = ${fmt(geb)} € Gebäudewert. AfA = ${fmt(geb)} × 2 % = <span class="genres">${fmt(afa)} €/Jahr</span> (Grund und Boden nie abschreibbar)`
+     };}}
+  ],
+  3:[ // Lohnsteuer
+    {title:"Sachbezug-Freigrenze",level:"§ 8 Abs. 2",
+     make:()=>{const wert=ri(40,60);const ok=wert<=50;return{
+       q:`Ein Arbeitgeber gewährt einen monatlichen Sachbezug (Tankgutschein) von <b>${wert} €</b>. Ist er steuerfrei?`,
+       a:ok?`<b>Ja, steuerfrei.</b> ${wert} € ≤ 50 € Freigrenze (§ 8 Abs. 2). <span class="genres">steuerfrei</span>`:`<b>Nein.</b> ${wert} € > 50 € → Freigrenze überschritten, der <b>gesamte</b> Betrag (${wert} €) ist steuer- und beitragspflichtig (Freigrenze, kein Freibetrag). <span class="genres">voll steuerpflichtig</span>`
+     };}},
+    {title:"Verpflegungsmehraufwand",level:"Reisekosten",
+     make:()=>{const std=[9,11,24,14][ri(0,3)];let pausch;if(std>=24)pausch=28;else if(std>8)pausch=14;else pausch=0;const tage=ri(2,8);return{
+       q:`Ein Arbeitnehmer ist an <b>${tage} Tagen</b> auf Dienstreise mit jeweils <b>über ${std>=24?'24':std} Stunden</b> Abwesenheit. Wie hoch ist die Verpflegungspauschale gesamt? (Zwischentage)`,
+       a:`Bei ${std>=24?'ganztägiger (24 h)':'über 8 h'} Abwesenheit: ${pausch} €/Tag. × ${tage} Tage = <span class="genres">${fmt(pausch*tage)} €</span> (An-/Abreisetage je 14 €, hier als volle Tage gerechnet)`
+     };}}
+  ],
+  5:[ // Umsatzsteuer
+    {title:"Kleinunternehmer prüfen",level:"§ 19 · 2026",
+     make:()=>{const vj=ri(15,35)*1000;const lj=ri(40,120)*1000;const ok=vj<=25000&&lj<=100000;return{
+       q:`Vorjahresumsatz <b>${fmt(vj)} €</b>, laufendes Jahr voraussichtlich <b>${fmt(lj)} €</b>. Kann die Kleinunternehmerregelung genutzt werden? (2026)`,
+       a:ok?`<b>Ja.</b> Vorjahr ${fmt(vj)} ≤ 25.000 € und laufendes Jahr ${fmt(lj)} ≤ 100.000 €. <span class="genres">Kleinunternehmer möglich</span>`:`<b>Nein.</b> ${vj>25000?`Vorjahr ${fmt(vj)} € > 25.000 €`:`laufendes Jahr ${fmt(lj)} € > 100.000 €`} → Regelbesteuerung. <span class="genres">keine KU-Regelung</span>`
+     };}},
+    {title:"USt herausrechnen (brutto→netto)",level:"Steuersatz",
+     make:()=>{const brutto=ri(50,500)*10;const satz=[19,7][ri(0,1)];const netto=Math.round(brutto/(1+satz/100)*100)/100;const ust=Math.round((brutto-netto)*100)/100;return{
+       q:`Ein Bruttobetrag von <b>${fmt(brutto)} €</b> enthält <b>${satz} %</b> Umsatzsteuer. Wie hoch sind Netto und USt?`,
+       a:`Netto = ${fmt(brutto)} ÷ ${(1+satz/100).toString().replace('.',',')} = ${netto.toLocaleString('de-DE')} €. USt = <span class="genres">${ust.toLocaleString('de-DE')} €</span>`
+     };}},
+    {title:"Vorsteuerüberhang",level:"Erstattung",
+     make:()=>{const aus=ri(5,25)*1000;const ein=ri(30,70)*1000;const ust=Math.round(aus*0.19);const vst=Math.round(ein*0.19);const saldo=ust-vst;return{
+       q:`Ein Existenzgründer hat hohe Investitionen: Ausgangsumsätze <b>${fmt(aus)} €</b> netto, Eingangsrechnungen <b>${fmt(ein)} €</b> netto (je 19 %). Wie hoch ist die Zahllast bzw. Erstattung?`,
+       a:`USt ${fmt(ust)} € − Vorsteuer ${fmt(vst)} € = ${fmt(saldo)} €. Negativ → <span class="genres">Vorsteuererstattung ${fmt(-saldo)} €</span> vom Finanzamt (typisch in der Gründungsphase)`
+     };}}
+  ]
+};
+let genCurrent={};
+function renderGen(gi){
+  const g=GENERATORS[cm][gi];
+  if(!genCurrent[cm+'-'+gi])genCurrent[cm+'-'+gi]={data:g.make(),show:false};
+  const st=genCurrent[cm+'-'+gi];
+  return `<div class="gen-title"><span>${g.title}</span><span class="gen-level">${g.level}</span></div>
+    <div class="gen-q">${st.data.q}</div>
+    ${st.show?`<div class="gen-a">${st.data.a}</div>`:''}
+    <div class="gen-btns">
+      <button class="gen-btn primary" onclick="genReveal(${gi})">${st.show?'Lösung ausblenden':'Lösung zeigen'}</button>
+      <button class="gen-btn" onclick="genNew(${gi})">🎲 Neue Aufgabe</button>
+    </div>`;
+}
+function genReveal(gi){const k=cm+'-'+gi;genCurrent[k].show=!genCurrent[k].show;document.getElementById('gen'+gi).innerHTML=renderGen(gi);}
+function genNew(gi){const k=cm+'-'+gi;genCurrent[k]={data:GENERATORS[cm][gi].make(),show:false};document.getElementById('gen'+gi).innerHTML=renderGen(gi);}
+
+/* ---- Interaktiver Bilanz-Builder ---- */
+let builderState=null;
+function newBuilderCase(){
+  // random balanced values
+  const av=ri(80,200)*1000, vorr=ri(30,90)*1000, ford=ri(40,120)*1000, bank=ri(20,80)*1000;
+  const gk=25000, verb=ri(30,80)*1000, darl=ri(40,120)*1000;
+  const summe=av+vorr+ford+bank;
+  const ek_rest=summe-verb-darl; // Eigenkapital (inkl. Rücklagen+JÜ) als Restgröße
+  return {av,vorr,ford,bank,gk,verb,darl,summe,ek_rest,checked:false};
+}
+function renderBuilder(){
+  if(!builderState)builderState=newBuilderCase();
+  const s=builderState;
+  return `<div class="builder-card">
+    <div class="builder-head">🏗️ <b>Bilanz selbst aufstellen</b> — Trage die Bilanzsumme und das Eigenkapital ein. Die Werte wechseln bei jeder neuen Aufgabe.</div>
+    <div class="builder-given">
+      <div class="bg-title">Gegebene Werte (€):</div>
+      <div class="bg-grid">
+        <span>Anlagevermögen</span><b>${fmt(s.av)}</b>
+        <span>Vorräte</span><b>${fmt(s.vorr)}</b>
+        <span>Forderungen</span><b>${fmt(s.ford)}</b>
+        <span>Bank</span><b>${fmt(s.bank)}</b>
+        <span>Verbindlichkeiten aus L+L</span><b>${fmt(s.verb)}</b>
+        <span>Bankdarlehen</span><b>${fmt(s.darl)}</b>
+      </div>
+    </div>
+    <div class="builder-inputs">
+      <label>1. Bilanzsumme (Summe aller Aktiva):<br><input type="text" id="b_summe" inputmode="numeric" placeholder="z. B. 350000"></label>
+      <label>2. Eigenkapital (Restgröße = Bilanzsumme − Schulden):<br><input type="text" id="b_ek" inputmode="numeric" placeholder="z. B. 200000"></label>
+    </div>
+    <div class="builder-btns">
+      <button class="gen-btn primary" onclick="checkBuilder()">Prüfen</button>
+      <button class="gen-btn" onclick="builderState=newBuilderCase();document.getElementById('builder').innerHTML=renderBuilder();">🎲 Neue Aufgabe</button>
+    </div>
+    <div id="builderResult"></div>
+  </div>`;
+}
+function parseNum(str){return parseInt((str||'').replace(/[^0-9]/g,''),10);}
+function checkBuilder(){
+  const s=builderState;
+  const us=parseNum(document.getElementById('b_summe').value);
+  const uek=parseNum(document.getElementById('b_ek').value);
+  const r=document.getElementById('builderResult');
+  if(isNaN(us)||isNaN(uek)){r.innerHTML='<div class="br-msg br-warn">Bitte beide Felder ausfüllen.</div>';return;}
+  const okS=us===s.summe, okE=uek===s.ek_rest;
+  let h='';
+  h+=`<div class="br-line ${okS?'ok':'no'}">Bilanzsumme: ${fmt(us)} € ${okS?'✓ richtig':'✗ — korrekt wäre '+fmt(s.summe)+' € (='+fmt(s.av)+'+'+fmt(s.vorr)+'+'+fmt(s.ford)+'+'+fmt(s.bank)+')'}</div>`;
+  h+=`<div class="br-line ${okE?'ok':'no'}">Eigenkapital: ${fmt(uek)} € ${okE?'✓ richtig':'✗ — korrekt wäre '+fmt(s.ek_rest)+' € (='+fmt(s.summe)+' − '+fmt(s.verb)+' − '+fmt(s.darl)+')'}</div>`;
+  if(okS&&okE)h+=`<div class="br-msg br-ok">Perfekt — die Bilanz geht auf: Aktiva = Passiva = ${fmt(s.summe)} €. Das Eigenkapital ist die Restgröße nach Abzug aller Schulden.</div>`;
+  r.innerHTML=h;
+}
+
+
+
+
+/* ---- Progress tracking (persisted locally) ---- */
+let progress = loadProgress();
+function loadProgress(){
+  try{const r=localStorage.getItem('stb_progress');if(r)return JSON.parse(r);}catch(e){}
+  return {read:{}, quiz:{}};
+}
+function saveProgress(){try{localStorage.setItem('stb_progress',JSON.stringify(progress));}catch(e){}}
+function markRead(mi,li){const k=mi+'-'+li;if(!progress.read[k]){progress.read[k]=1;saveProgress();updateProgressBar();buildNav();if(cv==='learn')buildLearn();}}
+function markQuiz(mi,pct){progress.quiz[mi]=pct;saveProgress();updateProgressBar();buildNav();}
+function moduleComplete(mi){
+  const m=DATA[mi];
+  const allRead=m.lessons.every((_,li)=>progress.read[mi+'-'+li]);
+  const quizOk=(progress.quiz[mi]||0)>=60;
+  return allRead && quizOk;
+}
+function updateProgressBar(){
+  let totalL=0,readL=0;
+  DATA.forEach((m,mi)=>{m.lessons.forEach((_,li)=>{totalL++;if(progress.read[mi+'-'+li])readL++;});});
+  const quizDone=DATA.filter((_,mi)=>(progress.quiz[mi]||0)>0).length;
+  const totalUnits=totalL+DATA.length;
+  const doneUnits=readL+quizDone;
+  const pct=Math.round(doneUnits/totalUnits*100);
+  const fill=document.getElementById('ptFill'),pp=document.getElementById('ptPct'),pt=document.getElementById('ptText');
+  if(fill)fill.style.width=pct+'%';
+  if(pp)pp.textContent=pct+' %';
+  if(pt)pt.textContent=pct>=100?'Komplett durchgearbeitet — stark!':pct>0?'Dein Lernfortschritt':'Dein Lernfortschritt';
+}
 
 function buildNav(){
   document.getElementById('modnav').innerHTML = DATA.map((m,i)=>
-    `<button class="mtab${i===cm?' act':''}" onclick="selMod(${i})"><span class="n">${m.n}</span>${m.label}</button>`
+    `<button class="mtab${i===cm?' act':''}" onclick="selMod(${i})"><span class="n">${m.n}</span>${m.label}${moduleComplete(i)?'<span class="done">✓</span>':''}</button>`
   ).join('');
 }
 function buildHead(){
@@ -795,81 +1677,210 @@ function buildHead(){
   document.getElementById('modhead').innerHTML =
     `<span class="day">${m.day}</span><h2>${m.label}</h2><p class="lead">${m.lead}</p>`;
 }
-function selMod(i){cm=i;open=null;resetQuiz();buildNav();buildHead();cv==='learn'?buildLearn():buildQuiz();}
+function selMod(i){cm=i;open=null;dopen=null;resetQuiz();buildNav();buildHead();if(cv==='quiz')buildQuiz();else if(cv==='drill')buildDrill();else{cv='learn';setView('learn');}}
 function setView(v){
   cv=v;
+  // leaving search when switching views
+  if(v!=='search'){const sr=document.getElementById('searchResults');if(sr)sr.style.display='none';}
+  const inRef=(v==='ref');
   document.getElementById('vt-learn').classList.toggle('act',v==='learn');
   document.getElementById('vt-quiz').classList.toggle('act',v==='quiz');
+  document.getElementById('vt-drill').classList.toggle('act',v==='drill');
   document.getElementById('learnView').style.display=v==='learn'?'':'none';
   document.getElementById('quizView').style.display=v==='quiz'?'':'none';
-  if(v==='learn')buildLearn();else{resetQuiz();buildQuiz();}
+  document.getElementById('drillView').style.display=v==='drill'?'':'none';
+  document.getElementById('refView').style.display=inRef?'':'none';
+  // hide module chrome in reference view
+  document.querySelector('.viewtabs').style.display=inRef?'none':'';
+  document.getElementById('modhead').style.display=inRef?'none':'';
+  if(v==='learn')buildLearn();else if(v==='quiz'){resetQuiz();buildQuiz();}else if(v==='drill')buildDrill();else if(v==='ref')buildRef();
 }
+function buildRef(){
+  const rv=document.getElementById('refView');
+  let h=`<div class="ref-head"><h2>Glossar &amp; Paragrafensammlung</h2><p class="ref-sub">Zum Nachschlagen — alle Abkürzungen und die wichtigsten Normen an einem Ort. Nutze auch die Suche oben.</p><button class="btn sec" onclick="setView('learn')">← Zurück zu den Modulen</button></div>`;
+  h+=`<div class="ref-section-title">Abkürzungen &amp; Begriffe</div><div class="glosslist">`;
+  GLOSSARY.forEach(([k,v])=>{h+=`<div class="glossitem"><div class="gk">${k}</div><div class="gv">${v}</div></div>`;});
+  h+=`</div>`;
+  h+=`<div class="ref-section-title">Die wichtigsten Paragrafen — mit Gesetzestext</div><p class="ref-sub" style="margin-bottom:14px">Auszüge im (teils gekürzten) Wortlaut. Maßgeblich ist stets die aktuelle amtliche Fassung.</p>`;
+  PARAGRAPHS.forEach(grp=>{
+    h+=`<div class="para-group"><div class="para-gname">${grp.g}</div>`;
+    grp.items.forEach(it=>{
+      const [p,d,txt]=it;
+      h+=`<div class="paraitem2"><div class="pk2">${p}</div><div class="pd">${d}</div>${txt?`<div class="ptext">${txt}</div>`:''}</div>`;
+    });
+    h+=`</div>`;
+  });
+  rv.innerHTML=h;
+}
+function buildDrill(){
+  const ds=DATA[cm].drills||[];
+  const dv=document.getElementById('drillView');
+  const gens=GENERATORS[cm]||[];
+  let h='';
+  if(cm===0){h+=`<div id="builder">${renderBuilder()}</div>`;}
+  if(gens.length){
+    h+='<div class="drill-intro">🎲 <b>Rechentrainer:</b> Diese Aufgaben erzeugen bei jedem Klick neue Zahlen. Erst selbst rechnen, dann prüfen — beliebig oft wiederholbar.</div>';
+    gens.forEach((g,gi)=>{h+=`<div class="gencard" id="gen${gi}">${renderGen(gi)}</div>`;});
+  }
+  if(!ds.length&&!gens.length){dv.innerHTML='<div class="drill-empty">Für dieses Modul sind die großen Rechenfälle in Rechnungswesen, Einkommensteuer, GewSt/KSt und Umsatzsteuer gebündelt.</div>';return;}
+  if(ds.length){
+    h+='<div class="drill-intro">Rechne jede Aufgabe zuerst selbst auf Papier — erst dann die Lösung aufklappen. Das aktive Durchrechnen ist der eigentliche Lerneffekt.</div><div class="drills">';
+    ds.forEach((d,i)=>{
+      const o=dopen===i;
+      h+=`<div class="drill${o?' open':''}">
+        <div class="dhead" onclick="dtoggle(${i})">
+          <div class="dnum">A${i+1}</div>
+          <div class="dtitle"><h3>${d.t}</h3><div class="dlevel">${d.lvl||'Übung'}</div></div>
+          <div class="lchev">▼</div>
+        </div>
+        <div class="dbody">
+          <div class="dtask">${d.task}</div>
+          <button class="dshow" onclick="event.stopPropagation();dtoggle(${i})">Lösung anzeigen ↓</button>
+          <div class="dsol"><div class="dsol-label">Lösung</div>${d.sol}</div>
+        </div>
+      </div>`;
+    });
+    h+='</div>';
+  }
+  dv.innerHTML=h;
+}
+function dtoggle(i){dopen=dopen===i?null:i;buildDrill();const el=document.querySelectorAll('.drill')[i];if(dopen!==null&&el)el.scrollIntoView({behavior:'smooth',block:'nearest'});}
 function buildLearn(){
   const ls=DATA[cm].lessons;
   let h='<div class="lessons">';
   ls.forEach((l,i)=>{
     const o=open===i;
     let body='';
-    if(o){
-      body+=`<div class="intro">${l.intro}</div>`;
-      body+=`<div class="seclabel">Im Detail</div>`;
-      l.blocks.forEach(b=>{body+=`<div class="block"><h4>${b.h}</h4><p>${b.p}</p></div>`;});
-      if(l.figs){
-        body+=`<table class="figtable"><tr><th colspan="2">${l.figs.title}</th></tr>`;
-        l.figs.rows.forEach(r=>{body+=`<tr><td>${r[0]}</td><td class="v">${r[1]}</td></tr>`;});
-        body+=`</table>`;
-      }
-      if(l.vis)body+=l.vis;
-      if(l.ex)body+=`<div class="callout c-ex"><div class="ctag">▸ Praxisbeispiel</div><p>${l.ex}</p></div>`;
-      if(l.warn)body+=`<div class="callout c-warn"><div class="ctag">▸ Stolperfalle</div><p>${l.warn}</p></div>`;
-      body+=`<div class="laws">`+l.laws.map(x=>`<span class="law">${x}</span>`).join('')+`</div>`;
+    body+=`<div class="intro">${l.intro}</div>`;
+    body+=`<div class="seclabel">Im Detail</div>`;
+    l.blocks.forEach(b=>{body+=`<div class="block"><h4>${b.h}</h4><p>${b.p}</p></div>`;});
+    if(l.figs){
+      body+=`<table class="figtable"><tr><th colspan="2">${l.figs.title}</th></tr>`;
+      l.figs.rows.forEach(r=>{body+=`<tr><td>${r[0]}</td><td class="v">${r[1]}</td></tr>`;});
+      body+=`</table>`;
     }
-    h+=`<div class="lesson${o?' open':''}">
+    if(l.vis)body+=l.vis;
+    if(l.ex)body+=`<div class="callout c-ex"><div class="ctag">▸ Praxisbeispiel</div><p>${l.ex}</p></div>`;
+    if(l.warn)body+=`<div class="callout c-warn"><div class="ctag">▸ Stolperfalle</div><p>${l.warn}</p></div>`;
+    body+=`<div class="laws">`+l.laws.map(x=>`<span class="law">${x}</span>`).join('')+`</div>`;
+    const rd=progress.read[cm+'-'+i];
+    body+=`<button class="readbtn${rd?' done':''}" onclick="event.stopPropagation();markRead(${cm},${i})">${rd?'✓ Als gelesen markiert':'Als gelesen markieren'}</button>`;
+    const isread=progress.read[cm+'-'+i];
+    h+=`<div class="lesson${o?' open':''}${isread?' read':''}">
       <div class="lhead" onclick="toggle(${i})">
-        <div class="lnum">${i+1}</div>
+        <div class="lnum">${isread?'✓':(i+1)}</div>
         <div class="ltitle"><h3>${l.t}</h3><div class="lsub">${l.s}</div></div>
         <div class="lchev">▼</div>
       </div>
-      ${o?`<div class="lbody">${body}</div>`:''}
+      <div class="lbody">${body}</div>
     </div>`;
   });
   h+='</div>';
   document.getElementById('learnView').innerHTML=h;
 }
 function toggle(i){open=open===i?null:i;buildLearn();const el=document.querySelectorAll('.lesson')[i];if(open!==null&&el)el.scrollIntoView({behavior:'smooth',block:'nearest'});}
-function resetQuiz(){qi=0;qsc=0;qans=false;qdone=false;}
+function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+let qOrder=[], qOptMap=null;
+function resetQuiz(){qi=0;qsc=0;qans=false;qdone=false;qOrder=shuffle(DATA[cm].quiz.map((_,i)=>i));qOptMap=null;}
+function curQ(){return DATA[cm].quiz[qOrder[qi]];}
 function buildQuiz(){
   const qz=DATA[cm].quiz, v=document.getElementById('quizView');
+  if(!qOrder.length)qOrder=shuffle(qz.map((_,i)=>i));
   if(qdone){
     const pct=Math.round(qsc/qz.length*100);
+    markQuiz(cm,pct);
     const msg=pct>=85?'Stark — diesen Block beherrschst du.':pct>=70?'Gut. Ein, zwei Themen nochmal im Lernmodus ansehen.':pct>=50?'Solide Basis. Geh die Lektionen nochmal durch.':'Erst den Lernmodus durcharbeiten, dann das Quiz wiederholen.';
-    v.innerHTML=`<div class="score"><div class="pct">${pct}%</div><div class="frac">${qsc} von ${qz.length} richtig</div><div class="msg">${msg}</div><div class="btns"><button class="btn" onclick="resetQuiz();buildQuiz()">Nochmal</button><button class="btn sec" onclick="setView('learn')">Zum Lernmodus</button></div></div>`;
+    v.innerHTML=`<div class="score"><div class="pct">${pct}%</div><div class="frac">${qsc} von ${qz.length} richtig</div><div class="msg">${msg}</div><div class="btns"><button class="btn" onclick="resetQuiz();buildQuiz()">Nochmal (neu gemischt)</button><button class="btn sec" onclick="setView('learn')">Zum Lernmodus</button></div></div>`;
     return;
   }
-  const q=qz[qi], pct=Math.round(qi/qz.length*100);
+  const q=curQ(), pct=Math.round(qi/qz.length*100);
+  // shuffle options, remember mapping to correct answer
+  const idxs=shuffle(q.o.map((_,i)=>i));
+  qOptMap=idxs;
   v.innerHTML=`<div class="quiz">
     <div class="qbar"><div class="qfill" style="width:${pct}%"></div></div>
     <div class="qmeta"><span>Frage ${qi+1} / ${qz.length}</span><span>${qsc} richtig</span></div>
     <div class="qq">${q.q}</div>
-    <div class="qopts">${q.o.map((o,i)=>`<button class="qopt" id="o${i}" onclick="ans(${i})">${o}</button>`).join('')}</div>
+    <div class="qopts">${idxs.map((orig,pos)=>`<button class="qopt" id="o${pos}" onclick="ans(${pos})">${q.o[orig]}</button>`).join('')}</div>
     <div class="qfb" id="fb"></div>
     <div class="qbtns"><button class="btn" id="nx" style="display:none" onclick="next()">${qi+1>=qz.length?'Ergebnis ansehen':'Weiter'}</button></div>
   </div>`;
 }
-function ans(c){
+function ans(pos){
   if(qans)return;qans=true;
-  const q=DATA[cm].quiz[qi];
+  const q=curQ();
+  const correctPos=qOptMap.indexOf(q.a);
   document.querySelectorAll('.qopt').forEach(o=>o.disabled=true);
-  if(c===q.a){document.getElementById('o'+c).classList.add('correct');qsc++;}
-  else{document.getElementById('o'+c).classList.add('wrong');document.getElementById('o'+q.a).classList.add('reveal');}
+  if(pos===correctPos){document.getElementById('o'+pos).classList.add('correct');qsc++;}
+  else{document.getElementById('o'+pos).classList.add('wrong');document.getElementById('o'+correctPos).classList.add('reveal');}
   const fb=document.getElementById('fb');
-  fb.innerHTML=`<b>${c===q.a?'Richtig.':'Nicht ganz.'}</b> ${q.e}<span class="law">${q.l}</span>`;
+  fb.innerHTML=`<b>${pos===correctPos?'Richtig.':'Nicht ganz.'}</b> ${q.e}<span class="law">${q.l}</span>`;
   fb.classList.add('show');
   document.getElementById('nx').style.display='';
 }
 function next(){qi++;qans=false;if(qi>=DATA[cm].quiz.length)qdone=true;buildQuiz();}
 
-buildNav();buildHead();buildLearn();
+/* ---- Suche ---- */
+function doSearch(term){
+  const t=term.trim().toLowerCase();
+  const sr=document.getElementById('searchResults');
+  document.getElementById('searchClear').style.display=t?'':'none';
+  if(t.length<2){sr.style.display='none';setView(cv==='search'?'learn':cv);return;}
+  // hide all module views
+  ['learnView','quizView','drillView','refView'].forEach(id=>document.getElementById(id).style.display='none');
+  document.querySelector('.viewtabs').style.display='none';
+  document.getElementById('modhead').style.display='none';
+  cv='search';
+  const hits=[];
+  DATA.forEach((m,mi)=>{
+    m.lessons.forEach((l,li)=>{
+      let hay=(l.t+' '+l.s+' '+l.intro+' '+l.blocks.map(b=>b.h+' '+b.p).join(' ')+' '+(l.ex||'')+' '+(l.warn||'')+' '+l.laws.join(' ')).toLowerCase();
+      if(l.figs)hay+=' '+l.figs.rows.map(r=>r.join(' ')).join(' ').toLowerCase();
+      if(hay.includes(t)){
+        // find a short snippet
+        let snip='';
+        const src=(l.intro+' '+l.blocks.map(b=>b.p).join(' '));
+        const idx=src.toLowerCase().indexOf(t);
+        if(idx>=0){const s=Math.max(0,idx-50);snip='…'+src.slice(s,idx+t.length+90).replace(/<[^>]+>/g,'')+'…';}
+        hits.push({mi,li,t:l.t,mod:m.label,snip});
+      }
+    });
+  });
+  // also glossary + paragraphs
+  const gHits=GLOSSARY.filter(([k,v])=>(k+' '+v).toLowerCase().includes(t));
+  const pHits=[];PARAGRAPHS.forEach(g=>g.items.forEach(it=>{const[p,d,txt]=it;if((p+' '+d+' '+(txt||'')).toLowerCase().includes(t))pHits.push([p,d]);}));
+  let h=`<div class="search-head"><b>${hits.length+gHits.length+pHits.length}</b> Treffer für „${term}\"</div>`;
+  if(hits.length){h+=`<div class="search-cat">Lektionen</div>`;hits.forEach(x=>{h+=`<div class="search-item" onclick="gotoLesson(${x.mi},${x.li})"><div class="si-mod">${x.mod}</div><div class="si-title">${x.t}</div>${x.snip?`<div class="si-snip">${x.snip}</div>`:''}</div>`;});}
+  if(gHits.length){h+=`<div class="search-cat">Glossar</div>`;gHits.forEach(([k,v])=>{h+=`<div class="search-item" onclick="setView('ref')"><div class="si-title">${k}</div><div class="si-snip">${v}</div></div>`;});}
+  if(pHits.length){h+=`<div class="search-cat">Paragrafen</div>`;pHits.forEach(([p,d])=>{h+=`<div class="search-item" onclick="setView('ref')"><div class="si-title">${p}</div><div class="si-snip">${d}</div></div>`;});}
+  if(!hits.length&&!gHits.length&&!pHits.length)h+=`<div class="search-empty">Keine Treffer. Versuch einen anderen Begriff.</div>`;
+  sr.innerHTML=h;sr.style.display='';
+}
+function clearSearch(){document.getElementById('searchInput').value='';document.getElementById('searchClear').style.display='none';document.getElementById('searchResults').style.display='none';setView('learn');}
+function gotoLesson(mi,li){document.getElementById('searchInput').value='';document.getElementById('searchClear').style.display='none';document.getElementById('searchResults').style.display='none';cm=mi;open=li;buildNav();buildHead();setView('learn');setTimeout(()=>{const el=document.querySelectorAll('.lesson')[li];if(el)el.scrollIntoView({behavior:'smooth',block:'center'});},60);}
+
+/* ---- Theme (hell/dunkel) ---- */
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  const btn=document.getElementById('themeToggle');
+  if(btn)btn.textContent=t==='dark'?'☀️':'🌙';
+  try{localStorage.setItem('stb_theme',t);}catch(e){}
+}
+function toggleTheme(){const cur=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';applyTheme(cur);}
+(function initTheme(){let t='light';try{t=localStorage.getItem('stb_theme')||'light';}catch(e){}applyTheme(t);})();
+
+/* ---- Header collapse on scroll ---- */
+let lastY=0;
+window.addEventListener('scroll',()=>{
+  const hero=document.getElementById('hero');if(!hero)return;
+  const y=window.scrollY;
+  if(y>140)hero.classList.add('collapsed');
+  else if(y<80)hero.classList.remove('collapsed');
+  lastY=y;
+},{passive:true});
+
+buildNav();buildHead();buildLearn();updateProgressBar();
+
 </script>
 </body>
 </html>
