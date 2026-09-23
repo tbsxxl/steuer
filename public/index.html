@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Steuerrecht Intensivkurs · Lernapp 2026</title>
+<meta name="description" content="Steuerrecht von Grund auf: 31 Lektionen, Wissenschecks, Rechentrainer und Übungsfälle zur Vorbereitung auf den 13-Tage-Intensivkurs (Veranlagungsjahr 2026).">
+<meta name="theme-color" content="#f5f3ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f141a" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Steuerrecht Intensivkurs · Lernapp 2026">
+<meta property="og:description" content="Lektionen, Quiz, Rechentrainer und Übungsfälle – Veranlagungsjahr 2026.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/icons/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/icons/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/fonts/plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="modulepreload" href="/js/data.js">
+<link rel="stylesheet" href="/css/app.css">
+<script src="/js/theme.js"></script>
+<script type="module" src="/js/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+<div class="app">
+  <aside class="sidebar" id="sidebar" aria-label="Kursnavigation">
+    <div class="brand">
+      <a href="#/">
+        <div class="brand-org">Steuerberaterverband<br>Niedersachsen Sachsen-Anhalt e.V.</div>
+        <div class="brand-title">Steuerrecht<br>Intensivkurs</div>
+        <div class="brand-sub">Einstiegskurs für Hochschulabsolventen · 2026</div>
+      </a>
+      <div class="side-progress">
+        <div class="row"><span>Lernfortschritt</span><span id="sideProgressPct">0 %</span></div>
+        <div class="bar"><i id="sideProgressBar"></i></div>
+      </div>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div class="nav-tools" id="navTools"></div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <div class="main-col">
+    <header class="topbar">
+      <button class="iconbtn menubtn" id="menuBtn" type="button" aria-label="Navigation öffnen" aria-controls="sidebar" aria-expanded="false">☰</button>
+      <div class="search" role="search">
+        <span class="glass" aria-hidden="true">⌕</span>
+        <label class="vh" for="searchInput">Suche in allen Lektionen, im Glossar und in den Paragrafen</label>
+        <input id="searchInput" type="search" placeholder="Suchen: GWG, Kleinunternehmer, Zinsschranke …" autocomplete="off" enterkeyhint="search">
+        <kbd aria-hidden="true">/</kbd>
+      </div>
+      <div class="spacer"></div>
+      <button class="iconbtn" id="themeBtn" type="button" aria-label="Dunkles Design einschalten">☾</button>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <noscript><p>Bitte JavaScript aktivieren, um die Lernapp zu nutzen.</p></noscript>
+    </main>
+
+    <footer class="foot">
+      <div class="inner">
+        <p><b>Steuerberaterverband Niedersachsen Sachsen-Anhalt e.V.</b> · Lern- &amp; Übungsplattform</p>
+        <p>Diese App dient der Vorbereitung und Wissensvermittlung. Alle Werte beziehen sich auf das Veranlagungsjahr 2026 (u. a. Grundfreibetrag 12.348 €, GWG-Grenze 800 € netto, Kleinunternehmer 25.000 €/100.000 €, Restaurant-USt 7 %, Entfernungspauschale 0,38 € ab dem ersten Kilometer). Steuerrecht ändert sich laufend – im Zweifel die jeweils gültige Gesetzesfassung und BMF-Schreiben prüfen. Keine Steuerberatung im Einzelfall.</p>
+        <p>Dein Lernfortschritt wird nur lokal in diesem Browser gespeichert. Über Export/Import kannst du ihn auf ein anderes Gerät mitnehmen.</p>
+        <div class="btnrow">
+          <button class="btn sec small" type="button" data-action="export">Fortschritt exportieren</button>
+          <label class="btn sec small">Fortschritt importieren<input type="file" id="importFile" accept="application/json,.json" hidden></label>
+          <button class="btn ghost small" type="button" data-action="reset">Fortschritt zurücksetzen</button>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

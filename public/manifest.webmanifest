@@ -1,0 +1,17 @@
+{
+  "name": "Steuerrecht Intensivkurs 2026",
+  "short_name": "Steuerkurs",
+  "description": "Lektionen, Quiz, Rechentrainer und Übungsfälle zur Vorbereitung auf den Steuerrecht-Intensivkurs (Veranlagungsjahr 2026).",
+  "lang": "de",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f5f3ee",
+  "theme_color": "#2D4059",
+  "icons": [
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
