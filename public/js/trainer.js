@@ -2,6 +2,19 @@
 
 export function ri(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
 export function fmt(n){return n.toLocaleString('de-DE');}
+// Einkommensteuertarif 2026 (§ 32a EStG), Grundtabelle
+export function est2026(zve){const x=Math.floor(zve);if(x<=12348)return 0;if(x<=17799){const y=(x-12348)/1e4;return Math.floor((914.51*y+1400)*y);}if(x<=69878){const z=(x-17799)/1e4;return Math.floor((173.10*z+2397)*z+1034.87);}if(x<=277825)return Math.floor(0.42*x-11135.63);return Math.floor(0.45*x-19470.38);}
+const eur=n=>n.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2});
+// Zumutbare Belastung (§ 33 Abs. 3 EStG), stufenweise
+export function zumutbar(gde,typ){const s={ledig:[5,6,7],paar:[4,5,6],k12:[2,3,4],k3:[1,1,2]}[typ];const st=[[0,15340],[15340,51130],[51130,Infinity]];return Math.round(st.reduce((a,[u,o],i)=>a+Math.max(0,Math.min(gde,o)-u)*s[i]/100,0)*100)/100;}
+// Gesetzliche Feiertage Niedersachsen
+function ostern(j){const a=j%19,b=Math.floor(j/100),c=j%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),t=((h+l-7*m+114)%31)+1;return new Date(Date.UTC(j,mo-1,t));}
+const addD=(d,n)=>new Date(d.getTime()+n*864e5);
+function feiertag(d){const j=d.getUTCFullYear(),o=ostern(j),key=x=>x.toISOString().slice(0,10);const fix=['01-01','05-01','10-03','10-31','12-25','12-26'].map(x=>`${j}-${x}`);const bew=[-2,1,39,50].map(n=>key(addD(o,n)));return fix.concat(bew).includes(key(d));}
+const werktag=d=>{while(d.getUTCDay()===0||d.getUTCDay()===6||feiertag(d))d=addD(d,1);return d;};
+const dstr=d=>d.toLocaleDateString('de-DE',{weekday:'short',day:'2-digit',month:'2-digit',year:'numeric',timeZone:'UTC'});
+function plusMonat(d){const j=d.getUTCFullYear(),m=d.getUTCMonth()+1,t=d.getUTCDate();const last=new Date(Date.UTC(j,m+1,0)).getUTCDate();return new Date(Date.UTC(j,m,Math.min(t,last)));}
+
 export const GENERATORS = {
   0:[ // Rechnungswesen
     {title:"AfA berechnen",level:"linear, Monatsregel",
@@ -30,6 +43,18 @@ export const GENERATORS = {
        a:`Verkaufspreis = ${fmt(ek)} × ${(100+auf)}/100 = ${fmt(vk)} €. Rohgewinn = ${fmt(vk)} − ${fmt(ek)} = <span class="genres">${fmt(rg)} €</span>`
      };}}
   ],
+  1:[ // Abgabenordnung
+    {title:"Einspruchsfrist berechnen",level:"§§ 108, 122, 355 AO · Niedersachsen",
+     make:()=>{const auf=new Date(Date.UTC(2026,ri(0,11),ri(1,28)));const fikt=addD(auf,4);const bek=werktag(new Date(fikt));const roh=plusMonat(bek);const ende=werktag(new Date(roh));return{
+       q:`Ein Steuerbescheid wird am <b>${dstr(auf)}</b> mit einfachem Brief zur Post gegeben. Wann endet die Einspruchsfrist? (Feiertage Niedersachsen)`,
+       a:`Bekanntgabe: vierter Tag nach Aufgabe zur Post = ${dstr(fikt)}${+bek!==+fikt?`, fällt auf Wochenende/Feiertag → nächster Werktag ${dstr(bek)}`:''} (§ 122 Abs. 2 Nr. 1 AO). Ein Monat später: ${dstr(roh)}${+ende!==+roh?` — Wochenende/Feiertag → ${dstr(ende)}`:''} (§ 108 Abs. 3 AO). <span class="genres">Fristende ${dstr(ende)}, 24 Uhr</span>`
+     };}},
+    {title:"Festsetzungsfrist berechnen",level:"§§ 169, 170 AO",
+     make:()=>{const y=ri(2018,2023);const abg=ri(0,4);const ab=abg===0?null:y+abg;const beginn=Math.min(ab??Infinity,y+3);const ende=beginn+4;return{
+       q:`Einkommensteuer ${y} (Pflichtveranlagung). Die Erklärung wurde ${ab?`im Jahr <b>${ab}</b> abgegeben`:`<b>nie</b> abgegeben`}. Wann endet die reguläre Festsetzungsfrist (keine Hinterziehung, keine Ablaufhemmung)?`,
+       a:`Steuer entsteht mit Ablauf ${y}. Anlaufhemmung (§ 170 Abs. 2 Nr. 1): Fristbeginn mit Ablauf des Abgabejahres, spätestens nach drei Jahren → Beginn mit Ablauf <b>${beginn}</b>${ab&&ab>y+3?` (Abgabe ${ab} ist später als die Höchstdauer)`:''}. Plus vier Jahre (§ 169 Abs. 2 Nr. 2). <span class="genres">Fristende 31.12.${ende}</span>`
+     };}},
+  ],
   4:[ // GewSt/KSt
     {title:"Gewerbesteuer berechnen",level:"GmbH",
      make:()=>{const g=ri(80,300)*1000;const hs=[350,400,450,470][ri(0,3)];const mb=Math.round(g*0.035);const gs=Math.round(mb*hs/100);return{
@@ -42,9 +67,9 @@ export const GENERATORS = {
        a:`KSt = ${fmt(zve)} × 15 % = ${fmt(kst)} €. SolZ = ${fmt(kst)} × 5,5 % = ${fmt(sol)} €. Gesamt = <span class="genres">${fmt(kst+sol)} €</span> (effektiv 15,825 %)`
      };}},
     {title:"GewSt Einzelunternehmen mit Freibetrag",level:"§ 35 Anrechnung",
-     make:()=>{const g=ri(40,120)*1000;const hs=[380,400,420][ri(0,2)];const nachFB=Math.max(0,g-24500);const mb=Math.round(nachFB*0.035);const gs=Math.round(mb*hs/100);const anr=Math.round(mb*4.0);return{
+     make:()=>{const g=ri(40,120)*1000;const hs=[360,380,400,450,480][ri(0,4)];const nachFB=Math.max(0,g-24500);const mb=Math.round(nachFB*0.035);const gs=Math.round(mb*hs/100);const anr=Math.min(Math.round(mb*4.0),gs);const ueb=gs-anr;return{
        q:`Einzelunternehmen, Gewerbeertrag <b>${fmt(g)} €</b>, Hebesatz <b>${hs} %</b>. Wie hoch ist die Gewerbesteuer (nach Freibetrag 24.500 €)?`,
-       a:`Nach Freibetrag: ${fmt(g)} − 24.500 = ${fmt(nachFB)} €. Messbetrag × 3,5 % = ${fmt(mb)} €. GewSt = ${fmt(mb)} × ${hs} % = <span class="genres">${fmt(gs)} €</span>. § 35 EStG rechnet 4,0 × ${fmt(mb)} = ${fmt(anr)} € auf die ESt an → GewSt weitgehend neutralisiert.`
+       a:`Nach Freibetrag: ${fmt(g)} − 24.500 = ${fmt(nachFB)} €. Messbetrag × 3,5 % = ${fmt(mb)} €. GewSt = ${fmt(mb)} × ${hs} % = <span class="genres">${fmt(gs)} €</span>. § 35 EStG ermäßigt die ESt um 4,0 × ${fmt(mb)} €, höchstens um die tatsächliche GewSt → ${fmt(anr)} €. ${ueb>0?`Überhang ${fmt(ueb)} € bleibt echte Belastung (Hebesatz über 400 %).`:`Die GewSt wird damit voll angerechnet, soweit genügend tarifliche ESt auf die gewerblichen Einkünfte entfällt.`}`
      };}},
     {title:"Gesamtbelastung Ausschüttung",level:"anspruchsvoll",
      make:()=>{const g=ri(60,200)*1000;const hs=400;const gewst=Math.round(g*0.14);const kst=Math.round(g*0.15825);const nach=g-gewst-kst;const ausst=Math.round(nach*0.26375);const netto=nach-ausst;const last=Math.round((gewst+kst+ausst)/g*1000)/10;return{
@@ -68,6 +93,26 @@ export const GENERATORS = {
        q:`Ehepaar: Partner A verdient <b>${fmt(a)} €</b> zvE, Partner B <b>${fmt(b)} €</b>. Auf welches Einkommen wird beim Splitting der Tarif angewendet (Splitting-Grundlage)?`,
        a:`Gemeinsames zvE = ${fmt(a)} + ${fmt(b)} = ${fmt(a+b)} €. Halbiert: <span class="genres">${fmt(halb)} €</span> — auf diese Hälfte wird der Tarif angewendet, das Ergebnis dann verdoppelt. Vorteil ist umso größer, je ungleicher die Einkommen.`
      };}},
+    {title:"Einkommensteuer 2026 nach Tarif",level:"§ 32a · Grund- und Splittingtarif",
+     make:()=>{const zve=ri(15,180)*1000+ri(0,9)*100;const split=ri(0,1)===1;const st=split?2*est2026(zve/2):est2026(zve);const gr=((split?2*est2026((zve+100)/2):est2026(zve+100))-st);return{
+       q:`Zu versteuerndes Einkommen <b>${fmt(zve)} €</b>, ${split?'<b>Zusammenveranlagung</b> (Splitting)':'<b>Einzelveranlagung</b> (Grundtarif)'}. Wie hoch sind tarifliche ESt 2026, Durchschnitts- und Grenzsteuersatz?`,
+       a:`${split?`Splitting: ESt auf ${fmt(zve/2)} € = ${fmt(est2026(zve/2))} € × 2. `:''}Tarifliche ESt <span class="genres">${fmt(st)} €</span>. Durchschnittssatz ${fmt(Math.round(st/zve*1000)/10)} %, Grenzsteuersatz ≈ ${gr} % (Steuer auf die nächsten 100 €).${split?` Zum Vergleich ohne Splitting: ${fmt(est2026(zve))} €.`:''}`
+     };}},
+    {title:"Zumutbare Belastung",level:"§ 33 Abs. 3 · stufenweise",
+     make:()=>{const gde=ri(20,120)*1000;const typ=['ledig','paar','k12','k3'][ri(0,3)];const txt={ledig:'ledig, ohne Kinder',paar:'Ehepaar, ohne Kinder',k12:'Ehepaar mit zwei Kindern',k3:'Ehepaar mit drei Kindern'}[typ];const kost=ri(2,8)*500;const zb=zumutbar(gde,typ);const ab=Math.max(0,Math.round((kost-zb)*100)/100);return{
+       q:`${txt}, Gesamtbetrag der Einkünfte <b>${fmt(gde)} €</b>, selbst getragene Krankheitskosten <b>${fmt(kost)} €</b>. Wie hoch ist die zumutbare Belastung, wie viel ist abziehbar?`,
+       a:`Stufen bis 15.340 € / bis 51.130 € / darüber, jeweils nur für den Teil des GdE in der Stufe. Zumutbare Belastung <b>${eur(zb)} €</b>. Abziehbar: ${fmt(kost)} − ${eur(zb)} = <span class="genres">${eur(ab)} €</span>`
+     };}},
+    {title:"Unterhalt an Angehörige",level:"§ 33a Abs. 1 · 2026",
+     make:()=>{const zahl=ri(3,12)*100;const eink=ri(0,10)*1000;const kv=ri(0,1)?0:ri(10,25)*100;const hb=12348+kv;const anr=Math.max(0,eink-624);const max=Math.max(0,hb-anr);const ab=Math.min(zahl*12,max);return{
+       q:`Ein Sohn überweist seiner bedürftigen Mutter monatlich <b>${fmt(zahl)} €</b>${kv?` und trägt ihre Basis-Kranken- und Pflegeversicherung von <b>${fmt(kv)} €</b> im Jahr`:''}. Ihre eigenen Einkünfte und Bezüge betragen <b>${fmt(eink)} €</b>. Wie viel ist 2026 abziehbar?`,
+       a:`Höchstbetrag 12.348 €${kv?` + ${fmt(kv)} € KV/PV = ${fmt(hb)} €`:''}. Anrechnung eigener Einkünfte über 624 €: ${fmt(anr)} € → gekürzter Höchstbetrag ${fmt(max)} €. Aufwendungen ${fmt(zahl*12)} €. <span class="genres">abziehbar ${fmt(ab)} €</span> (ohne zumutbare Belastung)`
+     };}},
+    {title:"Bewirtungskosten",level:"§ 4 Abs. 5 Nr. 2 · 70 %",
+     make:()=>{const netto=ri(8,60)*10;const ust=Math.round(netto*19)/100;const ba=Math.round(netto*70)/100;return{
+       q:`Geschäftsessen mit zwei Kunden, Rechnung <b>${fmt(netto)} €</b> netto zzgl. 19 % USt (Speisen und Getränke vereinfacht zu 19 %). Was ist als Betriebsausgabe und als Vorsteuer abziehbar?`,
+       a:`Betriebsausgabe 70 % von ${fmt(netto)} € = <span class="genres">${eur(ba)} €</span>; nicht abziehbar ${eur(netto-ba)} € (außerbilanziell hinzurechnen). Vorsteuer ${eur(ust)} € voll abziehbar — ordnungsgemäßer Bewirtungsbeleg vorausgesetzt.`
+     };}},
     {title:"Abschreibung Immobilie (V+V)",level:"§ 7 Abs. 4",
      make:()=>{const kauf=ri(200,500)*1000;const grund=Math.round(kauf*ri(20,35)/100);const geb=kauf-grund;const afa=Math.round(geb*0.02);return{
        q:`Vermietete Immobilie: Kaufpreis <b>${fmt(kauf)} €</b>, davon Grundanteil <b>${fmt(grund)} €</b>. Wie hoch ist die jährliche Gebäude-AfA (2 %)?`,
@@ -88,9 +133,11 @@ export const GENERATORS = {
   ],
   5:[ // Umsatzsteuer
     {title:"Kleinunternehmer prüfen",level:"§ 19 · 2026",
-     make:()=>{const vj=ri(15,35)*1000;const lj=ri(40,120)*1000;const ok=vj<=25000&&lj<=100000;return{
-       q:`Vorjahresumsatz <b>${fmt(vj)} €</b>, laufendes Jahr voraussichtlich <b>${fmt(lj)} €</b>. Kann die Kleinunternehmerregelung genutzt werden? (2026)`,
-       a:ok?`<b>Ja.</b> Vorjahr ${fmt(vj)} ≤ 25.000 € und laufendes Jahr ${fmt(lj)} ≤ 100.000 €. <span class="genres">Kleinunternehmer möglich</span>`:`<b>Nein.</b> ${vj>25000?`Vorjahr ${fmt(vj)} € > 25.000 €`:`laufendes Jahr ${fmt(lj)} € > 100.000 €`} → Regelbesteuerung. <span class="genres">keine KU-Regelung</span>`
+     make:()=>{const vj=ri(15,35)*1000;const lj=ri(40,120)*1000;return{
+       q:`Vorjahresumsatz <b>${fmt(vj)} €</b>, Umsatz im laufenden Jahr 2026 tatsächlich <b>${fmt(lj)} €</b>. Gilt die Kleinunternehmerregelung?`,
+       a:vj>25000?`<b>Nein.</b> Vorjahr ${fmt(vj)} € > 25.000 € → von Jahresbeginn an Regelbesteuerung. <span class="genres">keine KU-Regelung</span>`
+        :lj<=100000?`<b>Ja.</b> Vorjahr ${fmt(vj)} € ≤ 25.000 € und laufendes Jahr ${fmt(lj)} € ≤ 100.000 €. <span class="genres">Kleinunternehmer (steuerfrei nach § 19)</span>`
+        :`<b>Zunächst ja.</b> Vorjahr ≤ 25.000 €, aber im laufenden Jahr werden 100.000 € überschritten: Ab dem Umsatz, mit dem die Grenze überschritten wird, gilt <b>sofort</b> die Regelbesteuerung (seit 2025). <span class="genres">KU bis zur Grenze, danach regelbesteuert</span>`
      };}},
     {title:"USt herausrechnen (brutto→netto)",level:"Steuersatz",
      make:()=>{const brutto=ri(50,500)*10;const satz=[19,7][ri(0,1)];const netto=Math.round(brutto/(1+satz/100)*100)/100;const ust=Math.round((brutto-netto)*100)/100;return{

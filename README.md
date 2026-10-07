@@ -1,7 +1,7 @@
 # Steuerrecht Intensivkurs – Lernapp 2026
 
 Lern- und Übungsplattform zur Vorbereitung auf den 13-Tage-Intensivkurs Steuerrecht
-(Veranlagungsjahr 2026): 6 Module, 31 Lektionen, 70 Quizfragen, Übungsfälle,
+(Veranlagungsjahr 2026): 6 Module, 53 Lektionen, 136 Quizfragen, 46 Übungsfälle,
 Rechentrainer mit Zufallszahlen, Glossar und Paragrafensammlung.
 
 Läuft auf **Cloudflare Workers** als reine statische Seite – kein Server-Code, keine Datenbank.
@@ -34,6 +34,8 @@ wrangler.jsonc          Cloudflare-Konfiguration
 ```
 
 Inhalte ändern: nur `public/js/data.js` bearbeiten, danach `npm run check`.
+Jede Lektion hat eine feste `id` — der Lernfortschritt hängt daran. IDs nie ändern
+oder wiederverwenden; neue Lektionen bekommen eine neue, sprechende ID.
 Nach größeren Änderungen an Dateinamen in `public/sw.js` die Cache-Version (`CACHE`) erhöhen.
 
 ## Lokal starten

@@ -66,13 +66,21 @@ function toast(msg) {
    Fortschritt (nur lokal im Browser)
    ========================================================= */
 const PROGRESS_KEY = "stb_progress";
-function emptyProgress() { return { read: {}, quiz: {}, wrong: {}, cards: {}, test: null, last: null }; }
+function emptyProgress() { return { v: 2, read: {}, quiz: {}, wrong: {}, cards: {}, test: null, last: null }; }
+// Lektionen werden über stabile IDs gespeichert. Ältere Stände (v1) speicherten
+// „Modul-Lektion“ als Position; deren Positionen entsprechen den IDs „m{Modul}l{Lektion}“.
+const legacyId = key => { const m = /^(\d+)-(\d+)$/.exec(key); return m ? `m${m[1]}l${m[2]}` : key; };
 function normalizeProgress(p) {
   const base = emptyProgress();
   if (!p || typeof p !== "object") return base;
   for (const k of ["read", "quiz", "wrong", "cards"]) if (p[k] && typeof p[k] === "object") base[k] = p[k];
   if (p.test && typeof p.test === "object") base.test = p.test;
   if (p.last && typeof p.last === "object") base.last = p.last;
+  if (p.v !== 2) {
+    base.read = Object.fromEntries(Object.keys(base.read).map(k => [legacyId(k), 1]));
+    if (base.last && Number.isInteger(base.last.mi)) base.last = { id: `m${base.last.mi}l${base.last.li}` };
+  }
+  if (base.last && typeof base.last.id !== "string") base.last = null;
   return base;
 }
 let progress = (() => {
@@ -82,7 +90,9 @@ function saveProgress() {
   try { localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress)); } catch (e) { /* privater Modus */ }
   updateChrome();
 }
-const isRead = (mi, li) => !!progress.read[`${mi}-${li}`];
+const LESSON_POS = new Map(DATA.flatMap((m, mi) => m.lessons.map((l, li) => [l.id, { mi, li }])));
+const lessonId = (mi, li) => DATA[mi].lessons[li].id;
+const isRead = (mi, li) => !!progress.read[lessonId(mi, li)];
 function moduleStats(mi) {
   const m = DATA[mi];
   const read = m.lessons.filter((_, li) => isRead(mi, li)).length;
@@ -90,12 +100,13 @@ function moduleStats(mi) {
   return { read, total: m.lessons.length, quiz, done: read === m.lessons.length && (quiz || 0) >= 60 };
 }
 function overallPct() {
-  const readL = Object.keys(progress.read).length;
+  const readL = Object.keys(progress.read).filter(id => LESSON_POS.has(id)).length;
   const quizDone = DATA.filter((_, mi) => (progress.quiz[mi] || 0) > 0).length;
   return Math.min(100, Math.round((readL + quizDone) / (TOTAL_LESSONS + DATA.length) * 100));
 }
 function nextLesson() {
-  if (progress.last && DATA[progress.last.mi] && !isRead(progress.last.mi, progress.last.li)) return progress.last;
+  const last = progress.last && LESSON_POS.get(progress.last.id);
+  if (last && !isRead(last.mi, last.li)) return last;
   for (let mi = 0; mi < DATA.length; mi++)
     for (let li = 0; li < DATA[mi].lessons.length; li++)
       if (!isRead(mi, li)) return { mi, li };
@@ -239,7 +250,7 @@ function courseStatus() {
 function viewHome() {
   const status = courseStatus();
   const pct = overallPct();
-  const readCount = Object.keys(progress.read).length;
+  const readCount = Object.keys(progress.read).filter(id => LESSON_POS.has(id)).length;
   const quizVals = Object.values(progress.quiz).filter(v => typeof v === "number");
   const quizAvg = quizVals.length ? Math.round(quizVals.reduce((a, b) => a + b, 0) / quizVals.length) : null;
   const wrong = wrongKeys().length;
@@ -358,7 +369,7 @@ function lessonBody(l) {
 
 function viewLesson({ mi, li }) {
   const m = DATA[mi], l = m.lessons[li];
-  progress.last = { mi, li };
+  progress.last = { id: l.id };
   try { localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress)); } catch (e) {}
   const rd = isRead(mi, li);
   const prev = li > 0 ? { hash: `#/m/${mi}/l/${li - 1}`, t: m.lessons[li - 1].t, label: "Vorherige Lektion" }
@@ -374,7 +385,7 @@ function viewLesson({ mi, li }) {
     <div class="lesson-foot">
       <button type="button" class="btn sec readtoggle" data-action="toggle-read" data-mi="${mi}" data-li="${li}" aria-pressed="${rd}">${rd ? "✓ Gelesen" : "Als gelesen markieren"}</button>
       <span class="spacer"></span>
-      <a class="btn" href="${next.hash}" data-markread="${mi}-${li}">${li < m.lessons.length - 1 ? "Gelesen &amp; weiter →" : "Zum Wissenscheck →"}</a>
+      <a class="btn" href="${next.hash}" data-markread="${l.id}">${li < m.lessons.length - 1 ? "Gelesen &amp; weiter →" : "Zum Wissenscheck →"}</a>
     </div>
     <nav class="pager" aria-label="Lektionen blättern">
       ${prev ? `<a class="prev" href="${prev.hash}"><small>← ${prev.label}</small><b>${prev.t}</b></a>` : ""}
@@ -786,14 +797,14 @@ function onSearchInput(e) {
    Aktionen (Event-Delegation – kein Inline-JavaScript)
    ========================================================= */
 function setRead(mi, li, value) {
-  const k = `${mi}-${li}`;
+  const k = lessonId(mi, li);
   if (value) progress.read[k] = 1; else delete progress.read[k];
   saveProgress();
 }
 
 document.addEventListener("click", e => {
   const markLink = e.target.closest("[data-markread]");
-  if (markLink) { const [mi, li] = markLink.dataset.markread.split("-").map(Number); if (!isRead(mi, li)) setRead(mi, li, true); }
+  if (markLink) { const pos = LESSON_POS.get(markLink.dataset.markread); if (pos && !isRead(pos.mi, pos.li)) setRead(pos.mi, pos.li, true); }
 
   const el = e.target.closest("[data-action]");
   if (!el) return;
