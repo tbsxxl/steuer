@@ -145,6 +145,7 @@ function renderNav() {
         const cur = route.name === "lesson" && route.li === li;
         h += `<a href="#/m/${mi}/l/${li}" class="${isRead(mi, li) ? "read" : ""}"${cur ? ` aria-current="page"` : ""}><span class="tick">${isRead(mi, li) ? "✓" : li + 1}</span><span>${l.t}</span></a>`;
       });
+      h += `<a class="sp" href="#/m/${mi}/einfach"${route.name === "easy" ? ` aria-current="page"` : ""}><span class="tick">☺</span><span>Einfach erklärt</span></a>`;
       h += `<a class="sp" href="#/m/${mi}/quiz"${route.name === "quiz" ? ` aria-current="page"` : ""}><span class="tick">◆</span><span>Wissenscheck · ${m.quiz.length} Fragen</span></a>`;
       h += `<a class="sp" href="#/m/${mi}/ueben"${route.name === "drill" ? ` aria-current="page"` : ""}><span class="tick">✎</span><span>Üben · Fälle &amp; Rechentrainer</span></a>`;
       h += `</div>`;
@@ -188,6 +189,7 @@ function parseRoute() {
       if (Number.isInteger(li) && li >= 0 && li < DATA[mi].lessons.length) return { name: "lesson", mi, li };
       return { name: "module", mi };
     }
+    if (parts[2] === "einfach") return { name: "easy", mi };
     if (parts[2] === "quiz") return { name: "quiz", mi };
     if (parts[2] === "ueben") return { name: "drill", mi };
     return { name: "module", mi };
@@ -202,7 +204,7 @@ function parseRoute() {
 }
 
 const VIEWS = {
-  home: viewHome, module: viewModule, lesson: viewLesson, quiz: viewQuiz, drill: viewDrill,
+  home: viewHome, module: viewModule, easy: viewEasy, lesson: viewLesson, quiz: viewQuiz, drill: viewDrill,
   test: viewQuiz, review: viewQuiz, cards: viewCards, ref: viewRef, print: viewPrint, search: viewSearch,
 };
 
@@ -329,6 +331,7 @@ function moduleHeader(mi, active) {
     <p class="lead">${m.lead}</p>
     <nav class="tabs" aria-label="Bereiche des Moduls">
       ${tab(`#/m/${mi}`, "learn", "Lektionen", m.lessons.length)}
+      ${tab(`#/m/${mi}/einfach`, "easy", "Einfach erklärt", m.lessons.length)}
       ${tab(`#/m/${mi}/quiz`, "quiz", "Wissenscheck", m.quiz.length)}
       ${tab(`#/m/${mi}/ueben`, "drill", "Üben", (m.drills || []).length + (GENERATORS[mi] || []).length)}
     </nav>`;
@@ -348,11 +351,29 @@ function viewModule({ mi }) {
   return { title: m.label, html: h };
 }
 
+// „Einfach erklärt“: Erklärung in Alltagssprache, Bild aus dem Alltag, Merksatz
+function easyBox(l, title = "") {
+  if (!l.easy) return "";
+  return `<div class="callout c-easy"><div class="ctag">Einfach erklärt</div>${title}<p>${l.easy.p}</p>`
+    + `<p class="easy-bild"><b>Stell dir vor:</b> ${l.easy.bild}</p>`
+    + `<p class="easy-merk"><b>Merksatz:</b> ${l.easy.merk}</p></div>`;
+}
+
+function viewEasy({ mi }) {
+  const m = DATA[mi];
+  let h = moduleHeader(mi, "easy")
+    + `<p class="easy-lead">Jede Lektion in wenigen Sätzen, ohne Fachsprache — zum Einstieg oder zum schnellen Wiederholen. Die ausführliche Fassung steht in der jeweiligen Lektion.</p>`;
+  m.lessons.forEach((l, li) => {
+    h += easyBox(l, `<h3 class="easy-t"><a href="#/m/${mi}/l/${li}">${li + 1}. ${l.t}</a></h3>`);
+  });
+  return { title: `Einfach erklärt · ${m.label}`, html: h };
+}
+
 /* =========================================================
    Lektion
    ========================================================= */
 function lessonBody(l) {
-  let h = `<p class="intro">${l.intro}</p><div class="blocks">`;
+  let h = `<p class="intro">${l.intro}</p>${easyBox(l)}<div class="blocks">`;
   l.blocks.forEach(b => { h += `<section class="block"><h3>${b.h}</h3><p>${b.p}</p></section>`; });
   h += `</div>`;
   if (l.figs) {
@@ -730,7 +751,8 @@ const SEARCH_INDEX = (() => {
   const idx = [];
   DATA.forEach((m, mi) => m.lessons.forEach((l, li) => {
     const body = strip([l.intro, ...l.blocks.map(b => b.p), l.ex, l.warn].join(" "));
-    const hay = [l.t, l.s, body, l.blocks.map(b => b.h).join(" "), (l.laws || []).join(" "), l.figs ? l.figs.rows.flat().join(" ") : "", strip(l.vis)].join(" ").toLowerCase();
+    const easyText = l.easy ? strip([l.easy.p, l.easy.bild, l.easy.merk].join(" ")) : "";
+    const hay = [l.t, easyText, l.s, body, l.blocks.map(b => b.h).join(" "), (l.laws || []).join(" "), l.figs ? l.figs.rows.flat().join(" ") : "", strip(l.vis)].join(" ").toLowerCase();
     idx.push({ type: "lesson", hash: `#/m/${mi}/l/${li}`, mod: `Modul ${m.n} · ${m.label}`, title: strip(l.t), body, hay });
   }));
   DATA.forEach((m, mi) => (m.drills || []).forEach(d => {

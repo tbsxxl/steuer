@@ -1,7 +1,7 @@
 /* Offline-Unterstützung: Die App lädt nach dem ersten Besuch auch ohne Netz.
    HTML/JS/CSS: zuerst Netz (Updates sofort sichtbar), bei Offline aus dem Cache.
    Schriften und Icons: zuerst Cache (ändern sich nie). */
-const CACHE = "steuerkurs-v2";
+const CACHE = "steuerkurs-v3";
 const SHELL = [
   "/", "/css/app.css", "/js/theme.js", "/js/app.js", "/js/data.js", "/js/trainer.js",
   "/manifest.webmanifest", "/icons/icon.svg", "/icons/icon-192.png",
