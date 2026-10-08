@@ -17,6 +17,7 @@ DATA.forEach((m, mi) => {
     else lessonIds.add(l.id);
     for (const k of ["t", "s", "intro"]) if (!l[k]) fail(`Lektion ${mi}-${li}: Feld ${k} fehlt`);
     if (!Array.isArray(l.blocks) || !l.blocks.length) fail(`Lektion ${mi}-${li}: keine Blöcke`);
+    if (!l.easy || !l.easy.p || !l.easy.bild || !l.easy.merk) fail(`Lektion ${mi}-${li}: „Einfach erklärt“ fehlt oder ist unvollständig`);
     if (!Array.isArray(l.laws)) fail(`Lektion ${mi}-${li}: laws fehlt`);
   });
   m.quiz.forEach((q, qi) => {
