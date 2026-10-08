@@ -351,10 +351,38 @@ function viewModule({ mi }) {
   return { title: m.label, html: h };
 }
 
+/* Herkunft der Inhalte: q = aus den Kursunterlagen, m = Unterlagen + Ergänzung, e = Ergänzung.
+   Seitenangaben beziehen sich auf die Seitenzahl im PDF. */
+const SRC_LABEL = { q: "Kursunterlage", m: "Unterlage + Ergänzung", e: "Ergänzung" };
+const SRC_HINT = {
+  q: "Inhalt stammt aus den Kursunterlagen (eigene Formulierung).",
+  m: "Kern aus den Kursunterlagen, um weitere Details ergänzt.",
+  e: "Nicht in den Kursunterlagen enthalten – zusätzliche Information.",
+};
+function srcChip(src) {
+  if (!src) return "";
+  const where = src.d ? ` · ${esc(src.d)}, S. ${src.s}` : "";
+  return `<span class="src src-${src.k}" title="${SRC_HINT[src.k]}">${SRC_LABEL[src.k]}${where}</span>`;
+}
+function hideExtras() { try { return localStorage.getItem("stb_hide_extra") === "1"; } catch (e) { return false; } }
+function applyHideExtras() { document.documentElement.classList.toggle("hide-extra", hideExtras()); }
+applyHideExtras();
+function lessonSources(l) {
+  const all = [...l.blocks.map(b => b.src), ...Object.values(l.srcs || {})].filter(Boolean);
+  const byDoc = new Map();
+  all.forEach(s => { if (s.d) { if (!byDoc.has(s.d)) byDoc.set(s.d, new Set()); byDoc.get(s.d).add(s.s); } });
+  const extra = all.filter(s => s.k === "e").length;
+  let h = `<div class="srcbox"><div class="eyebrow">Quellen dieser Lektion</div>`;
+  if (byDoc.size) h += `<ul>${[...byDoc].map(([d, pages]) => `<li><b>${esc(d)}</b>, S. ${[...pages].sort((a, b) => a - b).join(", ")}</li>`).join("")}</ul>`;
+  else h += `<p>Diese Lektion stützt sich nicht direkt auf die Kursunterlagen.</p>`;
+  h += `<p class="muted">${extra ? `${extra} Abschnitt${extra > 1 ? "e" : ""} als „Ergänzung“ markiert (nicht aus den Unterlagen). ` : ""}<a href="#/glossar/herkunft">Wie die Kennzeichnung funktioniert</a></p></div>`;
+  return h;
+}
+
 // „Einfach erklärt“: Erklärung in Alltagssprache, Bild aus dem Alltag, Merksatz
 function easyBox(l, title = "") {
   if (!l.easy) return "";
-  return `<div class="callout c-easy"><div class="ctag">Einfach erklärt</div>${title}<p>${l.easy.p}</p>`
+  return `<div class="callout c-easy"><div class="ctag">Einfach erklärt <span class="ctag-note">· eigene Vereinfachung</span></div>${title}<p>${l.easy.p}</p>`
     + `<p class="easy-bild"><b>Stell dir vor:</b> ${l.easy.bild}</p>`
     + `<p class="easy-merk"><b>Merksatz:</b> ${l.easy.merk}</p></div>`;
 }
@@ -373,18 +401,20 @@ function viewEasy({ mi }) {
    Lektion
    ========================================================= */
 function lessonBody(l) {
+  const sr = l.srcs || {};
   let h = `<p class="intro">${l.intro}</p>${easyBox(l)}<div class="blocks">`;
-  l.blocks.forEach(b => { h += `<section class="block"><h3>${b.h}</h3><p>${b.p}</p></section>`; });
+  l.blocks.forEach(b => { h += `<section class="block" data-src="${b.src ? b.src.k : ""}"><h3>${b.h}</h3>${srcChip(b.src)}<p>${b.p}</p></section>`; });
   h += `</div>`;
   if (l.figs) {
     h += `<table class="figtable"><thead><tr><th colspan="2">${l.figs.title}</th></tr></thead><tbody>`;
     l.figs.rows.forEach(r => { h += `<tr><td>${r[0]}</td><td class="v">${r[1]}</td></tr>`; });
-    h += `</tbody></table>`;
+    h += `</tbody></table>${srcChip(sr.figs)}`;
   }
-  if (l.vis) h += l.vis;
-  if (l.ex) h += `<div class="callout c-ex"><div class="ctag">Praxisbeispiel</div><p>${l.ex}</p></div>`;
-  if (l.warn) h += `<div class="callout c-warn"><div class="ctag">Stolperfalle</div><p>${l.warn}</p></div>`;
+  if (l.vis) h += `<div class="vis-wrap" data-src="${sr.vis ? sr.vis.k : ""}">${l.vis}${srcChip(sr.vis)}</div>`;
+  if (l.ex) h += `<div class="callout c-ex" data-src="${sr.ex ? sr.ex.k : ""}"><div class="ctag">Praxisbeispiel</div>${srcChip(sr.ex)}<p>${l.ex}</p></div>`;
+  if (l.warn) h += `<div class="callout c-warn" data-src="${sr.warn ? sr.warn.k : ""}"><div class="ctag">Stolperfalle</div>${srcChip(sr.warn)}<p>${l.warn}</p></div>`;
   if (l.laws && l.laws.length) h += `<div class="eyebrow">Rechtsgrundlagen</div><div class="laws">${l.laws.map(x => `<span class="law">${x}</span>`).join("")}</div>`;
+  h += lessonSources(l);
   return h;
 }
 
@@ -402,6 +432,8 @@ function viewLesson({ mi, li }) {
     <div class="kicker"><a href="#/m/${mi}">Modul ${m.n}</a> <span class="sep">/</span> <span class="dim">${m.label}</span> <span class="sep">·</span> <span class="dim">Lektion ${li + 1} von ${m.lessons.length} · ca. ${readingMinutes(l)} Min.</span></div>
     <h1 class="title">${l.t}</h1>
     <div class="subtitle">${l.s}</div>
+    <div class="srcbar"><a class="srcbar-l" href="#/glossar/herkunft">Herkunft:</a><span class="src src-q">Kursunterlage</span><span class="src src-m">Unterlage + Ergänzung</span><span class="src src-e">Ergänzung</span>
+      <button type="button" class="btn ghost small" data-action="toggle-extra" aria-pressed="${hideExtras()}">${hideExtras() ? "Ergänzungen einblenden" : "Ergänzungen ausblenden"}</button></div>
     ${lessonBody(l)}
     <div class="lesson-foot">
       <button type="button" class="btn sec readtoggle" data-action="toggle-read" data-mi="${mi}" data-li="${li}" aria-pressed="${rd}">${rd ? "✓ Gelesen" : "Als gelesen markieren"}</button>
@@ -482,7 +514,7 @@ function quizBody() {
   h += `</div>`;
   if (q.answered != null) {
     const ok = q.order[q.answered] === item.a;
-    h += `<div class="qfb ${ok ? "ok" : "no"}" role="status"><b>${ok ? "Richtig." : "Nicht ganz."}</b> ${item.e}<br><span class="law">${item.l}</span></div>
+    h += `<div class="qfb ${ok ? "ok" : "no"}" role="status"><b>${ok ? "Richtig." : "Nicht ganz."}</b> ${item.e}<br><span class="law">${item.l}</span> ${srcChip(item.src)}</div>
       <div class="btnrow"><button type="button" class="btn" data-action="next" id="nextBtn">${q.idx + 1 >= q.items.length ? "Ergebnis ansehen" : "Weiter →"}</button><span class="muted">oder Enter drücken</span></div>`;
   } else {
     h += `<p class="muted">Tipp: Antworten auch mit den Tasten 1–4 wählen.</p>`;
@@ -614,7 +646,7 @@ function checkBuilder() {
 
 function drillHtml(d, i, open = false) {
   return `<div class="card drill">
-    <div class="dh"><span class="dnum">A${i + 1}</span><div class="dtitle"><h3>${d.t}</h3><div class="dlevel">${d.lvl || "Übung"}</div></div></div>
+    <div class="dh"><span class="dnum">A${i + 1}</span><div class="dtitle"><h3>${d.t}</h3><div class="dlevel">${d.lvl || "Übung"}</div>${srcChip(d.src)}</div></div>
     <div class="dtask">${d.task}</div>
     <details${open ? " open" : ""}><summary>Lösung anzeigen</summary><div class="dsol">${d.sol}</div></details>
   </div>`;
@@ -687,11 +719,36 @@ function cardStep(known) {
 /* =========================================================
    Glossar & Paragrafen
    ========================================================= */
+// Erklärung der Herkunftskennzeichnung und Übersicht, welche Unterlage wie oft genutzt wird
+function herkunftHtml() {
+  const count = new Map(), kinds = { q: 0, m: 0, e: 0 };
+  const add = s => { if (!s) return; kinds[s.k]++; if (s.d) count.set(s.d, (count.get(s.d) || 0) + 1); };
+  DATA.forEach(m => {
+    m.lessons.forEach(l => { l.blocks.forEach(b => add(b.src)); Object.values(l.srcs || {}).forEach(add); });
+    m.quiz.forEach(q => add(q.src)); (m.drills || []).forEach(d => add(d.src));
+  });
+  const docs = [...count].sort((a, b) => a[0].localeCompare(b[0], "de", { numeric: true }));
+  return `<section class="card herkunft" id="herkunft">
+    <h2 class="h2">Woher stammen die Inhalte?</h2>
+    <p>Jeder Abschnitt, jede Quizfrage und jeder Übungsfall ist gekennzeichnet:</p>
+    <ul class="legend">
+      <li>${srcChip({ k: "q", d: "Dokument", s: "x" })} Inhalt stammt aus den Kursunterlagen (in eigenen Worten wiedergegeben). Die Seitenzahl ist die Seite im PDF.</li>
+      <li>${srcChip({ k: "m", d: "Dokument", s: "x" })} Der Kern steht in den Unterlagen, die App ergänzt weitere Details, Zahlen oder Beispiele.</li>
+      <li>${srcChip({ k: "e" })} Steht so nicht in den Kursunterlagen – zusätzliche Information. Mit „Ergänzungen ausblenden“ in jeder Lektion lassen sich diese Abschnitte verbergen.</li>
+      <li><span class="src src-easy">Einfach erklärt</span> Die Kurzfassungen sind immer eigene Vereinfachungen.</li>
+    </ul>
+    <p class="muted">Die Zuordnung wurde durch einen Textabgleich mit den Unterlagen ermittelt und stichprobenartig geprüft. Sie zeigt die passendste Stelle, nicht jede Fundstelle. Im Zweifel gilt das Original.</p>
+    <p class="muted">Insgesamt: ${kinds.q} × Kursunterlage, ${kinds.m} × Unterlage + Ergänzung, ${kinds.e} × Ergänzung.</p>
+    <details><summary>Genutzte Unterlagen (${docs.length})</summary><ul class="doclist">${docs.map(([d, n]) => `<li>${esc(d)} <span class="muted">· ${n} Verweise</span></li>`).join("")}</ul></details>
+  </section>`;
+}
+
 function viewRef(r) {
   const sorted = GLOSSARY.map((g, i) => ({ g, i })).sort((a, b) => a.g[0].localeCompare(b.g[0], "de"));
   const letters = [...new Set(sorted.map(x => x.g[0][0].toUpperCase()))];
   let h = `<div class="kicker">Nachschlagen</div><h1 class="title">Glossar &amp; Paragrafen</h1>
     <p class="lead">Alle Abkürzungen und die wichtigsten Normen an einem Ort. Die Suche oben durchsucht auch diese Seite.</p>
+    ${herkunftHtml()}
     <h2 class="h2">Abkürzungen &amp; Begriffe</h2>
     <div class="gloss-letters">${letters.map(L => `<a href="#/glossar/L-${encodeURIComponent(L)}">${L}</a>`).join("")}</div>
     <div class="card glosslist">`;
@@ -833,6 +890,14 @@ document.addEventListener("click", e => {
   const a = el.dataset.action;
   const mi = Number(el.dataset.mi), gi = Number(el.dataset.gi);
   switch (a) {
+    case "toggle-extra": {
+      const now = !hideExtras();
+      try { localStorage.setItem("stb_hide_extra", now ? "1" : "0"); } catch (e) { /* privater Modus */ }
+      applyHideExtras();
+      el.setAttribute("aria-pressed", String(now));
+      el.textContent = now ? "Ergänzungen einblenden" : "Ergänzungen ausblenden";
+      break;
+    }
     case "toggle-read": {
       const li = Number(el.dataset.li);
       const now = !isRead(mi, li);
@@ -946,7 +1011,22 @@ window.addEventListener("hashchange", () => render());
 updateChrome();
 render({ focus: false });
 
-/* Offline-Unterstützung */
+/* Offline-Unterstützung und automatische Updates.
+   iPad/iPhone (besonders als Home-Bildschirm-App) laden eine offene Seite oft tagelang nicht neu.
+   Deshalb: beim Zurückkehren in die App nach einer neuen Version fragen und nach dem Update einmal neu laden. */
 if ("serviceWorker" in navigator && location.protocol === "https:") {
-  window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
+  const hadController = !!navigator.serviceWorker.controller;
+  let reloaded = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (!hadController || reloaded) return;
+    reloaded = true;
+    location.reload();
+  });
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js", { updateViaCache: "none" }).then(reg => {
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") reg.update().catch(() => {});
+      });
+    }).catch(() => {});
+  });
 }

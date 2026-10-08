@@ -256,6 +256,27 @@ h1.title{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4.2vw,42p
 .c-easy .easy-t a{color:var(--heading);text-decoration:none}
 .c-easy .easy-t a:hover{text-decoration:underline}
 .easy-lead{margin:24px 0 0;color:var(--ink2)}
+/* Herkunft der Inhalte */
+.src{display:inline-block;font-family:var(--mono);font-size:11px;line-height:1.4;letter-spacing:.02em;padding:2px 8px;border-radius:999px;border:1px solid;margin:4px 6px 4px 0;vertical-align:middle}
+.src-q{color:var(--green);background:var(--green-bg);border-color:var(--green-line)}
+.src-m{color:var(--blue-strong);background:var(--blue-soft);border-color:var(--blue-line)}
+.src-e{color:var(--amber);background:var(--amber-bg);border-color:var(--amber-line)}
+.src-easy{color:var(--blue-strong);background:var(--blue-soft);border-color:var(--blue-line)}
+.block > .src{margin:2px 0 6px}
+.callout .src{margin:0 0 6px}
+.ctag-note{text-transform:none;letter-spacing:0;font-weight:400;opacity:.8}
+.srcbar{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:14px 0 0}
+.srcbar .btn{margin-left:auto}
+.srcbox{margin:28px 0 0;padding:16px 20px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-size:14px;color:var(--ink2)}
+.srcbox ul{margin:6px 0 8px 18px}
+.srcbox li{margin:2px 0}
+.herkunft{padding:20px 24px;margin:24px 0 0}
+.herkunft .h2{margin-top:0}
+.herkunft .legend{list-style:none;margin:10px 0;padding:0}
+.herkunft .legend li{margin:8px 0;color:var(--ink2)}
+.herkunft .doclist{margin:8px 0 0 18px}
+.hide-extra [data-src="e"]{display:none}
+@media (max-width:640px){.srcbar .btn{margin-left:0}}
 
 .laws{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
 .law{font-family:var(--mono);font-size:12px;color:var(--ink2);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:4px 10px}
@@ -489,3 +510,4 @@ footer.foot .btnrow{margin-top:14px}
   .drill details > *{display:block!important}
   a{color:#000;text-decoration:none}
 }
+.srcbar-l{font-size:13px;color:var(--muted);margin-right:4px;text-decoration:none}
