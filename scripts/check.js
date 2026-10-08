@@ -7,6 +7,7 @@ const errors = [];
 const fail = msg => errors.push(msg);
 // Lernfortschritt hängt an den Lektions-IDs: Sie müssen eindeutig sein und dürfen sich nicht ändern.
 const lessonIds = new Set();
+const validSrc = s => !!s && (s.k === "e" || ((s.k === "q" || s.k === "m") && typeof s.d === "string" && Number.isInteger(s.s)));
 
 DATA.forEach((m, mi) => {
   if (m.id !== mi) fail(`Modul ${mi}: id ${m.id} passt nicht zum Index`);
@@ -18,14 +19,18 @@ DATA.forEach((m, mi) => {
     for (const k of ["t", "s", "intro"]) if (!l[k]) fail(`Lektion ${mi}-${li}: Feld ${k} fehlt`);
     if (!Array.isArray(l.blocks) || !l.blocks.length) fail(`Lektion ${mi}-${li}: keine Blöcke`);
     if (!l.easy || !l.easy.p || !l.easy.bild || !l.easy.merk) fail(`Lektion ${mi}-${li}: „Einfach erklärt“ fehlt oder ist unvollständig`);
+    // Herkunft: jeder Abschnitt ist als Kursunterlage (q), Unterlage + Ergänzung (m) oder Ergänzung (e) gekennzeichnet
+    l.blocks.forEach((b, bi) => { if (!validSrc(b.src)) fail(`Lektion ${mi}-${li}, Block ${bi}: Herkunft fehlt`); });
+    for (const part of ["figs", "vis", "ex", "warn"]) if (l[part] && !validSrc((l.srcs || {})[part])) fail(`Lektion ${mi}-${li}, ${part}: Herkunft fehlt`);
     if (!Array.isArray(l.laws)) fail(`Lektion ${mi}-${li}: laws fehlt`);
   });
   m.quiz.forEach((q, qi) => {
     if (!Array.isArray(q.o) || q.o.length < 2) fail(`Quiz ${mi}-${qi}: zu wenige Optionen`);
     if (!Number.isInteger(q.a) || q.a < 0 || q.a >= q.o.length) fail(`Quiz ${mi}-${qi}: Lösung außerhalb der Optionen`);
     if (!q.e || !q.l) fail(`Quiz ${mi}-${qi}: Erklärung/Norm fehlt`);
+    if (!validSrc(q.src)) fail(`Quiz ${mi}-${qi}: Herkunft fehlt`);
   });
-  (m.drills || []).forEach((d, di) => { if (!d.t || !d.task || !d.sol) fail(`Übung ${mi}-${di}: unvollständig`); });
+  (m.drills || []).forEach((d, di) => { if (!d.t || !d.task || !d.sol) fail(`Übung ${mi}-${di}: unvollständig`); if (!validSrc(d.src)) fail(`Übung ${mi}-${di}: Herkunft fehlt`); });
 });
 
 GLOSSARY.forEach((g, i) => { if (!Array.isArray(g) || g.length !== 2) fail(`Glossar ${i}: Format`); });
