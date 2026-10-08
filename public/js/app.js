@@ -946,7 +946,22 @@ window.addEventListener("hashchange", () => render());
 updateChrome();
 render({ focus: false });
 
-/* Offline-Unterstützung */
+/* Offline-Unterstützung und automatische Updates.
+   iPad/iPhone (besonders als Home-Bildschirm-App) laden eine offene Seite oft tagelang nicht neu.
+   Deshalb: beim Zurückkehren in die App nach einer neuen Version fragen und nach dem Update einmal neu laden. */
 if ("serviceWorker" in navigator && location.protocol === "https:") {
-  window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
+  const hadController = !!navigator.serviceWorker.controller;
+  let reloaded = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (!hadController || reloaded) return;
+    reloaded = true;
+    location.reload();
+  });
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js", { updateViaCache: "none" }).then(reg => {
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") reg.update().catch(() => {});
+      });
+    }).catch(() => {});
+  });
 }
