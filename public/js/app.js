@@ -66,14 +66,14 @@ function toast(msg) {
    Fortschritt (nur lokal im Browser)
    ========================================================= */
 const PROGRESS_KEY = "stb_progress";
-function emptyProgress() { return { v: 2, read: {}, quiz: {}, wrong: {}, cards: {}, test: null, last: null }; }
+function emptyProgress() { return { v: 2, read: {}, quiz: {}, wrong: {}, cards: {}, drills: {}, test: null, last: null }; }
 // Lektionen werden über stabile IDs gespeichert. Ältere Stände (v1) speicherten
 // „Modul-Lektion“ als Position; deren Positionen entsprechen den IDs „m{Modul}l{Lektion}“.
 const legacyId = key => { const m = /^(\d+)-(\d+)$/.exec(key); return m ? `m${m[1]}l${m[2]}` : key; };
 function normalizeProgress(p) {
   const base = emptyProgress();
   if (!p || typeof p !== "object") return base;
-  for (const k of ["read", "quiz", "wrong", "cards"]) if (p[k] && typeof p[k] === "object") base[k] = p[k];
+  for (const k of ["read", "quiz", "wrong", "cards", "drills"]) if (p[k] && typeof p[k] === "object") base[k] = p[k];
   if (p.test && typeof p.test === "object") base.test = p.test;
   if (p.last && typeof p.last === "object") base.last = p.last;
   if (p.v !== 2) {
@@ -160,6 +160,7 @@ function renderNav() {
     tool("#/", "home", "⌂", "Übersicht") +
     tool("#/test", "test", "◎", "Abschlusstest") +
     tool("#/wiederholen", "review", "↻", "Fehler wiederholen", wrong ? `<span class="badge">${wrong}</span>` : "") +
+    tool("#/uebungen", "drillsAll", "✎", "Alle Übungsfälle", drillAgainCount() ? `<span class="badge">${drillAgainCount()}</span>` : "") +
     tool("#/karten", "cards", "▭", "Karteikarten") +
     tool("#/glossar", "ref", "§", "Glossar &amp; Paragrafen") +
     tool("#/druck", "print", "⎙", "Skript drucken / PDF");
@@ -197,6 +198,7 @@ function parseRoute() {
   if (parts[0] === "test") return { name: "test" };
   if (parts[0] === "wiederholen") return { name: "review" };
   if (parts[0] === "karten") return { name: "cards" };
+  if (parts[0] === "uebungen") return { name: "drillsAll" };
   if (parts[0] === "glossar") return { name: "ref", anchor: parts[1] || null };
   if (parts[0] === "druck") return { name: "print", mi: parts[1] != null ? modIdx(Number(parts[1])) : null };
   if (parts[0] === "suche") return { name: "search", q: parts.slice(1).join("/") };
@@ -204,7 +206,7 @@ function parseRoute() {
 }
 
 const VIEWS = {
-  home: viewHome, module: viewModule, easy: viewEasy, lesson: viewLesson, quiz: viewQuiz, drill: viewDrill,
+  home: viewHome, module: viewModule, easy: viewEasy, drillsAll: viewDrillsAll, lesson: viewLesson, quiz: viewQuiz, drill: viewDrill,
   test: viewQuiz, review: viewQuiz, cards: viewCards, ref: viewRef, print: viewPrint, search: viewSearch,
 };
 
@@ -590,13 +592,39 @@ function nextQuestion() {
    Üben: Fälle, Rechentrainer, Bilanz-Builder
    ========================================================= */
 const genState = {};
+// Erwarteter Zahlenwert aus der Lösung (hervorgehobener Ergebnisbetrag), sofern eindeutig
+function expectedValue(answerHtml) {
+  const m = /<span class="genres">([\s\S]*?)<\/span>/.exec(answerHtml || "");
+  if (!m) return null;
+  const nums = strip(m[1]).match(/-?\d{1,3}(?:\.\d{3})*(?:,\d+)?|-?\d+(?:,\d+)?/g) || [];
+  return nums.length === 1 ? parseDe(nums[0]) : null;
+}
+function parseDe(t) {
+  const v = Number(String(t).trim().replace(/\s|€|%/g, "").replace(/\.(?=\d{3}(\D|$))/g, "").replace(",", "."));
+  return Number.isFinite(v) ? v : null;
+}
+function checkGen(mi, gi) {
+  const k = `${mi}-${gi}`, st = genState[k], inp = $(`#gin-${k}`);
+  if (!st || !inp) return;
+  st.input = inp.value;
+  const v = parseDe(inp.value);
+  st.verdict = v == null ? "no" : Math.abs(v - st.expect) <= Math.max(0.5, Math.abs(st.expect) * 0.001) ? "ok" : "no";
+  if (st.verdict === "ok") st.show = true;
+  $(`#gen-${mi}-${gi}`).innerHTML = genCard(mi, gi);
+}
+
 function genCard(mi, gi) {
   const g = GENERATORS[mi][gi];
   const k = `${mi}-${gi}`;
   if (!genState[k]) genState[k] = { data: g.make(), show: false };
   const st = genState[k];
+  if (st.expect === undefined) st.expect = expectedValue(st.data.a);
+  const check = st.expect != null && !st.show
+    ? `<div class="gen-check"><label class="sr-only" for="gin-${k}">Dein Ergebnis</label><input class="gen-input" id="gin-${k}" inputmode="decimal" autocomplete="off" placeholder="Dein Ergebnis" data-mi="${mi}" data-gi="${gi}" value="${st.input ? esc(st.input) : ""}"><button type="button" class="btn small sec" data-action="gen-check" data-mi="${mi}" data-gi="${gi}">Prüfen</button></div>
+      ${st.verdict ? `<div class="gen-verdict ${st.verdict}">${st.verdict === "ok" ? "✓ Richtig!" : "✗ Noch nicht – rechne nach oder sieh dir die Lösung an."}</div>` : ""}` : "";
   return `<div class="gen-title"><b>${g.title}</b><span class="gen-level">${g.level}</span></div>
     <div class="gen-q">${st.data.q}</div>
+    ${check}
     ${st.show ? `<div class="gen-a">${st.data.a}</div>` : ""}
     <div class="gen-btns">
       <button type="button" class="btn small" data-action="gen-toggle" data-mi="${mi}" data-gi="${gi}">${st.show ? "Lösung ausblenden" : "Lösung zeigen"}</button>
@@ -644,12 +672,112 @@ function checkBuilder() {
   out.innerHTML = h;
 }
 
-function drillHtml(d, i, open = false) {
-  return `<div class="card drill">
-    <div class="dh"><span class="dnum">A${i + 1}</span><div class="dtitle"><h3>${d.t}</h3><div class="dlevel">${d.lvl || "Übung"}</div>${srcChip(d.src)}</div></div>
+/* Übungsfälle: Denkanstoß → Lösung Schritt für Schritt → Selbsteinschätzung */
+const DIFF = { 1: "Einstieg", 2: "Mittel", 3: "Anspruchsvoll" };
+const drillState = {};
+const drillFilter = { st: "all", diff: "0" };
+const drillKey = (mi, di) => `${mi}-${di}`;
+const drillSteps = d => d.sol.split("\n").filter(x => x.trim());
+function drillAgainCount() { return Object.values(progress.drills || {}).filter(v => v === "again").length; }
+function lessonLink(lid) {
+  for (let mi = 0; mi < DATA.length; mi++) {
+    const li = DATA[mi].lessons.findIndex(l => l.id === lid);
+    if (li >= 0) return `<a class="dlesson" href="#/m/${mi}/l/${li}">Zur Lektion: ${DATA[mi].lessons[li].t} →</a>`;
+  }
+  return "";
+}
+function drillInner(mi, di) {
+  const d = DATA[mi].drills[di], key = drillKey(mi, di);
+  const st = drillState[key] || (drillState[key] = { hint: false, shown: 0 });
+  const steps = drillSteps(d), n = steps.length, rated = progress.drills[key];
+  let h = "";
+  if (st.hint && d.hint) h += `<div class="dhint"><b>Denkanstoß:</b> ${d.hint}</div>`;
+  if (st.shown > 0) h += `<div class="dsol">${steps.slice(0, st.shown).join("\n")}</div>`;
+  h += `<div class="dctrl">`;
+  if (d.hint && !st.hint && st.shown === 0) h += `<button type="button" class="btn sec small" data-action="d-hint" data-key="${key}">Denkanstoß</button>`;
+  if (st.shown < n) {
+    h += `<button type="button" class="btn small" data-action="d-step" data-key="${key}">${st.shown ? "Nächster Schritt" : "Ersten Lösungsschritt zeigen"} <span class="cnt">${st.shown}/${n}</span></button>`;
+    h += `<button type="button" class="btn ghost small" data-action="d-all" data-key="${key}">Ganze Lösung</button>`;
+  } else {
+    h += `<span class="dask">Wie lief es?</span>
+      <button type="button" class="btn small ${rated === "ok" ? "ok on" : "sec"}" data-action="d-rate" data-key="${key}" data-v="ok" aria-pressed="${rated === "ok"}">✓ Konnte ich</button>
+      <button type="button" class="btn small sec${rated === "again" ? " again on" : ""}" data-action="d-rate" data-key="${key}" data-v="again" aria-pressed="${rated === "again"}">↻ Nochmal üben</button>
+      <button type="button" class="btn ghost small" data-action="d-hide" data-key="${key}">Lösung verbergen</button>`;
+  }
+  return h + `</div>`;
+}
+function drillHtml(mi, di, label) {
+  const d = DATA[mi].drills[di], key = drillKey(mi, di), rated = progress.drills[key];
+  const badge = rated === "ok" ? `<span class="dstat ok">✓ gelöst</span>` : rated === "again" ? `<span class="dstat again">↻ nochmal</span>` : "";
+  return `<div class="card drill" id="drill-${key}">
+    <div class="dh"><span class="dnum">${label}</span><div class="dtitle"><h3>${d.t}</h3>
+      <div class="dlevel">${d.lvl || "Übung"} <span class="diff d${d.diff}" title="Schwierigkeit">${"●".repeat(d.diff || 1)}${"○".repeat(3 - (d.diff || 1))} ${DIFF[d.diff || 1]}</span>${badge}</div>${srcChip(d.src)}</div></div>
     <div class="dtask">${d.task}</div>
-    <details${open ? " open" : ""}><summary>Lösung anzeigen</summary><div class="dsol">${d.sol}</div></details>
+    <div class="dbody" id="dbody-${key}">${drillInner(mi, di)}</div>
+    <div class="dfoot">${lessonLink(d.lid)}</div>
   </div>`;
+}
+function rerenderDrill(key) {
+  const [mi, di] = key.split("-").map(Number);
+  const card = $(`#drill-${key}`);
+  if (card) card.outerHTML = drillHtml(mi, di, card.querySelector(".dnum").textContent);
+}
+function drillAction(a, key) {
+  const [mi, di] = key.split("-").map(Number);
+  const st = drillState[key] || (drillState[key] = { hint: false, shown: 0 });
+  const n = drillSteps(DATA[mi].drills[di]).length;
+  if (a === "d-hint") st.hint = true;
+  if (a === "d-step") st.shown = Math.min(n, st.shown + 1);
+  if (a === "d-all") st.shown = n;
+  if (a === "d-hide") { st.shown = 0; st.hint = false; }
+  const body = $(`#dbody-${key}`);
+  if (body) body.innerHTML = drillInner(mi, di);
+}
+function rateDrill(key, v) {
+  if (progress.drills[key] === v) delete progress.drills[key]; else progress.drills[key] = v;
+  saveProgress();
+  rerenderDrill(key);
+  const sum = $("#drillSummary");
+  if (sum) { sum.outerHTML = drillSummary(currentDrillList()); applyBars($("#drillSummary")); }
+  renderNav();
+}
+let drillListCache = [];
+function currentDrillList() { return drillListCache; }
+function drillSummary(list) {
+  const ok = list.filter(([mi, di]) => progress.drills[drillKey(mi, di)] === "ok").length;
+  const again = list.filter(([mi, di]) => progress.drills[drillKey(mi, di)] === "again").length;
+  return `<div class="drill-sum" id="drillSummary"><div class="bar"><i data-w="${list.length ? Math.round(ok / list.length * 100) : 0}"></i></div>
+    <span><b>${ok}</b> von ${list.length} gelöst${again ? ` · <b>${again}</b> zum Wiederholen` : ""}</span></div>`;
+}
+function drillFilterBar() {
+  const chip = (f, v, label) => `<button type="button" class="chip${drillFilter[f] === v ? " live" : ""}" data-action="d-filter" data-f="${f}" data-v="${v}" aria-pressed="${drillFilter[f] === v}">${label}</button>`;
+  return `<div class="drill-filter" role="group" aria-label="Übungsfälle filtern">
+    ${chip("st", "all", "Alle")}${chip("st", "open", "Offen")}${chip("st", "again", "Nochmal üben")}${chip("st", "ok", "Gelöst")}
+    <span class="sep"></span>
+    ${chip("diff", "0", "Jede Schwierigkeit")}${chip("diff", "1", "● Einstieg")}${chip("diff", "2", "●● Mittel")}${chip("diff", "3", "●●● Anspruchsvoll")}
+  </div>`;
+}
+function filteredDrills(list) {
+  return list.filter(([mi, di]) => {
+    const st = progress.drills[drillKey(mi, di)], d = DATA[mi].drills[di];
+    if (drillFilter.st === "open" && st) return false;
+    if (drillFilter.st === "again" && st !== "again") return false;
+    if (drillFilter.st === "ok" && st !== "ok") return false;
+    if (drillFilter.diff !== "0" && String(d.diff || 1) !== drillFilter.diff) return false;
+    return true;
+  });
+}
+function drillListHtml(list, withModule) {
+  drillListCache = list;
+  const shown = filteredDrills(list);
+  let h = drillSummary(list) + drillFilterBar();
+  if (!shown.length) return h + `<div class="card empty">Keine Fälle für diesen Filter.</div>`;
+  let lastMi = -1;
+  shown.forEach(([mi, di]) => {
+    if (withModule && mi !== lastMi) { h += `<h3 class="drill-mod"><a href="#/m/${mi}/ueben">Modul ${DATA[mi].n} · ${DATA[mi].label}</a></h3>`; lastMi = mi; }
+    h += drillHtml(mi, di, `${withModule ? DATA[mi].n + "·" : "A"}${di + 1}`);
+  });
+  return h;
 }
 
 function viewDrill({ mi }) {
@@ -659,16 +787,24 @@ function viewDrill({ mi }) {
   let h = moduleHeader(mi, "drill");
   if (mi === 0) h += `<div class="card builder" id="builder">${builderCard()}</div>`;
   if (gens.length) {
-    h += `<p class="note"><b>Rechentrainer:</b> Jede Aufgabe erzeugt auf Knopfdruck neue Zahlen. Erst selbst rechnen, dann die Lösung aufdecken – beliebig oft wiederholbar.</p><div class="gengrid">`;
+    h += `<p class="note"><b>Rechentrainer:</b> Jede Aufgabe erzeugt auf Knopfdruck neue Zahlen. Rechne selbst, trage dein Ergebnis ein und prüfe es – oder deck die Lösung auf.</p><div class="gengrid">`;
     gens.forEach((_, gi) => { h += `<div class="card gencard" id="gen-${mi}-${gi}">${genCard(mi, gi)}</div>`; });
     h += `</div>`;
   }
   if (ds.length) {
-    h += `<h2 class="h2">Übungsfälle</h2><p class="note">Rechne jeden Fall zuerst selbst auf Papier – erst dann die Lösung aufklappen. Das aktive Durchrechnen ist der eigentliche Lerneffekt.</p>`;
-    ds.forEach((d, i) => { h += drillHtml(d, i); });
+    h += `<h2 class="h2">Übungsfälle</h2><p class="note">So übst du am wirksamsten: Fall zuerst selbst auf Papier lösen. Wenn du hängst, hilft der <b>Denkanstoß</b>. Dann die Lösung <b>Schritt für Schritt</b> aufdecken und am Ende ehrlich einschätzen – „Nochmal üben“ sammelt die Fälle unter <a href="#/uebungen">Alle Übungsfälle</a>.</p>`;
+    h += drillListHtml(ds.map((_, di) => [mi, di]), false);
   }
   if (!ds.length && !gens.length) h += `<div class="card empty">Für dieses Modul gibt es keine Rechenfälle.</div>`;
   return { title: `Üben · ${m.label}`, html: h };
+}
+
+function viewDrillsAll() {
+  const list = DATA.flatMap((m, mi) => (m.drills || []).map((_, di) => [mi, di]));
+  const h = `<div class="kicker">Üben</div><h1 class="title">Alle Übungsfälle</h1>
+    <p class="lead">Alle ${list.length} Fälle aus allen Modulen an einem Ort. Filtere nach „Nochmal üben“, um gezielt die Fälle zu wiederholen, die noch nicht sitzen.</p>
+    ${drillListHtml(list, true)}`;
+  return { title: "Alle Übungsfälle", html: h };
 }
 
 /* =========================================================
@@ -795,7 +931,10 @@ function viewPrint(r) {
     });
     if ((m.drills || []).length) {
       h += `<h2 class="h2">Übungsfälle ${m.label}</h2>`;
-      m.drills.forEach((d, i) => { h += drillHtml(d, i, true); });
+      m.drills.forEach((d, i) => {
+        h += `<div class="card drill"><div class="dh"><span class="dnum">A${i + 1}</span><div class="dtitle"><h3>${d.t}</h3><div class="dlevel">${d.lvl || "Übung"} · ${DIFF[d.diff || 1]}</div>${srcChip(d.src)}</div></div>
+          <div class="dtask">${d.task}</div>${d.hint ? `<div class="dhint"><b>Denkanstoß:</b> ${d.hint}</div>` : ""}<div class="dsol">${d.sol}</div></div>`;
+      });
     }
   });
   return { title: "Skript drucken", html: h };
@@ -911,6 +1050,10 @@ document.addEventListener("click", e => {
     case "restart": newQuiz(quiz.key); rerenderQuiz(); renderNav(); break;
     case "gen-toggle": genState[`${mi}-${gi}`].show = !genState[`${mi}-${gi}`].show; $(`#gen-${mi}-${gi}`).innerHTML = genCard(mi, gi); break;
     case "gen-new": genState[`${mi}-${gi}`] = { data: GENERATORS[mi][gi].make(), show: false }; $(`#gen-${mi}-${gi}`).innerHTML = genCard(mi, gi); break;
+    case "gen-check": checkGen(mi, gi); break;
+    case "d-hint": case "d-step": case "d-all": case "d-hide": drillAction(a, el.dataset.key); break;
+    case "d-rate": rateDrill(el.dataset.key, el.dataset.v); break;
+    case "d-filter": drillFilter[el.dataset.f] = el.dataset.v; render({ focus: false }); break;
     case "b-check": checkBuilder(); break;
     case "b-new": builder = newBuilder(); $("#builder").innerHTML = builderCard(); break;
     case "card-flip": cards.flipped = !cards.flipped; rerenderCards(); $("#cardArea .face")?.focus(); break;
@@ -928,6 +1071,7 @@ document.addEventListener("click", e => {
 
 document.addEventListener("keydown", e => {
   const typing = e.target.closest && e.target.closest("input, textarea, select, [contenteditable]");
+  if (e.key === "Enter" && e.target.classList && e.target.classList.contains("gen-input")) { e.preventDefault(); checkGen(Number(e.target.dataset.mi), Number(e.target.dataset.gi)); return; }
   if (e.key === "/" && !typing) { e.preventDefault(); $("#searchInput").focus(); return; }
   if (e.key === "Escape") {
     if (document.body.classList.contains("nav-open")) { closeNav(); return; }

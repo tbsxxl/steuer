@@ -382,43 +382,43 @@ export const DATA = [
 <div class="step"><b>3.</b> Büromaterial 100 € + Vorsteuer 19 € <b>an</b> Kasse 119 €</div>
 <div class="step"><b>4.</b> Mietaufwand 1.500 € <b>an</b> Bank 1.500 € (keine Vorsteuer, da steuerfrei)</div>
 <div class="step"><b>5.</b> Privatentnahme 800 € <b>an</b> Kasse 800 €</div>
-<div class="step">Merke: Aufwand und Aktivzugänge stehen im Soll, Bank-/Kassenabgänge und Verbindlichkeitszugänge im Haben.</div>`,src:{k:"m",d:"Rewe-Skript 2026",s:6}},
+<div class="step">Merke: Aufwand und Aktivzugänge stehen im Soll, Bank-/Kassenabgänge und Verbindlichkeitszugänge im Haben.</div>`,lid:"m0l1",diff:1,hint:"Bei jedem Vorfall zuerst fragen: Welche zwei Konten sind berührt, und nimmt das Konto zu oder ab? Aktiv-Zugang steht im Soll, Passiv-Zugang im Haben.",src:{k:"m",d:"Rewe-Skript 2026",s:6}},
     {t:"Abschreibung berechnen und buchen",lvl:"AfA",
      task:"Ein Mandant kauft am <b>1. April 2026</b> eine Produktionsmaschine für <b>60.000 € netto</b>. Nutzungsdauer laut AfA-Tabelle: 10 Jahre. Lineare AfA.<br><b>a)</b> Wie hoch ist die AfA 2026?<br><b>b)</b> Wie lautet die Buchung?<br><b>c)</b> Wie hoch ist der Restbuchwert am 31.12.2027?",
      sol:`<div class="step"><b>a)</b> Jahres-AfA = 60.000 ÷ 10 = 6.000 €. 2026 nur 9 Monate (April–Dez): 6.000 × 9/12 = <b>4.500 €</b>.</div>
 <div class="step"><b>b)</b> Abschreibungen 4.500 € <b>an</b> Maschinen 4.500 €.</div>
-<div class="step"><b>c)</b> Buchwert nach 2026: 60.000 − 4.500 = 55.500 €. 2027 volle Jahres-AfA 6.000 €. Restbuchwert 31.12.2027: <span class="res">49.500 €</span></div>`,src:{k:"e"}},
+<div class="step"><b>c)</b> Buchwert nach 2026: 60.000 − 4.500 = 55.500 €. 2027 volle Jahres-AfA 6.000 €. Restbuchwert 31.12.2027: <span class="res">49.500 €</span></div>`,lid:"m0l2",diff:1,hint:"Jahres-AfA = Anschaffungskosten ÷ Nutzungsdauer. Im Anschaffungsjahr nur für die Monate ab dem Anschaffungsmonat (Monat der Anschaffung zählt voll).",src:{k:"e"}},
     {t:"GWG, Sammelposten oder reguläre AfA?",lvl:"Einordnung",
      task:"Ordne jede Anschaffung (netto) korrekt zu — GWG-Sofort, Sammelposten, digitales WG oder reguläre AfA:<br><b>1.</b> Bürodrucker 220 €<br><b>2.</b> Schreibtisch 920 €<br><b>3.</b> Smartphone (betrieblich) 780 €<br><b>4.</b> Monitor 340 €<br><b>5.</b> Konferenztisch 2.400 €",
      sol:`<div class="step"><b>1.</b> Drucker 220 € → digitale Hardware → <b>Sofortabschreibung</b> (auch als GWG ≤ 800 € möglich).</div>
 <div class="step"><b>2.</b> Schreibtisch 920 € → kein GWG (über 800 €), kein digitales WG → <b>Sammelposten</b> (250,01–1.000 €) über 5 Jahre oder reguläre AfA.</div>
 <div class="step"><b>3.</b> Smartphone 780 € ≤ 800 € → <b>GWG</b>, Sofortabschreibung.</div>
 <div class="step"><b>4.</b> Monitor 340 € → digitale Hardware → <b>Sofortabschreibung</b>.</div>
-<div class="step"><b>5.</b> Konferenztisch 2.400 € → über 1.000 €, kein digitales WG → <b>reguläre AfA</b> über die Nutzungsdauer (13 Jahre).</div>`,src:{k:"m",d:"DATEV-Kontenrahmen SKR03",s:24}},
+<div class="step"><b>5.</b> Konferenztisch 2.400 € → über 1.000 €, kein digitales WG → <b>reguläre AfA</b> über die Nutzungsdauer (13 Jahre).</div>`,lid:"m0l2",diff:1,hint:"Drei Grenzen nebeneinanderlegen: bis 250 € Sofortaufwand, bis 800 € GWG, 250–1.000 € wahlweise Sammelposten. Maßgeblich ist der Nettobetrag.",src:{k:"m",d:"DATEV-Kontenrahmen SKR03",s:24}},
     {t:"Abschlussbuchungen: Rechnungsabgrenzung & Rückstellung",lvl:"Jahresabschluss",
      task:"Buche zum 31.12.2026:<br><b>a)</b> Am 1.10.2026 wurde die Kfz-Versicherung für 12 Monate im Voraus gezahlt: 2.400 €.<br><b>b)</b> Die Steuerberatungskosten für den Abschluss 2026 (geschätzt 4.000 €) sind noch nicht berechnet.<br><b>c)</b> Ein Kunde hat im Dezember 3.000 € Miete für Januar 2027 im Voraus überwiesen (Mietertrag).",
      sol:`<div class="step"><b>a)</b> Von Okt 2026 bis Sep 2027. 2026 gehören nur 3 Monate (Okt–Dez) = 600 €. Die übrigen 9 Monate = 1.800 € sind <b>aktive RAP</b>: Aktive RAP 1.800 € <b>an</b> Versicherungsaufwand 1.800 €.</div>
 <div class="step"><b>b)</b> Wirtschaftlich 2026 verursacht, Höhe ungewiss → <b>Rückstellung</b>: Rechts-/Beratungskosten 4.000 € <b>an</b> Sonstige Rückstellungen 4.000 €.</div>
-<div class="step"><b>c)</b> Ertrag gehört ins Jahr 2027 → <b>passive RAP</b>: Mietertrag 3.000 € <b>an</b> Passive RAP 3.000 € (bzw. direkt bei Vereinnahmung als PRAP gebucht).</div>`,src:{k:"m",d:"DATEV-Kontenrahmen SKR03",s:4}},
+<div class="step"><b>c)</b> Ertrag gehört ins Jahr 2027 → <b>passive RAP</b>: Mietertrag 3.000 € <b>an</b> Passive RAP 3.000 € (bzw. direkt bei Vereinnahmung als PRAP gebucht).</div>`,lid:"m0l3",diff:2,hint:"Gehört der Aufwand wirtschaftlich ins alte oder ins neue Jahr? Vorausbezahlter Aufwand → aktive RAP. Ungewisse Schuld aus dem alten Jahr → Rückstellung.",src:{k:"m",d:"DATEV-Kontenrahmen SKR03",s:4}},
     {t:"Übungs-GuV aufstellen (Gesamtkostenverfahren)",lvl:"GuV",
      task:"Stelle aus diesen Werten die GuV auf und ermittle den Jahresüberschuss:<br>Umsatzerlöse 600.000 €, sonstige betr. Erträge 20.000 €, Materialaufwand 250.000 €, Personalaufwand 200.000 €, Abschreibungen 30.000 €, sonstige betr. Aufwendungen 70.000 €, Zinsaufwand 6.000 €, Steuern vom Einkommen 13.000 €.",
      sol:`<div class="step">Umsatzerlöse 600.000 + sonst. Erträge 20.000 = <b>Gesamtleistung 620.000</b></div>
 <div class="step">− Material 250.000 − Personal 200.000 − Abschreibungen 30.000 − sonst. Aufwand 70.000 = <b>Betriebsergebnis 70.000</b></div>
 <div class="step">− Zinsaufwand 6.000 = <b>Ergebnis vor Steuern 64.000</b></div>
 <div class="step">− Steuern 13.000 = Jahresüberschuss</div>
-<div class="step"><span class="res">Jahresüberschuss = 51.000 €</span></div>`,src:{k:"m",d:"DATEV-Kontenrahmen SKR03",s:18}},
+<div class="step"><span class="res">Jahresüberschuss = 51.000 €</span></div>`,lid:"m0l4",diff:2,hint:"Gesamtkostenverfahren: Umsatzerlöse ± Bestandsveränderungen, dann Material, Personal, Abschreibungen, sonstige Aufwendungen der Reihe nach abziehen.",src:{k:"m",d:"DATEV-Kontenrahmen SKR03",s:18}},
     {t:"Übungs-Bilanz: fehlende Größe finden",lvl:"Bilanz",
      task:"Eine Bilanz hat folgende Posten:<br><b>Aktiva:</b> Anlagevermögen 300.000 €, Vorräte 90.000 €, Forderungen 120.000 €, Bank 40.000 €.<br><b>Passiva:</b> Eigenkapital ?, Rückstellungen 50.000 €, Verbindlichkeiten 280.000 €.<br><b>a)</b> Wie hoch ist die Bilanzsumme?<br><b>b)</b> Wie hoch ist das Eigenkapital?<br><b>c)</b> Wie hoch ist die Eigenkapitalquote?",
      sol:`<div class="step"><b>a)</b> Aktiva = 300.000 + 90.000 + 120.000 + 40.000 = <b>550.000 €</b>. Da Aktiva = Passiva, ist die Bilanzsumme 550.000 €.</div>
 <div class="step"><b>b)</b> Eigenkapital = Bilanzsumme − Rückstellungen − Verbindlichkeiten = 550.000 − 50.000 − 280.000 = <b>220.000 €</b>.</div>
-<div class="step"><b>c)</b> Eigenkapitalquote = 220.000 / 550.000 = <span class="res">40 %</span></div>`,src:{k:"m",d:"Rewe-Skript 2026",s:15}},
+<div class="step"><b>c)</b> Eigenkapitalquote = 220.000 / 550.000 = <span class="res">40 %</span></div>`,lid:"m0l4",diff:1,hint:"Aktiva = Passiva. Das Eigenkapital ist die Restgröße: Vermögen minus Schulden.",src:{k:"m",d:"Rewe-Skript 2026",s:15}},
     {t:"Kompletter Mini-Jahresabschluss",lvl:"Vertiefung · anspruchsvoll",
      task:"Ein Einzelunternehmer legt vor: vorläufiger Gewinn 80.000 €. Noch zu berücksichtigen:<br><b>1.</b> AfA auf einen im Juli gekauften Transporter (36.000 €, ND 6 Jahre, linear).<br><b>2.</b> Rückstellung für eine drohende Garantieleistung 5.000 €.<br><b>3.</b> Pkw-Privatnutzung (Bruttolistenpreis 30.000 €, 1-%-Regel, ganzjährig).<br>Wie hoch ist der korrigierte Gewinn?",
      sol:`<div class="step"><b>1.</b> AfA Transporter: 36.000 ÷ 6 = 6.000/Jahr, Juli–Dez = 6 Monate → 3.000 €. Gewinnmindernd: −3.000 €.</div>
 <div class="step"><b>2.</b> Garantierückstellung 5.000 € → Aufwand, gewinnmindernd: −5.000 €.</div>
 <div class="step"><b>3.</b> Pkw-Privatanteil: 1 % × 30.000 = 300/Monat × 12 = 3.600 € → Entnahme, gewinn<b>erhöhend</b>: +3.600 €.</div>
 <div class="step">Korrigierter Gewinn = 80.000 − 3.000 − 5.000 + 3.600 = <span class="res">75.600 €</span></div>
-<div class="step">Hinweis: Die Privatnutzung erhöht den Gewinn, weil sie betrieblichen Aufwand neutralisiert (privater Anteil darf den Gewinn nicht mindern).</div>`,src:{k:"m",d:"DATEV-Kontenrahmen SKR03",s:4}},
+<div class="step">Hinweis: Die Privatnutzung erhöht den Gewinn, weil sie betrieblichen Aufwand neutralisiert (privater Anteil darf den Gewinn nicht mindern).</div>`,lid:"m0l9",diff:3,hint:"In der Reihenfolge des Beispielabschlusses vorgehen: Abschlussbuchungen → GuV → Gewinn ins Eigenkapital → Bilanz.",src:{k:"m",d:"DATEV-Kontenrahmen SKR03",s:4}},
     {t:"Zehn Geschäftsvorfälle in SKR 03 und SKR 04 kontieren",lvl:"Kontierung · Praxis",
      task:"Bilde den Buchungssatz und kontiere in beiden Kontenrahmen (Umsatzsteuer der Einfachheit halber außer Acht lassen, Beträge netto):<br><b>1.</b> Wareneinkauf 5.000 € auf Ziel.<br><b>2.</b> Büromiete 1.000 € bar bezahlt.<br><b>3.</b> Kunde überweist 3.000 € auf eine offene Rechnung.<br><b>4.</b> Bankkredit 20.000 € wird ausgezahlt (Laufzeit 4 Jahre).<br><b>5.</b> Löhne 6.000 € werden überwiesen.<br><b>6.</b> Abschreibung einer Maschine 1.500 €.<br><b>7.</b> Waren für 4.000 € auf Ziel verkauft.<br><b>8.</b> Darlehenszinsen 300 € werden abgebucht.<br><b>9.</b> Telefonrechnung 150 € per Lastschrift.<br><b>10.</b> Kauf eines Pkw für 30.000 € auf Ziel.",
      sol:`<div class="step"><b>1.</b> Wareneingang an Verbindlichkeiten L+L<br>SKR 03: 3200 an 1600<br>SKR 04: 5200 an 3300</div>
@@ -431,13 +431,27 @@ export const DATA = [
 <div class="step"><b>8.</b> Zinsaufwand an Bank<br>SKR 03: 2120 an 1200<br>SKR 04: 7320 an 1800</div>
 <div class="step"><b>9.</b> Telefon an Bank<br>SKR 03: 4920 an 1200<br>SKR 04: 6805 an 1800</div>
 <div class="step"><b>10.</b> Pkw an Verbindlichkeiten L+L<br>SKR 03: 0320 an 1600<br>SKR 04: 0520 an 3300</div>
-<div class="step">Merke: In der Praxis würde man bei 1, 7, 9 und 10 die Vorsteuer bzw. Umsatzsteuer über den Steuerschlüssel oder ein Automatikkonto mitbuchen. Kontonummern immer im aktuellen DATEV-Kontenrahmen gegenprüfen.</div>`,src:{k:"m",d:"Rewe-Skript 2026",s:7}},
+<div class="step">Merke: In der Praxis würde man bei 1, 7, 9 und 10 die Vorsteuer bzw. Umsatzsteuer über den Steuerschlüssel oder ein Automatikkonto mitbuchen. Kontonummern immer im aktuellen DATEV-Kontenrahmen gegenprüfen.</div>`,lid:"rewe-skr",diff:2,hint:"Für jeden Vorfall zuerst das Konto im SKR 03 suchen, dann im SKR 04 die Entsprechung. Bei Umsätzen und Einkäufen an die Umsatzsteuer denken (Automatikkonto oder Steuerschlüssel).",src:{k:"m",d:"Rewe-Skript 2026",s:7}},
     {t:"Degressiv oder linear abschreiben?",lvl:"AfA · Investitionssofortprogramm",
      task:"Eine GmbH kauft am 2.1.2026 eine Maschine für 60.000 € netto, Nutzungsdauer 10 Jahre.<br><b>a)</b> Wie hoch ist die AfA 2026 und 2027 linear?<br><b>b)</b> Wie hoch ist sie degressiv mit dem höchstmöglichen Satz?<br><b>c)</b> Ab wann lohnt der Wechsel zur linearen AfA?",
      sol:`<div class="step"><b>a)</b> Linear: 60.000 ÷ 10 = 6.000 € pro Jahr (2026 voll, da Anschaffung im Januar).</div>
 <div class="step"><b>b)</b> Degressiv: 3 × 10 % = 30 % (Höchstgrenze 30 % greift genau). 2026: 30 % × 60.000 = <b>18.000 €</b>, Restbuchwert 42.000 €. 2027: 30 % × 42.000 = <b>12.600 €</b>, Restbuchwert 29.400 €.</div>
 <div class="step"><b>c)</b> Wechsel, sobald Restbuchwert ÷ Restnutzungsdauer mehr ergibt als 30 % vom Restbuchwert — also wenn die Restnutzungsdauer unter 3,33 Jahre fällt, d. h. ab dem 8. Jahr (Restnutzungsdauer 3 Jahre).</div>
-<span class="res">Vorteil: in den ersten beiden Jahren 18.600 € mehr Abschreibung als linear → Steuerstundung und Liquidität</span>`,src:{k:"e"}}
+<span class="res">Vorteil: in den ersten beiden Jahren 18.600 € mehr Abschreibung als linear → Steuerstundung und Liquidität</span>`,lid:"m0l2",diff:2,hint:"Degressiv: Restbuchwert × Satz (höchstens das 3-Fache der linearen AfA, maximal 30 %). Wechseln, sobald linear auf den Restbuchwert mehr bringt.",src:{k:"e"}},
+    {t:"Privatvorgänge buchen (SKR 03)",lvl:"Vertiefung · Privatkonten",lid:"rewe-skr",diff:1,hint:"Privatentnahmen und -einlagen laufen über eigene Konten (1800 bzw. 1890) und berühren den Gewinn nicht. Nur die Warenentnahme ist eine umsatzsteuerpflichtige Wertabgabe.",
+     task:"Ein Einzelunternehmer (SKR 03, regelbesteuert) hat im März folgende Vorgänge. Bilde die Buchungssätze:<br><b>1.</b> Er nimmt 500 € aus der Kasse für private Zwecke.<br><b>2.</b> Er bezahlt seine private Krankenversicherung (300 €) vom Geschäftskonto.<br><b>3.</b> Er überweist 2.000 € von seinem Privatkonto auf das Geschäftskonto.<br><b>4.</b> Er entnimmt Waren für den privaten Haushalt; Einkaufspreis 100 € netto.",
+     sol:`<div class="step"><b>1.</b> 1800 Privatentnahmen allgemein <b>an</b> 1000 Kasse — 500 €.</div>
+<div class="step"><b>2.</b> 1800 Privatentnahmen allgemein <b>an</b> 1200 Bank — 300 €. Private Versicherungen sind keine Betriebsausgaben; als Sonderausgaben wirken sie in der Einkommensteuererklärung.</div>
+<div class="step"><b>3.</b> 1200 Bank <b>an</b> 1890 Privateinlagen — 2.000 €.</div>
+<div class="step"><b>4.</b> Entnahme von Waren = unentgeltliche Wertabgabe (§ 3 Abs. 1b UStG), Bemessungsgrundlage Einkaufspreis: 1800 Privatentnahmen allgemein <b>an</b> 8910 Entnahme durch den Unternehmer (Waren) 19 % USt — 119 € (100 € netto, die 19 € USt bucht das Automatikkonto).</div>
+<span class="res">Nur Fall 4 löst Umsatzsteuer aus</span>`,src:{k:"m",d:"DATEV-Kontenrahmen SKR03",s:11}},
+    {t:"Verkauf eines gebrauchten Pkw mit Buchgewinn",lvl:"Vertiefung · Anlagenabgang",lid:"m0l2",diff:2,hint:"Zwei Buchungen: Der Erlös läuft über ein Erlöskonto für Anlagenverkäufe (mit Umsatzsteuer), der Restbuchwert wird ausgebucht. Der Gewinn ergibt sich aus der Differenz.",
+     task:"Ein Unternehmer (SKR 03) verkauft am 30.6. einen betrieblichen Pkw für 8.000 € netto zzgl. 19 % USt per Überweisung. Der Buchwert zum 1.1. betrug 6.000 €, die AfA bis zum Verkauf beträgt 1.000 €.<br><b>a)</b> Wie hoch ist der Buchgewinn?<br><b>b)</b> Welche Buchungen sind nötig?",
+     sol:`<div class="step">AfA bis zum Verkauf buchen: 4830 Abschreibungen auf Sachanlagen <b>an</b> 0320 Pkw — 1.000 €. Restbuchwert danach 5.000 €.</div>
+<div class="step"><b>a)</b> Buchgewinn = 8.000 € − 5.000 € = <b>3.000 €</b>.</div>
+<div class="step"><b>b)</b> Erlös: 1200 Bank 9.520 € <b>an</b> 8820 Erlöse aus Verkäufen Sachanlagevermögen 19 % USt (bei Buchgewinn) — 8.000 € netto + 1.520 € USt (Automatikkonto).</div>
+<div class="step">Restbuchwert ausbuchen: 2315 Anlagenabgänge Sachanlagen (Restbuchwert bei Buchgewinn) <b>an</b> 0320 Pkw — 5.000 €.</div>
+<span class="res">Buchgewinn 3.000 € – zusammen mit der AfA (1.000 €) steigt der Gewinn um 2.000 €</span>`,src:{k:"m",d:"DATEV-Kontenrahmen SKR03",s:28}}
   ]
 },
 {
@@ -690,35 +704,35 @@ export const DATA = [
      task:"Ein ESt-Bescheid wird vom Finanzamt am <b>Mittwoch, 7. Oktober 2026</b> zur Post gegeben.<br><b>a)</b> Wann gilt er als bekannt gegeben (4-Tages-Fiktion)?<br><b>b)</b> Wann läuft die Einspruchsfrist ab?<br><b>c)</b> Was ändert sich, wenn die Rechtsbehelfsbelehrung fehlt?",
      sol:`<div class="step"><b>a)</b> 7.10. + 4 Tage = 11.10.2026 (Sonntag). Da Wochenende → Bekanntgabe verschiebt sich auf <b>Montag, 12.10.2026</b>.</div>
 <div class="step"><b>b)</b> Einspruchsfrist 1 Monat ab Bekanntgabe → Ablauf am <b>12.11.2026</b>. Der Einspruch muss spätestens an diesem Tag beim FA eingegangen sein.</div>
-<div class="step"><b>c)</b> Ohne Rechtsbehelfsbelehrung verlängert sich die Frist auf <span class="res">1 Jahr</span> (§ 356 AO) → Ablauf 12.10.2027.</div>`,src:{k:"q",d:"AO Kapitel F – Fristen",s:4}},
+<div class="step"><b>c)</b> Ohne Rechtsbehelfsbelehrung verlängert sich die Frist auf <span class="res">1 Jahr</span> (§ 356 AO) → Ablauf 12.10.2027.</div>`,lid:"m1l1",diff:1,hint:"Bekanntgabe: Tag der Aufgabe zur Post + 4 Tage. Dann einen Monat dazurechnen. Fällt ein Fristende auf Wochenende oder Feiertag, verschiebt es sich.",src:{k:"q",d:"AO Kapitel F – Fristen",s:4}},
     {t:"Festsetzungsverjährung mit Anlaufhemmung",lvl:"Verjährung",
      task:"Ein Mandant ist verpflichtet, die ESt-Erklärung 2022 abzugeben. Er reicht sie aber erst <b>2024</b> ein.<br><b>a)</b> Wann beginnt die Festsetzungsfrist?<br><b>b)</b> Wann endet sie regulär?<br><b>c)</b> Wie lange wäre die Frist bei Steuerhinterziehung?",
      sol:`<div class="step"><b>a)</b> Anlaufhemmung (§ 170 Abs. 2 AO): Die Frist beginnt erst mit Ablauf des Jahres, in dem die Erklärung eingereicht wird → Beginn mit Ablauf <b>31.12.2024</b>.</div>
 <div class="step"><b>b)</b> Reguläre Frist 4 Jahre → Ende <b>31.12.2028</b>. (Ohne die späte Abgabe hätte sie schon Ende 2026 geendet — die späte Abgabe verlängert faktisch die Änderbarkeit.)</div>
-<div class="step"><b>c)</b> Bei Steuerhinterziehung 10 Jahre → Ende <span class="res">31.12.2034</span>.</div>`,src:{k:"m",d:"AO-Skript 2026",s:120}},
+<div class="step"><b>c)</b> Bei Steuerhinterziehung 10 Jahre → Ende <span class="res">31.12.2034</span>.</div>`,lid:"m1l2",diff:2,hint:"Anlaufhemmung: Die Frist beginnt mit Ablauf des Jahres, in dem die Erklärung abgegeben wurde – spätestens drei Jahre nach dem Steuerjahr.",src:{k:"m",d:"AO-Skript 2026",s:120}},
     {t:"Welche Änderungsvorschrift greift?",lvl:"Korrektur",
      task:"Ordne jeweils die richtige AO-Vorschrift zu:<br><b>1.</b> Das FA hat sich beim Übertragen einer Zahl vertippt (5.000 statt 500).<br><b>2.</b> Nach Bestandskraft taucht eine bisher unbekannte Mieteinnahme auf.<br><b>3.</b> Der Steuerpflichtige stimmt einer Änderung zu seinen Gunsten zu.",
      sol:`<div class="step"><b>1.</b> Mechanischer Schreibfehler, offensichtlich → <b>§ 129 AO</b> (offenbare Unrichtigkeit), jederzeit berichtigbar.</div>
 <div class="step"><b>2.</b> Nachträglich bekannt gewordene Tatsache → <b>§ 173 AO</b>. Zu Ungunsten nur bei grobem Verschulden.</div>
-<div class="step"><b>3.</b> Änderung mit Zustimmung/auf Antrag → <b>§ 172 AO</b> (allgemeine Korrekturvorschrift).</div>`,src:{k:"m",d:"AO-Skript 2026",s:165}},
+<div class="step"><b>3.</b> Änderung mit Zustimmung/auf Antrag → <b>§ 172 AO</b> (allgemeine Korrekturvorschrift).</div>`,lid:"ao-korrektur",diff:2,hint:"Für jeden Fall fragen: Wer hat den Fehler gemacht, wann wurde er bekannt, und wirkt die Änderung für oder gegen den Steuerpflichtigen?",src:{k:"m",d:"AO-Skript 2026",s:165}},
     {t:"Einspruch mit AdV — Ablauf und Zinsrisiko",lvl:"Rechtsschutz",
      task:"Ein Mandant erhält einen Nachzahlungsbescheid über 12.000 €, hält ihn aber für falsch.<br><b>a)</b> Muss er die 12.000 € trotz Einspruch zahlen?<br><b>b)</b> Wie verhindert er die Zahlung?<br><b>c)</b> Welches Risiko besteht, wenn der Einspruch am Ende erfolglos ist?",
      sol:`<div class="step"><b>a)</b> Ja — der Einspruch hat keine aufschiebende Wirkung (§ 361 Abs. 1 AO). Die 12.000 € werden zunächst fällig.</div>
 <div class="step"><b>b)</b> Er beantragt zusätzlich <b>Aussetzung der Vollziehung (AdV)</b>. Bei ernstlichen Zweifeln an der Rechtmäßigkeit setzt das FA die Zahlung aus.</div>
-<div class="step"><b>c)</b> Bei erfolglosem Einspruch werden <b>Aussetzungszinsen</b> von 0,5 %/Monat = 6 % p. a. auf den ausgesetzten Betrag fällig (§ 237/238 AO; die Höhe liegt derzeit dem BVerfG zur Prüfung vor — Stand 2026 gilt sie weiter). <span class="res">Auf 12.000 € z. B. 720 € pro Jahr.</span></div>`,src:{k:"m",d:"AO-Skript 2026",s:113}},
+<div class="step"><b>c)</b> Bei erfolglosem Einspruch werden <b>Aussetzungszinsen</b> von 0,5 %/Monat = 6 % p. a. auf den ausgesetzten Betrag fällig (§ 237/238 AO; die Höhe liegt derzeit dem BVerfG zur Prüfung vor — Stand 2026 gilt sie weiter). <span class="res">Auf 12.000 € z. B. 720 € pro Jahr.</span></div>`,lid:"m1l3",diff:2,hint:"Einspruch hemmt die Zahlung nicht. Was stoppt die Vollstreckung, und was kostet es, wenn der Einspruch scheitert?",src:{k:"m",d:"AO-Skript 2026",s:113}},
     {t:"Vier Fristen berechnen",lvl:"Fristen · § 108 AO",
      task:"<b>1.</b> ESt-Bescheid 2023 des A (Hannover) wird am Dienstag, 7.1.2025, zur Post gegeben. Wann endet die Einspruchsfrist?<br><b>2.</b> ESt-Bescheid 2024 des B wird am Donnerstag, 27.3.2025, zur Post gegeben, Abschlusszahlung 1.000 €. Wann ist die Zahlung fällig?<br><b>3.</b> C wurde am 26.8.2000 geboren. Wann hat sie ihr 18. Lebensjahr vollendet?<br><b>4.</b> ESt-Bescheid 2024 des D wird am Montag, 29.9.2025, zur Post gegeben, Abschlusszahlung 1.025 € per Überweisung. Bis wann muss das Geld beim Finanzamt sein, damit keine Säumniszuschläge anfallen?",
      sol:`<div class="step"><b>1.</b> 7.1. + 4 Tage = Samstag, 11.1.2025 → Bekanntgabe verschiebt sich auf Montag, 13.1.2025. Einspruchsfrist: ein Monat → Ende mit Ablauf des <b>13.2.2025</b> (Donnerstag).</div>
 <div class="step"><b>2.</b> 27.3. + 4 = Montag, 31.3.2025 → Bekanntgabe. Zahlungsfrist ein Monat: Einen 31. April gibt es nicht → Ende am <b>30.4.2025</b> (§ 188 Abs. 3 BGB), Mittwoch.</div>
 <div class="step"><b>3.</b> Beim Lebensalter zählt der Geburtstag mit (§ 187 Abs. 2 S. 2 BGB): Das 18. Lebensjahr ist mit Ablauf des <b>25.8.2018</b> vollendet.</div>
-<div class="step"><b>4.</b> 29.9. + 4 = Freitag, 3.10.2025 (Tag der Deutschen Einheit) → nächster Werktag ist Montag, 6.10.2025 = Bekanntgabe. Fälligkeit einen Monat später: Donnerstag, 6.11.2025. Schonfrist von drei Tagen bei Überweisung: bis 9.11.2025 (Sonntag) → verschiebt sich auf <b>Montag, 10.11.2025</b>. Maßgeblich ist die Gutschrift auf dem Konto des Finanzamts.</div>`,src:{k:"q",d:"AO-Skript 2026",s:85}},
+<div class="step"><b>4.</b> 29.9. + 4 = Freitag, 3.10.2025 (Tag der Deutschen Einheit) → nächster Werktag ist Montag, 6.10.2025 = Bekanntgabe. Fälligkeit einen Monat später: Donnerstag, 6.11.2025. Schonfrist von drei Tagen bei Überweisung: bis 9.11.2025 (Sonntag) → verschiebt sich auf <b>Montag, 10.11.2025</b>. Maßgeblich ist die Gutschrift auf dem Konto des Finanzamts.</div>`,lid:"ao-fristen",diff:2,hint:"Schema für jede Frist: Ereignis bestimmen → Beginn (Folgetag) → Ende nach §§ 187, 188 BGB → Wochenende/Feiertag prüfen.",src:{k:"q",d:"AO-Skript 2026",s:85}},
     {t:"Festsetzungsverjährung in fünf Fällen",lvl:"Verjährung · §§ 169–171 AO",
      task:"<b>1.</b> Arbeitnehmerin B (nicht erklärungspflichtig) reicht im April 2021 ihre Erklärung 2020 ein, um eine Erstattung zu bekommen. Das Finanzamt bearbeitet sie versehentlich nicht; 2025 fällt es auf. Kann 2025 noch festgesetzt werden?<br><b>2.</b> Selbständige C reicht ihre (Pflicht-)Erklärung 2019 im April 2020 ein. Auch sie bleibt liegen und wird 2025 entdeckt. Kann noch festgesetzt werden?<br><b>3.</b> Der geänderte ESt-Bescheid 2019 des A wird am 21.8.2024 bekannt gegeben und enthält erstmals einen Rechenfehler des Finanzamts. Die reguläre Frist endet am 31.12.2024. Bis wann kann nach § 129 AO berichtigt werden?<br><b>4.</b> Rentner F wurde für 2019 nach § 165 Abs. 1 S. 1 AO vorläufig veranlagt (ungewisses Eigentum an einer Immobilie). Reguläres Fristende 31.12.2024; das Urteil ergeht am 18.3.2025, das Finanzamt erfährt davon am 26.6.2025. Bis wann kann geändert werden?<br><b>5.</b> Für die Grundstücksgemeinschaft der G ergeht am 3.2.2025 ein geänderter Feststellungsbescheid 2019. Bis wann kann der ESt-Bescheid 2019 der G angepasst werden?",
      sol:`<div class="step"><b>1.</b> Keine Erklärungspflicht → Fristbeginn mit Ablauf 2020, reguläres Ende 31.12.2024. Aber: Die Erklärung zur Antragsveranlagung ist ein <b>Antrag</b> im Sinne des § 171 Abs. 3 AO → Ablaufhemmung bis zur Entscheidung. <b>Ja</b>, die Festsetzung ist 2025 noch möglich.</div>
 <div class="step"><b>2.</b> Erklärungspflicht → Anlaufhemmung: Beginn mit Ablauf 2020 (Jahr der Abgabe), Ende 31.12.2024. Eine Pflichterklärung ist kein Antrag nach § 171 Abs. 3 → <b>keine</b> Ablaufhemmung, 2025 ist Festsetzungsverjährung eingetreten.</div>
 <div class="step"><b>3.</b> § 171 Abs. 2 AO: Die Frist endet nicht vor Ablauf eines Jahres nach Bekanntgabe des Bescheids, der den Fehler erstmals enthält → Berichtigung bis <b>21.8.2025</b>.</div>
 <div class="step"><b>4.</b> § 171 Abs. 8 S. 1 AO (tatsächliche Ungewissheit): ein Jahr nach Kenntnis des Finanzamts vom Wegfall der Ungewissheit → bis <b>26.6.2026</b>.</div>
-<div class="step"><b>5.</b> § 171 Abs. 10 AO: zwei Jahre nach Bekanntgabe des Grundlagenbescheids → bis <b>3.2.2027</b> (Änderung nach § 175 Abs. 1 Nr. 1 AO).</div>`,src:{k:"m",d:"AO-Skript 2026",s:125}},
+<div class="step"><b>5.</b> § 171 Abs. 10 AO: zwei Jahre nach Bekanntgabe des Grundlagenbescheids → bis <b>3.2.2027</b> (Änderung nach § 175 Abs. 1 Nr. 1 AO).</div>`,lid:"m1l2",diff:3,hint:"Für jeden Fall: Regelfrist (4 Jahre), Beginn mit Anlaufhemmung, dann prüfen, ob eine Ablaufhemmung nach § 171 AO das Ende hinausschiebt.",src:{k:"m",d:"AO-Skript 2026",s:125}},
     {t:"Welche Korrekturvorschrift greift?",lvl:"Korrektur · §§ 129–177 AO",
      task:"Alle Bescheide sind bestandskräftig und nicht vorbehaltlich oder vorläufig ergangen.<br><b>1.</b> Die Steuerpflichtige erklärt Mieteinkünfte von +2.000 €, der Bearbeiter erfasst versehentlich −2.000 €.<br><b>2.</b> Das Finanzamt hat erklärte Fortbildungskosten bewusst nicht anerkannt, weil der Bearbeiter sie rechtlich für privat hielt — zu Unrecht.<br><b>3.</b> Die Steuerpflichtige addiert ihre Spenden falsch (240 € statt 200 €) und trägt den falschen Betrag ein.<br><b>4.</b> Die Krankenkasse hat Basisbeiträge von 3.000 € übermittelt; das Finanzamt hat die erklärten 2.000 € übernommen.<br><b>5.</b> Wie Fall 2, aber zusätzlich erfährt das Finanzamt von verschwiegenen Zinsen aus einem Privatdarlehen (Steuerwirkung +1.000 €, Fortbildung −600 €).",
      sol:`<div class="step"><b>1.</b> Mechanischer Übertragungsfehler des Finanzamts → <b>§ 129 AO</b>.</div>
@@ -726,7 +740,24 @@ export const DATA = [
 <div class="step"><b>3.</b> Rechenfehler des Steuerpflichtigen bei Erstellung der Erklärung → <b>§ 173a AO</b> (Änderung zu seinen Lasten).</div>
 <div class="step"><b>4.</b> Übermittelte Daten wurden nicht zutreffend berücksichtigt → <b>§ 175b Abs. 1 AO</b> (zu Gunsten).</div>
 <div class="step"><b>5.</b> Neue Tatsache zu Ungunsten → § 173 Abs. 1 Nr. 1 AO (+1.000 €); im Rahmen dieser Änderung wird der Rechtsfehler nach <b>§ 177 AO</b> mitberichtigt (−600 €) → Saldo +400 €.</div>
-<span class="res">Merke: Erst die Fehlerart bestimmen, dann die Vorschrift</span>`,src:{k:"m",d:"AO-Skript 2026",s:169}}
+<span class="res">Merke: Erst die Fehlerart bestimmen, dann die Vorschrift</span>`,lid:"ao-korrektur",diff:3,hint:"Zuerst prüfen, ob der Bescheid noch offen ist (Vorbehalt, vorläufig). Erst danach die Einzelvorschriften §§ 129, 172, 173, 175 durchgehen.",src:{k:"m",d:"AO-Skript 2026",s:169}},
+    {t:"Verspätungszuschlag berechnen",lvl:"Vertiefung · § 152 AO",lid:"ao-ermittlung",diff:2,hint:"Je angefangenen Monat der Verspätung 0,25 % der Steuer nach Abzug von Vorauszahlungen und Steuerabzügen – mindestens 25 € je angefangenen Monat bei Jahreserklärungen.",
+     task:"Eine steuerlich beratene Mandantin musste ihre Einkommensteuererklärung 2024 bis zum <b>30.4.2026</b> abgeben. Die Erklärung geht am <b>15.9.2026</b> ein. Festgesetzte Einkommensteuer 14.000 €, Lohnsteuer 8.000 €, keine Vorauszahlungen.<br><b>a)</b> Wie viele angefangene Monate der Verspätung liegen vor?<br><b>b)</b> Wie hoch ist der Verspätungszuschlag?<br><b>c)</b> Wie wäre es bei einer Abschlusszahlung von 20.000 €?",
+     sol:`<div class="step"><b>a)</b> Verspätung vom 1.5.2026 bis 15.9.2026: Mai, Juni, Juli, August und der angefangene September → <b>5 angefangene Monate</b>.</div>
+<div class="step"><b>b)</b> Bemessung: 14.000 € − 8.000 € = 6.000 €. 0,25 % × 6.000 € = 15 € je Monat — weniger als der Mindestbetrag von 25 €. Also 25 € × 5 = <b>125 €</b>.</div>
+<div class="step"><b>c)</b> 0,25 % × 20.000 € = 50 € je Monat × 5 = <b>250 €</b> (über dem Mindestbetrag).</div>
+<div class="step">Der Zuschlag wird zusammen mit dem Steuerbescheid festgesetzt (§ 152 Abs. 11 AO); Höchstbetrag 25.000 €.</div>`,src:{k:"m",d:"AO-Skript 2026",s:43}},
+    {t:"Säumniszuschlag und Schonfrist",lvl:"Vertiefung · § 240 AO",lid:"m1l1",diff:2,hint:"Säumniszuschläge: 1 % je angefangenen Monat auf den auf volle 50 € abgerundeten Rückstand. Bei Überweisung gibt es drei Tage Schonfrist.",
+     task:"Eine Abschlusszahlung von 2.387 € ist am Montag, 5.10.2026, fällig. Der Mandant überweist; das Geld wird dem Finanzamt am <b>a)</b> 7.10.2026, <b>b)</b> 12.10.2026, <b>c)</b> 6.11.2026 gutgeschrieben. Welche Säumniszuschläge fallen an?",
+     sol:`<div class="step">Rückstand auf volle 50 € abrunden: 2.350 €. 1 % = 23,50 € je angefangenen Monat.</div>
+<div class="step"><b>a)</b> Gutschrift innerhalb der dreitägigen Schonfrist (bis 8.10.2026) → <b>keine</b> Säumniszuschläge (§ 240 Abs. 3 AO).</div>
+<div class="step"><b>b)</b> Nach der Schonfrist: Die Säumnis beginnt mit Ablauf des Fälligkeitstags; ein angefangener Monat → <b>23,50 €</b>.</div>
+<div class="step"><b>c)</b> Zeitraum ab 6.10.2026: erster Monat bis 5.11., der 6.11. beginnt den zweiten Monat → <b>47,00 €</b>.</div>`,src:{k:"m",d:"AO-Skript 2026",s:86}},
+    {t:"Einspruch gegen den richtigen Bescheid",lvl:"Vertiefung · Grundlagen- und Folgebescheid",lid:"ao-feststellung",diff:3,hint:"Einwendungen gegen Feststellungen im Grundlagenbescheid können nur durch Anfechtung des Grundlagenbescheids geltend gemacht werden (§ 351 Abs. 2 AO). Der Folgebescheid wird automatisch angepasst (§ 175 Abs. 1 Nr. 1 AO).",
+     task:"Ein Gesellschafter einer KG erhält einen Einkommensteuerbescheid, in dem sein Gewinnanteil mit 80.000 € angesetzt ist. Er meint, richtig seien 60.000 €. Außerdem fehlen in seinem Bescheid Spenden von 1.000 €.<br><b>a)</b> Wogegen muss er sich jeweils wenden?<br><b>b)</b> Was passiert mit seinem Einkommensteuerbescheid, wenn der Feststellungsbescheid später geändert wird?",
+     sol:`<div class="step"><b>a)</b> Gewinnanteil: Er ist im Feststellungsbescheid der KG festgestellt (§ 180 Abs. 1 Nr. 2a AO) — Einspruch gegen den <b>Feststellungsbescheid</b>. Ein Einspruch gegen den Einkommensteuerbescheid wäre insoweit unzulässig (§ 351 Abs. 2 AO).</div>
+<div class="step">Spenden: Sie betreffen nur seine persönliche Veranlagung — Einspruch gegen den <b>Einkommensteuerbescheid</b>.</div>
+<div class="step"><b>b)</b> Der Einkommensteuerbescheid (Folgebescheid) wird an den geänderten Grundlagenbescheid angepasst (§ 175 Abs. 1 S. 1 Nr. 1 AO). Die Festsetzungsfrist des Folgebescheids läuft frühestens zwei Jahre nach Bekanntgabe des Grundlagenbescheids ab (§ 171 Abs. 10 AO).</div>`,src:{k:"q",d:"AO Kapitel E – Gesonderte Feststellungen",s:7}}
   ]
 },
 {
@@ -1058,52 +1089,81 @@ export const DATA = [
      sol:`<div class="step">Bruttolohn 62.000 − Arbeitnehmer-Pauschbetrag 1.230 = Einkünfte 60.770 €</div>
 <div class="step">Sonderausgaben: KV/PV 4.200 + Kirchensteuer 350 + Spenden 500 = 5.050 €</div>
 <div class="step">zvE = 60.770 − 5.050 = <span class="res">55.720 €</span></div>
-<div class="step">Der Spitzensteuersatz (42 % ab 69.879 €) ist noch nicht erreicht — sie liegt in der oberen Progressionszone.</div>`,src:{k:"m",d:"ESt-Handout 02 – Amtliche Vordrucke",s:17}},
+<div class="step">Der Spitzensteuersatz (42 % ab 69.879 €) ist noch nicht erreicht — sie liegt in der oberen Progressionszone.</div>`,lid:"m2l0",diff:1,hint:"Schema: Einkünfte → Summe/Gesamtbetrag der Einkünfte → minus Sonderausgaben und außergewöhnliche Belastungen → zvE. Den Arbeitnehmer-Pauschbetrag nicht vergessen.",src:{k:"m",d:"ESt-Handout 02 – Amtliche Vordrucke",s:17}},
     {t:"EÜR aufstellen",lvl:"Gewinnermittlung",
      task:"Ein freiberuflicher Texter (EÜR) hat 2026:<br>Honorareinnahmen (zugeflossen) 85.000 €, noch offene Rechnung 5.000 € (noch nicht bezahlt), Bürokosten 8.000 €, Laptop 1.200 € (im Januar gekauft), Fahrtkosten 3.000 €, im Dezember bezahlte aber erst 2027 fällige Fortbildung 2.000 €.<br>Wie hoch ist der Gewinn?",
      sol:`<div class="step">Einnahmen: nur tatsächlich zugeflossen → 85.000 € (die offenen 5.000 € zählen erst bei Zahlung, Zuflussprinzip).</div>
 <div class="step">Ausgaben (Abflussprinzip): Bürokosten 8.000 + Fahrtkosten 3.000 + Fortbildung 2.000 (im Dez. bezahlt → 2026) = 13.000 €.</div>
 <div class="step">Laptop 1.200 € → digitales WG → Sofortabschreibung 1.200 € (sonst über 3 Jahre). Hier voll: −1.200 €.</div>
-<div class="step">Gewinn = 85.000 − 13.000 − 1.200 = <span class="res">70.800 €</span></div>`,src:{k:"e"}},
+<div class="step">Gewinn = 85.000 − 13.000 − 1.200 = <span class="res">70.800 €</span></div>`,lid:"m2l2",diff:1,hint:"EÜR folgt dem Zahlungsfluss. Ausnahmen: Anlagegüter werden über die AfA verteilt, regelmäßig wiederkehrende Zahlungen um den Jahreswechsel nach der Zehn-Tage-Regel.",src:{k:"e"}},
     {t:"Investitionsabzugsbetrag durchrechnen",lvl:"§ 7g EStG",
      task:"Ein Handwerker (Gewinn 90.000 €) plant für 2028 eine Maschine für 50.000 € netto. Er bildet 2026 den maximalen IAB.<br><b>a)</b> Wie hoch ist der IAB 2026 und wie wirkt er auf den Gewinn?<br><b>b)</b> Was passiert 2028 bei der Anschaffung?<br><b>c)</b> Was, wenn er bis 2029 nicht investiert?",
      sol:`<div class="step"><b>a)</b> Max. IAB = 50 % × 50.000 = 25.000 €. Gewinn 2026 sinkt von 90.000 auf <b>65.000 €</b> → sofortige Steuerersparnis.</div>
 <div class="step"><b>b)</b> 2028: Hinzurechnung +25.000 € zum Gewinn, gleichzeitig Sonderabschreibung 20 % × 50.000 = 10.000 € + reguläre AfA. Netto wird der Vorteil teils zurückgeführt, teils verstetigt.</div>
-<div class="step"><b>c)</b> Ohne Investition bis Ende der 3-Jahres-Frist → <b>rückwirkende Auflösung</b> des IAB: Bescheid 2026 wird geändert, <span class="res">Nachzahlung + Zinsen (0,15 %/Monat)</span>.</div>`,src:{k:"e"}},
+<div class="step"><b>c)</b> Ohne Investition bis Ende der 3-Jahres-Frist → <b>rückwirkende Auflösung</b> des IAB: Bescheid 2026 wird geändert, <span class="res">Nachzahlung + Zinsen (0,15 %/Monat)</span>.</div>`,lid:"m2l2",diff:2,hint:"Der IAB senkt den Gewinn vorab um bis zu 50 % der geplanten Kosten. Im Investitionsjahr wird er hinzugerechnet und kann die Anschaffungskosten mindern.",src:{k:"e"}},
     {t:"Pkw: 1-%-Regel vs. E-Auto",lvl:"Dienstwagen",
      task:"Vergleiche den jährlichen geldwerten Vorteil für drei Fahrzeuge (ganzjährige Privatnutzung, 1-%-Methode):<br><b>1.</b> Verbrenner, Bruttolistenpreis 50.000 €<br><b>2.</b> Reines E-Auto, Bruttolistenpreis 50.000 €<br><b>3.</b> Reines E-Auto, Bruttolistenpreis 110.000 €",
      sol:`<div class="step"><b>1.</b> Verbrenner: 1 % × 50.000 = 500/Monat × 12 = <b>6.000 €/Jahr</b>.</div>
 <div class="step"><b>2.</b> E-Auto bis 100.000 €: nur 0,25 % → 0,25 % × 50.000 = 125/Monat × 12 = <b>1.500 €/Jahr</b>.</div>
 <div class="step"><b>3.</b> E-Auto über 100.000 €: 0,5 % → 0,5 % × 110.000 = 550/Monat × 12 = <b>6.600 €/Jahr</b>.</div>
-<div class="step"><span class="res">Das günstige E-Auto spart 4.500 € geldwerten Vorteil pro Jahr gegenüber dem Verbrenner.</span></div>`,src:{k:"e"}},
+<div class="step"><span class="res">Das günstige E-Auto spart 4.500 € geldwerten Vorteil pro Jahr gegenüber dem Verbrenner.</span></div>`,lid:"m2l2",diff:1,hint:"1 % des Bruttolistenpreises pro Monat; bei reinen E-Autos bis 100.000 € nur ein Viertel der Bemessungsgrundlage.",src:{k:"e"}},
     {t:"Gewerbe oder Freiberuf?",lvl:"Abgrenzung",
      task:"Beurteile, ob gewerblich (§ 15, mit Gewerbesteuer) oder freiberuflich (§ 18, ohne):<br><b>1.</b> Eine Ärztin mit eigener Praxis.<br><b>2.</b> Ein Online-Händler, der Waren ein- und weiterverkauft.<br><b>3.</b> Ein selbständiger Programmierer, der individuelle Software entwickelt.<br><b>4.</b> Ein Steuerberater.",
      sol:`<div class="step"><b>1.</b> Ärztin → Katalogberuf → <b>freiberuflich</b> (§ 18), keine GewSt.</div>
 <div class="step"><b>2.</b> Warenhandel ohne eigene Schöpfung → <b>gewerblich</b> (§ 15), GewSt.</div>
 <div class="step"><b>3.</b> Eigenständige Software-Entwicklung → ingenieurähnlich → in der Regel <b>freiberuflich</b> (strittig; reine Anpassung/Installation kann gewerblich sein).</div>
-<div class="step"><b>4.</b> Steuerberater → Katalogberuf → <b>freiberuflich</b>.</div>`,src:{k:"m",d:"ESt-Handout 03 – Grundlagen der Besteuerung",s:95}},
+<div class="step"><b>4.</b> Steuerberater → Katalogberuf → <b>freiberuflich</b>.</div>`,lid:"m2l1",diff:2,hint:"Katalogberuf, ähnlicher Beruf oder Tätigkeitsberuf? Fehlt alles davon, ist es Gewerbe. Bei Personengesellschaften an die Abfärbung denken.",src:{k:"m",d:"ESt-Handout 03 – Grundlagen der Besteuerung",s:95}},
     {t:"Zumutbare Belastung stufenweise berechnen",lvl:"Außergewöhnliche Belastungen",
      task:"Ehepaar mit einem Kind, Zusammenveranlagung, Gesamtbetrag der Einkünfte 40.000 €. Selbst getragene Zahnbehandlung 2.500 €.<br><b>a)</b> Wie hoch ist die zumutbare Belastung?<br><b>b)</b> Wie viel wirkt als außergewöhnliche Belastung?<br><b>c)</b> Wie sieht es bei einem GdE von 80.000 € aus?",
      sol:`<div class="step"><b>a)</b> Sätze für 1–2 Kinder: 2 % / 3 % / 4 %. 2 % von 15.340 € = 306,80 €; 3 % von 24.660 € (40.000 − 15.340) = 739,80 € → zusammen <b>1.046,60 €</b>.</div>
 <div class="step"><b>b)</b> 2.500,00 − 1.046,60 = <b>1.453,40 €</b> außergewöhnliche Belastung.</div>
 <div class="step"><b>c)</b> 306,80 € + 3 % von 35.790 € = 1.073,70 € + 4 % von 28.870 € (80.000 − 51.130) = 1.154,80 € → zumutbare Belastung 2.535,30 €. Sie übersteigt die Kosten — es wirkt <b>nichts</b>.</div>
-<span class="res">Je höher das Einkommen, desto weniger bleibt vom selben Betrag</span>`,src:{k:"q",d:"ESt-Handout 06 – Außergewöhnliche Belastungen",s:8}},
+<span class="res">Je höher das Einkommen, desto weniger bleibt vom selben Betrag</span>`,lid:"m2l4",diff:2,hint:"Die zumutbare Belastung wird stufenweise berechnet: Jeder Prozentsatz gilt nur für den Teil des Gesamtbetrags der Einkünfte in seiner Stufe.",src:{k:"q",d:"ESt-Handout 06 – Außergewöhnliche Belastungen",s:8}},
     {t:"Unterhalt an die Mutter (§ 33a EStG)",lvl:"Unterhalt · Höchstbetrag",
      task:"Die Mutter lebt allein von ihrer Rente; ihre anzusetzenden Einkünfte und Bezüge betragen 8.000 €, ihr Vermögen 4.000 €. Der Sohn überweist ihr monatlich 500 €. Wie hoch ist der Abzug 2026? Abwandlung: Der Sohn bringt das Geld jeden Monat bar vorbei.",
      sol:`<div class="step">Prüfung: gesetzliche Unterhaltspflicht (gerade Linie), kein Kindergeldanspruch, Vermögen unter 15.500 € → begünstigt.</div>
 <div class="step">Höchstbetrag 12.348 € − anrechenbare Einkünfte (8.000 − 624 = 7.376 €) = 4.972 €.</div>
 <div class="step">Aufwendungen 6.000 €, begrenzt auf den gekürzten Höchstbetrag → <b>4.972 €</b>, ohne zumutbare Belastung.</div>
-<div class="step">Abwandlung: Barzahlungen werden nicht anerkannt → <b>0 €</b>.</div>`,src:{k:"q",d:"ESt-Handout 06 – Außergewöhnliche Belastungen",s:15}},
+<div class="step">Abwandlung: Barzahlungen werden nicht anerkannt → <b>0 €</b>.</div>`,lid:"m2l4",diff:2,hint:"Höchstbetrag 12.348 € (+ Basis-KV/PV), eigene Einkünfte und Bezüge der unterstützten Person über 624 € kürzen ihn. Zahlungsweg prüfen.",src:{k:"q",d:"ESt-Handout 06 – Außergewöhnliche Belastungen",s:15}},
     {t:"Splittingvorteil und Günstigerprüfung",lvl:"Tarif 2026",
      task:"<b>a)</b> Ein Ehepaar hat ein gemeinsames zvE von 80.000 €. Nur ein Partner verdient. Wie hoch ist die ESt nach Grund- und Splittingtarif, wie hoch der Vorteil?<br><b>b)</b> Wie ändert sich das, wenn beide je 40.000 € verdienen?<br><b>c)</b> Die Freibeträge für ein Kind sparen dem Paar 3.900 € Steuer. Was ergibt die Günstigerprüfung?",
      sol:`<div class="step"><b>a)</b> Grundtarif auf 80.000 €: 22.464 €. Splitting: ESt auf 40.000 € = 7.209 € × 2 = 14.418 €. Vorteil <b>8.046 €</b>.</div>
 <div class="step"><b>b)</b> Einzeln je 7.209 € = 14.418 €, Splitting ebenfalls 14.418 € → Vorteil <b>0 €</b>.</div>
-<div class="step"><b>c)</b> Kindergeldanspruch 259 € × 12 = 3.108 €. Die Freibeträge sparen mehr (3.900 €) → sie werden abgezogen, das Kindergeld hinzugerechnet. Zusätzlicher Vorteil <b>792 €</b>.</div>`,src:{k:"m",d:"ESt-Handout 03 – Grundlagen der Besteuerung",s:72}},
+<div class="step"><b>c)</b> Kindergeldanspruch 259 € × 12 = 3.108 €. Die Freibeträge sparen mehr (3.900 €) → sie werden abgezogen, das Kindergeld hinzugerechnet. Zusätzlicher Vorteil <b>792 €</b>.</div>`,lid:"est-tarif",diff:2,hint:"Splitting: Tarif auf die Hälfte des gemeinsamen zvE, Ergebnis verdoppeln. Günstigerprüfung: Steuerersparnis durch Freibeträge gegen das Jahreskindergeld.",src:{k:"m",d:"ESt-Handout 03 – Grundlagen der Besteuerung",s:72}},
     {t:"Veräußerung einer vermieteten Wohnung",lvl:"§ 23 EStG",
      task:"Kauf einer Eigentumswohnung 2018 für 300.000 € inklusive Nebenkosten (Gebäudeanteil 240.000 €), seitdem vermietet, AfA 2 %. Verkauf 2026 für 380.000 €, Makler 8.000 €.<br><b>a)</b> Ist der Verkauf steuerbar?<br><b>b)</b> Wie hoch ist der Gewinn?<br><b>c)</b> Was wäre, wenn die Mandantin die Wohnung 2024 bis zum Verkauf selbst bewohnt hätte?",
      sol:`<div class="step"><b>a)</b> Zwischen den Kaufverträgen liegen acht Jahre → innerhalb der Zehnjahresfrist, steuerbar.</div>
 <div class="step"><b>b)</b> AfA 8 Jahre × 4.800 € = 38.400 €. Fortgeführte AK 261.600 €. Gewinn 380.000 − 8.000 − 261.600 = <b>110.400 €</b>.</div>
-<div class="step"><b>c)</b> Eigennutzung im Verkaufsjahr 2026 und den beiden Vorjahren (2024, 2025) — zusammenhängend → <b>nicht steuerbar</b> (§ 23 Abs. 1 Nr. 1 S. 3 EStG).</div>`,src:{k:"m",d:"ESt-Handout 09 – Private Veräußerungsgeschäfte",s:14}}
+<div class="step"><b>c)</b> Eigennutzung im Verkaufsjahr 2026 und den beiden Vorjahren (2024, 2025) — zusammenhängend → <b>nicht steuerbar</b> (§ 23 Abs. 1 Nr. 1 S. 3 EStG).</div>`,lid:"est-23",diff:2,hint:"Drei Prüfschritte: Frist zwischen den Notarverträgen? Ausnahme Eigennutzung? Gewinn = Preis − Kosten − (AK minus in Anspruch genommene AfA).",src:{k:"m",d:"ESt-Handout 09 – Private Veräußerungsgeschäfte",s:14}},
+    {t:"Verbilligte Vermietung an die Tochter",lvl:"Vertiefung · § 21 Abs. 2 EStG",lid:"m2l3",diff:2,hint:"Vergleichsmaßstab ist die ortsübliche Warmmiete. Ab 66 % voller Werbungskostenabzug, zwischen 50 und 66 % Prognose, unter 50 % Aufteilung.",
+     task:"Ein Mandant vermietet eine Wohnung an seine Tochter für 450 € monatlich warm. Ortsübliche Miete: 600 € kalt + 150 € Nebenkosten. Werbungskosten im Jahr 9.000 €.<br><b>a)</b> Wie hoch ist der Prozentsatz?<br><b>b)</b> Welche Werbungskosten sind abziehbar?<br><b>c)</b> Was gilt bei einer Miete von 500 € warm?",
+     sol:`<div class="step"><b>a)</b> 450 € / 750 € = <b>60 %</b> — zwischen 50 % und 66 %.</div>
+<div class="step"><b>b)</b> Totalüberschussprognose: Fällt sie positiv aus, voller Abzug der 9.000 €; fällt sie negativ aus, Aufteilung — nur 60 % = <b>5.400 €</b> abziehbar.</div>
+<div class="step"><b>c)</b> 500 € / 750 € = 66,7 % → gilt als voll entgeltlich: <b>9.000 €</b> abziehbar, ohne Prognose.</div>
+<div class="step">Mietvertrag unter Angehörigen: schriftlich, fremdüblich und tatsächlich durchgeführt.</div>`,src:{k:"q",d:"ESt-Handout 08 – Vermietungseinkünfte",s:15}},
+    {t:"Kapitalerträge: Verlustverrechnung und Sparer-Pauschbetrag",lvl:"Vertiefung · § 20 EStG",lid:"m2l3",diff:2,hint:"Aktienverluste dürfen nur mit Aktiengewinnen verrechnet werden. Der Sparer-Pauschbetrag (1.000 €) mindert erst die verbleibenden Erträge. Verrechnung zwischen Banken nur mit Verlustbescheinigung.",
+     task:"Eine ledige Mandantin hat 2026 bei Bank A: Zinsen 400 €, Dividenden 900 €, Verlust aus Aktienverkauf 1.500 €. Bei Bank B: Gewinn aus Aktienverkauf 2.000 €. Freistellungsauftrag nur bei Bank A (1.000 €). Sie hat bis 15.12. eine Verlustbescheinigung bei Bank A beantragt.<br>Wie hoch sind die steuerpflichtigen Kapitalerträge in der Veranlagung?",
+     sol:`<div class="step">Bank A: Aktienverlust 1.500 € kann nicht mit Zinsen und Dividenden verrechnet werden → er wird bescheinigt (Verlustbescheinigung).</div>
+<div class="step">In der Veranlagung: Aktiengewinn Bank B 2.000 € − Aktienverlust 1.500 € = 500 €.</div>
+<div class="step">Übrige Erträge: Zinsen 400 € + Dividenden 900 € = 1.300 €. Zusammen 1.800 € − Sparer-Pauschbetrag 1.000 € = <b>800 €</b> zu 25 %.</div>
+<span class="res">200 € Abgeltungsteuer (zzgl. SolZ/KiSt), Anrechnung der einbehaltenen Steuer</span>`,src:{k:"m",d:"ESt-Handout 10 – Kapitaleinkünfte",s:8}},
+    {t:"Geschenke an Geschäftsfreunde",lvl:"Vertiefung · § 4 Abs. 5 Nr. 1 EStG",lid:"est-abzug",diff:1,hint:"Je Empfänger und Jahr alle Geschenke addieren. 50 € ist eine Freigrenze: darüber ist alles nicht abziehbar. Bei Vorsteuerabzug zählt der Nettobetrag.",
+     task:"Ein vorsteuerabzugsberechtigter Unternehmer macht im Jahr folgende Geschenke:<br>Kunde A: Wein zu Weihnachten 40 € netto.<br>Kunde B: Buch im Mai 25 € netto und Präsentkorb im Dezember 35 € netto.<br>Kunde C: Blumen 30 € netto, außerdem eine Einladung zum Geschäftsessen (60 € netto).<br>Was ist als Betriebsausgabe abziehbar?",
+     sol:`<div class="step">Kunde A: 40 € ≤ 50 € → <b>40 €</b> abziehbar (gesondert aufgezeichnet).</div>
+<div class="step">Kunde B: 25 € + 35 € = 60 € > 50 € → <b>0 €</b> abziehbar, Vorsteuer aus beiden Geschenken nicht abziehbar (§ 15 Abs. 1a UStG).</div>
+<div class="step">Kunde C: Blumen 30 € → abziehbar. Das Geschäftsessen ist kein Geschenk, sondern Bewirtung → 70 % von 60 € = 42 €.</div>
+<span class="res">Abziehbar: 40 + 30 + 42 = 112 €</span>`,src:{k:"m",d:"ESt-Handout 15 – Beschränkung des Betriebsausgabenabzugs",s:9}},
+    {t:"Teilentgeltliche Übertragung eines Mietshauses",lvl:"Vertiefung · Vermögensnachfolge",lid:"est-nachfolge",diff:3,hint:"Verhältnis Gegenleistung zu Verkehrswert bestimmen. Der entgeltliche Teil wird wie ein Kauf behandelt (eigene AfA), der unentgeltliche Teil führt die Werte des Übergebers fort.",
+     task:"Die Mutter überträgt ein vermietetes Haus (Verkehrswert 800.000 €, davon Gebäude 600.000 €) auf ihren Sohn. Der Sohn zahlt seiner Schwester ein Gleichstellungsgeld von 200.000 €. Die Mutter hatte das Gebäude für 400.000 € gekauft und schreibt jährlich 8.000 € (2 %) ab.<br><b>a)</b> Zu welchem Anteil ist die Übertragung entgeltlich?<br><b>b)</b> Wie hoch ist die AfA des Sohnes?",
+     sol:`<div class="step"><b>a)</b> 200.000 € / 800.000 € = <b>25 % entgeltlich</b>, 75 % unentgeltlich.</div>
+<div class="step"><b>b) Entgeltlicher Teil:</b> Anschaffungskosten Gebäude 25 % × 600.000 € = 150.000 € — davon 2 % (Gebäude nach 1924, Wohnzwecke) = 3.000 €.</div>
+<div class="step"><b>Unentgeltlicher Teil:</b> Fortführung der AfA der Mutter zu 75 %: 75 % × 8.000 € = 6.000 € (§ 11d EStDV).</div>
+<span class="res">AfA des Sohnes: 9.000 € jährlich</span>`,src:{k:"m",d:"ESt-Handout 12 – Komplexe Rechtsverhältnisse",s:10}},
+    {t:"Entlastungsbetrag für Alleinerziehende mit Zwölftelung",lvl:"Vertiefung · § 24b EStG",lid:"est-kinder",diff:1,hint:"4.260 € für das erste Kind, 240 € für jedes weitere. Für jeden vollen Monat ohne Voraussetzungen ein Zwölftel weniger.",
+     task:"Eine Mutter lebt mit ihren zwei Kindern (beide mit Kindergeldanspruch) allein. Am 15. August zieht ihr neuer Partner ein. Wie hoch ist der Entlastungsbetrag 2026?",
+     sol:`<div class="step">Jahresbetrag: 4.260 € + 240 € = 4.500 €.</div>
+<div class="step">Voraussetzungen erfüllt von Januar bis August (der Monat des Einzugs zählt noch, wenn die Voraussetzungen an mindestens einem Tag vorlagen) = 8 Monate.</div>
+<div class="step">4.500 € × 8/12 = <b>3.000 €</b>.</div>`,src:{k:"m",d:"ESt-Handout 07 – Familienleistungsausgleich",s:19}}
   ]
 },
 {
@@ -1240,35 +1300,46 @@ export const DATA = [
      task:"Ein Arbeitgeber will einem Mitarbeiter 100 €/Monat mehr zukommen lassen. Vergleiche zwei Wege:<br><b>A)</b> Bruttolohnerhöhung um 100 €.<br><b>B)</b> 50 € Sachbezug (Tankgutschein) + 50 €/Monat steuerfreier Zuschuss aus dem Gesundheitsbudget (600 €/Jahr).<br>Welcher Weg bringt dem Mitarbeiter netto mehr — und warum?",
      sol:`<div class="step"><b>A)</b> 100 € brutto: davon gehen Lohnsteuer + Sozialabgaben ab (zusammen oft 35–45 %). Netto bleiben ca. <b>55–65 €</b>.</div>
 <div class="step"><b>B)</b> 50 € Sachbezug (Freigrenze § 8 Abs. 2) + 50 € Gesundheitsförderung (§ 3 Nr. 34) → beide steuer- und sozialabgabenfrei. Netto bleiben volle <b>100 €</b>.</div>
-<div class="step"><span class="res">Weg B bringt rund 40 € mehr netto pro Monat</span> — und der Arbeitgeber spart zusätzlich die Lohnnebenkosten.</div>`,src:{k:"m",d:"ESt-Handout 11 – Lohnsteuerrecht",s:11}},
+<div class="step"><span class="res">Weg B bringt rund 40 € mehr netto pro Monat</span> — und der Arbeitgeber spart zusätzlich die Lohnnebenkosten.</div>`,lid:"m3l1",diff:1,hint:"Welche Leistungen sind nach § 3 EStG steuerfrei, und kommen sie zusätzlich zum ohnehin geschuldeten Lohn?",src:{k:"m",d:"ESt-Handout 11 – Lohnsteuerrecht",s:11}},
     {t:"Sachbezugs-Freigrenze prüfen",lvl:"Freigrenze",
      task:"Beurteile, ob steuerfrei:<br><b>1.</b> Tankgutschein 50 €/Monat.<br><b>2.</b> Warengutschein 51 €/Monat.<br><b>3.</b> Eine offene Prepaid-Kreditkarte mit 45 €, bar abhebbar.<br><b>4.</b> Geburtstagsgeschenk (Buch) im Wert von 55 €.",
      sol:`<div class="step"><b>1.</b> 50 € → genau die Freigrenze ausgeschöpft → <b>steuerfrei</b>.</div>
 <div class="step"><b>2.</b> 51 € → Freigrenze um 1 € überschritten → <b>der gesamte Betrag (51 €) ist steuerpflichtig</b> (Freigrenze, kein Freibetrag).</div>
 <div class="step"><b>3.</b> Bar abhebbar → gilt als Geldleistung → <b>voll steuerpflichtig</b>, unabhängig vom Betrag.</div>
-<div class="step"><b>4.</b> Aufmerksamkeit zum persönlichen Anlass bis 60 € → <b>steuerfrei</b> (eigene Grenze, getrennt von den 50 €).</div>`,src:{k:"m",d:"ESt-Handout 15 – Beschränkung des Betriebsausgabenabzugs",s:10}},
+<div class="step"><b>4.</b> Aufmerksamkeit zum persönlichen Anlass bis 60 € → <b>steuerfrei</b> (eigene Grenze, getrennt von den 50 €).</div>`,lid:"m3l1",diff:1,hint:"50 € im Monat sind eine Freigrenze. Erst prüfen: Ist es überhaupt ein Sachbezug (kein Geld, kein frei verwendbares Guthaben)?",src:{k:"m",d:"ESt-Handout 15 – Beschränkung des Betriebsausgabenabzugs",s:10}},
     {t:"Minijob beurteilen",lvl:"Geringfügigkeit",
      task:"Eine Aushilfe verdient 2026 monatlich 600 €. In zwei Monaten fällt zusätzlich eine Einmalzahlung von je 200 € an.<br><b>a)</b> Liegt der reguläre Verdienst unter der Minijob-Grenze?<br><b>b)</b> Was bewirken die Einmalzahlungen?<br><b>c)</b> Wie wird der Minijob pauschal versteuert?",
      sol:`<div class="step"><b>a)</b> Minijob-Grenze 2026 = 603 €/Monat. 600 € liegen knapp darunter → grundsätzlich Minijob.</div>
 <div class="step"><b>b)</b> Maßgeblich ist der Jahresdurchschnitt: 600 × 12 + 400 = 7.600 € ÷ 12 = 633 €/Monat → <b>über</b> der Jahresgrenze (7.236 €) → die Beschäftigung wird sozialversicherungspflichtig.</div>
-<div class="step"><b>c)</b> Bei echtem Minijob: <span class="res">2 % Pauschsteuer</span> (inkl. SolZ + KiSt), die der Arbeitgeber trägt.</div>`,src:{k:"e"}},
+<div class="step"><b>c)</b> Bei echtem Minijob: <span class="res">2 % Pauschsteuer</span> (inkl. SolZ + KiSt), die der Arbeitgeber trägt.</div>`,lid:"m3l0",diff:1,hint:"Verdienstgrenze 2026: 603 € im Monat. Gelegentliches unvorhersehbares Überschreiten ist unschädlich, regelmäßiges nicht.",src:{k:"e"}},
     {t:"Dienstwagen: Verbrenner oder Elektro?",lvl:"Sachbezüge · § 8 EStG",
      task:"Eine Arbeitnehmerin darf ihren Dienstwagen privat nutzen und fährt damit an 220 Tagen 18 km ins Büro. Listenpreis inklusive Sonderausstattung 52.380 €.<br><b>a)</b> Geldwerter Vorteil je Monat als Verbrenner?<br><b>b)</b> Als reines Elektroauto?<br><b>c)</b> Was kann sie als Werbungskosten für die Fahrten ansetzen?",
      sol:`<div class="step">Listenpreis auf volle 100 € abrunden: 52.300 €.</div>
 <div class="step"><b>a)</b> 1 % = 523,00 € + 0,03 % × 18 km = 282,42 € → <b>805,42 €</b> monatlich.</div>
 <div class="step"><b>b)</b> Ein Viertel der Bemessungsgrundlage: 130,75 € + 70,61 € = <b>201,36 €</b> monatlich.</div>
-<div class="step"><b>c)</b> Entfernungspauschale unabhängig vom Dienstwagen: 18 km × 0,38 € × 220 Tage = <b>1.504,80 €</b> — über dem Pauschbetrag von 1.230 €.</div>`,src:{k:"m",d:"ESt-Handout 11 – Lohnsteuerrecht",s:15}},
+<div class="step"><b>c)</b> Entfernungspauschale unabhängig vom Dienstwagen: 18 km × 0,38 € × 220 Tage = <b>1.504,80 €</b> — über dem Pauschbetrag von 1.230 €.</div>`,lid:"lst-dienstwagen",diff:2,hint:"Listenpreis auf volle 100 € abrunden, dann 1 % plus 0,03 % je Entfernungskilometer. Beim E-Auto ein Viertel der Bemessungsgrundlage.",src:{k:"m",d:"ESt-Handout 11 – Lohnsteuerrecht",s:15}},
     {t:"Dienstreise abrechnen",lvl:"Reisekosten",
      task:"Ein Arbeitnehmer fährt mit dem eigenen Pkw zu einem Kunden (einfache Strecke 150 km). Abfahrt Montag 7 Uhr, Rückkehr Mittwoch 19 Uhr. Das Hotel kostet 2 × 110 € inklusive Frühstück; am Dienstag lädt der Kunde ihn zum Mittagessen ein, das Hotel ist vom Arbeitgeber gebucht. Was kann der Arbeitgeber steuerfrei erstatten?",
      sol:`<div class="step">Fahrtkosten: 300 km × 0,30 € = <b>90,00 €</b>.</div>
 <div class="step">Verpflegung: Anreisetag 14 €, Zwischentag 28 €, Abreisetag 14 € = 56 €. Kürzung für zwei vom Arbeitgeber veranlasste Frühstücke: 2 × 5,60 € = 11,20 €. Das Mittagessen des Kunden ist keine Arbeitgebermahlzeit → keine Kürzung. Ergebnis <b>44,80 €</b>.</div>
 <div class="step">Übernachtung: tatsächliche Kosten 220 € (das Frühstück ist über die Kürzung der Pauschale erfasst).</div>
-<span class="res">Steuerfrei erstattbar: 354,80 €</span>`,src:{k:"m",d:"ESt-Handout 11 – Lohnsteuerrecht",s:16}},
+<span class="res">Steuerfrei erstattbar: 354,80 €</span>`,lid:"m3l2",diff:2,hint:"Fahrtkosten 0,30 € je gefahrenem km, Verpflegung 14/28/14 €, Kürzung für gestellte Mahlzeiten – aber nur für Mahlzeiten, die der Arbeitgeber veranlasst hat.",src:{k:"m",d:"ESt-Handout 11 – Lohnsteuerrecht",s:16}},
     {t:"Freier Mitarbeiter oder Arbeitnehmer?",lvl:"Arbeitnehmerbegriff · Haftung",
      task:"Ein Grafiker arbeitet seit drei Jahren ausschließlich für eine Werbeagentur, nutzt dort einen Arbeitsplatz, nimmt an den Teambesprechungen teil und stellt monatlich eine gleichbleibende Rechnung. Wie ist er einzuordnen, welches Risiko trägt die Agentur und was ist zu raten?",
      sol:`<div class="step">Weisungsgebundenheit und Eingliederung (fester Arbeitsplatz, Teamstruktur), kein erkennbares Unternehmerrisiko (feste Vergütung, nur ein Auftraggeber) → spricht deutlich für ein <b>Arbeitsverhältnis</b>. Rechnung und Gewerbeanmeldung ändern daran nichts.</div>
 <div class="step">Risiko: Haftung der Agentur für nicht einbehaltene Lohnsteuer (§ 42d EStG) und Nachforderung der Sozialversicherungsbeiträge — beim Arbeitnehmeranteil weitgehend ohne Rückgriff.</div>
-<div class="step">Rat: Vertrag und tatsächliche Durchführung prüfen, Statusfeststellung bei der Deutschen Rentenversicherung beantragen und eine Anrufungsauskunft nach § 42e EStG einholen.</div>`,src:{k:"m",d:"ESt-Handout 11 – Lohnsteuerrecht",s:7}}
+<div class="step">Rat: Vertrag und tatsächliche Durchführung prüfen, Statusfeststellung bei der Deutschen Rentenversicherung beantragen und eine Anrufungsauskunft nach § 42e EStG einholen.</div>`,lid:"lst-arbeitgeber",diff:2,hint:"Gesamtbild: Weisungen, Eingliederung, Unternehmerrisiko. Danach: Wer haftet, und wie kann man sich absichern?",src:{k:"m",d:"ESt-Handout 11 – Lohnsteuerrecht",s:7}},
+    {t:"Geburtstag, Weihnachtsfeier und Sommerfest",lvl:"Vertiefung · Aufmerksamkeiten · Betriebsveranstaltungen",lid:"m3l1",diff:2,hint:"Aufmerksamkeiten bis 60 € sind eine Freigrenze. Betriebsveranstaltungen: 110 € Freibetrag je Veranstaltung, höchstens zwei im Jahr.",
+     task:"Ein Arbeitnehmer erhält:<br><b>1.</b> zum 40. Geburtstag einen Blumenstrauß und ein Buch für zusammen 55 €,<br><b>2.</b> zu Weihnachten einen Präsentkorb für 45 €,<br><b>3.</b> die Teilnahme an der Weihnachtsfeier (Kosten je Teilnehmer 150 €),<br><b>4.</b> die Teilnahme an einem Sommerfest (90 €) und einem Betriebsausflug (100 €).<br>Was ist Arbeitslohn?",
+     sol:`<div class="step"><b>1.</b> Persönlicher Anlass, Sachzuwendung bis 60 € → kein Arbeitslohn.</div>
+<div class="step"><b>2.</b> Weihnachten ist kein persönlicher Anlass → Sachbezug; steuerfrei nur über die 50-€-Monatsfreigrenze, wenn im Dezember keine weiteren Sachbezüge anfallen.</div>
+<div class="step"><b>3./4.</b> Der Freibetrag von 110 € gilt für höchstens <b>zwei</b> Veranstaltungen; der Arbeitgeber darf wählen, welche. Am günstigsten: Weihnachtsfeier (150 € − 110 € = 40 €) und Betriebsausflug (100 € − 100 € = 0 €). Das Sommerfest ist dann voll Arbeitslohn (90 €).</div>
+<span class="res">Arbeitslohn aus Veranstaltungen: 130 € (Pauschalierung mit 25 % möglich)</span>`,src:{k:"m",d:"ESt-Handout 11 – Lohnsteuerrecht",s:11}},
+    {t:"Homeoffice oder Arbeitszimmer?",lvl:"Vertiefung · Werbungskosten",lid:"m3l2",diff:1,hint:"Tagespauschale 6 € je Homeoffice-Tag, höchstens 1.260 €. Für denselben Tag nicht zusätzlich die Entfernungspauschale. Arbeitszimmer voll nur als Mittelpunkt der gesamten Tätigkeit.",
+     task:"Eine Arbeitnehmerin arbeitet 2026 an 120 Tagen im Homeoffice und fährt an 100 Tagen 20 km ins Büro. Sie hat kein abgeschlossenes Arbeitszimmer. Wie hoch sind ihre Werbungskosten aus Homeoffice und Fahrten? Lohnt sich der Einzelnachweis?",
+     sol:`<div class="step">Tagespauschale: 120 Tage × 6 € = 720 € (unter dem Höchstbetrag von 1.260 €).</div>
+<div class="step">Entfernungspauschale: 100 Tage × 20 km × 0,38 € = 760 €.</div>
+<div class="step">Zusammen <b>1.480 €</b> > Arbeitnehmer-Pauschbetrag 1.230 € → Einzelnachweis lohnt sich (+ 250 €, zuzüglich weiterer Werbungskosten).</div>`,src:{k:"m",d:"ESt-Handout 11 – Lohnsteuerrecht",s:19}}
   ]
 },
 {
@@ -1413,38 +1484,49 @@ export const DATA = [
      task:"Ein Einzelunternehmer (Gemeinde mit Hebesatz 380 %) hat einen Gewerbeertrag (vor Freibetrag) von 100.000 €. Keine Hinzurechnungen/Kürzungen.<br><b>a)</b> Wie hoch ist die Gewerbesteuer?<br><b>b)</b> Wie wirkt die Anrechnung nach § 35 EStG?",
      sol:`<div class="step"><b>a)</b> Gewerbeertrag 100.000 − Freibetrag 24.500 = 75.500 €. × 3,5 % = Messbetrag 2.642 €. × 380 % Hebesatz = <b>GewSt 10.040 €</b>.</div>
 <div class="step"><b>b)</b> § 35 EStG: 4,0 × Messbetrag = 4,0 × 2.642 = 10.568 € werden auf die ESt angerechnet. Da 10.568 > 10.040, wird die GewSt <b>vollständig</b> neutralisiert.</div>
-<div class="step"><span class="res">Effektive GewSt-Belastung beim Einzelunternehmer: praktisch 0 € (bei Hebesatz 380 %).</span></div>`,src:{k:"m",d:"ESt-Handout 13 – Gewerbesteuerrecht",s:17}},
+<div class="step"><span class="res">Effektive GewSt-Belastung beim Einzelunternehmer: praktisch 0 € (bei Hebesatz 380 %).</span></div>`,lid:"m4l0",diff:1,hint:"Gewerbeertrag auf volle 100 € abrunden, Freibetrag 24.500 € abziehen, × 3,5 % = Messbetrag, × Hebesatz = Gewerbesteuer.",src:{k:"m",d:"ESt-Handout 13 – Gewerbesteuerrecht",s:17}},
     {t:"GewSt bei der GmbH (keine Anrechnung)",lvl:"GewSt",
      task:"Eine GmbH (Hebesatz 450 %) hat einen Gewinn von 250.000 €. Hinzurechnungen nach § 8: Schuldzinsen, die nach dem 200.000-€-Freibetrag mit 12.000 € einzubeziehen sind.<br>Berechne die Gewerbesteuer.",
      sol:`<div class="step">Hinzurechnung: 25 % × 12.000 = 3.000 €. Gewerbeertrag = 250.000 + 3.000 = 253.000 €.</div>
 <div class="step">Kein Freibetrag (GmbH). × 3,5 % = Messbetrag 8.855 €.</div>
 <div class="step">× 450 % Hebesatz = 39.847,50 € → <span class="res">GewSt ≈ 39.848 €</span></div>
-<div class="step">Anders als beim Einzelunternehmer gibt es <b>keine § 35-Anrechnung</b> — die GewSt ist definitive Belastung.</div>`,src:{k:"m",d:"ESt-Handout 13 – Gewerbesteuerrecht",s:17}},
+<div class="step">Anders als beim Einzelunternehmer gibt es <b>keine § 35-Anrechnung</b> — die GewSt ist definitive Belastung.</div>`,lid:"m4l0",diff:2,hint:"Erst die Hinzurechnung nach dem Topf-Prinzip, dann Gewerbeertrag ohne Freibetrag (GmbH), dann Messbetrag und Hebesatz.",src:{k:"m",d:"ESt-Handout 13 – Gewerbesteuerrecht",s:17}},
     {t:"Gesamtsteuerbelastung GmbH + Ausschüttung",lvl:"KSt · anspruchsvoll",
      task:"Eine GmbH (Hebesatz 400 %) erwirtschaftet 100.000 € Gewinn vor Steuern. Der Alleingesellschafter schüttet den gesamten Gewinn nach Steuern aus (Abgeltungsteuer 25 % + SolZ).<br>Wie hoch ist die Gesamtsteuerbelastung?",
      sol:`<div class="step">GewSt: 100.000 × 3,5 % × 400 % = 14.000 €.</div>
 <div class="step">KSt 15 % + SolZ 5,5 % = 15,825 % × 100.000 = 15.825 €.</div>
 <div class="step">Gewinn nach Steuern = 100.000 − 14.000 − 15.825 = 70.175 €.</div>
 <div class="step">Ausschüttung: Abgeltungsteuer 25 % + SolZ (26,375 %) × 70.175 = 18.509 €.</div>
-<div class="step">Gesamte Steuer = 14.000 + 15.825 + 18.509 = 48.334 € → <span class="res">Gesamtbelastung ≈ 48,3 %</span></div>`,src:{k:"m",d:"ESt-Handout 14 – Körperschaftsteuerrecht",s:3}},
+<div class="step">Gesamte Steuer = 14.000 + 15.825 + 18.509 = 48.334 € → <span class="res">Gesamtbelastung ≈ 48,3 %</span></div>`,lid:"m4l1",diff:3,hint:"Zwei Ebenen getrennt rechnen: GmbH (GewSt + KSt + SolZ), dann Gesellschafter (Abgeltungsteuer + SolZ auf die Ausschüttung).",src:{k:"m",d:"ESt-Handout 14 – Körperschaftsteuerrecht",s:3}},
     {t:"Verdeckte Gewinnausschüttung erkennen",lvl:"vGA",
      task:"Beurteile, ob eine vGA vorliegt:<br><b>1.</b> Die GmbH zahlt dem Gesellschafter-GF ein marktübliches Gehalt von 120.000 €.<br><b>2.</b> Die GmbH gewährt dem Gesellschafter ein zinsloses Darlehen von 200.000 €.<br><b>3.</b> Die GmbH verkauft dem Gesellschafter einen Firmenwagen weit unter Marktwert.",
      sol:`<div class="step"><b>1.</b> Marktüblich → kein Verstoß gegen den Fremdvergleich → <b>keine vGA</b>.</div>
 <div class="step"><b>2.</b> Ein fremder Dritter bekäme kein zinsloses Darlehen → der entgangene Zins ist eine <b>vGA</b>.</div>
-<div class="step"><b>3.</b> Verkauf unter Wert → der Preisvorteil ist eine <b>vGA</b>. Folge jeweils: KSt-Einkommen der GmbH steigt, beim Gesellschafter Besteuerung als Kapitalertrag.</div>`,src:{k:"m",d:"ESt-Handout 14 – Körperschaftsteuerrecht",s:13}},
+<div class="step"><b>3.</b> Verkauf unter Wert → der Preisvorteil ist eine <b>vGA</b>. Folge jeweils: KSt-Einkommen der GmbH steigt, beim Gesellschafter Besteuerung als Kapitalertrag.</div>`,lid:"m4l1",diff:2,hint:"Fremdvergleich: Hätte die GmbH das einem fremden Dritten genauso gewährt? Wenn nein und der Vorteil fließt dem Gesellschafter zu → vGA.",src:{k:"m",d:"ESt-Handout 14 – Körperschaftsteuerrecht",s:13}},
     {t:"Vom Handelsbilanzgewinn zur Körperschaftsteuer",lvl:"KSt · außerbilanzielle Korrekturen",
      task:"Eine GmbH (Hebesatz 400 %) weist einen Jahresüberschuss von 120.000 € aus. Darin gebucht: KSt-Vorauszahlungen 15.000 €, Gewerbesteuer 14.000 €, Geldbuße 2.000 €, Dividende aus einer 20-%-Beteiligung 10.000 € (als Ertrag). Dem Gesellschafter-Geschäftsführer wurden 30.000 € über dem Angemessenen gezahlt. Wie hoch ist das zu versteuernde Einkommen?",
      sol:`<div class="step">Jahresüberschuss 120.000 €</div>
 <div class="step">+ KSt 15.000 € (§ 10 Nr. 2 KStG), + GewSt 14.000 € (§ 4 Abs. 5b EStG), + Geldbuße 2.000 € (§ 10 Nr. 3 KStG)</div>
 <div class="step">+ vGA 30.000 € (§ 8 Abs. 3 S. 2 KStG)</div>
 <div class="step">− Dividende 10.000 € (§ 8b Abs. 1 KStG) + 5 % = 500 € nicht abziehbare Betriebsausgabe (§ 8b Abs. 5)</div>
-<span class="res">zu versteuerndes Einkommen 171.500 €</span>`,src:{k:"m",d:"ESt-Handout 14 – Körperschaftsteuerrecht",s:11}},
+<span class="res">zu versteuerndes Einkommen 171.500 €</span>`,lid:"m4l1",diff:3,hint:"Jahresüberschuss als Start. Nicht abziehbare Aufwendungen und vGA hinzurechnen, steuerfreie Beteiligungserträge abziehen (5 % wieder hinzu).",src:{k:"m",d:"ESt-Handout 14 – Körperschaftsteuerrecht",s:11}},
     {t:"Hinzurechnung und Gewerbesteuer im Filialbetrieb",lvl:"GewSt · § 8 Nr. 1",
      task:"Eine Handels-GmbH (Hebesatz 450 %) hat einen Gewinn von 500.000 €. Aufwand: Schuldzinsen 120.000 €, Ladenmieten 400.000 €, Leasing für Fahrzeuge 100.000 €. Berechne Hinzurechnung, Messbetrag und Gewerbesteuer.",
      sol:`<div class="step">Topf: Zinsen 120.000 € + ½ × 400.000 € = 200.000 € + ⅕ × 100.000 € = 20.000 € → <b>340.000 €</b>.</div>
 <div class="step">− Freibetrag 200.000 € = 140.000 € × ¼ = Hinzurechnung <b>35.000 €</b>.</div>
 <div class="step">Gewerbeertrag 535.000 € (GmbH: kein Freibetrag) × 3,5 % = Messbetrag <b>18.725 €</b>.</div>
-<div class="step">× 450 % = Gewerbesteuer <b>84.262,50 €</b> — nicht abziehbar und ohne Anrechnung.</div>`,src:{k:"m",d:"ESt-Handout 13 – Gewerbesteuerrecht",s:8}}
+<div class="step">× 450 % = Gewerbesteuer <b>84.262,50 €</b> — nicht abziehbar und ohne Anrechnung.</div>`,lid:"m4l0",diff:2,hint:"Topf: Zinsen voll, Immobilienmieten ½, bewegliche Mieten/Leasing ⅕, Lizenzen ¼. Dann Freibetrag 200.000 € und vom Rest ein Viertel.",src:{k:"m",d:"ESt-Handout 13 – Gewerbesteuerrecht",s:8}},
+    {t:"Holding: Dividende und Anteilsverkauf",lvl:"Vertiefung · § 8b KStG",lid:"m4l1",diff:2,hint:"Dividenden: 95 % steuerfrei nur ab 10 % Beteiligung zu Jahresbeginn. Veräußerungsgewinne: 95 % steuerfrei unabhängig von der Beteiligungshöhe.",
+     task:"Eine Holding-GmbH hält seit Jahren 30 % an der A-GmbH und 5 % an der B-AG. 2026: Dividende A-GmbH 200.000 €, Dividende B-AG 20.000 €, Gewinn aus dem Verkauf der B-Anteile 100.000 €. Welcher Betrag ist für die Körperschaftsteuer zu versteuern?",
+     sol:`<div class="step">Dividende A-GmbH (30 %): außer Ansatz, 5 % = 10.000 € nicht abziehbare Betriebsausgaben → <b>10.000 €</b>.</div>
+<div class="step">Dividende B-AG (5 % — Streubesitz unter 10 %): voll steuerpflichtig → <b>20.000 €</b>.</div>
+<div class="step">Veräußerungsgewinn B-AG: steuerfrei nach § 8b Abs. 2 KStG ohne Mindestbeteiligung, 5 % nicht abziehbar → <b>5.000 €</b>.</div>
+<span class="res">Steuerpflichtig: 35.000 €</span>`,src:{k:"m",d:"ESt-Handout 14 – Körperschaftsteuerrecht",s:17}},
+    {t:"Organschaft: Ergebnisse zusammenrechnen",lvl:"Vertiefung · §§ 14 ff. KStG",lid:"m4l1",diff:2,hint:"Das Einkommen der Organgesellschaft wird dem Organträger zugerechnet. Voraussetzungen: finanzielle Eingliederung und Gewinnabführungsvertrag über mindestens fünf Jahre, tatsächlich durchgeführt.",
+     task:"Die M-GmbH hält 100 % an der T-GmbH; ein Gewinnabführungsvertrag läuft seit 2024. 2026: Einkommen M 800.000 €, Verlust T 300.000 €.<br><b>a)</b> Welches Einkommen wird bei M versteuert?<br><b>b)</b> Was wäre ohne Organschaft?<br><b>c)</b> Was droht, wenn der Vertrag 2027 aufgehoben wird?",
+     sol:`<div class="step"><b>a)</b> 800.000 € − 300.000 € = <b>500.000 €</b> bei M; T hat ein Einkommen von 0 €.</div>
+<div class="step"><b>b)</b> Ohne Organschaft: M versteuert 800.000 €, T trägt einen Verlustvortrag von 300.000 € in die Zukunft.</div>
+<div class="step"><b>c)</b> Beendigung vor Ablauf von fünf Jahren ohne wichtigen Grund → die Organschaft wird <b>rückwirkend</b> nicht anerkannt; die Gewinnabführungen werden zu verdeckten Gewinnausschüttungen, die Verlustverrechnung entfällt.</div>`,src:{k:"m",d:"ESt-Handout 14 – Körperschaftsteuerrecht",s:24}}
   ]
 },
 {
@@ -1715,46 +1797,75 @@ export const DATA = [
      task:"Ein Unternehmer hat im Monat folgende Umsätze:<br>Ausgangsrechnungen 40.000 € netto (19 %), zusätzlich 5.000 € netto ermäßigt (7 %).<br>Eingangsrechnungen mit Vorsteuer: 18.000 € netto (19 %) Material, 2.000 € (19 %) Bürokosten.<br>Berechne die Zahllast ans Finanzamt.",
      sol:`<div class="step">USt auf Ausgangsumsätze: 40.000 × 19 % = 7.600 € + 5.000 × 7 % = 350 € → <b>7.950 € USt</b>.</div>
 <div class="step">Vorsteuer: (18.000 + 2.000) × 19 % = 20.000 × 19 % = <b>3.800 € Vorsteuer</b>.</div>
-<div class="step">Zahllast = USt − Vorsteuer = 7.950 − 3.800 = <span class="res">4.150 €</span></div>`,src:{k:"m",d:"USt-Skript Teil 1",s:8}},
+<div class="step">Zahllast = USt − Vorsteuer = 7.950 − 3.800 = <span class="res">4.150 €</span></div>`,lid:"m5l0",diff:1,hint:"Umsatzsteuer auf die Ausgangsumsätze minus abziehbare Vorsteuer aus den Eingangsrechnungen.",src:{k:"m",d:"USt-Skript Teil 1",s:8}},
     {t:"Kleinunternehmer-Grenzen prüfen (2026)",lvl:"§ 19 UStG",
      task:"Beurteile für 2026:<br><b>1.</b> Vorjahresumsatz 23.000 €, laufendes Jahr voraussichtlich 60.000 €.<br><b>2.</b> Vorjahresumsatz 26.000 €.<br><b>3.</b> Vorjahr 20.000 €, aber im laufenden Jahr wird im September die 100.000-€-Grenze gerissen.",
      sol:`<div class="step"><b>1.</b> Vorjahr ≤ 25.000 € und laufend ≤ 100.000 € → <b>Kleinunternehmer möglich</b>.</div>
 <div class="step"><b>2.</b> Vorjahr 26.000 € > 25.000 € → <b>keine</b> Kleinunternehmerregelung, Regelbesteuerung.</div>
-<div class="step"><b>3.</b> Beim Überschreiten der 100.000 € tritt die Regelbesteuerung <b>sofort, unterjährig</b> ein — ab genau dem Umsatz, der die Grenze reißt. <span class="res">Ab September USt-Pflicht.</span></div>`,src:{k:"m",d:"USt-Skript Teil 3",s:94}},
+<div class="step"><b>3.</b> Beim Überschreiten der 100.000 € tritt die Regelbesteuerung <b>sofort, unterjährig</b> ein — ab genau dem Umsatz, der die Grenze reißt. <span class="res">Ab September USt-Pflicht.</span></div>`,lid:"m5l0",diff:1,hint:"Zwei Grenzen: Vorjahr höchstens 25.000 €, laufendes Jahr höchstens 100.000 €. Was passiert beim Überschreiten im laufenden Jahr?",src:{k:"m",d:"USt-Skript Teil 3",s:94}},
     {t:"Leistungsort bestimmen",lvl:"§ 3a UStG",
      task:"Wo ist der Leistungsort, und fällt deutsche USt an?<br><b>1.</b> Deutscher Berater → französischer Unternehmer (Beratung).<br><b>2.</b> Deutscher Berater → französische Privatperson (Beratung).<br><b>3.</b> Deutscher Handwerker renoviert ein Haus in Österreich.",
      sol:`<div class="step"><b>1.</b> B2B → Empfängerortsprinzip (§ 3a Abs. 2) → Leistungsort Frankreich → <b>keine deutsche USt</b>, Reverse Charge beim Empfänger.</div>
 <div class="step"><b>2.</b> B2C → Sitz des Leistenden (§ 3a Abs. 1) → Leistungsort Deutschland → <b>19 % deutsche USt</b>.</div>
-<div class="step"><b>3.</b> Grundstücksleistung (§ 3a Abs. 3 Nr. 1) → Ort des Grundstücks = Österreich → <b>keine deutsche USt</b>, österreichische Regeln.</div>`,src:{k:"m",d:"USt-Skript Teil 1",s:76}},
+<div class="step"><b>3.</b> Grundstücksleistung (§ 3a Abs. 3 Nr. 1) → Ort des Grundstücks = Österreich → <b>keine deutsche USt</b>, österreichische Regeln.</div>`,lid:"m5l1",diff:2,hint:"Erst klären: Unternehmer oder Privatperson als Empfänger? Dann Grundregel § 3a Abs. 1/2 und Sonderregeln (Grundstück, Beförderung, Veranstaltung).",src:{k:"m",d:"USt-Skript Teil 1",s:76}},
     {t:"Echte vs. unechte Steuerbefreiung & Vorsteuer",lvl:"§ 4, § 15 UStG",
      task:"Beurteile jeweils, ob USt anfällt und ob der Vorsteuerabzug erhalten bleibt:<br><b>1.</b> Innergemeinschaftliche Lieferung an einen EU-Unternehmer.<br><b>2.</b> Eine Ärztin behandelt Patienten.<br><b>3.</b> Ein Vermieter vermietet eine Wohnung an eine Privatperson.",
      sol:`<div class="step"><b>1.</b> Echte Befreiung (§ 4 Nr. 1b): keine USt, aber <b>Vorsteuerabzug bleibt</b> erhalten.</div>
 <div class="step"><b>2.</b> Unechte Befreiung (§ 4 Nr. 14): keine USt, <b>kein Vorsteuerabzug</b> — die gezahlte Vorsteuer wird Kostenfaktor.</div>
-<div class="step"><b>3.</b> Unechte Befreiung (§ 4 Nr. 12): keine USt, <b>kein Vorsteuerabzug</b>. Bei Vermietung an Unternehmer könnte zur Steuerpflicht optiert werden (§ 9).</div>`,src:{k:"m",d:"USt-Skript Teil 2",s:146}},
+<div class="step"><b>3.</b> Unechte Befreiung (§ 4 Nr. 12): keine USt, <b>kein Vorsteuerabzug</b>. Bei Vermietung an Unternehmer könnte zur Steuerpflicht optiert werden (§ 9).</div>`,lid:"m5l2",diff:2,hint:"Echte Befreiung: Vorsteuer bleibt. Unechte Befreiung: Vorsteuer entfällt. Bei Grundstücken an die Option denken.",src:{k:"m",d:"USt-Skript Teil 2",s:146}},
     {t:"Reverse Charge und ig Lieferung im Geschäftsfall",lvl:"EU · anspruchsvoll",
      task:"Ein deutscher Maschinenbauer liefert eine Maschine (80.000 €) an einen italienischen Unternehmer mit gültiger USt-IdNr. und transportiert sie nach Mailand.<br><b>a)</b> Wie wird die Lieferung umsatzsteuerlich behandelt?<br><b>b)</b> Was muss auf der Rechnung stehen?<br><b>c)</b> Welche Meldepflicht besteht zusätzlich?",
      sol:`<div class="step"><b>a)</b> Innergemeinschaftliche Lieferung (§ 6a) → <b>steuerfrei</b> (echte Befreiung). Der Italiener versteuert den ig Erwerb in Italien.</div>
 <div class="step"><b>b)</b> Rechnung ohne USt, mit beiden USt-IdNr. und dem Hinweis „steuerfreie innergemeinschaftliche Lieferung". Gelangensnachweis aufbewahren.</div>
-<div class="step"><b>c)</b> <span class="res">Zusammenfassende Meldung (ZM)</span> ans BZSt mit der IdNr. des Italieners und der Bemessungsgrundlage — bis zum 25. des Folgemonats. Wichtig: USt-IdNr. vorab über das BZSt-Bestätigungsverfahren prüfen!</div>`,src:{k:"m",d:"USt-Skript Teil 3",s:105}},
+<div class="step"><b>c)</b> <span class="res">Zusammenfassende Meldung (ZM)</span> ans BZSt mit der IdNr. des Italieners und der Bemessungsgrundlage — bis zum 25. des Folgemonats. Wichtig: USt-IdNr. vorab über das BZSt-Bestätigungsverfahren prüfen!</div>`,lid:"m5l3",diff:3,hint:"Für jeden Umsatz: Ort, Steuerbarkeit, Befreiung und Steuerschuldner prüfen. Gültige USt-IdNr. und Nachweise sind Voraussetzung.",src:{k:"m",d:"USt-Skript Teil 3",s:105}},
     {t:"Zuordnung und Wertabgabe beim Pkw",lvl:"Wertabgaben · § 3 Abs. 9a UStG",
      task:"Eine Unternehmerin kauft einen Pkw für 50.000 € netto (Listenpreis 50.000 €), nutzt ihn zu 60 % unternehmerisch und ordnet ihn voll dem Unternehmen zu. Laufende Kosten mit Vorsteuer 6.000 € netto im Jahr. Sie führt kein Fahrtenbuch.<br><b>a)</b> Wie viel Vorsteuer kann sie aus dem Kauf ziehen?<br><b>b)</b> Wie hoch ist die Umsatzsteuer auf die Privatnutzung pro Jahr?",
      sol:`<div class="step"><b>a)</b> Volle Zuordnung (unternehmerische Nutzung über 10 %) → Vorsteuer aus dem Kauf voll: 50.000 € × 19 % = <b>9.500 €</b>; ebenso aus den laufenden Kosten.</div>
-<div class="step"><b>b)</b> 1-%-Methode: 1 % × 50.000 € × 12 = 6.000 €, abzüglich 20 % für nicht vorsteuerbelastete Kosten = 4.800 € × 19 % = <b>912 €</b> Umsatzsteuer.</div>`,src:{k:"m",d:"USt-Skript Teil 1",s:232}},
+<div class="step"><b>b)</b> 1-%-Methode: 1 % × 50.000 € × 12 = 6.000 €, abzüglich 20 % für nicht vorsteuerbelastete Kosten = 4.800 € × 19 % = <b>912 €</b> Umsatzsteuer.</div>`,lid:"ust-wertabgaben",diff:2,hint:"Zuordnung ab 10 % unternehmerischer Nutzung möglich. Bei voller Zuordnung voller Vorsteuerabzug – die Privatnutzung wird über die Wertabgabe besteuert.",src:{k:"m",d:"USt-Skript Teil 1",s:232}},
     {t:"Gemischt genutztes Geschäftshaus",lvl:"Grundstücke · § 9, § 15 Abs. 4 UStG",
      task:"Ein Unternehmer baut ein Haus mit drei gleich großen Etagen (je 200 m²); Vorsteuer aus den Baukosten 150.000 €. EG: Vermietung an eine Steuerberatungskanzlei. 1. OG: Vermietung an einen Arzt. 2. OG: Vermietung als Wohnung.<br><b>a)</b> Wo ist eine Option möglich?<br><b>b)</b> Wie viel Vorsteuer ist abziehbar?<br><b>c)</b> Was passiert, wenn die Kanzlei nach drei Jahren auszieht und ein Zahnarzt einzieht?",
      sol:`<div class="step"><b>a)</b> Option nur für das EG (Mieter mit steuerpflichtigen Umsätzen). Arzt und Wohnung: keine Option.</div>
 <div class="step"><b>b)</b> Flächenschlüssel: 200 / 600 = ⅓ → <b>50.000 €</b> Vorsteuer.</div>
-<div class="step"><b>c)</b> Ab Jahr 4 steuerfreie Vermietung des EG → Berichtigung nach § 15a: 50.000 € / 10 = <b>5.000 € je Jahr</b> für die Jahre 4 bis 10, zusammen 35.000 €.</div>`,src:{k:"m",d:"USt-Skript Teil 2",s:161}},
+<div class="step"><b>c)</b> Ab Jahr 4 steuerfreie Vermietung des EG → Berichtigung nach § 15a: 50.000 € / 10 = <b>5.000 € je Jahr</b> für die Jahre 4 bis 10, zusammen 35.000 €.</div>`,lid:"ust-grundstueck",diff:3,hint:"Je Etage prüfen: Option möglich? Dann Vorsteuer nach dem Flächenschlüssel. Bei Nutzungsänderung: Berichtigung über 10 Jahre.",src:{k:"m",d:"USt-Skript Teil 2",s:161}},
     {t:"Rechnung prüfen",lvl:"Rechnung · § 14 UStG",
      task:"Ein Mandant legt eine Eingangsrechnung über 2.380 € vor: Briefkopf mit Name und Anschrift des Lieferers, Steuernummer, Rechnungsnummer 2026-118, Datum, „Material lt. Absprache“, Netto 2.000 €, USt 19 % 380 €. Der Empfänger ist nur mit „Fa. Müller“ ohne Anschrift genannt. Kann er die Vorsteuer ziehen?",
      sol:`<div class="step">Fehlend bzw. unzureichend: vollständige Anschrift des Empfängers, handelsübliche Bezeichnung der Leistung („Material lt. Absprache“ genügt nicht), Leistungszeitpunkt.</div>
 <div class="step">Ohne ordnungsgemäße Rechnung <b>kein Vorsteuerabzug</b>, bis die Rechnung berichtigt ist.</div>
-<div class="step">Berichtigung durch den Lieferer anfordern. Rückwirkend auf den ursprünglichen Zeitpunkt wirkt sie nur, wenn die Erstrechnung Leistenden, Empfänger, Leistung, Entgelt und gesonderte USt bereits erkennen ließ — bei „Material lt. Absprache“ ist das zweifelhaft. Deshalb sofort berichtigen lassen und die Vorsteuer bis dahin zurückstellen.</div>`,src:{k:"m",d:"USt-Skript Teil 2",s:96}},
+<div class="step">Berichtigung durch den Lieferer anfordern. Rückwirkend auf den ursprünglichen Zeitpunkt wirkt sie nur, wenn die Erstrechnung Leistenden, Empfänger, Leistung, Entgelt und gesonderte USt bereits erkennen ließ — bei „Material lt. Absprache“ ist das zweifelhaft. Deshalb sofort berichtigen lassen und die Vorsteuer bis dahin zurückstellen.</div>`,lid:"ust-rechnung",diff:2,hint:"Pflichtangaben des § 14 Abs. 4 UStG der Reihe nach abhaken: Namen und Anschriften, Steuernummer, Nummer, Datum, Leistung, Leistungszeitpunkt, Entgelt, Satz, Steuer.",src:{k:"m",d:"USt-Skript Teil 2",s:96}},
     {t:"Reihengeschäft und Dreiecksgeschäft",lvl:"Grenzüberschreitend · § 3 Abs. 6a, § 25b UStG",
      task:"Ein deutscher Händler D bestellt eine Maschine bei einem französischen Hersteller F und verkauft sie an einen österreichischen Kunden A. F transportiert die Maschine direkt nach Wien. Alle verwenden die USt-IdNr. ihres Staates.<br><b>a)</b> Welche Lieferung ist die bewegte?<br><b>b)</b> Wo ist die Lieferung D → A ausgeführt?<br><b>c)</b> Muss sich D in Österreich registrieren?",
      sol:`<div class="step"><b>a)</b> F (erster Lieferer) transportiert → die Lieferung F → D ist bewegt: steuerfreie ig Lieferung in Frankreich.</div>
 <div class="step"><b>b)</b> Die Lieferung D → A ist ruhend und folgt der Warenbewegung → Ort in <b>Österreich</b>.</div>
-<div class="step"><b>c)</b> Drei Unternehmer, drei Staaten, Transport durch den ersten Lieferer → <b>Dreiecksgeschäft</b> (§ 25b). Der Erwerb des D gilt als besteuert, A schuldet die österreichische USt. D muss sich nicht registrieren, wenn seine Rechnung die Hinweise auf das Dreiecksgeschäft und die Steuerschuldnerschaft enthält und er den Vorgang in der ZM meldet.</div>`,src:{k:"m",d:"USt-Skript Teil 3",s:84}}
+<div class="step"><b>c)</b> Drei Unternehmer, drei Staaten, Transport durch den ersten Lieferer → <b>Dreiecksgeschäft</b> (§ 25b). Der Erwerb des D gilt als besteuert, A schuldet die österreichische USt. D muss sich nicht registrieren, wenn seine Rechnung die Hinweise auf das Dreiecksgeschäft und die Steuerschuldnerschaft enthält und er den Vorgang in der ZM meldet.</div>`,lid:"ust-grenz",diff:3,hint:"Erst die bewegte Lieferung bestimmen (wer transportiert?). Dann prüfen, ob die Voraussetzungen des Dreiecksgeschäfts vorliegen.",src:{k:"m",d:"USt-Skript Teil 3",s:84}},
+    {t:"Kommissionsgeschäft",lvl:"Vertiefung · § 3 Abs. 3 UStG",lid:"m5l1",diff:3,hint:"Beim Kommissionsgeschäft liegen zwei Lieferungen vor: vom Kommittenten an den Kommissionär und vom Kommissionär an den Käufer. Entgelt der ersten Lieferung ist der Verkaufspreis abzüglich Provision.",
+     task:"Ein Händler (Kommissionär) verkauft im eigenen Namen, aber für Rechnung eines Unternehmers (Kommittent) eine Maschine für 10.000 € netto an einen Käufer. Seine Provision beträgt 10 % des Verkaufspreises. Beide sind regelbesteuert.<br>Welche Umsätze liegen vor und wie hoch sind die Bemessungsgrundlagen?",
+     sol:`<div class="step">Verkaufskommission: Zwischen Kommittent und Kommissionär liegt eine Lieferung vor (§ 3 Abs. 3 UStG), ebenso zwischen Kommissionär und Käufer.</div>
+<div class="step">Lieferung Kommissionär → Käufer: Bemessungsgrundlage <b>10.000 €</b>, USt 1.900 €.</div>
+<div class="step">Lieferung Kommittent → Kommissionär: Verkaufspreis minus Provision = <b>9.000 €</b>, USt 1.710 €. Abgerechnet wird meist per Gutschrift des Kommissionärs.</div>
+<div class="step">Die Provision ist keine eigene sonstige Leistung, sondern steckt in der Differenz der beiden Lieferungen. Zahllast des Kommissionärs: 1.900 € − 1.710 € Vorsteuer = 190 €.</div>`,src:{k:"m",d:"USt-Skript Teil 1",s:63}},
+    {t:"Bauleistungen: Wer schuldet die Steuer?",lvl:"Vertiefung · § 13b Abs. 2 Nr. 4 UStG",lid:"m5l3",diff:2,hint:"Bei Bauleistungen wird der Empfänger nur Steuerschuldner, wenn er selbst nachhaltig Bauleistungen erbringt (Nachweis: Bescheinigung USt 1 TG). Privatleute und „normale“ Unternehmer schulden nie nach § 13b.",
+     task:"Ein Dachdecker erneuert für 20.000 € netto das Dach<br><b>a)</b> für einen Generalunternehmer, der Bauleistungen erbringt und eine Bescheinigung nach § 13b Abs. 5 S. 2 UStG vorlegt,<br><b>b)</b> für eine Rechtsanwaltskanzlei,<br><b>c)</b> für ein Privathaus.<br>Wer schuldet jeweils die Umsatzsteuer, und was muss in der Rechnung stehen?",
+     sol:`<div class="step"><b>a)</b> Reverse Charge: Der <b>Generalunternehmer</b> schuldet 3.800 € und zieht sie zugleich als Vorsteuer ab. Rechnung netto mit Hinweis „Steuerschuldnerschaft des Leistungsempfängers“.</div>
+<div class="step"><b>b)</b> Die Kanzlei erbringt selbst keine Bauleistungen → der <b>Dachdecker</b> schuldet die USt; Rechnung mit 19 % (3.800 €).</div>
+<div class="step"><b>c)</b> Privatperson → der <b>Dachdecker</b> schuldet die USt; Rechnung mit 19 %. Der Kunde kann für den Lohnanteil die Steuerermäßigung nach § 35a EStG nutzen.</div>`,src:{k:"m",d:"USt-Skript Teil 3",s:22}},
+    {t:"Leistungsort in Sonderfällen",lvl:"Vertiefung · § 3a Abs. 3 UStG",lid:"m5l1",diff:2,hint:"Vor der Grundregel die Sonderregeln prüfen: Grundstück (Belegenheit), Restaurant (Ort der Tätigkeit), kurzfristige Fahrzeugvermietung (Übergabe), Eintrittsberechtigung (Veranstaltungsort), Vermittlung an Privatleute (Ort des vermittelten Umsatzes).",
+     task:"Ein Unternehmer aus Hannover erbringt folgende Leistungen. Wo ist der Ort?<br><b>1.</b> Architektenplanung für ein Ferienhaus in Österreich, Auftraggeber Privatperson aus Hamburg.<br><b>2.</b> Catering mit Service bei einer Feier in Paris für einen französischen Unternehmer.<br><b>3.</b> Vermietung eines Transporters für 5 Tage an einen belgischen Unternehmer, Übergabe in Hannover.<br><b>4.</b> Beratung eines Schweizer Unternehmens (B2B).",
+     sol:`<div class="step"><b>1.</b> Leistung im Zusammenhang mit einem Grundstück → Ort in <b>Österreich</b> (§ 3a Abs. 3 Nr. 1 UStG), unabhängig vom Empfänger.</div>
+<div class="step"><b>2.</b> Restaurationsleistung → Ort, an dem sie tatsächlich erbracht wird: <b>Paris</b> (§ 3a Abs. 3 Nr. 3 Buchst. b UStG).</div>
+<div class="step"><b>3.</b> Kurzfristige Vermietung eines Beförderungsmittels (bis 30 Tage) → Ort der Übergabe: <b>Hannover</b>, deutsche USt (§ 3a Abs. 3 Nr. 2 UStG).</div>
+<div class="step"><b>4.</b> Grundregel B2B → Sitz des Empfängers: <b>Schweiz</b>, in Deutschland nicht steuerbar (§ 3a Abs. 2 UStG).</div>`,src:{k:"m",d:"USt-Skript Teil 1",s:76}},
+    {t:"Vorsteueraufteilung nach Flächen",lvl:"Vertiefung · § 15 Abs. 4 UStG",lid:"ust-grundstueck",diff:2,hint:"Direkt zuordenbare Vorsteuer direkt zuordnen. Nur die Vorsteuer für das ganze Gebäude wird nach dem Flächenschlüssel aufgeteilt.",
+     task:"Ein Vermieter hat ein Gebäude mit 1.000 m²: 400 m² an eine Werbeagentur (Option zur Steuerpflicht), 600 m² an Wohnungsmieter. Vorsteuern 2026: Dachsanierung (ganzes Gebäude) 19.000 €, Renovierung der Agenturfläche 3.800 €, Renovierung einer Wohnung 1.900 €. Wie viel Vorsteuer ist abziehbar?",
+     sol:`<div class="step">Agenturfläche (steuerpflichtig vermietet): 3.800 € direkt zuordenbar → voll abziehbar.</div>
+<div class="step">Wohnung (steuerfrei vermietet): 1.900 € → nicht abziehbar.</div>
+<div class="step">Dach (ganzes Gebäude): Flächenschlüssel 400/1.000 = 40 % → 7.600 € abziehbar.</div>
+<span class="res">Abziehbare Vorsteuer: 11.400 €</span>`,src:{k:"q",d:"USt-Skript Teil 2",s:161}},
+    {t:"Tausch und tauschähnlicher Umsatz",lvl:"Vertiefung · § 10 Abs. 2 UStG",lid:"ust-leistung",diff:3,hint:"Beim Tausch gilt der Wert jedes Umsatzes als Entgelt für den anderen Umsatz. Die Umsatzsteuer ist herauszurechnen.",
+     task:"Ein Malermeister streicht die Büroräume eines Autohändlers. Statt Geld erhält er einen Gebrauchtwagen, der sonst für 11.900 € (brutto, regelbesteuert) verkauft würde. Beide sind regelbesteuerte Unternehmer.<br>Welche Umsätze liegen vor, und wie hoch ist jeweils die Bemessungsgrundlage?",
+     sol:`<div class="step">Malerleistung gegen Fahrzeuglieferung = <b>tauschähnlicher Umsatz</b> (sonstige Leistung gegen Lieferung) — beide Umsätze sind steuerbar.</div>
+<div class="step">Entgelt der Malerleistung ist der Wert des Fahrzeugs: 11.900 € / 1,19 = <b>10.000 €</b>, USt 1.900 €.</div>
+<div class="step">Entgelt der Fahrzeuglieferung ist der Wert der Malerleistung, ebenfalls <b>10.000 €</b>, USt 1.900 €.</div>
+<div class="step">Beide stellen eine Rechnung mit gesondertem Steuerausweis aus und ziehen die Vorsteuer des anderen ab.</div>`,src:{k:"m",d:"USt-Skript Teil 1",s:216}}
   ]
 }
 ];
