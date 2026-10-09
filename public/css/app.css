@@ -511,3 +511,63 @@ footer.foot .btnrow{margin-top:14px}
   a{color:#000;text-decoration:none}
 }
 .srcbar-l{font-size:13px;color:var(--muted);margin-right:4px;text-decoration:none}
+
+/* Übungsfälle: Denkanstoß, schrittweise Lösung, Selbsteinschätzung */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.drill .diff{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:6px;white-space:nowrap}
+.drill .diff.d3{color:var(--amber)}
+.dstat{font-family:var(--mono);font-size:11px;margin-left:8px;padding:1px 7px;border-radius:999px;border:1px solid}
+.dstat.ok{color:var(--green);background:var(--green-bg);border-color:var(--green-line)}
+.dstat.again{color:var(--amber);background:var(--amber-bg);border-color:var(--amber-line)}
+.dbody{border-top:1px solid var(--line-soft)}
+.dhint{font-size:14px;line-height:1.65;color:var(--ink2);background:var(--blue-soft);border-bottom:1px solid var(--blue-line);padding:12px 18px 12px 65px}
+.dbody .dsol{border-top:0;border-bottom:1px solid var(--green-line)}
+.dctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 18px 12px 65px}
+.dctrl .cnt{font-family:var(--mono);font-size:11px;opacity:.8;margin-left:4px}
+.dctrl .dask{font-size:13.5px;color:var(--muted);margin-right:2px}
+.dctrl .btn.on{box-shadow:0 0 0 2px var(--blue-line)}
+.dfoot{padding:0 18px 14px 65px}
+.dfoot:empty{display:none}
+.dlesson{font-size:13px;color:var(--blue-strong);text-decoration:none}
+.dlesson:hover{text-decoration:underline}
+.drill-sum{display:flex;align-items:center;gap:14px;margin:18px 0 10px;font-size:14px;color:var(--ink2)}
+.drill-sum .bar{flex:0 0 160px;margin:0}
+.drill-filter{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 16px}
+.drill-filter .sep{width:12px}
+.drill-filter .chip{cursor:pointer;font:inherit;font-size:13px}
+.drill-mod{font-size:15px;margin:26px 0 10px}
+.drill-mod a{color:var(--heading);text-decoration:none}
+.gen-check{display:flex;gap:8px;margin:10px 0 0}
+.gen-input{flex:1;min-width:0;font:inherit;font-size:15px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.gen-input:focus{outline:2px solid var(--blue-line);border-color:var(--blue)}
+.gen-verdict{font-size:13.5px;margin-top:6px;font-weight:600}
+.gen-verdict.ok{color:var(--green)}
+.gen-verdict.no{color:var(--amber)}
+@media (max-width:640px){
+  .dhint,.dctrl,.dfoot{padding-left:18px}
+  .drill-sum{flex-wrap:wrap}
+}
+.dctrl .btn.again{color:var(--amber);border-color:var(--amber-line);background:var(--amber-bg)}
+
+/* Vertiefung je Lektion */
+.deep{margin:32px 0 0;border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.deep > summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:16px 20px;user-select:none}
+.deep > summary::-webkit-details-marker{display:none}
+.deep > summary::before{content:"▸";color:var(--blue-strong);transition:transform .15s;display:inline-block}
+.deep[open] > summary::before{transform:rotate(90deg)}
+.deep-t{font-family:var(--serif);font-size:20px;color:var(--heading);font-weight:600}
+.deep-n{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.04em}
+.deep-body{border-top:1px solid var(--line-soft);padding:4px 20px 18px}
+.deep-item{padding:14px 0 4px;border-bottom:1px solid var(--line-soft)}
+.deep-item:last-child{border-bottom:0}
+.deep-item h4{font-size:15.5px;color:var(--heading);margin:0 0 2px}
+.deep-item p{font-size:14.5px;line-height:1.7;color:var(--ink2);margin-top:4px}
+.deep-item b{color:var(--ink);font-weight:600}
+.deep-tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0 8px;border:1px solid var(--line-soft);border-radius:8px}
+.deep-table{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.5;min-width:560px}
+.deep-table th,.deep-table td{padding:7px 10px;border-bottom:1px solid var(--line-soft);text-align:left;vertical-align:top}
+.deep-table th{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:var(--surface2)}
+.deep-table td:first-child{font-family:var(--mono);color:var(--muted);white-space:nowrap}
+.deep-table tr:last-child td{border-bottom:0}
+@media (max-width:640px){.deep > summary,.deep-body{padding-left:14px;padding-right:14px}}
+@media print{.deep{border:0}.deep > summary::before{content:""}}

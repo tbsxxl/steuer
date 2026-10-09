@@ -1,7 +1,7 @@
 # Steuerrecht Intensivkurs – Lernapp 2026
 
 Lern- und Übungsplattform zur Vorbereitung auf den 13-Tage-Intensivkurs Steuerrecht
-(Veranlagungsjahr 2026): 6 Module, 53 Lektionen, 136 Quizfragen, 46 Übungsfälle,
+(Veranlagungsjahr 2026): 6 Module, 53 Lektionen, 136 Quizfragen, 65 Übungsfälle,
 Rechentrainer mit Zufallszahlen, Glossar und Paragrafensammlung.
 
 Läuft auf **Cloudflare Workers** als reine statische Seite – kein Server-Code, keine Datenbank.
@@ -10,6 +10,7 @@ Der Lernfortschritt bleibt lokal im Browser (Export/Import als JSON-Datei mögli
 ## Funktionen
 
 - **Lesemodus** mit Seitenleiste, Weiter/Zurück und „Als gelesen markieren“
+- **Vertiefung je Lektion** (280 Punkte): Details, Rechenbeispiele und Sonderfälle aus den Kursunterlagen, jeweils mit Herkunft und Seitenangabe
 - **Wissenscheck** je Modul, **Abschlusstest** (20 gemischte Fragen mit Auswertung je Modul)
 - **Fehler wiederholen**: falsch beantwortete Fragen werden automatisch gesammelt
 - **Üben**: Übungsfälle mit aufklappbarer Lösung, Rechentrainer, Bilanz-Builder
