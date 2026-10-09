@@ -16,7 +16,7 @@ const dstr=d=>d.toLocaleDateString('de-DE',{weekday:'short',day:'2-digit',month:
 function plusMonat(d){const j=d.getUTCFullYear(),m=d.getUTCMonth()+1,t=d.getUTCDate();const last=new Date(Date.UTC(j,m+1,0)).getUTCDate();return new Date(Date.UTC(j,m,Math.min(t,last)));}
 
 export const GENERATORS = {
-  0:[ // Rechnungswesen
+  1:[ // Rechnungswesen (Modul II)
     {title:"AfA berechnen",level:"linear, Monatsregel",
      make:()=>{const ak=ri(12,60)*1000;const nd=[3,5,8,10,13][ri(0,4)];const mon=ri(1,12);const jahr=Math.round(ak/nd);const anteil=Math.round(jahr*(13-mon)/12);return{
        q:`Anschaffung einer Maschine am 1. <b>${['Jan','Feb','März','Apr','Mai','Juni','Juli','Aug','Sep','Okt','Nov','Dez'][mon-1]}</b> für <b>${fmt(ak)} €</b> netto, Nutzungsdauer <b>${nd} Jahre</b> (linear). Wie hoch ist die AfA im Anschaffungsjahr?`,
@@ -43,7 +43,7 @@ export const GENERATORS = {
        a:`Verkaufspreis = ${fmt(ek)} × ${(100+auf)}/100 = ${fmt(vk)} €. Rohgewinn = ${fmt(vk)} − ${fmt(ek)} = <span class="genres">${fmt(rg)} €</span>`
      };}}
   ],
-  1:[ // Abgabenordnung
+  0:[ // Abgabenordnung (Modul I)
     {title:"Einspruchsfrist berechnen",level:"§§ 108, 122, 355 AO · Niedersachsen",
      make:()=>{const auf=new Date(Date.UTC(2026,ri(0,11),ri(1,28)));const fikt=addD(auf,4);const bek=werktag(new Date(fikt));const roh=plusMonat(bek);const ende=werktag(new Date(roh));return{
        q:`Ein Steuerbescheid wird am <b>${dstr(auf)}</b> mit einfachem Brief zur Post gegeben. Wann endet die Einspruchsfrist? (Feiertage Niedersachsen)`,

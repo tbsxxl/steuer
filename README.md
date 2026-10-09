@@ -15,7 +15,7 @@ Der Lernfortschritt bleibt lokal im Browser (Export/Import als JSON-Datei mögli
 - **Fehler wiederholen**: falsch beantwortete Fragen werden automatisch gesammelt
 - **Üben**: Übungsfälle mit aufklappbarer Lösung, Rechentrainer, Bilanz-Builder
 - **Karteikarten** aus dem Glossar, **Volltextsuche** (Taste `/`)
-- **Kursplan** mit Countdown bzw. „Heute Kurstag X“
+- **Kursplan** (AO 07.–08.10., Rechnungswesen 09.–14.10., ESt, LSt, GewSt/KSt, USt bis 23.10.) mit Countdown, „Heute Kurstag X“ und Gliederung je Modul
 - **Druckversion/PDF** des gesamten Skripts, **Hell/Dunkel**, **offline nutzbar** (Service Worker)
 - Tastatur: `1`–`4` Antwort wählen, `Enter` weiter, Leertaste/`←`/`→` bei Karteikarten
 
