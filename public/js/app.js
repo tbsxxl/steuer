@@ -370,7 +370,7 @@ function hideExtras() { try { return localStorage.getItem("stb_hide_extra") === 
 function applyHideExtras() { document.documentElement.classList.toggle("hide-extra", hideExtras()); }
 applyHideExtras();
 function lessonSources(l) {
-  const all = [...l.blocks.map(b => b.src), ...Object.values(l.srcs || {})].filter(Boolean);
+  const all = [...l.blocks.map(b => b.src), ...Object.values(l.srcs || {}), ...(l.deep || []).map(d => d.src)].filter(Boolean);
   const byDoc = new Map();
   all.forEach(s => { if (s.d) { if (!byDoc.has(s.d)) byDoc.set(s.d, new Set()); byDoc.get(s.d).add(s.s); } });
   const extra = all.filter(s => s.k === "e").length;
@@ -402,7 +402,21 @@ function viewEasy({ mi }) {
 /* =========================================================
    Lektion
    ========================================================= */
-function lessonBody(l) {
+// Vertiefung: Details aus den Kursunterlagen, aufklappbar (im Druck immer offen)
+function deepPara(p) {
+  const i = p.indexOf("<table");
+  if (i < 0) return `<p>${p}</p>`;
+  return `${i > 0 ? `<p>${p.slice(0, i)}</p>` : ""}<div class="deep-tw">${p.slice(i)}</div>`;
+}
+
+function deepHtml(l, open = false) {
+  if (!l.deep || !l.deep.length) return "";
+  const fromDocs = l.deep.filter(d => d.src && d.src.k !== "e").length;
+  return `<details class="deep"${open ? " open" : ""}><summary><span class="deep-t">Vertiefung</span><span class="deep-n">${l.deep.length} ${l.deep.length === 1 ? "Thema" : "Themen"}${fromDocs ? " · aus den Kursunterlagen" : ""}</span></summary>
+    <div class="deep-body">${l.deep.map(d => `<section class="deep-item" data-src="${d.src ? d.src.k : ""}"><h4>${d.h}</h4>${srcChip(d.src)}${deepPara(d.p)}</section>`).join("")}</div></details>`;
+}
+
+function lessonBody(l, print = false) {
   const sr = l.srcs || {};
   let h = `<p class="intro">${l.intro}</p>${easyBox(l)}<div class="blocks">`;
   l.blocks.forEach(b => { h += `<section class="block" data-src="${b.src ? b.src.k : ""}"><h3>${b.h}</h3>${srcChip(b.src)}<p>${b.p}</p></section>`; });
@@ -415,6 +429,7 @@ function lessonBody(l) {
   if (l.vis) h += `<div class="vis-wrap" data-src="${sr.vis ? sr.vis.k : ""}">${l.vis}${srcChip(sr.vis)}</div>`;
   if (l.ex) h += `<div class="callout c-ex" data-src="${sr.ex ? sr.ex.k : ""}"><div class="ctag">Praxisbeispiel</div>${srcChip(sr.ex)}<p>${l.ex}</p></div>`;
   if (l.warn) h += `<div class="callout c-warn" data-src="${sr.warn ? sr.warn.k : ""}"><div class="ctag">Stolperfalle</div>${srcChip(sr.warn)}<p>${l.warn}</p></div>`;
+  h += deepHtml(l, print);
   if (l.laws && l.laws.length) h += `<div class="eyebrow">Rechtsgrundlagen</div><div class="laws">${l.laws.map(x => `<span class="law">${x}</span>`).join("")}</div>`;
   h += lessonSources(l);
   return h;
@@ -860,7 +875,7 @@ function herkunftHtml() {
   const count = new Map(), kinds = { q: 0, m: 0, e: 0 };
   const add = s => { if (!s) return; kinds[s.k]++; if (s.d) count.set(s.d, (count.get(s.d) || 0) + 1); };
   DATA.forEach(m => {
-    m.lessons.forEach(l => { l.blocks.forEach(b => add(b.src)); Object.values(l.srcs || {}).forEach(add); });
+    m.lessons.forEach(l => { l.blocks.forEach(b => add(b.src)); Object.values(l.srcs || {}).forEach(add); (l.deep || []).forEach(d => add(d.src)); });
     m.quiz.forEach(q => add(q.src)); (m.drills || []).forEach(d => add(d.src));
   });
   const docs = [...count].sort((a, b) => a[0].localeCompare(b[0], "de", { numeric: true }));
@@ -927,7 +942,7 @@ function viewPrint(r) {
     const m = DATA[mi];
     h += `<section class="print-lesson"><div class="kicker">Modul ${m.n} · ${esc(m.day)}</div><h1 class="title">${m.label}</h1><p class="lead">${m.lead}</p></section>`;
     m.lessons.forEach((l, li) => {
-      h += `<article class="lesson"><h2 class="h2">${li + 1}. ${l.t}</h2><div class="subtitle">${l.s}</div>${lessonBody(l)}</article>`;
+      h += `<article class="lesson"><h2 class="h2">${li + 1}. ${l.t}</h2><div class="subtitle">${l.s}</div>${lessonBody(l, true)}</article>`;
     });
     if ((m.drills || []).length) {
       h += `<h2 class="h2">Übungsfälle ${m.label}</h2>`;
@@ -948,7 +963,8 @@ const SEARCH_INDEX = (() => {
   DATA.forEach((m, mi) => m.lessons.forEach((l, li) => {
     const body = strip([l.intro, ...l.blocks.map(b => b.p), l.ex, l.warn].join(" "));
     const easyText = l.easy ? strip([l.easy.p, l.easy.bild, l.easy.merk].join(" ")) : "";
-    const hay = [l.t, easyText, l.s, body, l.blocks.map(b => b.h).join(" "), (l.laws || []).join(" "), l.figs ? l.figs.rows.flat().join(" ") : "", strip(l.vis)].join(" ").toLowerCase();
+    const deepText = (l.deep || []).map(d => strip(d.h + " " + d.p)).join(" ");
+    const hay = [l.t, easyText, deepText, l.s, body, l.blocks.map(b => b.h).join(" "), (l.laws || []).join(" "), l.figs ? l.figs.rows.flat().join(" ") : "", strip(l.vis)].join(" ").toLowerCase();
     idx.push({ type: "lesson", hash: `#/m/${mi}/l/${li}`, mod: `Modul ${m.n} · ${m.label}`, title: strip(l.t), body, hay });
   }));
   DATA.forEach((m, mi) => (m.drills || []).forEach(d => {

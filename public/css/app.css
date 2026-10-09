@@ -548,3 +548,26 @@ footer.foot .btnrow{margin-top:14px}
   .drill-sum{flex-wrap:wrap}
 }
 .dctrl .btn.again{color:var(--amber);border-color:var(--amber-line);background:var(--amber-bg)}
+
+/* Vertiefung je Lektion */
+.deep{margin:32px 0 0;border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.deep > summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:16px 20px;user-select:none}
+.deep > summary::-webkit-details-marker{display:none}
+.deep > summary::before{content:"▸";color:var(--blue-strong);transition:transform .15s;display:inline-block}
+.deep[open] > summary::before{transform:rotate(90deg)}
+.deep-t{font-family:var(--serif);font-size:20px;color:var(--heading);font-weight:600}
+.deep-n{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.04em}
+.deep-body{border-top:1px solid var(--line-soft);padding:4px 20px 18px}
+.deep-item{padding:14px 0 4px;border-bottom:1px solid var(--line-soft)}
+.deep-item:last-child{border-bottom:0}
+.deep-item h4{font-size:15.5px;color:var(--heading);margin:0 0 2px}
+.deep-item p{font-size:14.5px;line-height:1.7;color:var(--ink2);margin-top:4px}
+.deep-item b{color:var(--ink);font-weight:600}
+.deep-tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0 8px;border:1px solid var(--line-soft);border-radius:8px}
+.deep-table{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.5;min-width:560px}
+.deep-table th,.deep-table td{padding:7px 10px;border-bottom:1px solid var(--line-soft);text-align:left;vertical-align:top}
+.deep-table th{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:var(--surface2)}
+.deep-table td:first-child{font-family:var(--mono);color:var(--muted);white-space:nowrap}
+.deep-table tr:last-child td{border-bottom:0}
+@media (max-width:640px){.deep > summary,.deep-body{padding-left:14px;padding-right:14px}}
+@media print{.deep{border:0}.deep > summary::before{content:""}}

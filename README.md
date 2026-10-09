@@ -10,6 +10,7 @@ Der Lernfortschritt bleibt lokal im Browser (Export/Import als JSON-Datei mögli
 ## Funktionen
 
 - **Lesemodus** mit Seitenleiste, Weiter/Zurück und „Als gelesen markieren“
+- **Vertiefung je Lektion** (280 Punkte): Details, Rechenbeispiele und Sonderfälle aus den Kursunterlagen, jeweils mit Herkunft und Seitenangabe
 - **Wissenscheck** je Modul, **Abschlusstest** (20 gemischte Fragen mit Auswertung je Modul)
 - **Fehler wiederholen**: falsch beantwortete Fragen werden automatisch gesammelt
 - **Üben**: Übungsfälle mit aufklappbarer Lösung, Rechentrainer, Bilanz-Builder

@@ -21,6 +21,8 @@ DATA.forEach((m, mi) => {
     if (!l.easy || !l.easy.p || !l.easy.bild || !l.easy.merk) fail(`Lektion ${mi}-${li}: „Einfach erklärt“ fehlt oder ist unvollständig`);
     // Herkunft: jeder Abschnitt ist als Kursunterlage (q), Unterlage + Ergänzung (m) oder Ergänzung (e) gekennzeichnet
     l.blocks.forEach((b, bi) => { if (!validSrc(b.src)) fail(`Lektion ${mi}-${li}, Block ${bi}: Herkunft fehlt`); });
+    if (!Array.isArray(l.deep) || !l.deep.length) fail(`Lektion ${mi}-${li}: Vertiefung fehlt`);
+    (l.deep || []).forEach((d, di) => { if (!d.h || !d.p) fail(`Lektion ${mi}-${li}, Vertiefung ${di}: unvollständig`); if (!validSrc(d.src)) fail(`Lektion ${mi}-${li}, Vertiefung ${di}: Herkunft fehlt`); });
     for (const part of ["figs", "vis", "ex", "warn"]) if (l[part] && !validSrc((l.srcs || {})[part])) fail(`Lektion ${mi}-${li}, ${part}: Herkunft fehlt`);
     if (!Array.isArray(l.laws)) fail(`Lektion ${mi}-${li}: laws fehlt`);
   });
