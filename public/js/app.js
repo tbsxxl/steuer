@@ -5,8 +5,8 @@ import { GENERATORS, ri, fmt } from "./trainer.js";
    Kursplan (Kurstage je Modul) – Grundlage für Countdown und „Heute"-Hinweis
    ========================================================= */
 const SCHEDULE = [
-  ["2026-10-07", "2026-10-08", "2026-10-09", "2026-10-12"],
-  ["2026-10-13", "2026-10-14"],
+  ["2026-10-07", "2026-10-08"],
+  ["2026-10-09", "2026-10-12", "2026-10-13", "2026-10-14"],
   ["2026-10-15", "2026-10-16", "2026-10-19"],
   ["2026-10-19"],
   ["2026-10-20"],
@@ -66,7 +66,7 @@ function toast(msg) {
    Fortschritt (nur lokal im Browser)
    ========================================================= */
 const PROGRESS_KEY = "stb_progress";
-function emptyProgress() { return { v: 2, read: {}, quiz: {}, wrong: {}, cards: {}, drills: {}, test: null, last: null }; }
+function emptyProgress() { return { v: 3, read: {}, quiz: {}, wrong: {}, cards: {}, drills: {}, test: null, last: null }; }
 // Lektionen werden über stabile IDs gespeichert. Ältere Stände (v1) speicherten
 // „Modul-Lektion“ als Position; deren Positionen entsprechen den IDs „m{Modul}l{Lektion}“.
 const legacyId = key => { const m = /^(\d+)-(\d+)$/.exec(key); return m ? `m${m[1]}l${m[2]}` : key; };
@@ -81,10 +81,25 @@ function normalizeProgress(p) {
     if (base.last && Number.isInteger(base.last.mi)) base.last = { id: `m${base.last.mi}l${base.last.li}` };
   }
   if (base.last && typeof base.last.id !== "string") base.last = null;
+  // Bis v2 war Rechnungswesen Modul 0 und Abgabenordnung Modul 1 – seit dem neuen Kursplan umgekehrt.
+  if (p.v !== 3) {
+    const swap = mi => (mi === 0 ? 1 : mi === 1 ? 0 : mi);
+    const remap = obj => Object.fromEntries(Object.entries(obj).map(([k, v]) => {
+      const m = /^(\d+)-(\d+)$/.exec(k);
+      return [m ? `${swap(Number(m[1]))}-${m[2]}` : k, v];
+    }));
+    base.quiz = Object.fromEntries(Object.entries(base.quiz).map(([k, v]) => [/^\d+$/.test(k) ? String(swap(Number(k))) : k, v]));
+    base.wrong = remap(base.wrong);
+    base.drills = remap(base.drills);
+  }
   return base;
 }
 let progress = (() => {
-  try { return normalizeProgress(JSON.parse(localStorage.getItem(PROGRESS_KEY) || "null")); } catch (e) { return emptyProgress(); }
+  try {
+    const raw = JSON.parse(localStorage.getItem(PROGRESS_KEY) || "null"), p = normalizeProgress(raw);
+    if (raw && raw.v !== p.v) localStorage.setItem(PROGRESS_KEY, JSON.stringify(p)); // Umstellung sofort sichern
+    return p;
+  } catch (e) { return emptyProgress(); }
 })();
 function saveProgress() {
   try { localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress)); } catch (e) { /* privater Modus */ }
@@ -306,7 +321,7 @@ function viewHome() {
     <a class="card tool" href="#/wiederholen"><span class="ico">↻</span><div><b>Fehler wiederholen</b><span>${wrong ? `${wrong} ${wrong === 1 ? "Frage wartet" : "Fragen warten"} auf dich.` : "Falsch beantwortete Fragen landen automatisch hier."}</span></div></a>
     <a class="card tool" href="#/karten"><span class="ico">▭</span><div><b>Karteikarten</b><span>Alle ${GLOSSARY.length} Abkürzungen und Begriffe zum Durchklicken.</span></div></a>
     <a class="card tool" href="#/glossar"><span class="ico">§</span><div><b>Glossar &amp; Paragrafen</b><span>Die wichtigsten Normen mit Gesetzestext zum Nachschlagen.</span></div></a>
-    <a class="card tool" href="#/m/0/ueben"><span class="ico">✎</span><div><b>Rechentrainer</b><span>Aufgaben mit immer neuen Zahlen – AfA, USt, GewSt, ESt …</span></div></a>
+    <a class="card tool" href="#/m/1/ueben"><span class="ico">✎</span><div><b>Rechentrainer</b><span>Aufgaben mit immer neuen Zahlen – AfA, USt, GewSt, ESt …</span></div></a>
     <a class="card tool" href="#/druck"><span class="ico">⎙</span><div><b>Skript drucken</b><span>Alle Lektionen und Lösungen als Druckversion oder PDF.</span></div></a>
   </div>`;
 
@@ -331,6 +346,7 @@ function moduleHeader(mi, active) {
   return `<div class="kicker">Modul ${m.n} <span class="sep">/</span> <span class="dim">${esc(m.day)}</span></div>
     <h1 class="title">${m.label}</h1>
     <p class="lead">${m.lead}</p>
+    ${m.ref ? `<p class="modref">${esc(m.ref)} · ${esc(m.time)}</p>` : ""}
     <nav class="tabs" aria-label="Bereiche des Moduls">
       ${tab(`#/m/${mi}`, "learn", "Lektionen", m.lessons.length)}
       ${tab(`#/m/${mi}/einfach`, "easy", "Einfach erklärt", m.lessons.length)}
@@ -350,7 +366,20 @@ function viewModule({ mi }) {
       <span class="min">${readingMinutes(l)} Min.</span></a>`;
   });
   h += `</div>`;
+  h += planHtml(mi);
   return { title: m.label, html: h };
+}
+
+/* Gliederung laut Kursplan mit Verweis auf die passenden Lektionen */
+function planHtml(mi) {
+  const m = DATA[mi];
+  if (!m.plan) return "";
+  const covered = new Set(m.plan.flatMap(([, ids]) => ids));
+  const extra = m.lessons.map((l, li) => [l, li]).filter(([l]) => !covered.has(l.id));
+  const link = id => { const p = LESSON_POS.get(id); return `<a href="#/m/${p.mi}/l/${p.li}">${p.li + 1}. ${DATA[p.mi].lessons[p.li].t}</a>`; };
+  return `<h2 class="h2">Gliederung laut Kursplan</h2><div class="card plan"><ol>${m.plan.map(([t, ids]) =>
+    `<li><b>${esc(t)}</b><span>${ids.map(link).join("")}</span></li>`).join("")}</ol>
+    ${extra.length ? `<p class="dim">Zusätzlich in der App: ${extra.map(([l]) => link(l.id)).join(", ")}</p>` : ""}</div>`;
 }
 
 /* Herkunft der Inhalte: q = aus den Kursunterlagen, m = Unterlagen + Ergänzung, e = Ergänzung.
@@ -800,7 +829,7 @@ function viewDrill({ mi }) {
   const gens = GENERATORS[mi] || [];
   const ds = m.drills || [];
   let h = moduleHeader(mi, "drill");
-  if (mi === 0) h += `<div class="card builder" id="builder">${builderCard()}</div>`;
+  if (DATA[mi].label === "Rechnungswesen") h += `<div class="card builder" id="builder">${builderCard()}</div>`;
   if (gens.length) {
     h += `<p class="note"><b>Rechentrainer:</b> Jede Aufgabe erzeugt auf Knopfdruck neue Zahlen. Rechne selbst, trage dein Ergebnis ein und prüfe es – oder deck die Lösung auf.</p><div class="gengrid">`;
     gens.forEach((_, gi) => { h += `<div class="card gencard" id="gen-${mi}-${gi}">${genCard(mi, gi)}</div>`; });

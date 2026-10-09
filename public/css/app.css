@@ -571,3 +571,14 @@ footer.foot .btnrow{margin-top:14px}
 .deep-table tr:last-child td{border-bottom:0}
 @media (max-width:640px){.deep > summary,.deep-body{padding-left:14px;padding-right:14px}}
 @media print{.deep{border:0}.deep > summary::before{content:""}}
+.modref{font-size:13.5px;color:var(--muted);margin:-4px 0 14px}
+.plan{padding:6px 20px}
+.plan ol{list-style:none;margin:0;padding:0}
+.plan li{padding:12px 0;border-bottom:1px solid var(--line-soft);display:flex;flex-direction:column;gap:4px}
+.plan li:last-child{border-bottom:0}
+.plan li b{font-size:14.5px;color:var(--heading);font-weight:600}
+.plan li span{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13.5px}
+.plan a{color:var(--blue-strong);text-decoration:none}
+.plan a:hover{text-decoration:underline}
+.plan .dim{font-size:13px;padding:10px 0 12px;border-top:1px solid var(--line-soft);margin:0}
+@media (max-width:640px){.plan{padding:4px 14px}}
