@@ -60,3 +60,22 @@ Alternativ lokal: `npx wrangler login` und `npm run deploy`.
 ## Lizenzen
 
 Schriften: Newsreader und IBM Plex (SIL Open Font License 1.1), selbst gehostet unter `public/fonts/`.
+
+## Private Nutzung und Zugriffsschutz
+
+Private Lernhilfe zum persönlichen Gebrauch – kein Angebot des Kursveranstalters. Die Kursunterlagen
+(PDFs) sind nicht Teil des Repositorys; die Texte der App sind eigene Zusammenfassungen, die
+Quellenangaben verweisen nur auf die Fundstelle. Die Seite ist für Suchmaschinen gesperrt
+(`robots.txt`, `X-Robots-Tag`, `<meta name="robots">`).
+
+Zugriff nur für eingeladene Personen über **Cloudflare Access** (Zero Trust, bis 50 Nutzer kostenlos):
+
+1. Cloudflare-Dashboard → **Zero Trust** öffnen (beim ersten Mal Team-Namen wählen, Free-Plan).
+2. **Access → Applications → Add an application → Self-hosted**.
+3. Name „Steuer-Lernapp“, Domain: die `*.workers.dev`-Adresse bzw. eigene Domain der App, Pfad leer lassen.
+4. **Policy** anlegen: Action *Allow*, Include → *Emails* → eigene Adresse(n) eintragen.
+5. Login-Methode: **One-time PIN** (Code per E-Mail) – ist standardmäßig aktiv.
+6. Speichern. Ab dann fragt die App vor dem Öffnen nach der E-Mail-Adresse und schickt einen Code.
+
+Für `*.workers.dev`-Adressen alternativ im Worker unter **Settings → Domains & Routes** bei
+„workers.dev“ den Schalter für Cloudflare Access aktivieren und die E-Mail-Adressen freigeben.

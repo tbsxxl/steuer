@@ -4,7 +4,7 @@
 export const DATA = [
 {
   id:0, label:"Abgabenordnung", n:"I", day:"07.–08.10.2026 · 2 Tage",
-  time:"09.00–16.00 Uhr", ref:"Katharina Peschke, Regierungsdirektorin",
+  time:"09.00–16.00 Uhr",
   plan:[
     ["I. Überblick und Aufbau der AO mit den wichtigsten Grundbegriffen",["m1l0"]],
     ["II. Zuständigkeiten",["ao-zust"]],
@@ -398,7 +398,7 @@ export const DATA = [
 },
 {
   id:1, label:"Rechnungswesen", n:"II", day:"09.–14.10.2026 · 4 Tage",
-  time:"09.00–16.00 Uhr", ref:"M. Sc. Stephanie Kröning, Steuerberaterin",
+  time:"09.00–16.00 Uhr",
   plan:[
     ["I.1 Grundlagen der Buchführung",["m0l1","rewe-skr"]],
     ["I.2 Anlagenbuchführung",["m0l2"]],
@@ -919,7 +919,7 @@ export const DATA = [
 },
 {
   id:2, label:"Einkommensteuer", n:"III", day:"15.–16.10. & 19.10.2026 (vormittags) · 2,5 Tage",
-  time:"09.00–16.00 Uhr, am 19.10. 09.00–12.00 Uhr", ref:"Dipl.-Finanzwirt (FH) Martin Sieden",
+  time:"09.00–16.00 Uhr, am 19.10. 09.00–12.00 Uhr",
   plan:[
     ["I. Grundlagen und Systematik der Einkommensteuer",["m2l0","est-tarif","m2l4","est-kinder"]],
     ["II. Einkunftsarten im Überblick",["m2l1"]],
@@ -1436,7 +1436,7 @@ export const DATA = [
 },
 {
   id:3, label:"Lohnsteuer", n:"IV", day:"19.10.2026 (nachmittags) · ½ Tag",
-  time:"13.00–16.00 Uhr", ref:"Dipl.-Finanzwirt (FH) Martin Sieden",
+  time:"13.00–16.00 Uhr",
   plan:[
     ["I. Grundlagen des Lohnsteuerabzugs",["m3l0"]],
     ["II. Arbeitgeber und Arbeitnehmer im Steuerrecht",["lst-arbeitgeber"]],
@@ -1656,7 +1656,7 @@ export const DATA = [
 },
 {
   id:4, label:"Gewerbe- & Körperschaftsteuer", n:"V", day:"20.10.2026 · 1 Tag",
-  time:"09.00–16.00 Uhr", ref:"Dipl.-Finanzwirt (FH) Martin Sieden",
+  time:"09.00–16.00 Uhr",
   plan:[
     ["I. Grundlagen der Gewerbesteuer",["m4l0"]],
     ["II. Ermittlung des Gewerbeertrags",["m4l0","m4l2"]],
@@ -1882,7 +1882,7 @@ export const DATA = [
 },
 {
   id:5, label:"Umsatzsteuer", n:"VI", day:"21.–23.10.2026 · 3 Tage",
-  time:"09.00–16.00 Uhr", ref:"Dipl.-Finanzwirt (FH) Florian Krause",
+  time:"09.00–16.00 Uhr",
   plan:[
     ["I. Der Unternehmer; Leistungen zwischen Gesellschafter und Gesellschaft",["m5l0","ust-leistung"]],
     ["II. Lieferungen: Werklieferung, Wertabgaben, Geschäftsveräußerung, Einheitlichkeit, Ort und Reihengeschäft, Gutscheine",["m5l1","ust-wertabgaben","ust-leistung"]],

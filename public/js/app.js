@@ -346,7 +346,7 @@ function moduleHeader(mi, active) {
   return `<div class="kicker">Modul ${m.n} <span class="sep">/</span> <span class="dim">${esc(m.day)}</span></div>
     <h1 class="title">${m.label}</h1>
     <p class="lead">${m.lead}</p>
-    ${m.ref ? `<p class="modref">${esc(m.ref)} · ${esc(m.time)}</p>` : ""}
+    ${m.time ? `<p class="modref">Kurszeit: ${esc(m.time)}</p>` : ""}
     <nav class="tabs" aria-label="Bereiche des Moduls">
       ${tab(`#/m/${mi}`, "learn", "Lektionen", m.lessons.length)}
       ${tab(`#/m/${mi}/einfach`, "easy", "Einfach erklärt", m.lessons.length)}
