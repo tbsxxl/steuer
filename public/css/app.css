@@ -16,9 +16,9 @@
 
 :root{
   color-scheme:light;
-  --navy:#2D4059; --blue:#2f7cb0; --blue-strong:#24628d; --blue-soft:#e7f0f8; --blue-line:#bcd6ea;
+  --navy:#2D4059; --blue:#296f9f; --blue-strong:#24628d; --blue-soft:#e7f0f8; --blue-line:#bcd6ea;
   --bg:#f5f3ee; --surface:#fffefb; --surface2:#f8f6f1; --sunken:#efece5;
-  --ink:#1c2530; --ink2:#46505c; --muted:#7a828c; --line:#e3dfd6; --line-soft:#ece9e2;
+  --ink:#1c2530; --ink2:#46505c; --muted:#626a74; --line:#e3dfd6; --line-soft:#ece9e2;
   --green:#1e7a55; --green-bg:#e6f3ec; --green-line:#b6dcc8;
   --amber:#8f5f16; --amber-bg:#fbf1e2; --amber-line:#ebcf9f;
   --red:#b23a48; --red-bg:#f9ebed; --red-line:#eab9c0;
@@ -39,7 +39,7 @@
   color-scheme:dark;
   --navy:#c9d8e8; --blue:#6cb2e3; --blue-strong:#8cc3ea; --blue-soft:#172a3b; --blue-line:#2b4a64;
   --bg:#0f141a; --surface:#161d25; --surface2:#1b232d; --sunken:#121920;
-  --ink:#e7ecf1; --ink2:#b1bcc7; --muted:#7d8a97; --line:#27313c; --line-soft:#202933;
+  --ink:#e7ecf1; --ink2:#b1bcc7; --muted:#8794a1; --line:#27313c; --line-soft:#202933;
   --green:#58c795; --green-bg:#14291f; --green-line:#24503b;
   --amber:#e3b066; --amber-bg:#2a2112; --amber-line:#57431f;
   --red:#ec7d89; --red-bg:#2d191d; --red-line:#5a2a31;
@@ -71,7 +71,7 @@ a{color:var(--blue-strong)}
 
 .brand{padding:22px 22px 18px;border-bottom:1px solid var(--line-soft);background:linear-gradient(180deg,var(--surface),var(--surface2))}
 .brand a{text-decoration:none;color:inherit;display:block}
-.brand-org{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:600;line-height:1.4}
+.brand-org{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:600;line-height:1.4}
 .brand-title{font-family:var(--serif);font-size:24px;font-weight:600;letter-spacing:-.01em;line-height:1.1;color:var(--heading);margin-top:8px}
 .brand-sub{font-size:12.5px;color:var(--muted);margin-top:4px}
 .side-progress{margin-top:16px}
@@ -80,14 +80,14 @@ a{color:var(--blue-strong)}
 .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:6px;transition:width .4s ease}
 
 .nav{padding:10px 10px 8px;flex:1}
-.nav-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:12px 12px 6px}
+.nav-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:12px 12px 6px}
 .nav-mod{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;text-align:left;padding:9px 10px;border-radius:9px;color:var(--ink);text-decoration:none;transition:background .15s}
 .nav-mod:hover{background:var(--surface2)}
 .nav-mod[aria-current="true"]{background:var(--blue-soft)}
 .nav-mod .n{font-family:var(--serif);font-weight:600;font-size:17px;width:28px;flex:0 0 28px;text-align:center;color:var(--blue)}
 .nav-mod .t{flex:1;min-width:0}
 .nav-mod .t b{display:block;font-weight:600;font-size:14px;line-height:1.25}
-.nav-mod .t small{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:2px}
+.nav-mod .t small{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:2px}
 .nav-mod .ring{--p:0;width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:conic-gradient(var(--green) calc(var(--p)*1%),var(--sunken) 0);display:grid;place-items:center;font-size:11px;color:var(--on-accent);font-weight:700}
 .nav-mod .ring::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--surface);grid-area:1/1}
 .nav-mod .ring.done{background:var(--green)}
@@ -104,7 +104,7 @@ a{color:var(--blue-strong)}
 .nav-tool:hover{background:var(--surface2);color:var(--ink)}
 .nav-tool[aria-current="page"]{background:var(--blue-soft);color:var(--blue-strong);font-weight:600}
 .nav-tool .ico{width:20px;text-align:center;font-size:14px}
-.nav-tool .badge{margin-left:auto;font-family:var(--mono);font-size:10.5px;background:var(--red-bg);color:var(--red);border-radius:20px;padding:1px 8px}
+.nav-tool .badge{margin-left:auto;font-family:var(--mono);font-size:11px;background:var(--red-bg);color:var(--red);border-radius:20px;padding:1px 8px}
 
 /* Kopfzeile */
 .topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:12px 28px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line-soft)}
@@ -171,7 +171,7 @@ h1.title{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4.2vw,42p
 .continue{display:flex;align-items:center;gap:18px;padding:20px 22px;margin-top:14px;text-decoration:none;color:inherit;border-left:4px solid var(--blue);transition:box-shadow .2s,transform .2s}
 .continue:hover{box-shadow:var(--shadow-lift);transform:translateY(-1px)}
 .continue .txt{flex:1;min-width:0}
-.continue .txt small{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.continue .txt small{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
 .continue .txt b{display:block;font-family:var(--serif);font-size:20px;font-weight:600;color:var(--heading);line-height:1.25;margin-top:4px}
 .continue .txt span{font-size:13px;color:var(--muted)}
 .continue .arr{font-size:22px;color:var(--blue)}
@@ -287,7 +287,7 @@ h1.title{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4.2vw,42p
 .pager{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
 .pager a{display:block;padding:14px 18px;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:10px;background:var(--surface);transition:border-color .15s}
 .pager a:hover{border-color:var(--blue)}
-.pager small{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.pager small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .pager b{display:block;font-size:14px;color:var(--heading);margin-top:3px;line-height:1.35}
 .pager .next{text-align:right;grid-column:2}
 
@@ -370,7 +370,7 @@ h1.title{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4.2vw,42p
 .gencard{padding:16px 18px;display:flex;flex-direction:column}
 .gen-title{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:10px}
 .gen-title b{font-size:15px;color:var(--heading)}
-.gen-level{font-family:var(--mono);font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.gen-level{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
 .gen-q{font-size:14px;color:var(--ink);line-height:1.65;flex:1}
 .gen-a{font-size:13.5px;color:var(--ink2);line-height:1.7;background:var(--green-bg);border:1px solid var(--green-line);border-radius:8px;padding:11px 13px;margin-top:10px}
 .genres{font-family:var(--mono);font-weight:600;color:var(--green);background:var(--surface);padding:1px 7px;border-radius:5px;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -380,7 +380,7 @@ h1.title{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4.2vw,42p
 .drill .dh{display:flex;gap:13px;align-items:flex-start;padding:16px 18px 0}
 .dnum{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--on-accent);background:var(--blue);border-radius:6px;min-width:34px;height:26px;display:grid;place-items:center}
 .dtitle h3{font-size:15.5px;font-weight:600;color:var(--heading);line-height:1.35}
-.dlevel{font-family:var(--mono);font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.dlevel{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
 .dtask{font-size:14.5px;color:var(--ink2);line-height:1.7;padding:12px 18px 14px 65px}
 .drill details{border-top:1px solid var(--line-soft)}
 .drill summary{list-style:none;padding:12px 18px 12px 65px;font-size:13.5px;font-weight:600;color:var(--blue-strong);cursor:pointer;user-select:none}
@@ -440,7 +440,7 @@ h1.title{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4.2vw,42p
 .search-cat{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin:24px 0 10px}
 .hit{display:block;padding:13px 16px;margin-bottom:8px;text-decoration:none;color:inherit;transition:border-color .15s}
 .hit:hover{border-color:var(--blue)}
-.hit small{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.hit small{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
 .hit b{display:block;font-size:15px;color:var(--heading);margin-top:2px}
 .hit p{font-size:13.5px;color:var(--ink2);margin-top:4px;line-height:1.5}
 mark{background:color-mix(in srgb,var(--blue) 22%,transparent);color:inherit;border-radius:3px;padding:0 2px}
@@ -582,3 +582,35 @@ footer.foot .btnrow{margin-top:14px}
 .plan a:hover{text-decoration:underline}
 .plan .dim{font-size:13px;padding:10px 0 12px;border-top:1px solid var(--line-soft);margin:0}
 @media (max-width:640px){.plan{padding:4px 14px}}
+
+/* =========================================================
+   iPhone/iPad (Apple Human Interface Guidelines)
+   Touch-Ziele mindestens 44 × 44 pt, Eingabefelder ab 16 px
+   (sonst zoomt Safari beim Antippen), Safe Areas bei Notch/Home-Indikator.
+   ========================================================= */
+.app{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+footer.foot{padding-bottom:calc(40px + env(safe-area-inset-bottom,0px))}
+.toast{bottom:calc(24px + env(safe-area-inset-bottom,0px))}
+@media (max-width:900px){
+  .sidebar{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px)}
+  /* Suchfeld nutzt die ganze Breite, damit der Platzhalter nicht mitten im Wort abbricht */
+  .topbar .spacer{display:none}
+  #themeBtn{margin-left:auto}
+  .search input{padding-right:12px;text-overflow:ellipsis}
+}
+@media (pointer:coarse){
+  .iconbtn{width:44px;height:44px;flex-basis:44px}
+  .search input{height:44px;font-size:16px}
+  .gen-input,.builder-inputs input{min-height:44px;font-size:16px}
+  .btn,.btn.small{min-height:44px}
+  .drill-filter .chip{min-height:44px}
+  .nav-tool,.nav-sub a{min-height:44px;align-items:center}
+  .dlesson{display:inline-flex;align-items:center;min-height:44px}
+  .srcbar-l{display:inline-flex;align-items:center;min-height:44px}
+  .gloss-letters a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}
+  details > summary{min-height:44px}
+}
+/* Auf Touch-Geräten bleibt :hover nach dem Antippen „hängen“ – keine Verschiebe-Effekte */
+@media (hover:none){
+  .continue:hover,.modcard:hover,.qopt:hover:not(:disabled){transform:none}
+}

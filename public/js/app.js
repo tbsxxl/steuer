@@ -276,7 +276,7 @@ function viewHome() {
   const next = nextLesson();
 
   let h = `<section class="hero">
-    <div class="kicker">Lern- &amp; Übungsplattform <span class="sep">/</span> <span class="dim">Veranlagungsjahr 2026</span></div>
+    <div class="kicker">Lern- &amp; Übungsplattform <span class="sep" aria-hidden="true">/</span> <span class="dim">Veranlagungsjahr 2026</span></div>
     <h1 class="title">Steuerrecht von Grund auf</h1>
     <p class="sub">Vorbereitung auf den 13-Tage-Intensivkurs: sechs Module entlang des Kursaufbaus – jede Lektion erklärt das Thema von null an, mit Praxisbeispielen, Stolperfallen, Rechenschemata und Übungen zum Selbstlösen.</p>
     <div class="chips">
@@ -343,7 +343,7 @@ function viewHome() {
 function moduleHeader(mi, active) {
   const m = DATA[mi];
   const tab = (hash, key, label, cnt) => `<a href="${hash}"${active === key ? ` aria-current="page"` : ""}>${label}<span class="cnt">${cnt}</span></a>`;
-  return `<div class="kicker">Modul ${m.n} <span class="sep">/</span> <span class="dim">${esc(m.day)}</span></div>
+  return `<div class="kicker">Modul ${m.n} <span class="sep" aria-hidden="true">/</span> <span class="dim">${esc(m.day)}</span></div>
     <h1 class="title">${m.label}</h1>
     <p class="lead">${m.lead}</p>
     ${m.time ? `<p class="modref">Kurszeit: ${esc(m.time)}</p>` : ""}
@@ -475,7 +475,7 @@ function viewLesson({ mi, li }) {
     : { hash: `#/m/${mi}/quiz`, t: `Wissenscheck ${m.label}`, label: "Modul abschließen" };
 
   const h = `<article class="lesson">
-    <div class="kicker"><a href="#/m/${mi}">Modul ${m.n}</a> <span class="sep">/</span> <span class="dim">${m.label}</span> <span class="sep">·</span> <span class="dim">Lektion ${li + 1} von ${m.lessons.length} · ca. ${readingMinutes(l)} Min.</span></div>
+    <div class="kicker"><a href="#/m/${mi}">Modul ${m.n}</a> <span class="sep" aria-hidden="true">/</span> <span class="dim">${m.label}</span> <span class="sep" aria-hidden="true">·</span> <span class="dim">Lektion ${li + 1} von ${m.lessons.length} · ca. ${readingMinutes(l)} Min.</span></div>
     <h1 class="title">${l.t}</h1>
     <div class="subtitle">${l.s}</div>
     <div class="srcbar"><a class="srcbar-l" href="#/glossar/herkunft">Herkunft:</a><span class="src src-q">Kursunterlage</span><span class="src src-m">Unterlage + Ergänzung</span><span class="src src-e">Ergänzung</span>
@@ -797,7 +797,7 @@ function drillFilterBar() {
   const chip = (f, v, label) => `<button type="button" class="chip${drillFilter[f] === v ? " live" : ""}" data-action="d-filter" data-f="${f}" data-v="${v}" aria-pressed="${drillFilter[f] === v}">${label}</button>`;
   return `<div class="drill-filter" role="group" aria-label="Übungsfälle filtern">
     ${chip("st", "all", "Alle")}${chip("st", "open", "Offen")}${chip("st", "again", "Nochmal üben")}${chip("st", "ok", "Gelöst")}
-    <span class="sep"></span>
+    <span class="sep" aria-hidden="true"></span>
     ${chip("diff", "0", "Jede Schwierigkeit")}${chip("diff", "1", "● Einstieg")}${chip("diff", "2", "●● Mittel")}${chip("diff", "3", "●●● Anspruchsvoll")}
   </div>`;
 }
